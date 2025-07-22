@@ -10,6 +10,12 @@ jest.mock('@/lib/monitoring/logger.config', () => ({
     info: jest.fn(),
     error: jest.fn(),
   },
+  appLogger: {
+    info: jest.fn(),
+    error: jest.fn(),
+    warn: jest.fn(),
+    debug: jest.fn(),
+  },
 }));
 
 // Create a proper test wrapper for Zustand store
