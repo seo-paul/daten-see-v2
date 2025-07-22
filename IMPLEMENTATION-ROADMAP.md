@@ -525,12 +525,23 @@
   - **Success Criteria:** System handles expected production load gracefully
   - **Why Now:** Complete system ready for production load validation
 
-- [ ] **Task 7.6: Monitoring + Observability Enhancement**
-  - [ ] 7.6.1: Enhance Sentry error monitoring with advanced features
-  - [ ] 7.6.2: Add comprehensive application performance monitoring (APM)
-  - [ ] 7.6.3: Create detailed system health dashboards
-  - [ ] 7.6.4: Implement proactive alerting for critical issues
-  - [ ] 7.6.5: Add user experience monitoring and analytics
+- [ ] **Task 7.6: CI/CD Pipeline + GitHub Actions (MOVED FROM WEEK 1)**
+  - [ ] 7.6.1: **CRITICAL:** Create comprehensive GitHub Actions workflow
+  - [ ] 7.6.2: Set up automated testing pipeline (TypeScript + ESLint + Build)
+  - [ ] 7.6.3: Configure branch protection rules with required status checks
+  - [ ] 7.6.4: Implement automated deployment pipeline
+  - [ ] 7.6.5: Add code coverage reporting and quality gates
+  - [ ] 7.6.6: Set up staging environment with automatic deployments
+  - **Tools:** GitHub Actions, branch protection, automated testing, deployment automation
+  - **Success Criteria:** Every code push automatically tested, quality gates enforced
+  - **Why Now:** Production-ready requires complete CI/CD automation
+
+- [ ] **Task 7.7: Advanced Monitoring + Observability Enhancement**
+  - [ ] 7.7.1: Enhance Sentry error monitoring with advanced features (Session Replay, Profiling)
+  - [ ] 7.7.2: Add comprehensive application performance monitoring (APM)
+  - [ ] 7.7.3: Create detailed system health dashboards
+  - [ ] 7.7.4: Implement proactive alerting for critical issues
+  - [ ] 7.7.5: Add user experience monitoring and analytics
   - **Tools:** Advanced Sentry features, APM tools, monitoring dashboards, alerting systems
   - **Success Criteria:** Complete visibility into system performance and user experience
   - **Why Now:** Existing monitoring foundation can be enhanced for production needs
