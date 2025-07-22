@@ -12,8 +12,8 @@ export async function register(): Promise<void> {
       // Performance Monitoring
       tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
       
-      // Development settings
-      debug: process.env.NODE_ENV === 'development',
+      // Development settings - avoid debug mode in Docker to prevent bundle issues
+      debug: false,
       
       // Environment
       environment: process.env.NODE_ENV,
@@ -52,7 +52,7 @@ export async function register(): Promise<void> {
     init({
       dsn: process.env.SENTRY_DSN,
       tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-      debug: process.env.NODE_ENV === 'development',
+      debug: false,
       environment: process.env.NODE_ENV,
     });
   }

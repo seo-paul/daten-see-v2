@@ -4,33 +4,15 @@ import pino from 'pino';
 const isServer = typeof window === 'undefined';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-// Development logger configuration
+// Development logger configuration - NO TRANSPORT to avoid worker thread issues
 const developmentConfig: pino.LoggerOptions = {
   level: 'debug',
-  // Only use pino-pretty transport on server-side in development
-  ...(isServer && {
-    transport: {
-      target: 'pino-pretty',
-      options: {
-        colorize: true,
-        levelFirst: true,
-        translateTime: 'yyyy-mm-dd HH:MM:ss.l',
-        ignore: 'pid,hostname',
-        singleLine: false,
-        hideObject: false,
-        // Note: customPrettifiers removed due to Next.js serialization issues
-        // Will be re-implemented as server-side only in Task 1.8
-      },
+  // Simple formatters for both server and client
+  formatters: {
+    level: (label: string): { level: string } => {
+      return { level: label };
     },
-  }),
-  // Use formatters for client-side logging
-  ...(!isServer && {
-    formatters: {
-      level: (label: string): { level: string } => {
-        return { level: label };
-      },
-    },
-  }),
+  },
   serializers: {
     err: pino.stdSerializers.err,
     req: pino.stdSerializers.req,
@@ -77,8 +59,13 @@ export interface LogContext {
   action?: string;
   component?: string;
   duration?: number;
-  error?: Error;
+  error?: Error | unknown;
   metadata?: Record<string, unknown>;
+  // Dashboard specific context
+  dashboardId?: string;
+  name?: string;
+  count?: number;
+  [key: string]: unknown; // Allow additional properties
 }
 
 // Enhanced logging methods with Sentry integration
