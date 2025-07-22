@@ -1,0 +1,80 @@
+# Docker Compose for Daten See v2 Development Environment
+# Optimized for hot reload and full development experience
+
+services:
+  # Next.js Application
+  app:
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    container_name: daten-see-app
+    ports:
+      - "3000:3000"
+    volumes:
+      # Hot reload: Mount source code
+      - ./src:/app/src:cached
+      - ./public:/app/public:cached
+      - ./assets:/app/assets:cached
+      
+      # Configuration files for hot reload
+      - ./next.config.js:/app/next.config.js:cached
+      - ./tailwind.config.js:/app/tailwind.config.js:cached
+      - ./tsconfig.json:/app/tsconfig.json:cached
+      - ./postcss.config.mjs:/app/postcss.config.mjs:cached
+      
+      # Prevent node_modules override
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - WATCHPACK_POLLING=true  # Better hot reload in Docker
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - daten-see-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Future services will be added here:
+  # 
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: daten-see-db
+  #   environment:
+  #     POSTGRES_DB: datendb
+  #     POSTGRES_USER: datenuser
+  #     POSTGRES_PASSWORD: datenpass
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - daten-see-network
+  #
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: daten-see-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - daten-see-network
+  #   command: redis-server --appendonly yes
+
+networks:
+  daten-see-network:
+    driver: bridge
+
+volumes:
+  # Volumes for future services
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local

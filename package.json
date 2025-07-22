@@ -11,7 +11,14 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "docker:dev": "./scripts/quick-restart.sh",
+    "docker:logs": "./scripts/docker-dev.sh logs",
+    "docker:shell": "./scripts/docker-dev.sh shell",
+    "docker:stats": "./scripts/docker-dev.sh stats",
+    "docker:clean": "./scripts/docker-dev.sh clean",
+    "docker:rebuild": "./scripts/docker-dev.sh rebuild",
+    "docker:status": "./scripts/docker-dev.sh status"
   },
   "dependencies": {
     "@sentry/nextjs": "^8.34.0",

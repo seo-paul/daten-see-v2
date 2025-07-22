@@ -1,0 +1,100 @@
+# Docker Compose for Daten See v2 Production Environment
+# Optimized for performance, security, and scalability
+
+services:
+  # Next.js Application (Production Build)
+  app:
+    build:
+      context: .
+      target: production
+      dockerfile: Dockerfile
+    container_name: daten-see-app-prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    networks:
+      - daten-see-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Production Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: daten-see-db-prod
+    environment:
+      POSTGRES_DB: ${DB_NAME:-datendb}
+      POSTGRES_USER: ${DB_USER:-datenuser}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - daten-see-network
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Production Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: daten-see-redis-prod
+    volumes:
+      - redis_data:/data
+    networks:
+      - daten-see-network
+    restart: always
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Nginx Reverse Proxy (Production)
+  nginx:
+    image: nginx:alpine
+    container_name: daten-see-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - daten-see-network
+    restart: always
+    depends_on:
+      - app
+
+networks:
+  daten-see-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
