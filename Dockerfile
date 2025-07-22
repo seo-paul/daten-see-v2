@@ -39,6 +39,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=dev-deps /app/node_modules ./node_modules
 COPY --from=dev-deps --chown=nextjs:nodejs /app .
 
+# Create .next directory with correct permissions
+RUN mkdir -p .next && chown -R nextjs:nodejs .next
+
 # Expose Next.js development port
 EXPOSE 3000
 

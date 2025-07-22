@@ -204,5 +204,45 @@ CLAUDE_DEPLOYMENT.md  ← Production-Guidelines
 
 ---
 
+## 📋 **ROADMAP INTEGRATION WORKFLOW**
+
+### **⚠️ CRITICAL: Automatische Roadmap-Updates**
+**BEI JEDER Implementation-Entscheidung die "Future Tasks" erzeugt:**
+
+1. **SOFORT zur IMPLEMENTATION-ROADMAP.md hinzufügen:**
+   ```bash
+   - Task X.Y: [Beschreibung der fehlenden Funktion]
+     - X.Y.1: [Spezifische Implementation]
+     - X.Y.2: [Tests schreiben]
+     - X.Y.3: [Integration testen]
+   ```
+
+2. **TodoWrite tool verwenden:**
+   - Task zu aktueller Session hinzufügen
+   - Priority setzen (high/medium/low)
+   - Klare Success-Criteria definieren
+
+3. **Beispiele für "Roadmap-pflichtige" Entscheidungen:**
+   - Tests für noch nicht existierende Methoden entfernen
+   - Placeholder-Implementierungen erstellen
+   - "TODO" Kommentare hinzufügen
+   - Features temporary disablen
+   - Mock-Implementierungen verwenden
+
+### **📝 Standard-Format für Roadmap-Tasks:**
+```markdown
+- [ ] **Task X.Y: [Feature Name]**
+  - [ ] X.Y.1: [Implementation Step 1]
+  - [ ] X.Y.2: [Testing]
+  - [ ] X.Y.3: [Documentation/Integration]
+  - **Tools:** [Verwendete Tools/Libraries]
+  - **Success Criteria:** [Messbare Ziele]
+  - **Why Now/Later:** [Begründung für Timing]
+```
+
+**✅ REGEL:** Niemals "later" oder "TODO" ohne Roadmap-Entry!
+
+---
+
 **Version 2.0** - Optimiert für autonome Claude-Entwicklung  
 *"Weniger Regeln, mehr Resultate"*

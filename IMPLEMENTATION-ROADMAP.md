@@ -99,13 +99,25 @@
 - **Blocker:** Sentry configuration → **Solution:** Follow official Next.js integration guide
 - **Blocker:** Testing setup → **Solution:** Use default configurations, expand later
 
-#### ✅ **Phase 1D: User Training + System Access (KNOWLEDGE TRANSFER)**
+#### ✅ **Phase 1D: Logger Enhancement + User Training**
+- [ ] **Task 1.8: Logger Enhancement & Worker Issue Fix**
+  - [ ] 1.8.1: Fix Pino Worker Thread errors in Next.js/Playwright environment
+  - [ ] 1.8.2: Fix Pino customPrettifiers serialization for Next.js compatibility
+  - [ ] 1.8.3: Implement performance() method with duration tracking
+  - [ ] 1.8.4: Implement userAction() method for user behavior logging
+  - [ ] 1.8.5: Implement apiCall() method for API monitoring
+  - [ ] 1.8.6: Write comprehensive tests for all advanced logger methods
+  - [ ] 1.8.7: Update logger documentation and usage examples
+  - **Tools:** Pino, Sentry integration, Jest testing
+  - **Success Criteria:** No worker errors, complete logger functionality with 80%+ test coverage
+  - **Why Now:** Worker errors affect E2E test stability + Foundation for monitoring
+
 - [ ] **Task 1.9: Comprehensive Monitoring & Debugging Training for User**
-  - [ ] 1.8.1: Sentry Error Monitoring - Dashboard walkthrough, alert setup, error analysis
-  - [ ] 1.8.2: Pino Structured Logging - Log access, filtering, debugging workflows
-  - [ ] 1.8.3: Testing Infrastructure - Running tests, reading coverage, interpreting results
-  - [ ] 1.8.4: Development Debugging - Error tracking to resolution workflow
-  - [ ] 1.8.5: Create "User Guide: Independent System Monitoring & Troubleshooting"
+  - [ ] 1.9.1: Sentry Error Monitoring - Dashboard walkthrough, alert setup, error analysis
+  - [ ] 1.9.2: Pino Structured Logging - Log access, filtering, debugging workflows
+  - [ ] 1.9.3: Testing Infrastructure - Running tests, reading coverage, interpreting results
+  - [ ] 1.9.4: Development Debugging - Error tracking to resolution workflow
+  - [ ] 1.9.5: Create "User Guide: Independent System Monitoring & Troubleshooting"
   - **Tools:** Sentry dashboard, log viewers, test reports, debugging workflows
   - **Success Criteria:** User can independently access, analyze, and troubleshoot all monitoring systems
   - **Why Early:** Complete system setup allows comprehensive user training for autonomous problem-solving

@@ -1,23 +1,36 @@
 import pino from 'pino';
 
+// Check if we're running on the server
+const isServer = typeof window === 'undefined';
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 // Development logger configuration
 const developmentConfig: pino.LoggerOptions = {
   level: 'debug',
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-      levelFirst: true,
-      translateTime: 'yyyy-mm-dd HH:MM:ss.l',
-      ignore: 'pid,hostname',
-      singleLine: false,
-      hideObject: false,
-      customPrettifiers: {
-        level: (logLevel: string) => `[${logLevel.toUpperCase()}]`,
-        time: (timestamp: string) => `🕒 ${timestamp}`,
+  // Only use pino-pretty transport on server-side in development
+  ...(isServer && {
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        levelFirst: true,
+        translateTime: 'yyyy-mm-dd HH:MM:ss.l',
+        ignore: 'pid,hostname',
+        singleLine: false,
+        hideObject: false,
+        // Note: customPrettifiers removed due to Next.js serialization issues
+        // Will be re-implemented as server-side only in Task 1.8
       },
     },
-  },
+  }),
+  // Use formatters for client-side logging
+  ...(!isServer && {
+    formatters: {
+      level: (label: string): { level: string } => {
+        return { level: label };
+      },
+    },
+  }),
   serializers: {
     err: pino.stdSerializers.err,
     req: pino.stdSerializers.req,
@@ -26,6 +39,7 @@ const developmentConfig: pino.LoggerOptions = {
   base: {
     env: process.env.NODE_ENV,
     version: process.env.npm_package_version,
+    isServer,
   },
 };
 
@@ -46,13 +60,14 @@ const productionConfig: pino.LoggerOptions = {
     env: process.env.NODE_ENV,
     version: process.env.npm_package_version,
     service: 'daten-see-dashboard',
+    isServer,
   },
   timestamp: pino.stdTimeFunctions.isoTime,
 };
 
 // Create logger instance based on environment
 export const logger = pino(
-  process.env.NODE_ENV === 'development' ? developmentConfig : productionConfig
+  isDevelopment ? developmentConfig : productionConfig
 );
 
 // Typed logging interface for development
