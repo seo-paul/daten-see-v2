@@ -73,26 +73,95 @@
   - **Success Criteria:** Professional dashboard layout matching provided design reference
   - **Why Now:** IMMEDIATE user validation of design and functionality + proven UI design
 
-- [ ] **Task 1.6: Basic Routing + State Foundation**
-  - [ ] 1.5.1: Set up Next.js routing for dashboard pages
-  - [ ] 1.5.2: Install and configure Zustand for state management
-  - [ ] 1.5.3: Create basic dashboard and widget state structures
-  - [ ] 1.5.4: Add localStorage persistence for state
-  - [ ] 1.5.5: Implement route protection patterns (without auth yet)
-  - **Tools:** Next.js router, Zustand, localStorage, TypeScript
-  - **Success Criteria:** Navigation works, state persists, routing functional
-  - **Why Now:** Foundation for all subsequent UI development
+- [ ] **Task 1.6: Modern State Management Foundation (TanStack Query + Context)**
+  - [ ] 1.6.1: **Phase 1 - TanStack Query Setup (Week 1)**
+    - [ ] Install @tanstack/react-query + DevTools
+    - [ ] Configure Query Client with defaults
+    - [ ] Set up Provider in app/layout.tsx
+    - [ ] Create TypeScript types for API responses
+  - [ ] 1.6.2: **Phase 1 - API Layer Foundation (Week 1)**
+    - [ ] Create fetch wrapper with error handling
+    - [ ] Set up request/response interceptors
+    - [ ] Mock API endpoints for development
+    - [ ] Configure base URLs and headers
+  - [ ] 1.6.3: **Phase 1 - Authentication Context (Week 1)**
+    - [ ] JWT token management (ohne Zustand)
+    - [ ] Secure token storage strategy
+    - [ ] Login/logout with TanStack mutations
+    - [ ] Auth state provider implementation
+  - [ ] 1.6.4: **Phase 1 - Route Protection (Week 2)**
+    - [ ] Protected route wrapper component
+    - [ ] Role-based access control
+    - [ ] Redirect logic für unauthorized
+    - [ ] Loading states während auth check
+  - [ ] 1.6.5: **Phase 1 - Navigation Context (Week 2)**
+    - [ ] Breadcrumb generation aus pathname
+    - [ ] Active route tracking
+    - [ ] Navigation history (ohne persist)
+    - [ ] Next.js App Router integration
+  - [ ] 1.6.6: **Phase 2 - Dashboard Queries (Week 3)**
+    - [ ] useDashboards query hook
+    - [ ] useDashboard für single dashboard
+    - [ ] Optimistic updates implementation
+    - [ ] Cache invalidation strategies
+  - [ ] 1.6.7: **Phase 2 - Dashboard Mutations (Week 3)**
+    - [ ] useCreateDashboard mutation
+    - [ ] useUpdateDashboard mutation
+    - [ ] useDeleteDashboard mutation
+    - [ ] Error handling & rollback
+  - [ ] 1.6.8: **Phase 2 - Theme & Settings Context (Week 4)**
+    - [ ] Theme provider (light/dark/system)
+    - [ ] Language settings management
+    - [ ] User preferences (ohne persist)
+    - [ ] localStorage sync für settings
+  - [ ] 1.6.9: **Phase 2 - UI State Context (Week 4)**
+    - [ ] Sidebar open/close state
+    - [ ] Modal stack management
+    - [ ] Toast/notification queue
+    - [ ] Global loading states
+  - [ ] 1.6.10: **Phase 2 - Minimal Zustand Store (Week 5)**
+    - [ ] Complex client-only state
+    - [ ] Cross-component communication
+    - [ ] Performance critical updates
+    - [ ] OHNE persist middleware
+  - [ ] 1.6.11: **Phase 3 - Test Infrastructure (Week 6)**
+    - [ ] TanStack Query test wrapper
+    - [ ] Context provider test utils
+    - [ ] MSW für API mocking
+    - [ ] Custom testing hooks
+  - [ ] 1.6.12: **Phase 3 - Component Test Migration (Week 6)**
+    - [ ] Update alle component tests
+    - [ ] Mock provider setup
+    - [ ] Async query testing
+    - [ ] Error state testing
+  - [ ] 1.6.13: **Phase 3 - Performance Optimization (Week 7)**
+    - [ ] Query prefetching strategies
+    - [ ] Stale-while-revalidate config
+    - [ ] Bundle size analysis
+    - [ ] React DevTools profiling
+  - [ ] 1.6.14: **Phase 3 - Developer Experience (Week 7)**
+    - [ ] TypeScript strict mode
+    - [ ] ESLint rules für hooks
+    - [ ] Code generation für API types
+    - [ ] Documentation & examples
+  - **Tools:** TanStack Query, React Context, Minimal Zustand (ohne persist), MSW, TypeScript
+  - **Success Criteria:** Modern state management ohne persist-Probleme, alle Tests laufen, optimale Performance
+  - **Timeline:** 6-7 Wochen (kann parallel zu Tasks 1.8 & 1.9 laufen)
+  - **Why Now:** Zukunftssichere Architektur die mit dem Projekt skaliert
 
-#### ✅ **Phase 1C: Mock Widget System (INTERACTIVE DEMO)**
+#### ✅ **Phase 1C: Mock Widget System (POSTPONED - NACH Task 1.6)**
 - [ ] **Task 1.7: Widget Grid + Mock Widgets**
-  - [ ] 1.6.1: Install and configure react-grid-layout
-  - [ ] 1.6.2: Create 3 mock widget types (Chart, KPI, Text) with placeholder content
-  - [ ] 1.6.3: Implement basic drag and drop functionality with Pino logging
-  - [ ] 1.6.4: Add widget resize handles and constraints with debug logging
-  - [ ] 1.6.5: Create widget deletion and basic interactions with structured logging
-  - **Tools:** react-grid-layout, mock widgets, drag & drop, Pino logging
-  - **Success Criteria:** Interactive dashboard with moveable placeholder widgets + debug logs
-  - **Why Now:** IMMEDIATE interactive experience for user validation + development debugging
+  - [ ] **WICHTIG:** Dieses Task wird nach Completion von Task 1.6 Phase 2 (Week 5) implementiert
+  - [ ] 1.7.1: Install and configure react-grid-layout
+  - [ ] 1.7.2: Create 3 mock widget types (Chart, KPI, Text) with placeholder content
+  - [ ] 1.7.3: Implement basic drag and drop functionality with Pino logging
+  - [ ] 1.7.4: Add widget resize handles and constraints with debug logging
+  - [ ] 1.7.5: Create widget deletion and basic interactions with structured logging
+  - [ ] 1.7.6: Integrate with Modern State Management (TanStack Query für widget data)
+  - **Tools:** react-grid-layout, mock widgets, drag & drop, Pino logging, TanStack Query
+  - **Success Criteria:** Interactive dashboard mit state management integration
+  - **Timeline:** Nach Week 5 von Task 1.6
+  - **Why Postponed:** Widget state management benötigt finale State Architecture
 
 **🚨 WEEK 1-2 BLOCKERS & SOLUTIONS:**
 - **Blocker:** Docker setup complexity → **Solution:** Use proven docker-compose patterns, start simple

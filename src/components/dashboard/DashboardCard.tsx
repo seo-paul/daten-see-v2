@@ -1,5 +1,6 @@
 import { Calendar, Globe, Lock, MoreVertical, Settings, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import type { Route } from 'next';
 import { useState } from 'react';
 
 import type { DashboardListItem } from '@/types/dashboard.types';
@@ -29,7 +30,7 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <Link 
-            href={`/dashboard/${dashboard.id}` as any}
+            href={`/dashboard/${dashboard.id}` as Route}
             className="block hover:text-blue-600 transition-colors"
           >
             <h3 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-blue-600">

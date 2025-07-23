@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { appLogger } from '@/lib/monitoring/logger.config';
+import { QueryProvider } from '@/lib/query/provider';
 import { ErrorBoundary } from '@/shared/components/ErrorBoundary';
 
 import './globals.css';
@@ -35,9 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <ErrorBoundary level="page" context={{ layout: 'root' }}>
-          {children}
-        </ErrorBoundary>
+        <QueryProvider>
+          <ErrorBoundary level="page" context={{ layout: 'root' }}>
+            {children}
+          </ErrorBoundary>
+        </QueryProvider>
         
         {/* Development error overlay */}
         {process.env.NODE_ENV === 'development' && (
