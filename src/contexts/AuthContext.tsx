@@ -148,7 +148,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     checkTokenRefresh();
 
     return () => clearInterval(interval);
-  }, [authState.isAuthenticated, refreshToken]);
+  }, [authState.isAuthenticated]);
 
   // Login function (will be enhanced with TanStack mutation)
   const login = async (email: string, _password: string): Promise<void> => {
