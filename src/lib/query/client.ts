@@ -13,7 +13,7 @@ export const queryClient = new QueryClient({
       // Retry failed requests 2 times
       retry: 2,
       // Retry with exponential backoff
-      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+      retryDelay: (attemptIndex: number): number => Math.min(1000 * 2 ** attemptIndex, 30000),
       // Refetch on window focus (useful for dashboard data)
       refetchOnWindowFocus: true,
       // Don't refetch on reconnect for better UX
@@ -25,7 +25,7 @@ export const queryClient = new QueryClient({
       // Retry mutations once on failure
       retry: 1,
       // Log mutation errors
-      onError: (error) => {
+      onError: (error: Error): void => {
         appLogger.error('Mutation failed', { 
           error: error instanceof Error ? error.message : 'Unknown error',
           stack: error instanceof Error ? error.stack : undefined

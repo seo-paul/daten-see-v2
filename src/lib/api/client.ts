@@ -1,5 +1,5 @@
 import { appLogger } from '@/lib/monitoring/logger.config';
-import type { ApiError, ApiResponse } from '@/types/api.types';
+import type { ApiError } from '@/types/api.types';
 import { ApiErrorSchema } from '@/types/api.types';
 
 // API Configuration

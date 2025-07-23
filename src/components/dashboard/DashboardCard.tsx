@@ -1,6 +1,6 @@
 import { Calendar, Globe, Lock, MoreVertical, Settings, Trash2 } from 'lucide-react';
-import Link from 'next/link';
 import type { Route } from 'next';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import type { DashboardListItem } from '@/types/dashboard.types';
