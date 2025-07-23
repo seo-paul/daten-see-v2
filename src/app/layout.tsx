@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { AuthProvider } from '@/contexts/AuthContext';
 import { appLogger } from '@/lib/monitoring/logger.config';
 import { QueryProvider } from '@/lib/query/provider';
 import { ErrorBoundary } from '@/shared/components/ErrorBoundary';
@@ -37,9 +38,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <QueryProvider>
-          <ErrorBoundary level="page" context={{ layout: 'root' }}>
-            {children}
-          </ErrorBoundary>
+          <AuthProvider>
+            <ErrorBoundary level="page" context={{ layout: 'root' }}>
+              {children}
+            </ErrorBoundary>
+          </AuthProvider>
         </QueryProvider>
         
         {/* Development error overlay */}
