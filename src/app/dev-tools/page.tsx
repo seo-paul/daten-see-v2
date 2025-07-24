@@ -5,13 +5,14 @@
  * React DevTools profiling interface and performance monitoring
  */
 
+import { Play, Square, Download, Trash2, BarChart3, Settings } from 'lucide-react';
 import React from 'react';
+
 import { MainLayout } from '@/components/layout/MainLayout';
+import { NavbarButton } from '@/components/ui/Button';
 import { devToolsUtils } from '@/lib/performance/devtools-integration';
 import { performanceMonitor } from '@/lib/performance/react-profiling';
 import { PerformanceDevPanel } from '@/lib/performance/react-profiling';
-import { NavbarButton } from '@/components/ui/Button';
-import { Play, Square, Download, Trash2, BarChart3, Settings } from 'lucide-react';
 
 export default function DevToolsPage(): React.ReactElement {
   const [isRecording, setIsRecording] = React.useState(false);

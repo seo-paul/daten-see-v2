@@ -3,8 +3,8 @@
  * Provides isolated Query Client for tests
  */
 
-import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from 'react';
 
 export interface TestQueryWrapperProps {
   children: React.ReactNode;

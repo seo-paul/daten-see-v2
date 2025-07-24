@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+
 import { usePerformanceProfiler, checkPerformanceBudget, performanceMonitor } from '@/lib/performance/react-profiling';
 
 export interface ProfiledComponentProps {

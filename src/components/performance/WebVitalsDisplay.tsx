@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+
 import { useWebVitals } from '@/lib/performance/web-vitals';
 
 interface WebVitalsDisplayProps {

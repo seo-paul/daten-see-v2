@@ -1,8 +1,9 @@
 'use client';
 
-import { Button, IconButton, NavbarButton } from '@/components/ui/Button';
-import { Logo, LogoCompact } from '@/components/brand/Logo';
 import { Plus, Settings, Share, Edit, Eye, X, BarChart3, Home, User, Palette } from 'lucide-react';
+
+import { Logo, LogoCompact } from '@/components/brand/Logo';
+import { Button, IconButton, NavbarButton } from '@/components/ui/Button';
 
 /**
  * DATEN-SEE Design System v2.3 - Tailwind Arbitrary Values

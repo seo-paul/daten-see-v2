@@ -1,8 +1,8 @@
 'use client';
 
 import { ChevronRight, Home } from 'lucide-react';
-import Link from 'next/link';
 import type { Route } from 'next';
+import Link from 'next/link';
 
 import { useNavigation } from '@/contexts/NavigationContext';
 

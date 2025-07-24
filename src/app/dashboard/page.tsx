@@ -1,12 +1,14 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
+
 import { DashboardGrid } from '@/components/layout/DashboardGrid';
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { useDashboards } from '@/hooks/useDashboards';
-import { useQueryClient } from '@tanstack/react-query';
 import { prefetchDashboards } from '@/lib/tanstack-query/prefetch';
-import { useEffect } from 'react';
+
 
 export default function DashboardPage(): React.ReactElement {
   const queryClient = useQueryClient();

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { designTokens } from '@/lib/design/tokens';
 
 interface LogoProps {

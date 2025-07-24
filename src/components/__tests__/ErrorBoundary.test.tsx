@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import { TestQueryWrapper } from '@/lib/testing';
 
 import { ErrorBoundary } from '../ErrorBoundary';

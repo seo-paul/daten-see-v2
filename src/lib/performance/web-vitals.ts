@@ -4,6 +4,7 @@
  */
 
 import * as React from 'react';
+
 import { simpleMonitor } from './simple-profiling';
 
 /**
@@ -161,7 +162,7 @@ class WebVitalsCollector {
     if (!('PerformanceObserver' in window)) return;
 
     let clsValue = 0;
-    let clsEntries: PerformanceEntry[] = [];
+    const clsEntries: PerformanceEntry[] = [];
 
     try {
       const observer = new PerformanceObserver((list) => {
@@ -246,7 +247,7 @@ class WebVitalsCollector {
     if (!('PerformanceObserver' in window)) return;
 
     let maxInpValue = 0;
-    let inpEntries: PerformanceEntry[] = [];
+    const inpEntries: PerformanceEntry[] = [];
 
     try {
       const observer = new PerformanceObserver((list) => {

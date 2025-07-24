@@ -4,9 +4,10 @@
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { dashboardApi } from '@/lib/api/dashboard.api';
-import { useDashboardStore } from '@/store/dashboard.store';
 import { createQueryOptions, queryKeys } from '@/lib/tanstack-query/config';
+import { useDashboardStore } from '@/store/dashboard.store';
 import type { DashboardListItem, CreateDashboardRequest } from '@/types/dashboard.types';
 
 /**

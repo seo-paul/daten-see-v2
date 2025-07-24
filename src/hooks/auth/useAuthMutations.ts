@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { apiClient } from '@/lib/api/client';
-import { appLogger } from '@/lib/monitoring/logger.config';
 import { tokenManager } from '@/lib/auth/token';
+import { appLogger } from '@/lib/monitoring/logger.config';
 import type { 
   LoginRequest, 
   LoginResponse, 

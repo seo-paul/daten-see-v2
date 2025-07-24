@@ -1,14 +1,16 @@
 'use client';
 
-import React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Menu, X, Settings, LogOut, User, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils/cn';
+import React from 'react';
+
 import { Logo, LogoCompact } from '@/components/brand/Logo';
 import { NavbarButton, IconButton } from '@/components/ui/Button';
 import { useAuth } from '@/contexts/AuthContext';
-import { Menu, X, Settings, LogOut, User, BarChart3 } from 'lucide-react';
+import { cn } from '@/lib/utils/cn';
+
 
 // Header variants for different page contexts
 const headerVariants = cva(

@@ -3,11 +3,13 @@
  * Combines all app contexts for testing
  */
 
+import { QueryClient } from '@tanstack/react-query';
 import React from 'react';
+
 import { AuthProvider } from '@/contexts/AuthContext';
 import { NavigationProvider } from '@/contexts/NavigationContext';
+
 import { TestQueryWrapper, createTestQueryClient } from './query-wrapper';
-import { QueryClient } from '@tanstack/react-query';
 
 export interface TestContextWrapperProps {
   children: React.ReactNode;

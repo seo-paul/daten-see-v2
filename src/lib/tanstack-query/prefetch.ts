@@ -4,6 +4,7 @@
  */
 
 import { QueryClient } from '@tanstack/react-query';
+
 import { dashboardApi } from '@/lib/api/dashboard.api';
 // import type { Dashboard, DashboardListItem } from '@/types/dashboard.types'; // TODO: Use when implementing real API calls
 
