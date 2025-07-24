@@ -104,7 +104,7 @@ export function ProtectedRoute({
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-        <p className="text-gray-600">You don't have permission to access this page.</p>
+        <p className="text-gray-600">You don&apos;t have permission to access this page.</p>
       </div>
     </div>
   );
@@ -134,7 +134,12 @@ export function useRouteProtection(options: {
   requireAuth?: boolean;
   requiredRole?: 'user' | 'admin';
   redirectTo?: string;
-}) {
+}): {
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  user: typeof useAuth extends () => { user: infer U } ? U : never;
+  hasAccess: boolean;
+} {
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const { requireAuth = true, requiredRole, redirectTo = '/login' } = options;

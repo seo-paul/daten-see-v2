@@ -38,7 +38,7 @@ export interface CardProps
  * Base container component for content sections, widgets, and layouts
  */
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, ...props }, ref) => { // eslint-disable-line @typescript-eslint/no-unused-vars
     return (
       <div
         className={cn(cardVariants({ variant, size }), className)}

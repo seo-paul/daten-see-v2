@@ -44,7 +44,7 @@ export function LoginForm({ onSuccess, className = '' }: LoginFormProps): React.
 
       // Call success callback
       onSuccess?.();
-    } catch (error) {
+    } catch {
       // Error is already handled by the mutation's onError
       // Silently handle as error is already logged
     }

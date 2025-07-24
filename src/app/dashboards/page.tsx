@@ -30,7 +30,7 @@ export default function DashboardsPage(): React.ReactElement {
   // Load dashboards on mount
   useEffect(() => {
     fetchDashboards();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fetchDashboards]);
 
   // Filter dashboards based on search query
   const filteredDashboards = dashboards.filter(dashboard =>

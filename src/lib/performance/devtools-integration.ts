@@ -37,12 +37,16 @@ class ProfilerDataStore {
   startRecording(): void {
     this.isRecording = true;
     this.profileData.clear();
-    console.log('🎬 Started React profiling session');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎬 Started React profiling session');
+    }
   }
 
   stopRecording(): void {
     this.isRecording = false;
-    console.log('🛑 Stopped React profiling session');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🛑 Stopped React profiling session');
+    }
     this.generateReport();
   }
 
@@ -64,11 +68,15 @@ class ProfilerDataStore {
 
   private generateReport(): void {
     if (this.profileData.size === 0) {
-      console.log('📊 No profiling data collected');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📊 No profiling data collected');
+      }
       return;
     }
 
-    console.group('📊 React Profiler Report');
+    if (process.env.NODE_ENV === 'development') {
+      console.group('📊 React Profiler Report');
+    }
     
     this.profileData.forEach((sessions, componentId) => {
       if (sessions.length === 0) return;
@@ -82,23 +90,27 @@ class ProfilerDataStore {
       const maxDuration = Math.max(...durations);
       const minDuration = Math.min(...durations);
 
-      console.group(`🔍 ${componentId}`);
-      console.log(`Total renders: ${totalSessions} (${mounts} mounts, ${updates} updates)`);
-      console.log(`Avg duration: ${avgDuration.toFixed(2)}ms`);
-      console.log(`Min/Max duration: ${minDuration.toFixed(2)}ms / ${maxDuration.toFixed(2)}ms`);
-      
-      // Highlight performance issues
-      if (avgDuration > 16) {
-        console.warn(`⚠️ Average render time exceeds 16ms budget`);
+      if (process.env.NODE_ENV === 'development') {
+        console.group(`🔍 ${componentId}`);
+        console.log(`Total renders: ${totalSessions} (${mounts} mounts, ${updates} updates)`);
+        console.log(`Avg duration: ${avgDuration.toFixed(2)}ms`);
+        console.log(`Min/Max duration: ${minDuration.toFixed(2)}ms / ${maxDuration.toFixed(2)}ms`);
+        
+        // Highlight performance issues
+        if (avgDuration > 16) {
+          console.warn(`⚠️ Average render time exceeds 16ms budget`);
+        }
+        if (updates > mounts * 3) {
+          console.warn(`⚠️ High update-to-mount ratio (${(updates/mounts).toFixed(1)}:1)`);
+        }
+        
+        console.groupEnd();
       }
-      if (updates > mounts * 3) {
-        console.warn(`⚠️ High update-to-mount ratio (${(updates/mounts).toFixed(1)}:1)`);
-      }
-      
-      console.groupEnd();
     });
 
-    console.groupEnd();
+    if (process.env.NODE_ENV === 'development') {
+      console.groupEnd();
+    }
   }
 
   exportData(): string {
@@ -167,9 +179,9 @@ export function createProfilerWrapper(
       if (trackInteractions) {
         console.log(`🖱️ ${id} interactions: [tracking disabled in current React version]`);
       }
-    }, [logToConsole, trackInteractions]);
+    }, []);
 
-    return React.createElement(React.Profiler, { id: componentId, onRender, children });
+    return React.createElement(React.Profiler, { id: componentId, onRender }, children);
   };
 }
 
@@ -188,7 +200,7 @@ export function withProfiler<P extends Record<string, unknown>>(
   const ProfilerWrapper = createProfilerWrapper(componentId, options);
 
   const ProfiledComponent = React.forwardRef<unknown, P>((props, ref) => 
-    React.createElement(ProfilerWrapper, { children: React.createElement(Component, { ...props, ref } as P & { ref?: unknown }) })
+    React.createElement(ProfilerWrapper, {}, React.createElement(Component, { ...props, ref } as P & { ref?: unknown }))
   );
 
   ProfiledComponent.displayName = `WithProfiler(${componentId})`;
@@ -207,7 +219,9 @@ export const devToolsUtils = {
     
     // Enable React DevTools profiling if available
     if (typeof window !== 'undefined' && (window as Record<string, unknown>).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-      console.log('🔧 React DevTools detected - profiling data will be available in DevTools');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🔧 React DevTools detected - profiling data will be available in DevTools');
+      }
     }
   },
 
@@ -236,7 +250,9 @@ export const devToolsUtils = {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
       
-      console.log('📥 Profiling data exported to file');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📥 Profiling data exported to file');
+      }
     }
     
     return data;
@@ -284,7 +300,9 @@ export const devToolsUtils = {
     if (allData instanceof Map) {
       allData.clear();
     }
-    console.log('🧹 Profiling data cleared');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🧹 Profiling data cleared');
+    }
   },
 };
 
@@ -295,7 +313,8 @@ export const devToolsUtils = {
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   (window as Record<string, unknown>).reactProfiling = devToolsUtils;
   
-  console.log(`
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`
 🛠️ React Profiling Utils Available:
    • window.reactProfiling.startProfiling()
    • window.reactProfiling.stopProfiling()  
@@ -303,6 +322,7 @@ if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
    • window.reactProfiling.getProfilingStats()
    • window.reactProfiling.clearProfilingData()
   `);
+  }
 }
 
 export default devToolsUtils;

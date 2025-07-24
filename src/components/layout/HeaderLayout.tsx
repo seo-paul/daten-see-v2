@@ -67,17 +67,19 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
   showUserMenu = true,
   customActions,
   breadcrumbs,
-}, _ref): React.ReactElement => {
+}, _ref): React.ReactElement => { // eslint-disable-line @typescript-eslint/no-unused-vars
   const router = useRouter();
   const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     try {
       await logout();
       router.push('/login');
     } catch (error) {
-      console.error('Logout failed:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Logout failed:', error);
+      }
     }
   };
 

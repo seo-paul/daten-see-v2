@@ -120,7 +120,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     size, 
     context,
     fullWidth,
-    asChild = false, 
+    asChild = false, // eslint-disable-line @typescript-eslint/no-unused-vars
     loading = false,
     leftIcon,
     rightIcon,
