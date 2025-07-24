@@ -16,7 +16,7 @@ export interface ProfiledComponentProps {
 /**
  * Higher-Order Component for automatic performance profiling
  */
-export function withProfiling<P extends Record<string, any>>(
+export function withProfiling<P extends Record<string, unknown>>(
   WrappedComponent: React.ComponentType<P>,
   options: {
     budget?: 'small' | 'medium' | 'large';
@@ -26,7 +26,7 @@ export function withProfiling<P extends Record<string, any>>(
   const componentName = options.name || WrappedComponent.displayName || WrappedComponent.name || 'Component';
   const budget = options.budget || 'medium';
 
-  const ProfiledComponent = React.forwardRef<any, P>((props, ref) => {
+  const ProfiledComponent = React.forwardRef<HTMLElement, P>((props, ref) => {
     const renderStart = React.useRef<number>();
     const { renderCount } = usePerformanceProfiler(componentName);
 
@@ -55,7 +55,7 @@ export function withProfiling<P extends Record<string, any>>(
       }
     });
 
-    return <WrappedComponent {...(props as any)} ref={ref} />;
+    return <WrappedComponent {...props} ref={ref} />;
   });
 
   ProfiledComponent.displayName = `Profiled(${componentName})`;
@@ -91,7 +91,7 @@ export function ProfiledComponent({
  * Profiled memo wrapper
  * Automatically profiles memoized components
  */
-export function createProfiledMemo<T extends React.ComponentType<any>>(
+export function createProfiledMemo<T extends React.ComponentType<Record<string, unknown>>>(
   Component: T,
   options: {
     name?: string;
@@ -104,7 +104,7 @@ export function createProfiledMemo<T extends React.ComponentType<any>>(
   
   const ProfiledMemoComponent = React.memo(
     withProfiling(Component, { name: `Memo(${componentName})`, budget }),
-    options.propsAreEqual as any
+    options.propsAreEqual
   );
 
   // Track memo effectiveness
@@ -113,7 +113,7 @@ export function createProfiledMemo<T extends React.ComponentType<any>>(
     memoSkips: 0,
   };
 
-  const EnhancedMemoComponent = React.forwardRef<any, React.ComponentProps<T>>((props, ref) => {
+  const EnhancedMemoComponent = React.forwardRef<HTMLElement, React.ComponentProps<T>>((props, ref) => {
     memoStats.renderCount += 1;
 
     React.useEffect(() => {
@@ -143,7 +143,7 @@ export class PerformanceBoundary extends React.Component<
     onPerformanceIssue?: (issue: {
       type: 'slow-render' | 'memory-leak' | 'frequent-rerenders';
       componentName: string;
-      details: any;
+      details: Record<string, unknown>;
     }) => void;
   },
   {
@@ -154,7 +154,15 @@ export class PerformanceBoundary extends React.Component<
   private renderTimes: number[] = [];
   private lastRenderTime = 0;
 
-  constructor(props: any) {
+  constructor(props: {
+    children: React.ReactNode;
+    name?: string;
+    onPerformanceIssue?: (issue: {
+      type: 'slow-render' | 'memory-leak' | 'frequent-rerenders';
+      componentName: string;
+      details: Record<string, unknown>;
+    }) => void;
+  }) {
     super(props);
     this.state = {
       renderCount: 0,

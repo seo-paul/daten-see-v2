@@ -16,7 +16,7 @@ export interface TestContextWrapperProps {
   queryClient?: QueryClient;
   // Auth context overrides for testing different states
   authValue?: {
-    user?: any;
+    user?: Record<string, unknown>;
     isAuthenticated?: boolean;
     isLoading?: boolean;
   };

@@ -75,7 +75,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
   const handleLogout = async () => {
     try {
       await logout();
-      router.push('/login' as any);
+      router.push('/login');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -111,7 +111,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
           {showNavigation && (
             <nav className="hidden md:flex items-center space-x-4">
               {navigationItems.map((item) => (
-                <Link key={item.href} href={item.href as any}>
+                <Link key={item.href} href={item.href}>
                   <NavbarButton leftIcon={item.icon}>
                     {item.label}
                   </NavbarButton>
@@ -152,7 +152,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
 
             {/* Login Button (if not authenticated) */}
             {showUserMenu && !user && (
-              <Link href={'/login' as any} className="hidden sm:block">
+              <Link href="/login" className="hidden sm:block">
                 <NavbarButton leftIcon={<User className="w-4 h-4" />}>
                   Login
                 </NavbarButton>
@@ -181,7 +181,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
               {showNavigation && navigationItems.map((item) => (
                 <Link 
                   key={item.href} 
-                  href={item.href as any}
+                  href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="block"
                 >
@@ -227,7 +227,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
               {/* Mobile Login Button */}
               {showUserMenu && !user && (
                 <div className="border-t border-[#E6D7B8] pt-3">
-                  <Link href={'/login' as any} onClick={() => setMobileMenuOpen(false)}>
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                     <NavbarButton 
                       leftIcon={<User className="w-4 h-4" />}
                       fullWidth

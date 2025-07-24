@@ -39,7 +39,7 @@ export function useRenderPerformance(componentName: string) {
 export function useMemoryMonitoring(context = 'component') {
   React.useEffect(() => {
     if ('memory' in performance) {
-      const memInfo = (performance as any).memory;
+      const memInfo = (performance as Record<string, unknown>).memory as Record<string, number>;
       if (memInfo) {
         const usedMB = memInfo.usedJSHeapSize / 1024 / 1024;
         recordMetrics.memoryUsage(usedMB, context);

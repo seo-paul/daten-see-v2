@@ -139,10 +139,10 @@ class WebVitalsCollector {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry: PerformanceEntry & { processingStart?: number; startTime: number }) => {
           this.recordMetric({
             name: 'FID',
-            value: entry.processingStart - entry.startTime,
+            value: (entry.processingStart || 0) - entry.startTime,
             entries: [entry],
           });
         });
@@ -167,10 +167,10 @@ class WebVitalsCollector {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry: PerformanceEntry & { hadRecentInput?: boolean; value?: number }) => {
           // Only count layout shifts without recent user input
           if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+            clsValue += (entry.value || 0);
             clsEntries.push(entry);
             
             this.recordMetric({
@@ -198,7 +198,7 @@ class WebVitalsCollector {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry: PerformanceEntry & { startTime: number }) => {
           if (entry.name === 'first-contentful-paint') {
             this.recordMetric({
               name: 'FCP',
@@ -252,7 +252,7 @@ class WebVitalsCollector {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry: PerformanceEntry & { duration: number }) => {
           const inp = entry.duration;
           if (inp > maxInpValue) {
             maxInpValue = inp;
@@ -356,9 +356,9 @@ class WebVitalsCollector {
     }
 
     // Send to Google Analytics (if available)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
+    if (typeof window !== 'undefined' && (window as Record<string, unknown>).gtag) {
       try {
-        (window as any).gtag('event', metric.name, {
+        (window as Record<string, unknown>).gtag('event', metric.name, {
           event_category: 'Web Vitals',
           value: Math.round(metric.value),
           metric_rating: metric.rating,
@@ -437,7 +437,11 @@ class WebVitalsCollector {
     recommendations: string[];
   } {
     const metrics = this.getMetrics();
-    const summary: any = {
+    const summary: {
+      score: number;
+      metrics: Record<string, { value: number; rating: string }>;
+      recommendations: string[];
+    } = {
       score: this.getScore(),
       metrics: {},
       recommendations: [],
@@ -564,7 +568,7 @@ export function initializeWebVitals(): void {
     
     // Make available in console for debugging
     if (process.env.NODE_ENV === 'development') {
-      (window as any).webVitals = {
+      (window as Record<string, unknown>).webVitals = {
         getMetrics: () => webVitalsCollector.getMetrics(),
         getScore: () => webVitalsCollector.getScore(),
         getSummary: () => webVitalsCollector.getSummary(),

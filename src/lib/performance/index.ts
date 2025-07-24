@@ -80,8 +80,8 @@ export function initializePerformanceMonitoring(config?: {
     // Make performance tools available globally in development
     if (process.env.NODE_ENV === 'development') {
       import('./simple-profiling').then(({ simpleMonitor }) => {
-        (window as any).performance = {
-          ...(window as any).performance,
+        (window as Record<string, unknown>).performance = {
+          ...(window as Record<string, unknown>).performance,
           monitoring: simpleMonitor,
         };
       });

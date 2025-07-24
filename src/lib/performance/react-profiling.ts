@@ -105,7 +105,7 @@ export function useProfiledMemo<T>(
  * useCallback profiler wrapper
  * Tracks callback recreation frequency
  */
-export function useProfiledCallback<T extends (...args: any[]) => any>(
+export function useProfiledCallback<T extends (...args: unknown[]) => unknown>(
   callback: T,
   deps: React.DependencyList,
   name: string

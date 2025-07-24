@@ -16,8 +16,21 @@ import { PerformanceDevPanel } from '@/lib/performance/react-profiling';
 
 export default function DevToolsPage(): React.ReactElement {
   const [isRecording, setIsRecording] = React.useState(false);
-  const [profilingStats, setProfilingStats] = React.useState<Record<string, any>>({});
-  const [performanceMetrics, setPerformanceMetrics] = React.useState<Record<string, any>>({});
+  const [profilingStats, setProfilingStats] = React.useState<Record<string, {
+    renderCount: number;
+    avgDuration: number;
+    maxDuration: number;
+    minDuration: number;
+    mountCount: number;
+    updateCount: number;
+  }>>({});
+  const [performanceMetrics, setPerformanceMetrics] = React.useState<Record<string, {
+    count: number;
+    avg: number;
+    min: number;
+    max: number;
+    total: number;
+  }>>({});
 
   // Update stats periodically
   React.useEffect(() => {
@@ -149,7 +162,7 @@ export default function DevToolsPage(): React.ReactElement {
               </p>
             ) : (
               <div className="space-y-4">
-                {Object.entries(profilingStats).map(([componentId, stats]: [string, any]) => (
+                {Object.entries(profilingStats).map(([componentId, stats]) => (
                   <div key={componentId} className="border-b border-gray-100 pb-4 last:border-b-0">
                     <h3 className="font-medium text-gray-800 mb-2">{componentId}</h3>
                     <div className="grid grid-cols-2 gap-4 text-sm">
@@ -207,7 +220,7 @@ export default function DevToolsPage(): React.ReactElement {
               </p>
             ) : (
               <div className="space-y-4">
-                {Object.entries(performanceMetrics).map(([name, data]: [string, any]) => (
+                {Object.entries(performanceMetrics).map(([name, data]) => (
                   data && (
                     <div key={name} className="border-b border-gray-100 pb-4 last:border-b-0">
                       <h3 className="font-medium text-gray-800 mb-2">{name}</h3>

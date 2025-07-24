@@ -68,7 +68,7 @@ export function createOptimizedQueryClient(): QueryClient {
         refetchOnMount: true,
         
         // Error handling
-        retry: (failureCount, error: any) => {
+        retry: (failureCount, error: Record<string, unknown>) => {
           // Don't retry on 404s or authentication errors
           if (error?.status === 404 || error?.status === 401) {
             return false;
@@ -79,7 +79,7 @@ export function createOptimizedQueryClient(): QueryClient {
         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
         
         // Performance optimization - keep previous data while fetching new data
-        placeholderData: (previousData: any) => previousData,
+        placeholderData: (previousData: unknown) => previousData,
         
         // Additional stale-while-revalidate behavior
         // Note: staleTime and gcTime already set above
@@ -155,7 +155,7 @@ export const createQueryOptions = {
  */
 export function getNetworkOptimizedConfig() {
   // Check if we're in a slow network environment
-  const connection = (navigator as any)?.connection;
+  const connection = (navigator as Record<string, unknown>)?.connection as Record<string, string> | undefined;
   const isSlowNetwork = connection?.effectiveType === '2g' || connection?.effectiveType === 'slow-2g';
   
   if (isSlowNetwork) {

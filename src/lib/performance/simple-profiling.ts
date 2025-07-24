@@ -91,13 +91,13 @@ export function checkPerformanceBudget(
 /**
  * Simple profiling HOC
  */
-export function withSimpleProfiler<P extends Record<string, any>>(
+export function withSimpleProfiler<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
   componentName?: string
 ) {
   const name = componentName || Component.displayName || Component.name || 'Component';
   
-  return React.forwardRef<any, P>((props, ref) => {
+  return React.forwardRef<unknown, P>((props, ref) => {
     const renderStart = performance.now();
     const { renderCount } = usePerformanceProfiler(name);
     
@@ -114,7 +114,7 @@ export function withSimpleProfiler<P extends Record<string, any>>(
     const componentProps = { ...props } as P;
     if (ref) {
       // Type assertion to handle ref forwarding properly
-      (componentProps as any).ref = ref;
+      (componentProps as Record<string, unknown>).ref = ref;
     }
     
     return React.createElement(Component, componentProps);
@@ -144,7 +144,7 @@ export const devProfiling = {
 
 // Make available in development console
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-  (window as any).simpleProfiling = devProfiling;
+  (window as Record<string, unknown>).simpleProfiling = devProfiling;
 }
 
 export default {

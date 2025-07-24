@@ -14,7 +14,7 @@ export interface PerformanceMetric {
   unit: 'ms' | 'kb' | 'count' | 'percentage';
   timestamp: number;
   tags?: Record<string, string>;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
 }
 
 /**
@@ -91,7 +91,7 @@ class PerformanceMonitor {
 
   private initializeSentryPerformance(): void {
     // Configure Sentry for performance monitoring
-    Sentry.addEventProcessor((event: any) => {
+    Sentry.addEventProcessor((event: Record<string, unknown>) => {
       if (event.type === 'transaction') {
         // Add custom performance context
         event.contexts = {
@@ -116,7 +116,7 @@ class PerformanceMonitor {
   private initializeDevelopmentTools(): void {
     if (typeof window !== 'undefined') {
       // Make monitoring available in console
-      (window as any).performanceMonitor = {
+      (window as Record<string, unknown>).performanceMonitor = {
         getMetrics: () => this.getMetrics(),
         getRecentMetrics: (count?: number) => this.getRecentMetrics(count),
         clearMetrics: () => this.clearMetrics(),
@@ -358,8 +358,8 @@ class PerformanceMonitor {
   /**
    * Get performance summary
    */
-  getSummary(): Record<string, any> {
-    const summary: Record<string, any> = {};
+  getSummary(): Record<string, unknown> {
+    const summary: Record<string, unknown> = {};
     
     // Group metrics by name
     const grouped = this.metrics.reduce((acc, metric) => {
@@ -407,7 +407,7 @@ export const performanceMonitor = PerformanceMonitor.getInstance();
  * Convenience functions for common metrics
  */
 export const recordMetrics = {
-  renderTime: (componentName: string, duration: number, additionalData?: Record<string, any>) => {
+  renderTime: (componentName: string, duration: number, additionalData?: Record<string, unknown>) => {
     performanceMonitor.recordMetric({
       name: 'component-render-time',
       value: duration,

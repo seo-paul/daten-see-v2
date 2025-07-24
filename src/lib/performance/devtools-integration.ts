@@ -16,7 +16,7 @@ export interface ProfilerData {
   baseDuration: number;
   startTime: number;
   commitTime: number;
-  interactions: Set<any>;
+  interactions: Set<unknown>;
 }
 
 /**
@@ -176,7 +176,7 @@ export function createProfilerWrapper(
 /**
  * HOC for automatic profiler wrapping
  */
-export function withProfiler<P extends Record<string, any>>(
+export function withProfiler<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
   options: {
     id?: string;
@@ -187,8 +187,8 @@ export function withProfiler<P extends Record<string, any>>(
   const componentId = options.id || Component.displayName || Component.name || 'Component';
   const ProfilerWrapper = createProfilerWrapper(componentId, options);
 
-  const ProfiledComponent = React.forwardRef<any, P>((props, ref) => 
-    React.createElement(ProfilerWrapper, { children: React.createElement(Component, { ...props, ref } as P & { ref?: any }) })
+  const ProfiledComponent = React.forwardRef<unknown, P>((props, ref) => 
+    React.createElement(ProfilerWrapper, { children: React.createElement(Component, { ...props, ref } as P & { ref?: unknown }) })
   );
 
   ProfiledComponent.displayName = `WithProfiler(${componentId})`;
@@ -206,7 +206,7 @@ export const devToolsUtils = {
     profilerStore.startRecording();
     
     // Enable React DevTools profiling if available
-    if (typeof window !== 'undefined' && (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+    if (typeof window !== 'undefined' && (window as Record<string, unknown>).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
       console.log('🔧 React DevTools detected - profiling data will be available in DevTools');
     }
   },
@@ -293,7 +293,7 @@ export const devToolsUtils = {
  * Add these to window for easy access in dev console
  */
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-  (window as any).reactProfiling = devToolsUtils;
+  (window as Record<string, unknown>).reactProfiling = devToolsUtils;
   
   console.log(`
 🛠️ React Profiling Utils Available:

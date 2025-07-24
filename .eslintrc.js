@@ -73,7 +73,6 @@ module.exports = {
       'error',
       {
         additionalHooks: '(useIsomorphicLayoutEffect|useUpdateEffect|useEventCallback|useQueryClient|usePrefetchQuery)',
-        enableDangerousAutofixSuggestionsByDefault: false, // Keep safe for production
       }
     ],
     
@@ -106,15 +105,8 @@ module.exports = {
       }
     ],
     
-    // Hook Performance & Best Practices
-    'no-restricted-patterns': [
-      'error',
-      {
-        // Discourage inline object/array dependencies
-        message: 'Avoid inline objects in hook dependencies. Extract to useMemo or define outside component.',
-        regex: 'useEffect\\(.*,\\s*\\[.*\\{.*\\}.*\\]\\)',
-      },
-    ],
+    // Hook Performance & Best Practices - using no-restricted-syntax for AST-based rules
+    // Note: Pattern-based rules moved to no-restricted-syntax above
     
     // Hook Naming Conventions
     'func-name-matching': 'off', // Disable to allow custom hook naming

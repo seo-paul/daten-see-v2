@@ -14,7 +14,7 @@ export function configureSentryPerformance() {
   if (typeof window === 'undefined') return;
 
   // Add performance-specific global event processor
-  Sentry.addEventProcessor((event: any, _hint: any) => {
+  Sentry.addEventProcessor((event: Record<string, unknown>, _hint: Record<string, unknown>) => {
     // Enhance performance transactions
     if (event.type === 'transaction') {
       return enhancePerformanceTransaction(event);
@@ -123,7 +123,7 @@ function initializeCustomTracing(): void {
     // Monitor layout shifts
     try {
       const clsObserver = new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry: any) => {
+        list.getEntries().forEach((entry: Record<string, unknown>) => {
           if (entry.value > 0.1) { // CLS threshold
             Sentry.addBreadcrumb({
               category: 'performance',
@@ -131,7 +131,7 @@ function initializeCustomTracing(): void {
               level: 'warning',
               data: {
                 value: entry.value,
-                sources: entry.sources?.map((source: any) => ({
+                sources: (entry.sources as Record<string, unknown>[] | undefined)?.map((source: Record<string, unknown>) => ({
                   node: source.node?.tagName,
                   currentRect: source.currentRect,
                   previousRect: source.previousRect,
@@ -175,7 +175,7 @@ function getNavigationTiming() {
 function getMemoryInfo() {
   if (!('memory' in performance)) return null;
 
-  const memory = (performance as any).memory;
+  const memory = (performance as Record<string, unknown>).memory as Record<string, number>;
   return {
     usedJSHeapSize: Math.round(memory.usedJSHeapSize / 1024 / 1024), // MB
     totalJSHeapSize: Math.round(memory.totalJSHeapSize / 1024 / 1024), // MB
@@ -187,7 +187,7 @@ function getMemoryInfo() {
  * Get connection information
  */
 function getConnectionInfo() {
-  const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+  const connection = (navigator as Record<string, unknown>).connection || (navigator as Record<string, unknown>).mozConnection || (navigator as Record<string, unknown>).webkitConnection;
   
   if (!connection) {
     return { effectiveType: 'unknown', downlink: 0 };
@@ -238,11 +238,11 @@ export function createPerformanceTransaction(
   name: string,
   op: string,
   description?: string
-): any | undefined {
+): Record<string, unknown> | undefined {
   if (process.env.NODE_ENV !== 'production') return undefined;
 
   // Use Sentry.startSpan to create a span and return it
-  let spanRef: any = undefined;
+  let spanRef: Record<string, unknown> | undefined = undefined;
   
   Sentry.startSpan({
     name,
@@ -256,9 +256,9 @@ export function createPerformanceTransaction(
     spanRef = span;
     // Add initial context using setData for spans
     if (span) {
-      (span as any).setData?.('startTime', performance.now());
-      (span as any).setData?.('memory', getMemoryInfo());
-      (span as any).setData?.('connection', getConnectionInfo());
+      (span as Record<string, unknown>).setData?.('startTime', performance.now());
+      (span as Record<string, unknown>).setData?.('memory', getMemoryInfo());
+      (span as Record<string, unknown>).setData?.('connection', getConnectionInfo());
     }
   });
 

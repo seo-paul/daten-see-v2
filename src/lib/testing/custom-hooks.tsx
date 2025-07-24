@@ -16,7 +16,7 @@ export interface RenderHookWithQueryOptions<TProps> extends Omit<RenderHookOptio
   queryClient?: QueryClient;
   withAuth?: boolean;
   authValue?: {
-    user?: any;
+    user?: Record<string, unknown>;
     isAuthenticated?: boolean;
     isLoading?: boolean;
   };
@@ -77,7 +77,7 @@ export function renderHookWithContext<TResult, TProps>(
  * Useful for testing async query behavior
  */
 export async function waitForQuery(
-  result: { current: any },
+  result: { current: Record<string, unknown> },
   timeout = 5000
 ): Promise<void> {
   const startTime = Date.now();
