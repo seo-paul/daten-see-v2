@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 
 import { tokenManager } from '@/lib/auth/token';
 import { appLogger } from '@/lib/monitoring/logger.config';
@@ -128,6 +128,50 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     initializeAuth();
   }, []);
 
+  // Refresh token function
+  const refreshToken = useCallback(async (): Promise<boolean> => {
+    try {
+      const refreshTokenValue = tokenManager.getRefreshToken();
+      
+      if (!refreshTokenValue) {
+        throw new Error('No refresh token available');
+      }
+
+      appLogger.debug('Token refresh attempt started');
+
+      // TODO: Replace with actual API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Mock successful refresh
+      const mockTokenData = {
+        token: 'refreshed.jwt.token',
+        refreshToken: refreshTokenValue, // Keep same refresh token
+        expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
+      };
+
+      tokenManager.setTokens(mockTokenData);
+      tokenManager.updateApiClientToken();
+
+      appLogger.info('Token refresh successful');
+      return true;
+
+    } catch (error) {
+      appLogger.error('Token refresh failed', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+      });
+
+      // Clear tokens and update state on refresh failure
+      tokenManager.clearTokens();
+      setAuthState({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: null,
+      });
+      return false;
+    }
+  }, []);
+
   // Auto-refresh token when needed
   useEffect(() => {
     if (!authState.isAuthenticated) return;
@@ -148,7 +192,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     checkTokenRefresh();
 
     return () => clearInterval(interval);
-  }, [authState.isAuthenticated]);
+  }, [authState.isAuthenticated, refreshToken]);
 
   // Login function (will be enhanced with TanStack mutation)
   const login = async (email: string, _password: string): Promise<void> => {
@@ -229,43 +273,6 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     appLogger.info('Logout completed');
   };
 
-  // Refresh token function
-  const refreshToken = async (): Promise<boolean> => {
-    try {
-      const refreshTokenValue = tokenManager.getRefreshToken();
-      
-      if (!refreshTokenValue) {
-        throw new Error('No refresh token available');
-      }
-
-      appLogger.debug('Token refresh attempt started');
-
-      // TODO: Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      // Mock successful refresh
-      const mockTokenData = {
-        token: 'refreshed.jwt.token',
-        refreshToken: refreshTokenValue, // Keep same refresh token
-        expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
-      };
-
-      tokenManager.setTokens(mockTokenData);
-      tokenManager.updateApiClientToken();
-
-      appLogger.info('Token refresh successful');
-      return true;
-
-    } catch (error) {
-      appLogger.error('Token refresh failed', {
-        error: error instanceof Error ? error.message : 'Unknown error',
-      });
-
-      // Force logout on refresh failure
-      logout();
-      return false;
-    }
-  };
 
   // Clear error
   const clearError = (): void => {

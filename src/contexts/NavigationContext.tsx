@@ -117,7 +117,7 @@ export function NavigationProvider({ children }: NavigationProviderProps): React
       breadcrumbs: newBreadcrumbs.map(b => b.label),
       pageTitle: newTitle,
     });
-  }, [pathname]);
+  }, [pathname, navigationState.currentPath]);
 
   // Set custom breadcrumbs
   const setBreadcrumbs = (breadcrumbs: Breadcrumb[]): void => {

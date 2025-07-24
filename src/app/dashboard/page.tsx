@@ -11,12 +11,13 @@ import { prefetchDashboards } from '@/lib/tanstack-query/prefetch';
 
 
 export default function DashboardPage(): React.ReactElement {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
   const { data: dashboards, isLoading } = useDashboards();
 
   // Prefetch dashboards on page load for performance
   useEffect(() => {
-    prefetchDashboards(queryClient);
+    void prefetchDashboards(queryClient);
   }, [queryClient]);
 
   return (

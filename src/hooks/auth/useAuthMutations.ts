@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, type UseMutationResult } from '@tanstack/react-query';
 
 import { apiClient } from '@/lib/api/client';
 import { tokenManager } from '@/lib/auth/token';
@@ -15,7 +15,8 @@ import { LoginResponseSchema, RefreshTokenResponseSchema } from '@/types/api.typ
  * Login mutation hook
  * Handles user authentication via TanStack Query
  */
-export function useLoginMutation() {
+export function useLoginMutation(): UseMutationResult<LoginResponse, Error, LoginRequest> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -72,7 +73,8 @@ export function useLoginMutation() {
  * Logout mutation hook
  * Handles user logout and cleanup
  */
-export function useLogoutMutation() {
+export function useLogoutMutation(): UseMutationResult<void, Error, void> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -123,7 +125,7 @@ export function useLogoutMutation() {
  * Refresh token mutation hook
  * Handles token refresh for automatic renewal
  */
-export function useRefreshTokenMutation() {
+export function useRefreshTokenMutation(): UseMutationResult<RefreshTokenResponse, Error, void> {
   return useMutation({
     mutationFn: async (): Promise<RefreshTokenResponse> => {
       const refreshToken = tokenManager.getRefreshToken();
@@ -181,7 +183,8 @@ export function useRefreshTokenMutation() {
  * Mock login mutation for development
  * Simulates API calls without actual backend
  */
-export function useMockLoginMutation() {
+export function useMockLoginMutation(): UseMutationResult<LoginResponse, Error, LoginRequest> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -250,7 +253,7 @@ export function useMockLoginMutation() {
 /**
  * Mock refresh token mutation for development
  */
-export function useMockRefreshTokenMutation() {
+export function useMockRefreshTokenMutation(): UseMutationResult<RefreshTokenResponse, Error, void> {
   return useMutation({
     mutationFn: async (): Promise<RefreshTokenResponse> => {
       appLogger.debug('Mock refresh token mutation started');

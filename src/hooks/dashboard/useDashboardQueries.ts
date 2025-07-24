@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, type UseQueryResult, type UseMutationResult } from '@tanstack/react-query';
 
 // import { apiClient } from '@/lib/api/client'; // TODO: Use when implementing real API calls
 import { appLogger } from '@/lib/monitoring/logger.config';
@@ -26,7 +26,7 @@ export const dashboardKeys = {
  * Hook to fetch dashboard list
  * Replaces the Zustand-based dashboard fetching
  */
-export function useDashboards() {
+export function useDashboards(): UseQueryResult<Dashboard[], Error> {
   return useQuery({
     queryKey: dashboardKeys.lists(),
     queryFn: async (): Promise<DashboardListItem[]> => {
@@ -92,7 +92,7 @@ export function useDashboards() {
  * Hook to fetch single dashboard details
  * Replaces Zustand-based dashboard detail fetching
  */
-export function useDashboard(id: string | undefined) {
+export function useDashboard(id: string | undefined): UseQueryResult<Dashboard, Error> {
   return useQuery({
     queryKey: dashboardKeys.detail(id || ''),
     queryFn: async (): Promise<Dashboard> => {
@@ -152,7 +152,8 @@ export function useDashboard(id: string | undefined) {
  * Hook to create new dashboard
  * Replaces Zustand-based dashboard creation
  */
-export function useCreateDashboard() {
+export function useCreateDashboard(): UseMutationResult<string, Error, CreateDashboardRequest> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -210,7 +211,8 @@ export function useCreateDashboard() {
  * Hook to update existing dashboard
  * Replaces Zustand-based dashboard updates
  */
-export function useUpdateDashboard() {
+export function useUpdateDashboard(): UseMutationResult<void, Error, UpdateDashboardRequest> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -258,7 +260,8 @@ export function useUpdateDashboard() {
  * Hook to delete dashboard
  * Replaces Zustand-based dashboard deletion
  */
-export function useDeleteDashboard() {
+export function useDeleteDashboard(): UseMutationResult<void, Error, string> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
