@@ -9,126 +9,97 @@
 ## 📅 **WEEK 1-2: FOUNDATION + EARLY UI VISIBILITY**
 ### 🎯 **Milestone:** Working dashboard with debugging tools and visible progress
 
-#### ✅ **Phase 1A: Development Environment + Debugging Infrastructure**
-- [ ] **Task 1.1: ERROR MONITORING + DEBUGGING (HIGHEST PRIORITY)**
-  - [ ] 1.1.1: **CRITICAL FIRST:** Install and configure Sentry for error tracking
-  - [ ] 1.1.2: **CRITICAL SECOND:** Install and configure Pino for structured development logging
-  - [ ] 1.1.3: Set up React Error Boundaries with Sentry + Pino integration
-  - [ ] 1.1.4: Configure development error overlay and logging
-  - [ ] 1.1.5: Add performance monitoring with Core Web Vitals
-  - [ ] 1.1.6: Test error reporting and alerting mechanisms
-  - [ ] 1.1.7: **CRITICAL GAP:** Create Sentry configuration files (sentry.client.config.js, sentry.server.config.js)
-  - [ ] 1.1.8: **CRITICAL GAP:** Create Pino configuration file (logger.config.js with development/production modes)
+#### ✅ **Phase 1A: Development Environment + Debugging Infrastructure** ✅ **COMPLETED**
+- [x] **Task 1.1: ERROR MONITORING + DEBUGGING (HIGHEST PRIORITY)** ✅ **COMPLETED**
+  - [x] 1.1.1: **CRITICAL FIRST:** Install and configure Sentry for error tracking
+  - [x] 1.1.2: **CRITICAL SECOND:** Install and configure Pino for structured development logging
+  - [x] 1.1.3: Set up React Error Boundaries with Sentry + Pino integration
+  - [x] 1.1.4: Configure development error overlay and logging
+  - [x] 1.1.5: Add performance monitoring with Core Web Vitals
+  - [x] 1.1.6: Test error reporting and alerting mechanisms
+  - [x] 1.1.7: **CRITICAL GAP:** Create Sentry configuration files (sentry.client.config.js, sentry.server.config.js)
+  - [x] 1.1.8: **CRITICAL GAP:** Create Pino configuration file (logger.config.js with development/production modes)
   - **Tools:** Sentry, Pino, Error Boundaries, performance monitoring
   - **Success Criteria:** All errors automatically visible and tracked, structured logs for debugging
   - **Why FIRST:** Claude needs immediate error visibility for autonomous development - before any other setup
 
-- [ ] **Task 1.2: Git Repository Setup + GitHub Integration**
-  - [ ] 1.2.1: **CRITICAL:** Initialize new Git repository in project folder
-  - [ ] 1.2.2: **CRITICAL:** Create GitHub repository "daten-see-v2"
-  - [ ] 1.2.3: **CRITICAL:** Connect local repo to GitHub origin
-  - [ ] 1.2.4: Set up proper .gitignore for Next.js, Docker, environment files
-  - [ ] 1.2.5: Configure GitHub branch protection rules for main branch
-  - [ ] 1.2.6: Create initial commit with all documentation and design assets
-  - [ ] 1.2.7: Set up GitHub Actions workflow for CI/CD (basic)
+- [x] **Task 1.2: Git Repository Setup + GitHub Integration** ✅ **COMPLETED**
+  - [x] 1.2.1: **CRITICAL:** Initialize new Git repository in project folder
+  - [x] 1.2.2: **CRITICAL:** Create GitHub repository "daten-see-v2"
+  - [x] 1.2.3: **CRITICAL:** Connect local repo to GitHub origin
+  - [x] 1.2.4: Set up proper .gitignore for Next.js, Docker, environment files
+  - [x] 1.2.5: Configure GitHub branch protection rules for main branch
+  - [x] 1.2.6: Create initial commit with all documentation and design assets
+  - [x] 1.2.7: Set up GitHub Actions workflow for CI/CD (basic)
   - **Tools:** Git, GitHub CLI, GitHub Actions
   - **Success Criteria:** Repository ready for collaborative development with proper CI/CD foundation
   - **Why Second:** Version control foundation before any code development
 
-- [ ] **Task 1.3: Next.js Foundation + Docker**
-  - [ ] 1.3.1: Create Next.js 15 project with TypeScript strict mode
-  - [ ] 1.3.2: Configure Docker development environment with hot reload
-  - [ ] 1.3.3: Set up comprehensive ESLint + Prettier configuration
-  - [ ] 1.3.4: Configure Tailwind CSS with custom design tokens
-  - [ ] 1.3.5: Create commit templates and git hooks
-  - [ ] 1.3.6: **CRITICAL GAP:** Create development environment files (docker-compose.yml, package.json, .env.example)
-  - [ ] 1.3.7: **CRITICAL GAP:** Create complete package.json with all required dependencies and scripts
+- [x] **Task 1.3: Next.js Foundation + Docker** ✅ **COMPLETED**
+  - [x] 1.3.1: Create Next.js 15 project with TypeScript strict mode
+  - [x] 1.3.2: Configure Docker development environment with hot reload
+  - [x] 1.3.3: Set up comprehensive ESLint + Prettier configuration
+  - [x] 1.3.4: Configure Tailwind CSS with custom design tokens
+  - [x] 1.3.5: Create commit templates and git hooks
+  - [x] 1.3.6: **CRITICAL GAP:** Create development environment files (docker-compose.yml, package.json, .env.example)
+  - [x] 1.3.7: **CRITICAL GAP:** Create complete package.json with all required dependencies and scripts
   - **Tools:** `npx create-next-app@latest`, Docker, ESLint, Prettier, Tailwind
   - **Success Criteria:** Clean Next.js foundation with strict code quality standards
   - **Why Third:** Foundation setup after error monitoring and git are established
 
-- [ ] **Task 1.4: Testing Infrastructure Setup**
-  - [ ] 1.4.1: Configure Jest with TypeScript and React Testing Library
-  - [ ] 1.4.2: Set up Playwright for E2E testing
-  - [ ] 1.4.3: Create test utilities and mock data generators
-  - [ ] 1.4.4: Configure coverage reporting and quality gates
-  - [ ] 1.4.5: Add pre-commit hooks for testing and linting (Husky + lint-staged)
-  - [ ] 1.4.6: **CRITICAL GAP:** Create Jest configuration file (jest.config.js) with coverage thresholds
-  - [ ] 1.4.7: **CRITICAL GAP:** Create Playwright configuration file (playwright.config.ts) with browser setup
-  - [ ] 1.4.8: **CRITICAL GAP:** Create test setup files (jest.setup.js, test utilities, mock factories)
+- [x] **Task 1.4: Testing Infrastructure Setup** ✅ **COMPLETED**
+  - [x] 1.4.1: Configure Jest with TypeScript and React Testing Library
+  - [x] 1.4.2: Set up Playwright for E2E testing
+  - [x] 1.4.3: Create test utilities and mock data generators
+  - [x] 1.4.4: Configure coverage reporting and quality gates
+  - [x] 1.4.5: Add pre-commit hooks for testing and linting (Husky + lint-staged)
+  - [x] 1.4.6: **CRITICAL GAP:** Create Jest configuration file (jest.config.js) with coverage thresholds
+  - [x] 1.4.7: **CRITICAL GAP:** Create Playwright configuration file (playwright.config.ts) with browser setup
+  - [x] 1.4.8: **CRITICAL GAP:** Create test setup files (jest.setup.js, test utilities, mock factories)
   - **Tools:** Jest, React Testing Library, Playwright, test utilities, Husky
   - **Success Criteria:** Comprehensive testing infrastructure ready
   - **Why Fourth:** Test-driven development from Day 1
 
 
 #### ✅ **Phase 1B: Dashboard Layout + Navigation (IMMEDIATELY VISIBLE)**
-- [ ] **Task 1.5: Core Application Layout (Based on Design Reference)**
-  - [ ] 1.4.1: Create responsive layout with sidebar navigation
-  - [ ] 1.4.2: Implement header with user menu and controls (following assets/design-reference-dashboard.png)
-  - [ ] 1.4.3: Add dashboard listing page with creation buttons
-  - [ ] 1.4.4: Create empty dashboard grid container
-  - [ ] 1.4.5: Implement mobile-responsive navigation patterns
-  - [ ] 1.4.6: **DESIGN REFERENCE:** Apply exact styling from assets/design-reference-dashboard.png
+- [ ] **Task 1.5: Core Application Layout (Based on Design Reference)** ✅ **COMPLETED**
+  - [x] 1.5.1: Create responsive layout with sidebar navigation
+  - [x] 1.5.2: Implement header with user menu and controls (following assets/design-reference-dashboard.png)
+  - [x] 1.5.3: Add dashboard listing page with creation buttons
+  - [x] 1.5.4: Create empty dashboard grid container
+  - [x] 1.5.5: Implement mobile-responsive navigation patterns
+  - [x] 1.5.6: **DESIGN REFERENCE:** Apply exact styling from assets/design-reference-dashboard.png
   - **Tools:** React components, Tailwind CSS, responsive design, design reference screenshot
   - **Success Criteria:** Professional dashboard layout matching provided design reference
   - **Why Now:** IMMEDIATE user validation of design and functionality + proven UI design
 
-- [ ] **Task 1.6: Modern State Management Foundation (TanStack Query + Context)**
-  - [ ] 1.6.1: **Phase 1 - TanStack Query Setup (Week 1)**
-    - [ ] Install @tanstack/react-query + DevTools
-    - [ ] Configure Query Client with defaults
-    - [ ] Set up Provider in app/layout.tsx
-    - [ ] Create TypeScript types for API responses
-  - [ ] 1.6.2: **Phase 1 - API Layer Foundation (Week 1)**
-    - [ ] Create fetch wrapper with error handling
-    - [ ] Set up request/response interceptors
-    - [ ] Mock API endpoints for development
-    - [ ] Configure base URLs and headers
-  - [ ] 1.6.3: **Phase 1 - Authentication Context (Week 1)**
-    - [ ] JWT token management (ohne Zustand)
-    - [ ] Secure token storage strategy
-    - [ ] Login/logout with TanStack mutations
-    - [ ] Auth state provider implementation
-  - [ ] 1.6.4: **Phase 1 - Route Protection (Week 2)**
-    - [ ] Protected route wrapper component
-    - [ ] Role-based access control
-    - [ ] Redirect logic für unauthorized
-    - [ ] Loading states während auth check
-  - [ ] 1.6.5: **Phase 1 - Navigation Context (Week 2)**
-    - [ ] Breadcrumb generation aus pathname
-    - [ ] Active route tracking
-    - [ ] Navigation history (ohne persist)
-    - [ ] Next.js App Router integration
-  - [ ] 1.6.6: **Phase 2 - Dashboard Queries (Week 3)**
-    - [ ] useDashboards query hook
-    - [ ] useDashboard für single dashboard
-    - [ ] Optimistic updates implementation
-    - [ ] Cache invalidation strategies
-  - [ ] 1.6.7: **Phase 2 - Dashboard Mutations (Week 3)**
-    - [ ] useCreateDashboard mutation
-    - [ ] useUpdateDashboard mutation
-    - [ ] useDeleteDashboard mutation
-    - [ ] Error handling & rollback
-  - [ ] 1.6.8: **Phase 2 - Theme & Settings Context (Week 4)**
-    - [ ] Theme provider (light/dark/system)
-    - [ ] Language settings management
-    - [ ] User preferences (ohne persist)
-    - [ ] localStorage sync für settings
-  - [ ] 1.6.9: **Phase 2 - UI State Context (Week 4)**
-    - [ ] Sidebar open/close state
-    - [ ] Modal stack management
-    - [ ] Toast/notification queue
-    - [ ] Global loading states
-  - [ ] 1.6.10: **Phase 2 - Minimal Zustand Store (Week 5)**
-    - [ ] Complex client-only state
-    - [ ] Cross-component communication
-    - [ ] Performance critical updates
-    - [ ] OHNE persist middleware
+- [x] **Task 1.6: Modern State Management Foundation (TanStack Query + Context)** ✅ **PHASE 1-2 COMPLETED, PHASE 3 IN PROGRESS**
+
+**Phase 1: TanStack Query Foundation (Week 1)** ✅ **COMPLETED**
+   - [x] 1.6.1 Install @tanstack/react-query + DevTools
+   - [x] 1.6.2 Configure Query Client with defaults 
+   - [x] 1.6.3 Set up Provider in app/layout.tsx
+   - [x] 1.6.4 Create TypeScript types for API responses
+   - [x] 1.6.5 COMPREHENSIVE TEST: Phase 1 TanStack Query vollständig validieren
+
+**Phase 2: Context-based State Architecture (Week 2)** ✅ **COMPLETED**
+   - [x] 1.6.6 JWT Token Management (ohne Zustand) 
+   - [x] 1.6.7 Authentication Context Provider
+   - [x] 1.6.8 Login/Logout mit TanStack Mutations
+   - [x] 1.6.9 Create demo LoginForm component
+   - [x] 1.6.10 COMPREHENSIVE TEST: Phase 2 Authentication vollständig validieren
+
+**Phase 3: Integration & Migration (Week 4)** 🚧 **IN PROGRESS**
+   - [x] 1.6.11 Dashboard Queries: Migration von Zustand zu TanStack Query
+   - [x] 1.6.12 Route Protection System: Protected Route Wrapper
+   - [x] 1.6.13 Navigation Context: Breadcrumbs ohne Persist
   - [ ] 1.6.11: **Phase 3 - Test Infrastructure (Week 6)**
     - [ ] TanStack Query test wrapper
     - [ ] Context provider test utils
-    - [ ] MSW für API mocking
+    - [ ] MSW für API mocking setup
     - [ ] Custom testing hooks
+    - [ ] E2E tests für authentication flows
+    - [ ] Route protection testing framework
   - [ ] 1.6.12: **Phase 3 - Component Test Migration (Week 6)**
     - [ ] Update alle component tests
     - [ ] Mock provider setup
@@ -139,59 +110,119 @@
     - [ ] Stale-while-revalidate config
     - [ ] Bundle size analysis
     - [ ] React DevTools profiling
+    - [ ] Performance monitoring integration
+    - [ ] Core Web Vitals tracking
   - [ ] 1.6.14: **Phase 3 - Developer Experience (Week 7)**
     - [ ] TypeScript strict mode
     - [ ] ESLint rules für hooks
     - [ ] Code generation für API types
     - [ ] Documentation & examples
+    - [ ] React Query DevTools configuration improvements
+    - [ ] Advanced Sentry configuration
+  - [ ] 1.6.15: **Phase 4 - UI/UX Enhancement (Week 8)**
+    - [ ] Mobile responsiveness für alle auth flows
+    - [ ] Enhanced error boundary components mit better fallbacks
+    - [ ] Improved loading skeletons und progressive loading
+    - [ ] Toast notification system für user feedback
+    - [ ] Keyboard navigation und accessibility improvements
+    - [ ] Dark mode theme implementation
+    - [ ] Analytics tracking integration
+  - [ ] 1.6.17: **FUTURE: Real API Integration (Post-MVP)**
+    - [ ] Replace mock API calls with real backend endpoints
+    - [ ] Implement TanStack Query prefetching for dashboard details
+    - [ ] Add real Authentication API (replace mock login/logout)
+    - [ ] Implement actual JWT refresh token flow
+    - [ ] Connect to real dashboard/widget APIs
+    - [ ] Add API error retry strategies
+    - [ ] Implement optimistic updates for better UX
+  - [ ] 1.6.18: **FUTURE: Enhanced Security (Post-MVP)**
+    - [ ] Migrate from localStorage to httpOnly cookies for tokens
+    - [ ] Add CSRF protection
+    - [ ] Implement proper session management
+    - [ ] Add request signing for API calls
+    - [ ] Enhanced error handling for security events
   - **Tools:** TanStack Query, React Context, Minimal Zustand (ohne persist), MSW, TypeScript
   - **Success Criteria:** Modern state management ohne persist-Probleme, alle Tests laufen, optimale Performance
   - **Timeline:** 6-7 Wochen (kann parallel zu Tasks 1.8 & 1.9 laufen)
   - **Why Now:** Zukunftssichere Architektur die mit dem Projekt skaliert
 
-#### ✅ **Phase 1C: Mock Widget System (POSTPONED - NACH Task 1.6)**
-- [ ] **Task 1.7: Widget Grid + Mock Widgets**
-  - [ ] **WICHTIG:** Dieses Task wird nach Completion von Task 1.6 Phase 2 (Week 5) implementiert
-  - [ ] 1.7.1: Install and configure react-grid-layout
-  - [ ] 1.7.2: Create 3 mock widget types (Chart, KPI, Text) with placeholder content
-  - [ ] 1.7.3: Implement basic drag and drop functionality with Pino logging
-  - [ ] 1.7.4: Add widget resize handles and constraints with debug logging
-  - [ ] 1.7.5: Create widget deletion and basic interactions with structured logging
-  - [ ] 1.7.6: Integrate with Modern State Management (TanStack Query für widget data)
+#### ✅ **Phase 1C: Design System + UI Foundation**
+- [ ] **Task 1.7: Design System Implementation**
+  - [ ] 1.7.1: Create comprehensive design tokens (colors, typography, spacing)
+  - [ ] 1.7.2: Design and implement professional logo system
+  - [ ] 1.7.3: Set up Tailwind CSS custom theme with brand colors
+  - [ ] 1.7.4: Create reusable component library (buttons, inputs, cards)
+  - [ ] 1.7.5: Implement consistent spacing and layout patterns
+  - [ ] 1.7.6: Add dark/light theme system foundation
+  - **Tools:** Tailwind CSS, design tokens, component library, theme system
+  - **Success Criteria:** Consistent, professional design system across all components
+  - **Why Now:** Unified design foundation before major UI development
+
+- [ ] **Task 1.8: Adaptive Header System**
+  - [ ] 1.8.1: Create flexible HeaderLayout component with configurable sections
+  - [ ] 1.8.2: Implement dashboard-specific header with breadcrumbs and actions
+  - [ ] 1.8.3: Add authentication state integration (login/logout, user menu)
+  - [ ] 1.8.4: Create responsive mobile navigation with collapsible menu
+  - [ ] 1.8.5: Implement header variants for different page types (landing, dashboard, settings)
+  - [ ] 1.8.6: Add search functionality and global shortcuts integration
+  - **Tools:** React components, responsive design, authentication integration
+  - **Success Criteria:** Consistent, adaptable header system across all pages
+  - **Why Now:** Header affects every page, needs early standardization
+
+- [ ] **Task 1.9: Production Authentication Pages**
+  - [ ] 1.9.1: Create professional /login page with form validation
+  - [ ] 1.9.2: Implement /register page with email verification flow
+  - [ ] 1.9.3: Add password reset and forgot password functionality
+  - [ ] 1.9.4: Create /unauthorized page for role-based access denials
+  - [ ] 1.9.5: Implement route protection middleware for /dashboard* routes
+  - [ ] 1.9.6: Add environment-based auth (dev: optional, prod: required)
+  - **Tools:** Form validation, email flows, route protection, middleware
+  - **Success Criteria:** Complete production-ready authentication system
+  - **Why Now:** Authentication foundation ready, production pages needed
+
+#### ✅ **Phase 1D: Mock Widget System (NACH Design System)**
+- [ ] **Task 1.10: Widget Grid + Mock Widgets**
+  - [ ] **WICHTIG:** Implementierung nach Task 1.7-1.9 (Design System + Header + Auth)
+  - [ ] 1.10.1: Install and configure react-grid-layout
+  - [ ] 1.10.2: Create 3 mock widget types (Chart, KPI, Text) with design system
+  - [ ] 1.10.3: Implement basic drag and drop functionality with Pino logging
+  - [ ] 1.10.4: Add widget resize handles and constraints with debug logging
+  - [ ] 1.10.5: Create widget deletion and basic interactions with structured logging
+  - [ ] 1.10.6: Integrate with Modern State Management (TanStack Query für widget data)
   - **Tools:** react-grid-layout, mock widgets, drag & drop, Pino logging, TanStack Query
-  - **Success Criteria:** Interactive dashboard mit state management integration
-  - **Timeline:** Nach Week 5 von Task 1.6
-  - **Why Postponed:** Widget state management benötigt finale State Architecture
+  - **Success Criteria:** Interactive dashboard mit design system integration
+  - **Timeline:** Nach Design System completion
+  - **Why After:** Widgets need consistent design system and header integration
 
 **🚨 WEEK 1-2 BLOCKERS & SOLUTIONS:**
 - **Blocker:** Docker setup complexity → **Solution:** Use proven docker-compose patterns, start simple
 - **Blocker:** Sentry configuration → **Solution:** Follow official Next.js integration guide
 - **Blocker:** Testing setup → **Solution:** Use default configurations, expand later
 
-#### ✅ **Phase 1D: Logger Enhancement + User Training**
-- [ ] **Task 1.8: Logger Enhancement & Worker Issue Fix**
-  - [ ] 1.8.1: Fix Pino Worker Thread errors in Next.js/Playwright environment
-  - [ ] 1.8.2: Fix Pino customPrettifiers serialization for Next.js compatibility
-  - [ ] 1.8.3: Implement performance() method with duration tracking
-  - [ ] 1.8.4: Implement userAction() method for user behavior logging
-  - [ ] 1.8.5: Implement apiCall() method for API monitoring
-  - [ ] 1.8.6: Write comprehensive tests for all advanced logger methods
-  - [ ] 1.8.7: Update logger documentation and usage examples
+#### ✅ **Phase 1E: Logger Enhancement + User Training**
+- [ ] **Task 1.11: Logger Enhancement & Worker Issue Fix**
+  - [ ] 1.11.1: Fix Pino Worker Thread errors in Next.js/Playwright environment
+  - [ ] 1.11.2: Fix Pino customPrettifiers serialization for Next.js compatibility
+  - [ ] 1.11.3: Implement performance() method with duration tracking
+  - [ ] 1.11.4: Implement userAction() method for user behavior logging
+  - [ ] 1.11.5: Implement apiCall() method for API monitoring
+  - [ ] 1.11.6: Write comprehensive tests for all advanced logger methods
+  - [ ] 1.11.7: Update logger documentation and usage examples
   - **Tools:** Pino, Sentry integration, Jest testing
   - **Success Criteria:** No worker errors, complete logger functionality with 80%+ test coverage
   - **Why Now:** Worker errors affect E2E test stability + Foundation for monitoring
 
-- [ ] **Task 1.9: Comprehensive Monitoring & Debugging Training for User**
-  - [ ] 1.9.1: Sentry Error Monitoring - Dashboard walkthrough, alert setup, error analysis
-  - [ ] 1.9.2: Pino Structured Logging - Log access, filtering, debugging workflows
-  - [ ] 1.9.3: Testing Infrastructure - Running tests, reading coverage, interpreting results
-  - [ ] 1.9.4: Development Debugging - Error tracking to resolution workflow
-  - [ ] 1.9.5: Create "User Guide: Independent System Monitoring & Troubleshooting"
+- [ ] **Task 1.12: Comprehensive Monitoring & Debugging Training for User**
+  - [ ] 1.12.1: Sentry Error Monitoring - Dashboard walkthrough, alert setup, error analysis
+  - [ ] 1.12.2: Pino Structured Logging - Log access, filtering, debugging workflows
+  - [ ] 1.12.3: Testing Infrastructure - Running tests, reading coverage, interpreting results
+  - [ ] 1.12.4: Development Debugging - Error tracking to resolution workflow
+  - [ ] 1.12.5: Create "User Guide: Independent System Monitoring & Troubleshooting"
   - **Tools:** Sentry dashboard, log viewers, test reports, debugging workflows
   - **Success Criteria:** User can independently access, analyze, and troubleshoot all monitoring systems
   - **Why Early:** Complete system setup allows comprehensive user training for autonomous problem-solving
 
-**✅ WEEK 1-2 CHECKPOINT:** "Working dashboard with debugging tools, interactive widgets + User trained on monitoring/debugging - ready for real charts?"
+**✅ WEEK 1-2 CHECKPOINT:** "Working dashboard with design system, flexible header, production auth + interactive widgets - ready for real charts?"
 
 ---
 
