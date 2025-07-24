@@ -35,6 +35,13 @@ VERSTEHEN → PLANEN → IMPLEMENTIEREN → VALIDIEREN
 - **Performance Monitoring**: `docker stats` für Resource-Usage überwachen
 - **REGEL**: Code-Änderung → Docker Restart → Test → Nächste Änderung
 
+### **📋 ROADMAP WORKFLOW (MANDATORY)**
+- **IMMER der Roadmap folgen**: Niemals Tasks überspringen oder eigene Reihenfolge wählen
+- **Aktuelle Task ermitteln**: Schaue in IMPLEMENTATION-ROADMAP.md welche Task als nächstes dran ist
+- **Sequentielle Bearbeitung**: Task X.Y.Z vollständig abschließen BEVOR X.Y.(Z+1) beginnt
+- **Status Updates**: TodoWrite nutzen um Tasks als completed zu markieren
+- **REGEL**: IMPLEMENTATION-ROADMAP.md bestimmt IMMER den nächsten Schritt
+
 ### **2. Autonomie-Level**
 **Erkläre erst, code dann:**
 **Du schläfst vor, bewertest und begründest die Optionen:** das gilt für alle Schritte insbesondere Implementation-Details, Tool-Auswahl, Code-Struktur, Feature-Requirements, UI/UX-Änderungen, Business-Logik, Architektur-Entscheidungen, Performance-Trade-offs

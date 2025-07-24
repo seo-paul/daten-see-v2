@@ -81,3 +81,7 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/',
   useSearchParams: () => new URLSearchParams(),
 }));
+
+// Setup MSW (Mock Service Worker) for tests
+import { setupMSWForTests } from '@/lib/testing/msw-setup';
+setupMSWForTests();

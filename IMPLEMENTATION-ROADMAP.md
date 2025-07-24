@@ -89,107 +89,113 @@
    - [x] 1.6.9 Create demo LoginForm component
    - [x] 1.6.10 COMPREHENSIVE TEST: Phase 2 Authentication vollständig validieren
 
-**Phase 3: Integration & Migration (Week 4)** 🚧 **IN PROGRESS**
-   - [x] 1.6.11 Dashboard Queries: Migration von Zustand zu TanStack Query
-   - [x] 1.6.12 Route Protection System: Protected Route Wrapper
-   - [x] 1.6.13 Navigation Context: Breadcrumbs ohne Persist
-  - [ ] 1.6.11: **Phase 3 - Test Infrastructure (Week 6)**
+#### ✅ **Phase 1C: Design System + UI Foundation** ✅ **COMPLETED**
+- [x] **Task 1.6: Design System Implementation** ✅ **COMPLETED**
+  - [x] 1.6.1: Create comprehensive design tokens (colors, typography, spacing) ✅ **COMPLETED**
+  - [x] 1.6.2: Design and implement professional logo system ✅ **COMPLETED**
+  - [x] 1.6.3: Set up Tailwind CSS custom theme with brand colors ✅ **COMPLETED**
+  - [x] 1.6.4: Create reusable component library (buttons, inputs, cards) ✅ **COMPLETED**
+  - [x] 1.6.5: Implement consistent spacing and layout patterns ✅ **COMPLETED**
+  - [x] 1.6.6: Font loading system für Custom Fonts ✅ **COMPLETED**
+  - **Tools:** Tailwind CSS, design tokens, component library, theme system
+  - **Success Criteria:** Consistent, professional design system across all components ✅ **ACHIEVED**
+  - **Why Now:** Unified design foundation before major UI development
+
+#### ✅ **Phase 1D: Integration & Migration (Week 4)** 🚧 **IN PROGRESS**
+- [x] **Task 1.7: TanStack Query Foundation - Integration & Migration**
+   - [x] 1.7.1 Dashboard Queries: Migration von Zustand zu TanStack Query
+   - [x] 1.7.2 Route Protection System: Protected Route Wrapper
+   - [x] 1.7.3 Navigation Context: Breadcrumbs ohne Persist
+  - [ ] 1.7.4: **Phase 1D - Test Infrastructure (Week 6)**
     - [ ] TanStack Query test wrapper
     - [ ] Context provider test utils
     - [ ] MSW für API mocking setup
     - [ ] Custom testing hooks
     - [ ] E2E tests für authentication flows
     - [ ] Route protection testing framework
-  - [ ] 1.6.12: **Phase 3 - Component Test Migration (Week 6)**
-    - [ ] Update alle component tests
-    - [ ] Mock provider setup
-    - [ ] Async query testing
-    - [ ] Error state testing
-  - [ ] 1.6.13: **Phase 3 - Performance Optimization (Week 7)**
+  - [ ] 1.7.5: **Phase 1D - Component Test Migration (Week 6)**
+    - [ ] Update alle Jest component tests für TanStack Query
+    - [ ] Mock provider setup für Tests
+    - [ ] Async query testing mit Jest + React Testing Library
+    - [ ] Error state testing für TanStack Query
+  - [ ] 1.7.6: **Phase 2 - Performance Optimization (Week 7)**
     - [ ] Query prefetching strategies
     - [ ] Stale-while-revalidate config
     - [ ] Bundle size analysis
     - [ ] React DevTools profiling
     - [ ] Performance monitoring integration
     - [ ] Core Web Vitals tracking
-  - [ ] 1.6.14: **Phase 3 - Developer Experience (Week 7)**
+  - [ ] 1.7.7: **Phase 3 - Developer Experience (Week 7)**
     - [ ] TypeScript strict mode
     - [ ] ESLint rules für hooks
     - [ ] Code generation für API types
     - [ ] Documentation & examples
     - [ ] React Query DevTools configuration improvements
     - [ ] Advanced Sentry configuration
-  - [ ] 1.6.15: **Phase 4 - UI/UX Enhancement (Week 8)**
+  - [ ] 1.7.8: **Phase 4 - UI/UX Enhancement (Week 8)**
     - [ ] Mobile responsiveness für alle auth flows
     - [ ] Enhanced error boundary components mit better fallbacks
     - [ ] Improved loading skeletons und progressive loading
     - [ ] Toast notification system für user feedback
     - [ ] Keyboard navigation und accessibility improvements
-    - [ ] Dark mode theme implementation
-    - [ ] Analytics tracking integration
-  - [ ] 1.6.17: **FUTURE: Real API Integration (Post-MVP)**
-    - [ ] Replace mock API calls with real backend endpoints
-    - [ ] Implement TanStack Query prefetching for dashboard details
-    - [ ] Add real Authentication API (replace mock login/logout)
-    - [ ] Implement actual JWT refresh token flow
-    - [ ] Connect to real dashboard/widget APIs
-    - [ ] Add API error retry strategies
-    - [ ] Implement optimistic updates for better UX
-  - [ ] 1.6.18: **FUTURE: Enhanced Security (Post-MVP)**
-    - [ ] Migrate from localStorage to httpOnly cookies for tokens
-    - [ ] Add CSRF protection
-    - [ ] Implement proper session management
-    - [ ] Add request signing for API calls
-    - [ ] Enhanced error handling for security events
+    - [ ] Analytics tracking integration (MOVED: Dark mode to post-launch)
   - **Tools:** TanStack Query, React Context, Minimal Zustand (ohne persist), MSW, TypeScript
   - **Success Criteria:** Modern state management ohne persist-Probleme, alle Tests laufen, optimale Performance
   - **Timeline:** 6-7 Wochen (kann parallel zu Tasks 1.8 & 1.9 laufen)
   - **Why Now:** Zukunftssichere Architektur die mit dem Projekt skaliert
 
-#### ✅ **Phase 1C: Design System + UI Foundation**
-- [ ] **Task 1.7: Design System Implementation**
-  - [ ] 1.7.1: Create comprehensive design tokens (colors, typography, spacing)
-  - [ ] 1.7.2: Design and implement professional logo system
-  - [ ] 1.7.3: Set up Tailwind CSS custom theme with brand colors
-  - [ ] 1.7.4: Create reusable component library (buttons, inputs, cards)
-  - [ ] 1.7.5: Implement consistent spacing and layout patterns
-  - [ ] 1.7.6: Add dark/light theme system foundation
-  - **Tools:** Tailwind CSS, design tokens, component library, theme system
-  - **Success Criteria:** Consistent, professional design system across all components
-  - **Why Now:** Unified design foundation before major UI development
+#### ✅ **Phase 1E: Design System Application**
+- [ ] **Task 1.8: Design System Application auf alle Seiten**
+  - [ ] 1.8.1: Replace old colors (bg-white → beige backgrounds, text-gray → #3d3d3d)
+  - [ ] 1.8.2: Update MainLayout, DashboardHeader, TopNavigation mit Design System
+  - [ ] 1.8.3: Update all modal components mit Design System colors
+  - [ ] 1.8.4: Update auth components und page components mit Design System
+  - **Tools:** Color migration, component updates, visual consistency
+  - **Success Criteria:** All pages use Design System v2.3 colors consistently
+  - **Why Now:** Design System components ready for application
 
-- [ ] **Task 1.8: Adaptive Header System**
-  - [ ] 1.8.1: Create flexible HeaderLayout component with configurable sections
-  - [ ] 1.8.2: Implement dashboard-specific header with breadcrumbs and actions
-  - [ ] 1.8.3: Add authentication state integration (login/logout, user menu)
-  - [ ] 1.8.4: Create responsive mobile navigation with collapsible menu
-  - [ ] 1.8.5: Implement header variants for different page types (landing, dashboard, settings)
-  - [ ] 1.8.6: Add search functionality and global shortcuts integration
+#### ✅ **Phase 1F: Advanced Tools & Testing**
+- [ ] **Task 1.9: Advanced Development Tools**
+  - [ ] 1.9.1: Test Infrastructure Setup & Performance Optimization
+  - [ ] 1.9.2: Component Test Migration: Jest Tests erweitern für TanStack Query Integration
+  - [ ] 1.9.3: @axe-core/react - Accessibility Testing (WCAG 2.1 AA)
+  - [ ] 1.9.4: @next/csp - Content Security Policy Implementation
+  - **Tools:** TanStack Query test wrapper, MSW, accessibility testing, CSP
+  - **Success Criteria:** Comprehensive testing infrastructure for TanStack Query integration
+  - **Why Now:** Testing foundation needed before proceeding with UI integration
+
+- [ ] **Task 1.10: Adaptive Header System**
+  - [x] 1.10.1: HeaderLayout component mit Design System v2.3 colors ✅ **COMPLETED**
+  - [ ] 1.10.2: Navigation integration mit auth state
+  - [ ] 1.10.3: Responsive mobile navigation (hamburger menu)
+  - [ ] 1.10.4: Header variants für different page types
+  - [ ] 1.10.5: HeaderLayout Integration auf alle Seiten (Replace TopNavigation)
   - **Tools:** React components, responsive design, authentication integration
   - **Success Criteria:** Consistent, adaptable header system across all pages
   - **Why Now:** Header affects every page, needs early standardization
 
-- [ ] **Task 1.9: Production Authentication Pages**
-  - [ ] 1.9.1: Create professional /login page with form validation
-  - [ ] 1.9.2: Implement /register page with email verification flow
-  - [ ] 1.9.3: Add password reset and forgot password functionality
-  - [ ] 1.9.4: Create /unauthorized page for role-based access denials
-  - [ ] 1.9.5: Implement route protection middleware for /dashboard* routes
-  - [ ] 1.9.6: Add environment-based auth (dev: optional, prod: required)
+- [ ] **Task 1.11: Production Authentication Pages**
+  - [ ] 1.11.1: Create professional /login page with form validation
+  - [ ] 1.11.2: Implement /register page with email verification flow
+  - [ ] 1.11.3: Add password reset and forgot password functionality
+  - [ ] 1.11.4: Create /unauthorized page for role-based access denials
+  - [ ] 1.11.5: Implement route protection middleware for /dashboard* routes
+  - [ ] 1.11.6: Add environment-based auth (dev: optional, prod: required)
   - **Tools:** Form validation, email flows, route protection, middleware
   - **Success Criteria:** Complete production-ready authentication system
   - **Why Now:** Authentication foundation ready, production pages needed
 
-#### ✅ **Phase 1D: Mock Widget System (NACH Design System)**
-- [ ] **Task 1.10: Widget Grid + Mock Widgets**
-  - [ ] **WICHTIG:** Implementierung nach Task 1.7-1.9 (Design System + Header + Auth)
-  - [ ] 1.10.1: Install and configure react-grid-layout
-  - [ ] 1.10.2: Create 3 mock widget types (Chart, KPI, Text) with design system
-  - [ ] 1.10.3: Implement basic drag and drop functionality with Pino logging
-  - [ ] 1.10.4: Add widget resize handles and constraints with debug logging
-  - [ ] 1.10.5: Create widget deletion and basic interactions with structured logging
-  - [ ] 1.10.6: Integrate with Modern State Management (TanStack Query für widget data)
-  - **Tools:** react-grid-layout, mock widgets, drag & drop, Pino logging, TanStack Query
+#### ✅ **Phase 1G: Widget System Foundation**
+- [ ] **Task 1.12: Widget Grid + Mock Widgets**
+  - [ ] **WICHTIG:** Implementierung nach Task 1.8-1.11 (Design System + Header + Auth)
+  - [ ] 1.12.1: Install and configure react-grid-layout
+  - [ ] 1.12.2: Create 3 mock widget types (Chart, KPI, Text) with design system
+  - [ ] 1.12.3: Implement basic drag and drop functionality with Pino logging
+  - [ ] 1.12.4: Add widget resize handles and constraints with debug logging
+  - [ ] 1.12.5: Create widget deletion and basic interactions with structured logging
+  - [ ] 1.12.6: Integrate with Modern State Management (TanStack Query für widget data)
+  - [ ] 1.12.7: @radix-ui Primitives - Accessible UI Components
+  - **Tools:** react-grid-layout, mock widgets, drag & drop, Pino logging, TanStack Query, @radix-ui
   - **Success Criteria:** Interactive dashboard mit design system integration
   - **Timeline:** Nach Design System completion
   - **Why After:** Widgets need consistent design system and header integration
@@ -199,25 +205,25 @@
 - **Blocker:** Sentry configuration → **Solution:** Follow official Next.js integration guide
 - **Blocker:** Testing setup → **Solution:** Use default configurations, expand later
 
-#### ✅ **Phase 1E: Logger Enhancement + User Training**
-- [ ] **Task 1.11: Logger Enhancement & Worker Issue Fix**
-  - [ ] 1.11.1: Fix Pino Worker Thread errors in Next.js/Playwright environment
-  - [ ] 1.11.2: Fix Pino customPrettifiers serialization for Next.js compatibility
-  - [ ] 1.11.3: Implement performance() method with duration tracking
-  - [ ] 1.11.4: Implement userAction() method for user behavior logging
-  - [ ] 1.11.5: Implement apiCall() method for API monitoring
-  - [ ] 1.11.6: Write comprehensive tests for all advanced logger methods
-  - [ ] 1.11.7: Update logger documentation and usage examples
+#### ✅ **Phase 1H: Logger Enhancement + User Training**
+- [ ] **Task 1.13: Logger Enhancement & Worker Issue Fix**
+  - [ ] 1.13.1: Fix Pino Worker Thread errors in Next.js/Playwright environment
+  - [ ] 1.13.2: Fix Pino customPrettifiers serialization for Next.js compatibility
+  - [ ] 1.13.3: Implement performance() method with duration tracking
+  - [ ] 1.13.4: Implement userAction() method for user behavior logging
+  - [ ] 1.13.5: Implement apiCall() method for API monitoring
+  - [ ] 1.13.6: Write comprehensive tests for all advanced logger methods
+  - [ ] 1.13.7: Update logger documentation and usage examples
   - **Tools:** Pino, Sentry integration, Jest testing
   - **Success Criteria:** No worker errors, complete logger functionality with 80%+ test coverage
   - **Why Now:** Worker errors affect E2E test stability + Foundation for monitoring
 
-- [ ] **Task 1.12: Comprehensive Monitoring & Debugging Training for User**
-  - [ ] 1.12.1: Sentry Error Monitoring - Dashboard walkthrough, alert setup, error analysis
-  - [ ] 1.12.2: Pino Structured Logging - Log access, filtering, debugging workflows
-  - [ ] 1.12.3: Testing Infrastructure - Running tests, reading coverage, interpreting results
-  - [ ] 1.12.4: Development Debugging - Error tracking to resolution workflow
-  - [ ] 1.12.5: Create "User Guide: Independent System Monitoring & Troubleshooting"
+- [ ] **Task 1.14: Comprehensive Monitoring & Debugging Training for User**
+  - [ ] 1.14.1: Sentry Error Monitoring - Dashboard walkthrough, alert setup, error analysis
+  - [ ] 1.14.2: Pino Structured Logging - Log access, filtering, debugging workflows
+  - [ ] 1.14.3: Testing Infrastructure - Running tests, reading coverage, interpreting results
+  - [ ] 1.14.4: Development Debugging - Error tracking to resolution workflow
+  - [ ] 1.14.5: Create "User Guide: Independent System Monitoring & Troubleshooting"
   - **Tools:** Sentry dashboard, log viewers, test reports, debugging workflows
   - **Success Criteria:** User can independently access, analyze, and troubleshoot all monitoring systems
   - **Why Early:** Complete system setup allows comprehensive user training for autonomous problem-solving
@@ -232,7 +238,7 @@
 #### ✅ **Phase 2A: Chart.js Integration + Widget Types**
 - [ ] **Task 2.1: Chart.js Foundation**
   - [ ] 2.1.1: Install Chart.js and react-chartjs-2
-  - [ ] 2.1.2: Create Line Chart widget component with mock data
+  - [ ] 2.1.2: Create Line Chart widget component for Google Analytics data
   - [ ] 2.1.3: Create Bar Chart widget component with configurations
   - [ ] 2.1.4: Create Doughnut Chart widget with interactive elements
   - [ ] 2.1.5: Implement chart responsiveness and theme integration
@@ -240,15 +246,15 @@
   - **Success Criteria:** Multiple chart types displaying realistic data
   - **Why Now:** Core functionality that users can immediately evaluate
 
-- [ ] **Task 2.2: Smart Mock Data System**
-  - [ ] 2.2.1: Create realistic analytics data generators
-  - [ ] 2.2.2: Implement time-series data with trends and patterns
-  - [ ] 2.2.3: Add data refresh mechanisms with loading states
-  - [ ] 2.2.4: Create data format validation with Zod schemas
-  - [ ] 2.2.5: Add data transformation utilities for different chart types
-  - **Tools:** Data generators, Zod validation, TypeScript utilities
-  - **Success Criteria:** Charts display varied, realistic analytics-like data
-  - **Why Now:** Predictable development environment that mimics real APIs
+- [ ] **Task 2.2: Google API Foundation & Chart Preparation**
+  - [ ] 2.2.1: Google Cloud Console Setup + API Enablement (GA4 & Ads APIs)
+  - [ ] 2.2.2: Chart.js Data Format für GA4/Ads APIs definieren
+  - [ ] 2.2.3: API Client Base Class (TypeScript) mit Error Handling
+  - [ ] 2.2.4: Loading States + Error Boundaries für Real APIs
+  - [ ] 2.2.5: Development Cache für Offline API Development
+  - **Tools:** Google Cloud Console, TypeScript classes, Chart.js, API caching
+  - **Success Criteria:** Charts ready for real Google Analytics data, robust error handling
+  - **Why Now:** Direct preparation for real APIs eliminates mock-to-real migration overhead
 
 #### ✅ **Phase 2B: Widget Configuration + UX**
 - [ ] **Task 2.3: Widget Configuration System**
@@ -293,177 +299,187 @@
   - **Why Now:** Solid testing before adding auth and database complexity
 
 **🚨 WEEK 3-4 BLOCKERS & SOLUTIONS:**
-- **Blocker:** Chart.js integration complexity → **Solution:** Start with basic charts, add features incrementally
-- **Blocker:** Performance issues with many widgets → **Solution:** Implement lazy loading and virtualization
-- **Blocker:** Testing setup complexity → **Solution:** Focus on critical paths first, expand coverage
+- **Blocker:** Google Cloud Console complexity → **Solution:** Follow step-by-step official guides, start with single API
+- **Blocker:** Chart.js data format uncertainty → **Solution:** Define schemas based on GA4 API documentation
+- **Blocker:** API development without real data → **Solution:** Use cached real API responses for offline development
 
-**✅ WEEK 3-4 CHECKPOINT:** "Feature-complete dashboard with charts and performance - ready for persistence layer?"
+**✅ WEEK 3-4 CHECKPOINT:** "Chart foundation established and ready for Google API integration - proceed with OAuth setup?"
 
 ---
 
-## 📅 **WEEK 5-6: AUTHENTICATION + DATABASE + GDPR**
-### 🎯 **Milestone:** Secure user system with data persistence and compliance
+## 📅 **WEEK 5-6: GOOGLE API INTEGRATION + LIVE DATA**
+### 🎯 **Milestone:** Live Google Analytics & Ads dashboards with real data
 
-#### ✅ **Phase 3A: Database Infrastructure**
-- [ ] **Task 3.1: PostgreSQL + Prisma Setup**
-  - [ ] 3.1.1: Set up PostgreSQL with Docker Compose
-  - [ ] 3.1.2: Install and configure Prisma ORM with TypeScript
-  - [ ] 3.1.3: Design database schema (users, dashboards, widgets, sessions)
-  - [ ] 3.1.4: Create database migrations and seed data
-  - [ ] 3.1.5: Set up connection pooling and performance optimization
-  - **Tools:** PostgreSQL, Prisma, Docker Compose, database design
-  - **Success Criteria:** Robust database foundation with type safety
-  - **Why Now:** Persistence needed after UI is proven and working
+#### ✅ **Phase 3A: Google OAuth & Authentication**
+- [ ] **Task 3.1: Google OAuth Integration**
+  - [ ] 3.1.1: Add Google provider to NextAuth.js configuration
+  - [ ] 3.1.2: Configure Google Analytics & Ads scopes and permissions
+  - [ ] 3.1.3: Implement secure token storage with encryption
+  - [ ] 3.1.4: Add token refresh mechanism and error handling
+  - [ ] 3.1.5: Test Google OAuth flow and token management
+  - **Tools:** NextAuth.js Google provider, token encryption, OAuth flow
+  - **Success Criteria:** Secure Google sign-in with Analytics & Ads permissions
+  - **Why Now:** Essential foundation for real Google API data access
 
-- [ ] **Task 3.2: Data Layer Integration**
-  - [ ] 3.2.1: Create Prisma models for dashboard and widget entities
-  - [ ] 3.2.2: Implement CRUD operations for dashboards
-  - [ ] 3.2.3: Add widget persistence and retrieval
-  - [ ] 3.2.4: Create data validation with Zod schemas
-  - [ ] 3.2.5: Add database error handling and logging
-  - **Tools:** Prisma Client, Zod validation, error handling
-  - **Success Criteria:** All dashboard operations persist to database
-  - **Why Now:** Bridge between working UI and authentication system
+- [ ] **Task 3.2: Google Analytics API Integration**
+  - [ ] 3.2.1: Create GoogleAnalyticsClient class with TypeScript
+  - [ ] 3.2.2: Implement GA4 metrics fetching (sessions, users, pageviews, events)
+  - [ ] 3.2.3: Add historical data retrieval with date range support
+  - [ ] 3.2.4: Create Zod schemas for Google Analytics responses
+  - [ ] 3.2.5: Transform Google API responses to Chart.js compatible format
+  - **Tools:** Google Analytics Data API, TypeScript classes, Zod validation
+  - **Success Criteria:** Live Google Analytics data flowing into existing charts
+  - **Why Now:** Core product functionality - real analytics dashboards
 
-#### ✅ **Phase 3B: Authentication System (NextAuth.js)**
-- [ ] **Task 3.3: NextAuth.js Configuration**
-  - [ ] 3.3.1: Install and configure NextAuth.js with database adapter
-  - [ ] 3.3.2: Set up email/password authentication
-  - [ ] 3.3.3: Configure session management and JWT handling
-  - [ ] 3.3.4: Create login, register, and logout pages
-  - [ ] 3.3.5: Add password reset and email verification
-  - **Tools:** NextAuth.js, authentication pages, email handling
-  - **Success Criteria:** Secure user authentication system
-  - **Why Now:** UI is stable, can focus on auth without UI disruption
+#### ✅ **Phase 3B: Google Ads API Integration**
+- [ ] **Task 3.3: Google Ads API Setup**
+  - [ ] 3.3.1: Enable Google Ads API in existing Google Cloud project
+  - [ ] 3.3.2: Configure additional OAuth scopes for Google Ads
+  - [ ] 3.3.3: Create Google Ads API client following established patterns
+  - [ ] 3.3.4: Implement Google Ads account discovery and selection
+  - [ ] 3.3.5: Add campaign performance data retrieval
+  - **Tools:** Google Ads API, OAuth scope expansion, existing auth patterns
+  - **Success Criteria:** Secure Google Ads API access integrated with current system
+  - **Why Now:** Established Google Auth patterns can be extended for Ads
 
-- [ ] **Task 3.4: Authentication Integration**
-  - [ ] 3.4.1: Add authentication middleware to protect routes
-  - [ ] 3.4.2: Integrate user sessions with dashboard state
-  - [ ] 3.4.3: Implement user-specific dashboard access
-  - [ ] 3.4.4: Add user profile and settings management
-  - [ ] 3.4.5: Create admin panel foundations
-  - **Tools:** Middleware, session integration, user management
-  - **Success Criteria:** Working auth integrated with existing dashboard
-  - **Why Now:** Proven UI patterns reduce auth integration complexity
+- [ ] **Task 3.4: Google Ads Data Pipeline**
+  - [ ] 3.4.1: Implement campaign performance data retrieval
+  - [ ] 3.4.2: Add keyword performance and search term reporting
+  - [ ] 3.4.3: Create ad group and ad performance metrics
+  - [ ] 3.4.4: Implement conversion tracking and ROI calculations
+  - [ ] 3.4.5: Add cost analysis and budget monitoring
+  - **Tools:** Google Ads API client, performance metrics, cost analysis
+  - **Success Criteria:** Comprehensive Google Ads data available for widgets
+  - **Why Now:** Proven data pipeline patterns from GA integration
 
-#### ✅ **Phase 3C: Security + GDPR Compliance**
-- [ ] **Task 3.5: Security Infrastructure**
-  - [ ] 3.5.1: Implement CSRF protection and secure headers
-  - [ ] 3.5.2: Add rate limiting for API endpoints
-  - [ ] 3.5.3: Configure input validation and sanitization
-  - [ ] 3.5.4: Add brute-force protection for login
-  - [ ] 3.5.5: Implement security monitoring and alerting
-  - **Tools:** Security middleware, rate limiting, input validation
-  - **Success Criteria:** Production-grade security foundation
-  - **Why Now:** Security layer after auth implementation
+#### ✅ **Phase 3C: Cross-Platform Analytics Foundation**
+- [ ] **Task 3.5: Data Correlation Engine**
+  - [ ] 3.5.1: Create correlation between GA traffic and Ads campaigns
+  - [ ] 3.5.2: Implement attribution modeling (first-click, last-click, multi-touch)
+  - [ ] 3.5.3: Add customer journey visualization across platforms
+  - [ ] 3.5.4: Create ROI analysis combining GA conversions with Ads spend
+  - [ ] 3.5.5: Implement channel performance comparison dashboards
+  - **Tools:** Data correlation algorithms, attribution models, analytics calculations
+  - **Success Criteria:** Unified insights combining Google Analytics and Ads data
+  - **Why Now:** Both API integrations complete, cross-platform analysis possible
 
-- [ ] **Task 3.6: GDPR Compliance Implementation**
-  - [ ] 3.6.1: Create privacy policy and terms of service
-  - [ ] 3.6.2: Implement user data export functionality
-  - [ ] 3.6.3: Add user data deletion (right to be forgotten)
-  - [ ] 3.6.4: Create consent management system
-  - [ ] 3.6.5: Add data retention policies and audit logging
-  - **Tools:** GDPR compliance utilities, legal documents, audit systems
-  - **Success Criteria:** Full GDPR compliance with user data controls
-  - **Why Now:** GDPR built-in from start, not bolted-on later
+- [ ] **Task 3.6: Advanced Analytics Widgets**
+  - [ ] 3.6.1: Create combined GA + Ads performance widgets
+  - [ ] 3.6.2: Add campaign performance comparison widgets
+  - [ ] 3.6.3: Implement keyword performance tracking widgets
+  - [ ] 3.6.4: Create ROI and ROAS visualization widgets
+  - [ ] 3.6.5: Add budget pacing and forecast widgets
+  - **Tools:** Advanced widget components, cross-platform data visualization
+  - **Success Criteria:** Rich, actionable advertising insights in dashboard
+  - **Why Now:** Core APIs integrated, ready for advanced analytics features
 
 **🚨 WEEK 5-6 BLOCKERS & SOLUTIONS:**
+- **Blocker:** Google OAuth integration issues → **Solution:** Test with simple scopes first, expand gradually
+- **Blocker:** API quota management → **Solution:** Implement aggressive caching and monitoring
+- **Blocker:** Cross-platform data complexity → **Solution:** Start with simple correlations, add sophistication
+
+**✅ WEEK 5-6 CHECKPOINT:** "Live Google Analytics & Ads dashboards operational - ready for database persistence & auth?"
+
+---
+
+## 📅 **WEEK 7-8: DATABASE + AUTHENTICATION + SECURITY**
+### 🎯 **Milestone:** Secure user system with data persistence and GDPR compliance
+
+#### ✅ **Phase 4A: Database Infrastructure**
+- [ ] **Task 4.1: PostgreSQL + Prisma Setup**
+  - [ ] 4.1.1: Set up PostgreSQL with Docker Compose
+  - [ ] 4.1.2: Install and configure Prisma ORM with TypeScript
+  - [ ] 4.1.3: Design database schema (users, dashboards, widgets, sessions)
+  - [ ] 4.1.4: Create database migrations and seed data
+  - [ ] 4.1.5: Set up connection pooling and performance optimization
+  - **Tools:** PostgreSQL, Prisma, Docker Compose, database design
+  - **Success Criteria:** Robust database foundation with type safety
+  - **Why Now:** Real APIs working, need persistent storage for user dashboards
+
+- [ ] **Task 4.2: Data Layer Integration**
+  - [ ] 4.2.1: Create Prisma models for dashboard and widget entities
+  - [ ] 4.2.2: Implement CRUD operations for dashboards
+  - [ ] 4.2.3: Add widget persistence and retrieval
+  - [ ] 4.2.4: Create data validation with Zod schemas
+  - [ ] 4.2.5: Add database error handling and logging
+  - **Tools:** Prisma Client, Zod validation, error handling
+  - **Success Criteria:** All dashboard operations persist to database
+  - **Why Now:** Bridge between working Google APIs and user authentication
+
+#### ✅ **Phase 4B: Authentication System (NextAuth.js)**
+- [ ] **Task 4.3: NextAuth.js Configuration**
+  - [ ] 4.3.1: Install and configure NextAuth.js with database adapter
+  - [ ] 4.3.2: Set up email/password authentication
+  - [ ] 4.3.3: Configure session management and JWT handling
+  - [ ] 4.3.4: Create login, register, and logout pages
+  - [ ] 4.3.5: Add password reset and email verification
+  - **Tools:** NextAuth.js, authentication pages, email handling
+  - **Success Criteria:** Secure user authentication system
+  - **Why Now:** Database ready, need user management for dashboard persistence
+
+- [ ] **Task 4.4: Authentication Integration**
+  - [ ] 4.4.1: Add authentication middleware to protect routes
+  - [ ] 4.4.2: Integrate user sessions with dashboard state
+  - [ ] 4.4.3: Implement user-specific dashboard access
+  - [ ] 4.4.4: Add user profile and settings management
+  - [ ] 4.4.5: Create admin panel foundations
+  - **Tools:** Middleware, session integration, user management
+  - **Success Criteria:** Working auth integrated with existing Google API dashboards
+  - **Why Now:** Google APIs working, need user-specific dashboard management
+
+#### ✅ **Phase 4C: Security + GDPR Compliance**
+- [ ] **Task 4.5: Security Infrastructure**
+  - [ ] 4.5.1: Implement CSRF protection and secure headers
+  - [ ] 4.5.2: Add rate limiting for API endpoints
+  - [ ] 4.5.3: Configure input validation and sanitization
+  - [ ] 4.5.4: Add brute-force protection for login
+  - [ ] 4.5.5: Implement security monitoring and alerting
+  - **Tools:** Security middleware, rate limiting, input validation
+  - **Success Criteria:** Production-grade security foundation
+  - **Why Now:** User authentication active, need comprehensive security
+
+- [ ] **Task 4.6: GDPR Compliance Implementation**
+  - [ ] 4.6.1: Create privacy policy and terms of service
+  - [ ] 4.6.2: Implement user data export functionality
+  - [ ] 4.6.3: Add user data deletion (right to be forgotten)
+  - [ ] 4.6.4: Create consent management system
+  - [ ] 4.6.5: Add data retention policies and audit logging
+  - **Tools:** GDPR compliance utilities, legal documents, audit systems
+  - **Success Criteria:** Full GDPR compliance with user data controls
+  - **Why Now:** User data collection active, GDPR compliance essential
+
+**🚨 WEEK 7-8 BLOCKERS & SOLUTIONS:**
 - **Blocker:** NextAuth redirect issues → **Solution:** Use simple email/password first, avoid complex flows
 - **Blocker:** Database schema complexity → **Solution:** Start simple, evolve schema with migrations
 - **Blocker:** GDPR compliance complexity → **Solution:** Use established patterns, focus on essentials
 
-**✅ WEEK 5-6 CHECKPOINT:** "Secure dashboard with user accounts and data persistence - ready for Google APIs?"
+**✅ WEEK 7-8 CHECKPOINT:** "Secure user system with database persistence - ready for advanced features?"
 
 ---
 
-## 📅 **WEEK 7-8: GOOGLE OAUTH + API INFRASTRUCTURE**
-### 🎯 **Milestone:** Secure Google API authentication and infrastructure
+## 📅 **WEEK 9-10: PERFORMANCE OPTIMIZATION + REAL-TIME FEATURES**
+### 🎯 **Milestone:** Production-ready performance with real-time updates
 
-#### ✅ **Phase 4A: Google Cloud Console Setup**
-- [ ] **Task 4.1: Google Cloud Project Configuration**
-  - [ ] 4.1.1: Create Google Cloud Project for dashboard application
-  - [ ] 4.1.2: Enable Google Analytics Reporting API v4 and GA4 Data API
-  - [ ] 4.1.3: Configure OAuth 2.0 credentials with PKCE
-  - [ ] 4.1.4: Set up authorized redirect URIs for development and production
-  - [ ] 4.1.5: Configure API quotas and usage monitoring
-  - **Tools:** Google Cloud Console, API management, OAuth configuration
-  - **Success Criteria:** All Google APIs enabled with secure credentials
-  - **Why Now:** Established auth system can integrate Google OAuth safely
-
-- [ ] **Task 4.2: Google OAuth Integration**
-  - [ ] 4.2.1: Add Google provider to NextAuth.js configuration
-  - [ ] 4.2.2: Configure Google Analytics scopes and permissions
-  - [ ] 4.2.3: Implement secure token storage with encryption
-  - [ ] 4.2.4: Add token refresh mechanism and error handling
-  - [ ] 4.2.5: Test Google OAuth flow and token management
-  - **Tools:** NextAuth.js Google provider, token encryption, OAuth flow
-  - **Success Criteria:** Secure Google sign-in with Analytics permissions
-  - **Why Now:** Stable auth foundation allows Google integration without disruption
-
-#### ✅ **Phase 4B: API Client Architecture**
-- [ ] **Task 4.3: Google Analytics API Client**
-  - [ ] 4.3.1: Create GoogleAnalyticsClient class with TypeScript
-  - [ ] 4.3.2: Implement authentication header management
-  - [ ] 4.3.3: Add automatic token refresh on 401 responses
-  - [ ] 4.3.4: Create connection health monitoring
-  - [ ] 4.3.5: Add comprehensive error handling and logging
-  - **Tools:** TypeScript classes, HTTP client, error handling, logging
-  - **Success Criteria:** Robust API client with full error handling
-  - **Why Now:** Proven patterns from existing codebase can be applied
-
-- [ ] **Task 4.4: Rate Limiting + Caching Infrastructure**
-  - [ ] 4.4.1: Implement API rate limiting to prevent quota exhaustion
-  - [ ] 4.4.2: Set up Redis for response caching
-  - [ ] 4.4.3: Add request batching and optimization
-  - [ ] 4.4.4: Implement retry logic with exponential backoff
-  - [ ] 4.4.5: Create API usage monitoring and alerting
+#### ✅ **Phase 5A: Performance Optimization**
+- [ ] **Task 5.1: Multi-API Performance**
+  - [ ] 5.1.1: Implement API rate limiting to prevent quota exhaustion
+  - [ ] 5.1.2: Set up Redis for response caching
+  - [ ] 5.1.3: Add request batching and optimization
+  - [ ] 5.1.4: Implement retry logic with exponential backoff
+  - [ ] 5.1.5: Create API usage monitoring and alerting
   - **Tools:** Redis, rate limiting middleware, retry mechanisms, monitoring
   - **Success Criteria:** Efficient API usage within Google quotas
-  - **Why Now:** Performance infrastructure before high-volume API usage
+  - **Why Now:** Google APIs integrated, need production-grade performance
 
-#### ✅ **Phase 4C: Data Pipeline Foundation**
-- [ ] **Task 4.5: API Response Handling**
-  - [ ] 4.5.1: Create Zod schemas for Google Analytics responses
-  - [ ] 4.5.2: Implement response data validation and sanitization
-  - [ ] 4.5.3: Add data transformation utilities
-  - [ ] 4.5.4: Create type-safe interfaces for Analytics data
-  - [ ] 4.5.5: Test API client with mock and real Google APIs
-  - **Tools:** Zod validation, data transformation, TypeScript interfaces
-  - **Success Criteria:** Type-safe API interactions with validation
-  - **Why Now:** Data pipeline foundation before integration with UI
-
-**🚨 WEEK 7-8 BLOCKERS & SOLUTIONS:**
-- **Blocker:** Google Cloud Console complexity → **Solution:** Follow step-by-step official guides
-- **Blocker:** OAuth integration issues → **Solution:** Test with simple scopes first, expand gradually
-- **Blocker:** API quota management → **Solution:** Implement aggressive caching and monitoring
-
-**✅ WEEK 7-8 CHECKPOINT:** "Google API authentication working with secure client - ready for real data integration?"
-
----
-
-## 📅 **WEEK 9-10: REAL DATA INTEGRATION + WEBSOCKET SYSTEM**
-### 🎯 **Milestone:** Live Google Analytics data flowing into existing widgets
-
-#### ✅ **Phase 5A: Google Analytics Data Integration**
-- [ ] **Task 5.1: GA4 Data Pipeline**
-  - [ ] 5.1.1: Implement GA4 metrics fetching (sessions, users, pageviews, events)
-  - [ ] 5.1.2: Add historical data retrieval with date range support
-  - [ ] 5.1.3: Implement dimensions support (country, device, source/medium)
-  - [ ] 5.1.4: Create custom event tracking and reporting
-  - [ ] 5.1.5: Add data aggregation and summarization methods
-  - **Tools:** Google Analytics Data API, data aggregation, time-series handling
-  - **Success Criteria:** Rich analytics data available for widget consumption
-  - **Why Now:** Existing widget system can immediately display real data
-
-- [ ] **Task 5.2: Data Format Standardization**
-  - [ ] 5.2.1: Transform Google API responses to Chart.js compatible format
-  - [ ] 5.2.2: Implement data normalization for different time periods
-  - [ ] 5.2.3: Create flexible data mapping for various chart types
-  - [ ] 5.2.4: Add data validation and error handling
-  - [ ] 5.2.5: Replace mock data system with real data integration
-  - **Tools:** Data transformation utilities, Chart.js data formats, validation
-  - **Success Criteria:** Seamless transition from mock to real data in existing widgets
-  - **Why Now:** Proven widget system can immediately benefit from real data
+- [ ] **Task 5.2: Widget Performance Optimization**
+  - [ ] 5.2.1: Implement lazy loading for off-screen widgets
+  - [ ] 5.2.2: Add Chart.js performance optimizations
+  - [ ] 5.2.3: Implement virtual scrolling for large dashboards
+  - [ ] 5.2.4: Add performance monitoring and metrics collection
+  - [ ] 5.2.5: Optimize bundle size and loading performance
+  - **Tools:** Lazy loading, virtual scrolling, performance monitoring
+  - **Success Criteria:** Smooth performance with 20+ widgets displaying real data
+  - **Why Now:** Real Google API data flowing, need optimized rendering
 
 #### ✅ **Phase 5B: Real-Time Data System**
 - [ ] **Task 5.3: WebSocket Infrastructure**
@@ -474,10 +490,10 @@
   - [ ] 5.3.5: Implement authentication for WebSocket connections
   - **Tools:** Socket.io, WebSocket management, authentication integration
   - **Success Criteria:** Stable real-time connections with user authentication
-  - **Why Now:** Stable foundation allows real-time enhancement without disruption
+  - **Why Now:** Google Analytics data established, add real-time updates for enhanced UX
 
 - [ ] **Task 5.4: Real-Time Widget Updates**
-  - [ ] 5.4.1: Integrate WebSocket updates into existing widget system
+  - [ ] 5.4.1: Integrate WebSocket updates into existing Google API widgets
   - [ ] 5.4.2: Implement selective data updates (delta updates)
   - [ ] 5.4.3: Add real-time connection indicators to UI
   - [ ] 5.4.4: Create polling fallback for connection failures
@@ -508,11 +524,11 @@
   - **Why Now:** Existing chart system provides foundation for enhancements
 
 **🚨 WEEK 9-10 BLOCKERS & SOLUTIONS:**
-- **Blocker:** Google API data complexity → **Solution:** Implement incrementally with comprehensive testing
+- **Blocker:** Performance bottlenecks with real Google data → **Solution:** Implement aggressive caching and lazy loading
 - **Blocker:** Real-time system complexity → **Solution:** Start with polling fallback, optimize to WebSocket
-- **Blocker:** Data transformation challenges → **Solution:** Create thorough test suite with various data scenarios
+- **Blocker:** API quota exhaustion → **Solution:** Intelligent request batching and rate limiting
 
-**✅ WEEK 9-10 CHECKPOINT:** "Real Google Analytics data flowing with real-time updates - ready for Google Ads?"
+**✅ WEEK 9-10 CHECKPOINT:** "Production-ready performance with real-time updates - ready for comprehensive testing?"
 
 ---
 
@@ -864,6 +880,53 @@
 - **Risk-Optimized Sequencing:** Complex systems built on proven foundations
 - **Anti-Pattern Prevention:** Lessons learned from previous project applied
 - **Weekly Validation:** User involvement ensures product-market fit
+
+---
+
+---
+
+## 📅 **POST-LAUNCH FUTURE FEATURES (Nach Production Launch)**
+### 🎯 **Timeline:** Nach erfolgreichem Launch und stabilem Betrieb
+
+#### ✅ **Future Phase 1: Real Backend Integration**
+- [ ] **FUTURE Task F.1: Real API Integration (Post-MVP)**
+  - [ ] F.1.1: Replace mock API calls with real backend endpoints
+  - [ ] F.1.2: Implement TanStack Query prefetching for dashboard details
+  - [ ] F.1.3: Add real Authentication API (replace mock login/logout)
+  - [ ] F.1.4: Implement actual JWT refresh token flow
+  - [ ] F.1.5: Connect to real dashboard/widget APIs
+  - [ ] F.1.6: Add API error retry strategies
+  - [ ] F.1.7: Implement optimistic updates for better UX
+  - **Timeline:** 2-3 Monate nach Launch
+  - **Prerequisites:** Stable user base, proven product-market fit
+
+#### ✅ **Future Phase 2: Enhanced Security & Enterprise Features**
+- [ ] **FUTURE Task F.2: Enhanced Security (Post-MVP)**
+  - [ ] F.2.1: Migrate from localStorage to httpOnly cookies for tokens
+  - [ ] F.2.2: Add CSRF protection
+  - [ ] F.2.3: Implement proper session management
+  - [ ] F.2.4: Add request signing for API calls
+  - [ ] F.2.5: Enhanced error handling for security events
+  - **Timeline:** 3-6 Monate nach Launch
+  - **Prerequisites:** Enterprise customer demand, security audit requirements
+
+#### ✅ **Future Phase 3: Advanced Monitoring & Analytics**
+- [ ] **FUTURE Task F.3: Advanced Tool Integration (Bei Bedarf)**
+  - [ ] F.3.1: MSW API Mocking - Erst bei echten APIs sinnvoll
+  - [ ] F.3.2: @vercel/analytics - Cookie-freie Analytics (Rücksprache vor Implementierung)
+  - [ ] F.3.3: DebugBear - Core Web Vitals Monitoring (Nach 3-6 Monaten Live)
+  - [ ] F.3.4: Better Stack GDPR Logging vs Sentry Evaluation (Nach echtem Traffic)
+  - [ ] F.3.5: Storybook für Component Documentation
+  - [ ] F.3.6: Redis für Session/Cache Performance Optimization
+  - [ ] F.3.7: GitLab CI/CD für Production Deployment Pipeline
+  - **Timeline:** 6-12 Monate nach Launch
+  - **Prerequisites:** Bewährte Anforderungen, echte User-Daten
+
+**🎯 FUTURE FEATURES RATIONALE:**
+- **Post-Launch Only:** Diese Features sind erst nach erfolgreichem Launch und stabilem Betrieb sinnvoll
+- **User-Driven:** Implementation basiert auf echten Benutzeranforderungen, nicht Vermutungen
+- **Risk-Minimized:** Keine Komplexität während kritischer Launch-Phase
+- **Resource-Optimized:** Focus auf Core Product bis Product-Market-Fit erreicht
 
 ---
 
