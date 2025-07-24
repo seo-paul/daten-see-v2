@@ -73,9 +73,9 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
           
           if (userInfo?.userId && userInfo?.email) {
             const user: User = {
-              id: userInfo.userId,
+              id: userInfo.userId!,
               email: userInfo.email,
-              name: userInfo.email.split('@')[0], // Fallback name
+              name: userInfo.email.split('@')[0] || 'Unknown User', // Fallback name
               role: (userInfo.role as 'user' | 'admin') || 'user',
             };
 
@@ -171,7 +171,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       const mockUser: User = {
         id: 'user-1',
         email,
-        name: email.split('@')[0],
+        name: email.split('@')[0] || 'Unknown User',
         role: 'user',
       };
 
@@ -212,7 +212,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
   // Logout function
   const logout = (): void => {
     appLogger.info('Logout started', {
-      userId: authState.user?.id,
+      ...(authState.user?.id && { userId: authState.user.id }),
     });
 
     // Clear tokens

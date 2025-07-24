@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils/cn';
 import { Logo, LogoCompact } from '@/components/brand/Logo';
 import { NavbarButton, IconButton } from '@/components/ui/Button';
 import { useAuth } from '@/contexts/AuthContext';
-import { Menu, X, Settings, LogOut, User, Home, BarChart3 } from 'lucide-react';
+import { Menu, X, Settings, LogOut, User, BarChart3 } from 'lucide-react';
 
 // Header variants for different page contexts
 const headerVariants = cva(
@@ -57,7 +57,7 @@ export interface HeaderLayoutProps extends VariantProps<typeof headerVariants> {
  * - Flexible variants for different page types
  * - Uses navbar button context (2px/3px shadow)
  */
-export function HeaderLayout({
+const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
   variant,
   position,
   className,
@@ -65,7 +65,7 @@ export function HeaderLayout({
   showUserMenu = true,
   customActions,
   breadcrumbs,
-}: HeaderLayoutProps): React.ReactElement {
+}, _ref): React.ReactElement => {
   const router = useRouter();
   const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -73,7 +73,7 @@ export function HeaderLayout({
   const handleLogout = async () => {
     try {
       await logout();
-      router.push('/login');
+      router.push('/login' as any);
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -109,7 +109,7 @@ export function HeaderLayout({
           {showNavigation && (
             <nav className="hidden md:flex items-center space-x-4">
               {navigationItems.map((item) => (
-                <Link key={item.href} href={item.href}>
+                <Link key={item.href} href={item.href as any}>
                   <NavbarButton leftIcon={item.icon}>
                     {item.label}
                   </NavbarButton>
@@ -150,7 +150,7 @@ export function HeaderLayout({
 
             {/* Login Button (if not authenticated) */}
             {showUserMenu && !user && (
-              <Link href="/login" className="hidden sm:block">
+              <Link href={'/login' as any} className="hidden sm:block">
                 <NavbarButton leftIcon={<User className="w-4 h-4" />}>
                   Login
                 </NavbarButton>
@@ -179,7 +179,7 @@ export function HeaderLayout({
               {showNavigation && navigationItems.map((item) => (
                 <Link 
                   key={item.href} 
-                  href={item.href}
+                  href={item.href as any}
                   onClick={() => setMobileMenuOpen(false)}
                   className="block"
                 >
@@ -225,7 +225,7 @@ export function HeaderLayout({
               {/* Mobile Login Button */}
               {showUserMenu && !user && (
                 <div className="border-t border-[#E6D7B8] pt-3">
-                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <Link href={'/login' as any} onClick={() => setMobileMenuOpen(false)}>
                     <NavbarButton 
                       leftIcon={<User className="w-4 h-4" />}
                       fullWidth
@@ -241,7 +241,8 @@ export function HeaderLayout({
       </div>
     </header>
   );
-}
+});
+HeaderLayout.displayName = 'HeaderLayout';
 
 /**
  * Pre-configured header variants for common use cases

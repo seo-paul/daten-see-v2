@@ -34,12 +34,6 @@ export function createTestQueryClient(): QueryClient {
         networkMode: 'offlineFirst',
       },
     },
-    // Suppress console output during tests
-    logger: {
-      log: () => {},
-      warn: () => {},
-      error: () => {},
-    },
   });
 }
 
@@ -64,7 +58,7 @@ export function TestQueryWrapper({
  */
 export const withQueryClient = (ui: React.ReactElement, queryClient?: QueryClient) => {
   return (
-    <TestQueryWrapper queryClient={queryClient}>
+    <TestQueryWrapper {...(queryClient && { queryClient })}>
       {ui}
     </TestQueryWrapper>
   );

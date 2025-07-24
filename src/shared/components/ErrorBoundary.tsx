@@ -31,7 +31,7 @@ export class ErrorBoundary extends Component<Props, State> {
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     const { level = 'component', context } = this.props;
     
     // Enhanced logging with context
@@ -66,7 +66,7 @@ export class ErrorBoundary extends Component<Props, State> {
       action: 'retry',
     });
     
-    this.setState({ hasError: false, error: undefined, errorId: undefined });
+    this.setState({ hasError: false });
   };
 
   private handleReportIssue = (): void => {
@@ -86,7 +86,7 @@ export class ErrorBoundary extends Component<Props, State> {
     }
   };
 
-  render(): ReactNode {
+  override render(): ReactNode {
     if (this.state.hasError) {
       // Custom fallback UI or use provided fallback
       if (this.props.fallback) {

@@ -10,7 +10,7 @@ interface Props {
 
 interface State {
   hasError: boolean;
-  error?: Error;
+  error?: Error | null;
 }
 
 export class ErrorBoundary extends Component<Props, State> {
@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<Props, State> {
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Error is already sent to Sentry, no need for console.error in production
     if (process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
@@ -42,10 +42,10 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   handleRetry = (): void => {
-    this.setState({ hasError: false, error: undefined });
+    this.setState({ hasError: false, error: null });
   };
 
-  render(): ReactNode {
+  override render(): ReactNode {
     if (this.state.hasError) {
       return (
         <div className={`error-boundary ${this.props.className || ''}`}>

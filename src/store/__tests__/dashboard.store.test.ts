@@ -67,7 +67,7 @@ describe('Dashboard Store', () => {
       state = useDashboardStore.getState();
       expect(state.isLoading).toBe(false);
       expect(state.dashboards).toHaveLength(3);
-      expect(state.dashboards[0].name).toBe('Sales Analytics');
+      expect(state.dashboards[0]?.name).toBe('Sales Analytics');
       expect(state.error).toBeNull();
     });
   });
@@ -88,8 +88,8 @@ describe('Dashboard Store', () => {
       
       const state = useDashboardStore.getState();
       expect(state.dashboards).toHaveLength(1);
-      expect(state.dashboards[0].name).toBe('Test Dashboard');
-      expect(state.dashboards[0].isPublic).toBe(true);
+      expect(state.dashboards[0]?.name).toBe('Test Dashboard');
+      expect(state.dashboards[0]?.isPublic).toBe(true);
       expect(state.error).toBeNull();
     });
 
@@ -129,10 +129,11 @@ describe('Dashboard Store', () => {
       
       let state = useDashboardStore.getState();
       const originalDashboard = state.dashboards[0];
-      expect(originalDashboard.name).toBe('Sales Analytics');
+      expect(originalDashboard).toBeDefined();
+      expect(originalDashboard!.name).toBe('Sales Analytics');
 
       const updateData: UpdateDashboardRequest = {
-        id: originalDashboard.id,
+        id: originalDashboard!.id,
         name: 'Updated Sales Analytics',
         description: 'Updated description',
         isPublic: true,
@@ -141,7 +142,7 @@ describe('Dashboard Store', () => {
       await store.updateDashboard(updateData);
 
       state = useDashboardStore.getState();
-      const updatedDashboard = state.dashboards.find(d => d.id === originalDashboard.id);
+      const updatedDashboard = state.dashboards.find(d => d.id === originalDashboard!.id);
       expect(updatedDashboard?.name).toBe('Updated Sales Analytics');
       expect(updatedDashboard?.description).toBe('Updated description');
       expect(updatedDashboard?.isPublic).toBe(true);
@@ -159,12 +160,13 @@ describe('Dashboard Store', () => {
       let state = useDashboardStore.getState();
       const initialCount = state.dashboards.length;
       const dashboardToDelete = state.dashboards[0];
+      expect(dashboardToDelete).toBeDefined();
 
-      await store.deleteDashboard(dashboardToDelete.id);
+      await store.deleteDashboard(dashboardToDelete!.id);
 
       state = useDashboardStore.getState();
       expect(state.dashboards).toHaveLength(initialCount - 1);
-      expect(state.dashboards.find(d => d.id === dashboardToDelete.id)).toBeUndefined();
+      expect(state.dashboards.find(d => d.id === dashboardToDelete!.id)).toBeUndefined();
       expect(state.error).toBeNull();
     });
   });

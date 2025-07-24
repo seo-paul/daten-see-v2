@@ -86,7 +86,7 @@ export const appLogger = {
         Sentry.addBreadcrumb({
           message,
           level: 'warning',
-          data: context,
+          ...(context && { data: context }),
         });
       });
     }
@@ -134,10 +134,10 @@ export const appLogger = {
   // User action logging
   userAction: (action: string, userId?: string, metadata?: Record<string, unknown>): void => {
     const context: LogContext = {
-      userId,
+      ...(userId && { userId }),
       action,
       component: 'user-interaction',
-      metadata,
+      ...(metadata && { metadata }),
     };
     logger.info(context, `👤 User action: ${action}`);
   },

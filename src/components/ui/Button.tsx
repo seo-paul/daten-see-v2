@@ -180,7 +180,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         size={size}
         context={context}
-        className={cn(sizeClasses[size], className)}
+        className={cn(sizeClasses[size || 'md'], className)}
         {...props}
       >
         <span className="flex items-center justify-center">

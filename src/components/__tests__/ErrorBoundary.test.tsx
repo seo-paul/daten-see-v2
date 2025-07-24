@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { TestQueryWrapper } from '@/lib/testing';
 
 import { ErrorBoundary } from '../ErrorBoundary';
 
@@ -27,9 +28,11 @@ describe('ErrorBoundary', () => {
 
   it('renders children when there is no error', () => {
     render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={false} />
-      </ErrorBoundary>
+      <TestQueryWrapper>
+        <ErrorBoundary>
+          <ThrowError shouldThrow={false} />
+        </ErrorBoundary>
+      </TestQueryWrapper>
     );
 
     expect(screen.getByText('Normal content')).toBeInTheDocument();
@@ -37,9 +40,11 @@ describe('ErrorBoundary', () => {
 
   it('renders error UI when there is an error', () => {
     render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      <TestQueryWrapper>
+        <ErrorBoundary>
+          <ThrowError shouldThrow={true} />
+        </ErrorBoundary>
+      </TestQueryWrapper>
     );
 
     // Check for error message
@@ -49,9 +54,11 @@ describe('ErrorBoundary', () => {
 
   it('shows retry button in error state', () => {
     render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      <TestQueryWrapper>
+        <ErrorBoundary>
+          <ThrowError shouldThrow={true} />
+        </ErrorBoundary>
+      </TestQueryWrapper>
     );
 
     const retryButton = screen.getByRole('button', { name: /try again/i });
@@ -63,9 +70,11 @@ describe('ErrorBoundary', () => {
     (process.env as { NODE_ENV: string }).NODE_ENV = 'development';
 
     render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      <TestQueryWrapper>
+        <ErrorBoundary>
+          <ThrowError shouldThrow={true} />
+        </ErrorBoundary>
+      </TestQueryWrapper>
     );
 
     // In development, should show more details
@@ -76,9 +85,11 @@ describe('ErrorBoundary', () => {
 
   it('applies custom className when provided', () => {
     const { container } = render(
-      <ErrorBoundary className="custom-error-class">
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
+      <TestQueryWrapper>
+        <ErrorBoundary className="custom-error-class">
+          <ThrowError shouldThrow={true} />
+        </ErrorBoundary>
+      </TestQueryWrapper>
     );
 
     expect(container.firstChild).toHaveClass('custom-error-class');

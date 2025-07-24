@@ -17,7 +17,9 @@ export class ApiClientError extends Error {
     this.name = 'ApiClientError';
     this.status = status;
     this.code = code;
-    this.details = details;
+    if (details !== undefined) {
+      this.details = details;
+    }
   }
 }
 
@@ -40,7 +42,7 @@ interface RequestConfig {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   url: string;
   data?: unknown;
-  headers?: Record<string, string>;
+  headers: Record<string, string>;
   timeout?: number;
 }
 
@@ -83,7 +85,7 @@ class ApiClient {
     // Merge headers
     const headers = {
       ...this.defaultHeaders,
-      ...config.headers,
+      ...(config.headers || {}),
       'X-Request-ID': requestId,
     };
 
@@ -151,19 +153,24 @@ class ApiClient {
   private async request<T>(config: RequestConfig): Promise<T> {
     const startTime = Date.now();
     const preparedConfig = await this.prepareRequest(config);
-    const requestId = preparedConfig.headers?.['X-Request-ID'] as string;
+    const requestId = preparedConfig.headers['X-Request-ID'] as string;
 
     try {
       // Create AbortController for timeout
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), preparedConfig.timeout);
 
-      const response = await fetch(`${this.baseURL}${preparedConfig.url}`, {
+      const fetchOptions: RequestInit = {
         method: preparedConfig.method,
         headers: preparedConfig.headers,
-        body: preparedConfig.data ? JSON.stringify(preparedConfig.data) : undefined,
         signal: controller.signal,
-      });
+      };
+      
+      if (preparedConfig.data) {
+        fetchOptions.body = JSON.stringify(preparedConfig.data);
+      }
+      
+      const response = await fetch(`${this.baseURL}${preparedConfig.url}`, fetchOptions);
 
       clearTimeout(timeoutId);
 
@@ -201,23 +208,23 @@ class ApiClient {
 
   // HTTP Methods
   public async get<T>(url: string, headers?: Record<string, string>): Promise<T> {
-    return this.request<T>({ method: 'GET', url, headers });
+    return this.request<T>({ method: 'GET', url, headers: headers || {} });
   }
 
   public async post<T>(url: string, data?: unknown, headers?: Record<string, string>): Promise<T> {
-    return this.request<T>({ method: 'POST', url, data, headers });
+    return this.request<T>({ method: 'POST', url, data, headers: headers || {} });
   }
 
   public async put<T>(url: string, data?: unknown, headers?: Record<string, string>): Promise<T> {
-    return this.request<T>({ method: 'PUT', url, data, headers });
+    return this.request<T>({ method: 'PUT', url, data, headers: headers || {} });
   }
 
   public async patch<T>(url: string, data?: unknown, headers?: Record<string, string>): Promise<T> {
-    return this.request<T>({ method: 'PATCH', url, data, headers });
+    return this.request<T>({ method: 'PATCH', url, data, headers: headers || {} });
   }
 
   public async delete<T>(url: string, headers?: Record<string, string>): Promise<T> {
-    return this.request<T>({ method: 'DELETE', url, headers });
+    return this.request<T>({ method: 'DELETE', url, headers: headers || {} });
   }
 }
 

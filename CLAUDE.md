@@ -37,14 +37,37 @@ VERSTEHEN → PLANEN → IMPLEMENTIEREN → VALIDIEREN
 
 ### **📋 ROADMAP WORKFLOW (MANDATORY)**
 - **IMMER der Roadmap folgen**: Niemals Tasks überspringen oder eigene Reihenfolge wählen
-- **Aktuelle Task ermitteln**: Schaue in IMPLEMENTATION-ROADMAP.md welche Task als nächstes dran ist
+- **Task-Batch laden**: Bei Start einer Haupttask (z.B. 1.7) ALLE Subtasks (1.7.1, 1.7.2, etc.) in TodoWrite laden
+- **TodoWrite als Arbeitsliste**: Nutze TodoWrite als primären Zwischenspeicher für alle anstehenden Subtasks
 - **Sequentielle Bearbeitung**: Task X.Y.Z vollständig abschließen BEVOR X.Y.(Z+1) beginnt
-- **Status Updates**: TodoWrite nutzen um Tasks als completed zu markieren
-- **REGEL**: IMPLEMENTATION-ROADMAP.md bestimmt IMMER den nächsten Schritt
+
+#### **HYBRID TEST & COMMIT WORKFLOW:**
+- **Nach JEDER Subtask (z.B. 1.7.6.1):**
+  1. Lokale Tests: `npm test` (schnell)
+  2. Type-Check: `npm run typecheck` (schnell)
+  3. Bei Fehler → sofort fixen
+  4. TodoWrite Status update
+  
+- **Nach AUFGABEN-BATCH (z.B. alle 1.7.6):**
+  1. Lint Check: `npm run lint`
+  2. Docker restart: `./scripts/quick-restart.sh`
+  3. Vollständige Tests im Browser
+  4. Git commit mit Summary aller Subtasks
+  5. In IMPLEMENTATION-ROADMAP.md alle Subtasks abhaken: `[ ]` → `[x]` + `✅ **COMPLETED**`
+  6. Git push
+  
+- **REGEL**: Code-Qualität durch kontinuierliche Tests, Effizienz durch Batch-Commits
+
+### **⚠️ ABWEICHUNG VOM PLAN (MANDATORY)**
+- **NIEMALS eigenmächtig vom geplanten Vorgehen abweichen**
+- **VOR jeder Abweichung**: User mit bewerteten Alternativen informieren
+- **Format**: Problem → Alternative 1 (Pro/Contra/Aufwand) → Alternative 2 → Alternative 3 → Empfehlung
+- **Gemeinsame Entscheidung**: User entscheidet welche Alternative umgesetzt wird
+- **REGEL**: Lieber nachfragen als eigenständig "optimieren"
 
 ### **2. Autonomie-Level**
 **Erkläre erst, code dann:**
-**Du schläfst vor, bewertest und begründest die Optionen:** das gilt für alle Schritte insbesondere Implementation-Details, Tool-Auswahl, Code-Struktur, Feature-Requirements, UI/UX-Änderungen, Business-Logik, Architektur-Entscheidungen, Performance-Trade-offs
+**Du schlägst vor, bewertest und begründest die Optionen:** das gilt für alle Schritte insbesondere Implementation-Details, Tool-Auswahl, Code-Struktur, Feature-Requirements, UI/UX-Änderungen, Business-Logik, Architektur-Entscheidungen, Performance-Trade-offs
 - Stichpunkte **vor** jeder Implementation
 - Bei Unklarheiten deinerseits → Nachfragen statt Raten
 - **User entscheidet** ob Änderungen notwendig sind und gibt es dann frei

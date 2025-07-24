@@ -1,19 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { apiClient } from '@/lib/api/client';
+// import { apiClient } from '@/lib/api/client'; // TODO: Use when implementing real API calls
 import { appLogger } from '@/lib/monitoring/logger.config';
 import type { 
-  DashboardListResponse,
-  DashboardDetailResponse,
   CreateDashboardRequest,
-  CreateDashboardResponse,
   UpdateDashboardRequest
 } from '@/types/api.types';
-import {
-  DashboardListResponseSchema,
-  DashboardDetailResponseSchema,
-  CreateDashboardResponseSchema
-} from '@/types/api.types';
+// import {
+//   DashboardListResponseSchema,
+//   DashboardDetailResponseSchema,
+//   CreateDashboardResponseSchema
+// } from '@/types/api.types'; // TODO: Use when implementing real API calls
 import type { DashboardListItem, Dashboard } from '@/types/dashboard.types';
 
 // Query Keys - centralized for cache management

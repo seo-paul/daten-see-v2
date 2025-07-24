@@ -3,7 +3,7 @@
  * API mocking for tests and development
  */
 
-import { http, HttpResponse } from 'msw';
+import { rest } from 'msw';
 import type { 
   DashboardListItem,
   Dashboard,
@@ -14,8 +14,8 @@ import { mockTestData } from './custom-hooks';
 // Mock API base URL
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
-// Mock dashboard data
-const mockDashboards: DashboardListItem[] = mockTestData.dashboards;
+// Mock dashboard data - convert readonly to mutable
+const mockDashboards: DashboardListItem[] = [...mockTestData.dashboards];
 
 let mockDashboardsStore = [...mockDashboards];
 
@@ -24,46 +24,52 @@ let mockDashboardsStore = [...mockDashboards];
  */
 export const authHandlers = [
   // Login endpoint
-  http.post(`${API_BASE}/auth/login`, async ({ request }) => {
-    const body = await request.json() as { email: string; password: string };
+  rest.post(`${API_BASE}/auth/login`, async (req, res, ctx) => {
+    const body = await req.json() as { email: string; password: string };
     
     // Mock successful login
     if (body.email === 'test@example.com' && body.password === 'password') {
-      return HttpResponse.json({
-        success: true,
-        data: {
-          user: mockTestData.user,
-          token: 'mock-jwt-token',
-        },
-      });
+      return res(
+        ctx.json({
+          success: true,
+          data: {
+            user: mockTestData.user,
+            token: 'mock-jwt-token',
+          },
+        })
+      );
     }
     
     // Mock failed login
-    return HttpResponse.json(
-      { success: false, error: 'Invalid credentials' },
-      { status: 401 }
+    return res(
+      ctx.status(401),
+      ctx.json({ success: false, error: 'Invalid credentials' })
     );
   }),
 
   // Logout endpoint
-  http.post(`${API_BASE}/auth/logout`, () => {
-    return HttpResponse.json({ success: true });
+  rest.post(`${API_BASE}/auth/logout`, (_req, res, ctx) => {
+    return res(ctx.json({ success: true }));
   }),
 
   // Token refresh endpoint
-  http.post(`${API_BASE}/auth/refresh`, () => {
-    return HttpResponse.json({
-      success: true,
-      data: { token: 'new-mock-jwt-token' },
-    });
+  rest.post(`${API_BASE}/auth/refresh`, (_req, res, ctx) => {
+    return res(
+      ctx.json({
+        success: true,
+        data: { token: 'new-mock-jwt-token' },
+      })
+    );
   }),
 
   // User profile endpoint
-  http.get(`${API_BASE}/auth/me`, () => {
-    return HttpResponse.json({
-      success: true,
-      data: { user: mockTestData.user },
-    });
+  rest.get(`${API_BASE}/auth/me`, (_req, res, ctx) => {
+    return res(
+      ctx.json({
+        success: true,
+        data: { user: mockTestData.user },
+      })
+    );
   }),
 ];
 
@@ -72,22 +78,24 @@ export const authHandlers = [
  */
 export const dashboardHandlers = [
   // Get all dashboards
-  http.get(`${API_BASE}/dashboards`, () => {
-    return HttpResponse.json({
-      success: true,
-      data: { dashboards: mockDashboardsStore },
-    });
+  rest.get(`${API_BASE}/dashboards`, (_req, res, ctx) => {
+    return res(
+      ctx.json({
+        success: true,
+        data: { dashboards: mockDashboardsStore },
+      })
+    );
   }),
 
   // Get single dashboard
-  http.get(`${API_BASE}/dashboards/:id`, ({ params }) => {
-    const { id } = params;
+  rest.get(`${API_BASE}/dashboards/:id`, (req, res, ctx) => {
+    const { id } = req.params;
     const dashboard = mockDashboardsStore.find(d => d.id === id);
     
     if (!dashboard) {
-      return HttpResponse.json(
-        { success: false, error: 'Dashboard not found' },
-        { status: 404 }
+      return res(
+        ctx.status(404),
+        ctx.json({ success: false, error: 'Dashboard not found' })
       );
     }
 
@@ -104,15 +112,17 @@ export const dashboardHandlers = [
       },
     };
 
-    return HttpResponse.json({
-      success: true,
-      data: { dashboard: fullDashboard },
-    });
+    return res(
+      ctx.json({
+        success: true,
+        data: { dashboard: fullDashboard },
+      })
+    );
   }),
 
   // Create dashboard
-  http.post(`${API_BASE}/dashboards`, async ({ request }) => {
-    const body = await request.json() as CreateDashboardRequest;
+  rest.post(`${API_BASE}/dashboards`, async (req, res, ctx) => {
+    const body = await req.json() as CreateDashboardRequest;
     
     const newDashboard: DashboardListItem = {
       id: `mock-${Date.now()}`,
@@ -125,51 +135,63 @@ export const dashboardHandlers = [
 
     mockDashboardsStore.push(newDashboard);
 
-    return HttpResponse.json({
-      success: true,
-      data: { dashboardId: newDashboard.id },
-    });
+    return res(
+      ctx.json({
+        success: true,
+        data: { dashboardId: newDashboard.id },
+      })
+    );
   }),
 
   // Update dashboard
-  http.put(`${API_BASE}/dashboards/:id`, async ({ params, request }) => {
-    const { id } = params;
-    const body = await request.json() as Partial<CreateDashboardRequest>;
+  rest.put(`${API_BASE}/dashboards/:id`, async (req, res, ctx) => {
+    const { id } = req.params;
+    const body = await req.json() as Partial<CreateDashboardRequest>;
     
     const dashboardIndex = mockDashboardsStore.findIndex(d => d.id === id);
     
     if (dashboardIndex === -1) {
-      return HttpResponse.json(
-        { success: false, error: 'Dashboard not found' },
-        { status: 404 }
+      return res(
+        ctx.status(404),
+        ctx.json({ success: false, error: 'Dashboard not found' })
       );
     }
 
     // Update dashboard
+    const existingDashboard = mockDashboardsStore[dashboardIndex];
+    if (!existingDashboard) {
+      return res(ctx.status(404), ctx.json({ error: 'Dashboard not found' }));
+    }
+    
     mockDashboardsStore[dashboardIndex] = {
-      ...mockDashboardsStore[dashboardIndex],
+      ...existingDashboard,
       ...body,
+      id: existingDashboard.id, // Ensure id is preserved
+      name: body.name ?? existingDashboard.name,
+      description: body.description ?? existingDashboard.description,
+      isPublic: body.isPublic ?? existingDashboard.isPublic,
       updatedAt: new Date(),
+      widgetCount: existingDashboard.widgetCount, // Preserve required widgetCount
     };
 
-    return HttpResponse.json({ success: true });
+    return res(ctx.json({ success: true }));
   }),
 
   // Delete dashboard
-  http.delete(`${API_BASE}/dashboards/:id`, ({ params }) => {
-    const { id } = params;
+  rest.delete(`${API_BASE}/dashboards/:id`, (req, res, ctx) => {
+    const { id } = req.params;
     const dashboardIndex = mockDashboardsStore.findIndex(d => d.id === id);
     
     if (dashboardIndex === -1) {
-      return HttpResponse.json(
-        { success: false, error: 'Dashboard not found' },
-        { status: 404 }
+      return res(
+        ctx.status(404),
+        ctx.json({ success: false, error: 'Dashboard not found' })
       );
     }
 
     mockDashboardsStore.splice(dashboardIndex, 1);
 
-    return HttpResponse.json({ success: true });
+    return res(ctx.json({ success: true }));
   }),
 ];
 
@@ -179,22 +201,22 @@ export const dashboardHandlers = [
  */
 export const errorHandlers = [
   // Simulate network error
-  http.get(`${API_BASE}/test/network-error`, () => {
-    return HttpResponse.error();
+  rest.get(`${API_BASE}/test/network-error`, (_req, res) => {
+    return res.networkError('Network error');
   }),
 
   // Simulate server error
-  http.get(`${API_BASE}/test/server-error`, () => {
-    return HttpResponse.json(
-      { success: false, error: 'Internal server error' },
-      { status: 500 }
+  rest.get(`${API_BASE}/test/server-error`, (_req, res, ctx) => {
+    return res(
+      ctx.status(500),
+      ctx.json({ success: false, error: 'Internal server error' })
     );
   }),
 
   // Simulate slow response
-  http.get(`${API_BASE}/test/slow-response`, async () => {
+  rest.get(`${API_BASE}/test/slow-response`, async (_req, res, ctx) => {
     await new Promise(resolve => setTimeout(resolve, 3000));
-    return HttpResponse.json({ success: true, data: 'slow response' });
+    return res(ctx.json({ success: true, data: 'slow response' }));
   }),
 ];
 

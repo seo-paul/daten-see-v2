@@ -4,35 +4,21 @@
  */
 
 import { setupServer } from 'msw/node';
-import { setupWorker } from 'msw/browser';
 import { handlers } from './msw-handlers';
 
 // Server for Node.js (tests)
 export const server = setupServer(...handlers);
 
-// Worker for browser (development/storybook)
-export const worker = setupWorker(...handlers);
+// Worker for browser will be created only when needed
 
 /**
  * Setup MSW for test environment
  * Call in jest.setup.js or test files
  */
 export function setupMSWForTests(): void {
-  // Start server before all tests
-  beforeAll(() => {
-    server.listen({
-      onUnhandledRequest: 'warn',
-    });
-  });
-
-  // Reset handlers after each test
-  afterEach(() => {
-    server.resetHandlers();
-  });
-
-  // Close server after all tests
-  afterAll(() => {
-    server.close();
+  // For jest.setup.js - start server immediately
+  server.listen({
+    onUnhandledRequest: 'bypass',
   });
 }
 
@@ -42,8 +28,10 @@ export function setupMSWForTests(): void {
  */
 export async function setupMSWForBrowser(): Promise<void> {
   if (typeof window !== 'undefined') {
+    const { setupWorker } = await import('msw');
+    const worker = setupWorker(...handlers);
     await worker.start({
-      onUnhandledRequest: 'warn',
+      onUnhandledRequest: 'bypass',
     });
   }
 }
@@ -61,9 +49,26 @@ export async function startMSW(): Promise<void> {
   }
 }
 
+/**
+ * Individual test file setup
+ * Use when you need MSW in specific test files
+ */
+export function setupMSWForTestFile(): void {
+  beforeAll(() => {
+    server.listen({ onUnhandledRequest: 'bypass' });
+  });
+  
+  beforeEach(() => {
+    server.resetHandlers();
+  });
+  
+  afterAll(() => {
+    server.close();
+  });
+}
+
 export default {
   server,
-  worker,
   setupMSWForTests,
   setupMSWForBrowser,
   startMSW,

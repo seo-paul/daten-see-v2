@@ -4,8 +4,8 @@
  */
 
 import { render, screen, waitFor, act } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
+import { TestQueryWrapper } from '@/lib/testing';
 
 import { AuthProvider, useAuth } from '../AuthContext';
 
@@ -60,19 +60,12 @@ function TestComponent(): React.ReactElement {
 
 // Test wrapper with providers
 function TestWrapper({ children }: { children: ReactNode }): React.ReactElement {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <TestQueryWrapper>
       <AuthProvider>
         {children}
       </AuthProvider>
-    </QueryClientProvider>
+    </TestQueryWrapper>
   );
 }
 

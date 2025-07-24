@@ -5,7 +5,8 @@
 
 import { renderHook, RenderHookOptions } from '@testing-library/react';
 import { QueryClient } from '@tanstack/react-query';
-import { TestContextWrapper, TestQueryWrapper } from './context-wrapper';
+import { TestContextWrapper } from './context-wrapper';
+import { TestQueryWrapper } from './query-wrapper';
 import { createTestQueryClient } from './query-wrapper';
 import React from 'react';
 
@@ -36,7 +37,10 @@ export function renderHookWithQuery<TResult, TProps>(
 
   const wrapper = withAuth 
     ? ({ children }: { children: React.ReactNode }) => (
-        <TestContextWrapper queryClient={queryClient} authValue={authValue}>
+        <TestContextWrapper 
+          queryClient={queryClient} 
+          {...(authValue && { authValue })}
+        >
           {children}
         </TestContextWrapper>
       )

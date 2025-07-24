@@ -55,8 +55,8 @@ export function ProtectedRoute({
     if (requiredRole && user?.role !== requiredRole) {
       appLogger.warn('Access denied: Insufficient permissions', {
         requiredRole,
-        userRole: user?.role,
-        userId: user?.id
+        ...(user?.role && { userRole: user.role }),
+        ...(user?.id && { userId: user.id })
       });
       
       // Redirect to appropriate page based on user status
@@ -71,9 +71,9 @@ export function ProtectedRoute({
     // Access granted
     if (requireAuth && isAuthenticated) {
       appLogger.debug('Route access granted', {
-        userId: user?.id,
-        userRole: user?.role,
-        requiredRole
+        ...(user?.id && { userId: user.id }),
+        ...(user?.role && { userRole: user.role }),
+        ...(requiredRole && { requiredRole })
       });
     }
   }, [isLoading, isAuthenticated, user, requireAuth, requiredRole, redirectTo, router]);

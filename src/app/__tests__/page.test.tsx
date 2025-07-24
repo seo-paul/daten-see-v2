@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { TestQueryWrapper } from '@/lib/testing';
 
 import Home from '../page';
 
@@ -13,7 +14,11 @@ jest.mock('next/image', () => ({
 
 describe('Home Page', () => {
   it('renders without crashing', () => {
-    render(<Home />);
+    render(
+      <TestQueryWrapper>
+        <Home />
+      </TestQueryWrapper>
+    );
     
     // Check if main content is rendered
     const mainElement = screen.getByRole('main');
@@ -21,7 +26,11 @@ describe('Home Page', () => {
   });
 
   it('contains expected content structure', () => {
-    render(<Home />);
+    render(
+      <TestQueryWrapper>
+        <Home />
+      </TestQueryWrapper>
+    );
     
     // Check for heading
     const heading = screen.getByRole('heading', { level: 1 });
@@ -29,7 +38,11 @@ describe('Home Page', () => {
   });
 
   it('has proper semantic structure', () => {
-    const { container } = render(<Home />);
+    const { container } = render(
+      <TestQueryWrapper>
+        <Home />
+      </TestQueryWrapper>
+    );
     
     // Check for main landmark
     const main = container.querySelector('main');

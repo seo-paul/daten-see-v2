@@ -202,7 +202,7 @@ export function useMockLoginMutation() {
           user: {
             id: 'mock-user-1',
             email: loginData.email,
-            name: loginData.email.split('@')[0],
+            name: loginData.email.split('@')[0] || 'Unknown User',
             role: 'user',
           },
           token: `mock.jwt.token.${Date.now()}`,

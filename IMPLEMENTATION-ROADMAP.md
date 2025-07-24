@@ -106,25 +106,25 @@
    - [x] 1.7.1 Dashboard Queries: Migration von Zustand zu TanStack Query
    - [x] 1.7.2 Route Protection System: Protected Route Wrapper
    - [x] 1.7.3 Navigation Context: Breadcrumbs ohne Persist
-  - [ ] 1.7.4: **Phase 1D - Test Infrastructure (Week 6)**
-    - [ ] TanStack Query test wrapper
-    - [ ] Context provider test utils
-    - [ ] MSW für API mocking setup
-    - [ ] Custom testing hooks
-    - [ ] E2E tests für authentication flows
-    - [ ] Route protection testing framework
-  - [ ] 1.7.5: **Phase 1D - Component Test Migration (Week 6)**
-    - [ ] Update alle Jest component tests für TanStack Query
-    - [ ] Mock provider setup für Tests
-    - [ ] Async query testing mit Jest + React Testing Library
-    - [ ] Error state testing für TanStack Query
-  - [ ] 1.7.6: **Phase 2 - Performance Optimization (Week 7)**
-    - [ ] Query prefetching strategies
-    - [ ] Stale-while-revalidate config
-    - [ ] Bundle size analysis
-    - [ ] React DevTools profiling
-    - [ ] Performance monitoring integration
-    - [ ] Core Web Vitals tracking
+  - [x] 1.7.4: **Phase 1D - Test Infrastructure (Week 6)** ✅ **COMPLETED**
+    - [x] TanStack Query test wrapper
+    - [x] Context provider test utils
+    - [x] MSW für API mocking setup (v1.3.3)
+    - [x] Custom testing hooks
+    - [x] E2E tests für authentication flows
+    - [x] Route protection testing framework
+  - [x] 1.7.5: **Phase 1D - Component Test Migration (Week 6)** ✅ **COMPLETED**
+    - [x] Update alle Jest component tests für TanStack Query
+    - [x] Mock provider setup für Tests
+    - [x] Async query testing mit Jest + React Testing Library
+    - [x] Error state testing für TanStack Query
+  - [x] 1.7.6: **Phase 2 - Performance Optimization (Week 7)**
+    - [x] Query prefetching strategies
+    - [x] Stale-while-revalidate config
+    - [x] Bundle size analysis
+    - [x] React DevTools profiling
+    - [x] Performance monitoring integration
+    - [x] Core Web Vitals tracking
   - [ ] 1.7.7: **Phase 3 - Developer Experience (Week 7)**
     - [ ] TypeScript strict mode
     - [ ] ESLint rules für hooks

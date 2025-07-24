@@ -26,12 +26,12 @@ export interface TestContextWrapperProps {
  */
 export function TestContextWrapper({ 
   children, 
-  queryClient = createTestQueryClient(),
-  authValue 
-}: TestContextWrapperProps): React.ReactElement {
+  queryClient = createTestQueryClient()
+}: Omit<TestContextWrapperProps, 'authValue'>): React.ReactElement {
+  // Note: AuthProvider manages its own state
   return (
     <TestQueryWrapper queryClient={queryClient}>
-      <AuthProvider value={authValue}>
+      <AuthProvider>
         <NavigationProvider>
           {children}
         </NavigationProvider>
@@ -45,7 +45,7 @@ export function TestContextWrapper({
  */
 export function MinimalTestWrapper({ 
   children,
-  queryClient 
+  queryClient = createTestQueryClient()
 }: Omit<TestContextWrapperProps, 'authValue'>): React.ReactElement {
   return (
     <TestQueryWrapper queryClient={queryClient}>
@@ -58,12 +58,12 @@ export function MinimalTestWrapper({
  * Auth-only wrapper for testing authentication flows
  */
 export function AuthTestWrapper({ 
-  children,
-  authValue 
-}: Pick<TestContextWrapperProps, 'children' | 'authValue'>): React.ReactElement {
+  children
+}: Pick<TestContextWrapperProps, 'children'>): React.ReactElement {
+  // Note: AuthProvider manages its own state
   return (
     <TestQueryWrapper>
-      <AuthProvider value={authValue}>
+      <AuthProvider>
         {children}
       </AuthProvider>
     </TestQueryWrapper>

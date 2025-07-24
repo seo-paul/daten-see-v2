@@ -36,7 +36,6 @@ export {
 
 export {
   server,
-  worker,
   setupMSWForTests,
   setupMSWForBrowser,
   startMSW,
