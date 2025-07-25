@@ -33,7 +33,9 @@ export function configureSentryPerformance() {
     initializeCustomTracing();
   }
 
-  console.log('📊 Sentry performance monitoring configured');
+  if (process.env.NODE_ENV === 'development') {
+    console.log('📊 Sentry performance monitoring configured');
+  }
 }
 
 /**
@@ -117,7 +119,9 @@ function initializeCustomTracing(): void {
 
       longTaskObserver.observe({ entryTypes: ['longtask'] });
     } catch (error) {
-      console.warn('Long task observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Long task observer not supported:', error);
+      }
     }
 
     // Monitor layout shifts
@@ -144,7 +148,9 @@ function initializeCustomTracing(): void {
 
       clsObserver.observe({ entryTypes: ['layout-shift'] });
     } catch (error) {
-      console.warn('Layout shift observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Layout shift observer not supported:', error);
+      }
     }
   }
 }

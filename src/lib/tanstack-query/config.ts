@@ -179,10 +179,14 @@ export function createDevQueryClient(): QueryClient {
     // Enable React Query DevTools logging
     client.setMutationDefaults(['debug'], {
       onSuccess: (data, variables) => {
-        console.log('Mutation success:', { data, variables });
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Mutation success:', { data, variables });
+        }
       },
       onError: (error, variables) => {
-        console.error('Mutation error:', { error, variables });
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Mutation error:', { error, variables });
+        }
       },
     });
   }

@@ -97,9 +97,13 @@ class WebVitalsCollector {
       this.initializeINP();
       
       this.isInitialized = true;
-      console.log('🎯 Core Web Vitals tracking initialized');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🎯 Core Web Vitals tracking initialized');
+      }
     } catch (error) {
-      console.warn('Failed to initialize Web Vitals tracking:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Failed to initialize Web Vitals tracking:', error);
+      }
     }
   }
 
@@ -126,7 +130,9 @@ class WebVitalsCollector {
       observer.observe({ type: 'largest-contentful-paint', buffered: true });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('LCP observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('LCP observer not supported:', error);
+      }
     }
   }
 
@@ -151,7 +157,9 @@ class WebVitalsCollector {
       observer.observe({ type: 'first-input', buffered: true });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('FID observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('FID observer not supported:', error);
+      }
     }
   }
 
@@ -185,7 +193,9 @@ class WebVitalsCollector {
       observer.observe({ type: 'layout-shift', buffered: true });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('CLS observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('CLS observer not supported:', error);
+      }
     }
   }
 
@@ -212,7 +222,9 @@ class WebVitalsCollector {
       observer.observe({ type: 'paint', buffered: true });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('FCP observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('FCP observer not supported:', error);
+      }
     }
   }
 
@@ -235,7 +247,9 @@ class WebVitalsCollector {
           });
         }
       } catch (error) {
-        console.warn('TTFB measurement failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('TTFB measurement failed:', error);
+        }
       }
     }
   }
@@ -276,7 +290,9 @@ class WebVitalsCollector {
       
       this.observers.push(observer);
     } catch (error) {
-      console.warn('INP observer not supported:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('INP observer not supported:', error);
+      }
     }
   }
 
@@ -351,7 +367,9 @@ class WebVitalsCollector {
           }
         });
       } catch (error) {
-        console.warn('Failed to send Web Vital to Sentry:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Failed to send Web Vital to Sentry:', error);
+        }
       }
     }
 
@@ -365,7 +383,9 @@ class WebVitalsCollector {
           custom_map: { metric_1: metric.name },
         });
       } catch (error) {
-        console.warn('Failed to send Web Vital to GA:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Failed to send Web Vital to GA:', error);
+        }
       }
     }
   }
@@ -516,7 +536,9 @@ class WebVitalsCollector {
       try {
         observer.disconnect();
       } catch (error) {
-        console.warn('Failed to disconnect observer:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Failed to disconnect observer:', error);
+        }
       }
     });
     this.observers = [];

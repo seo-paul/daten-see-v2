@@ -87,7 +87,9 @@ export function initializePerformanceMonitoring(config?: {
       });
     }
 
-    console.log('📊 Performance monitoring initialized');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('📊 Performance monitoring initialized');
+    }
   }
 }
 

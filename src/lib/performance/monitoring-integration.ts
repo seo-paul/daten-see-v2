@@ -105,12 +105,16 @@ class PerformanceMonitor {
       return event;
     });
 
-    console.log('📊 Sentry performance monitoring initialized');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('📊 Sentry performance monitoring initialized');
+    }
   }
 
   private initializeWebVitals(): void {
     // Web Vitals will be initialized separately in Core Web Vitals task
-    console.log('🎯 Web Vitals monitoring prepared');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🎯 Web Vitals monitoring prepared');
+    }
   }
 
   private initializeDevelopmentTools(): void {
@@ -127,7 +131,9 @@ class PerformanceMonitor {
         },
       };
 
-      console.log('🛠️ Development performance tools available via window.performanceMonitor');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🛠️ Development performance tools available via window.performanceMonitor');
+      }
     }
   }
 
@@ -175,11 +181,13 @@ class PerformanceMonitor {
     const emoji = this.getMetricEmoji(metric);
     const color = this.getMetricColor(metric);
     
-    console.log(
-      `%c${emoji} ${metric.name}: ${metric.value}${metric.unit}`,
-      `color: ${color}; font-weight: bold`,
-      metric.tags || {}
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `%c${emoji} ${metric.name}: ${metric.value}${metric.unit}`,
+        `color: ${color}; font-weight: bold`,
+        metric.tags || {}
+      );
+    }
   }
 
   private sendMetricToSentry(metric: PerformanceMetric): void {
@@ -210,7 +218,9 @@ class PerformanceMonitor {
           },
         });
       } catch (error) {
-        console.warn('Failed to track critical metric:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Failed to track critical metric:', error);
+        }
       }
     }
   }
@@ -225,7 +235,9 @@ class PerformanceMonitor {
       const recent = metrics.slice(-100);
       localStorage.setItem('performance-metrics', JSON.stringify(recent));
     } catch (error) {
-      console.warn('Failed to store performance metric locally:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Failed to store performance metric locally:', error);
+      }
     }
   }
 
@@ -265,7 +277,9 @@ class PerformanceMonitor {
     
     // Console warning in development
     if (this.config.enableConsoleLogging) {
-      console.warn(`⚠️ ${message}`, metric);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`⚠️ ${message}`, metric);
+      }
     }
 
     // Send to Sentry as warning
@@ -339,7 +353,9 @@ class PerformanceMonitor {
       try {
         localStorage.removeItem('performance-metrics');
       } catch (error) {
-        console.warn('Failed to clear stored metrics:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Failed to clear stored metrics:', error);
+        }
       }
     }
   }
@@ -396,7 +412,9 @@ class PerformanceMonitor {
    */
   setEnabled(enabled: boolean): void {
     this.isEnabled = enabled;
-    console.log(`📊 Performance monitoring ${enabled ? 'enabled' : 'disabled'}`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`📊 Performance monitoring ${enabled ? 'enabled' : 'disabled'}`);
+    }
   }
 }
 
