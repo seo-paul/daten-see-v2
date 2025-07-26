@@ -28,6 +28,12 @@ VERSTEHEN → PLANEN → IMPLEMENTIEREN → VALIDIEREN
 - **Aufbauende Implementation** - jeder Schritt funktioniert vollständig
 - **Ein Feature = Ein funktionierender Baustein**
 
+### **📊 DEBUGGING DASHBOARD UPDATE (MANDATORY)**
+- **Nach JEDER größeren Code-Änderung**: Automatisch `./scripts/collect-real-metrics.sh` ausführen
+- **Nach Task-Completion**: Dashboard mit aktuellen Metriken updaten
+- **Nach Feature-Implementation**: Achievement-Liste in real-metrics.json erweitern
+- **REGEL**: Code-Änderung → Test → Dashboard Update → Commit
+
 ### **🔧 HYBRID DEVELOPMENT WORKFLOW**
 
 #### **⚡ QUICK DEV CHECKS (npm-basiert, für Speed):**

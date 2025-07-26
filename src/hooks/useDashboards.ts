@@ -5,23 +5,20 @@
 
 import { useQuery, useMutation, useQueryClient, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
 
-import { dashboardApi } from '@/lib/api/dashboard.api';
-import { createQueryOptions, queryKeys } from '@/lib/tanstack-query/config';
-import { useDashboardStore } from '@/store/dashboard.store';
-import type { DashboardListItem, CreateDashboardRequest, Dashboard, UpdateDashboardRequest } from '@/types/dashboard.types';
+import { dashboardApi } from '@/lib/api/dashboard';
+import { createQueryOptions } from '@/lib/tanstack-query/config';
+import type { Dashboard, CreateDashboardRequest, UpdateDashboardRequest } from '@/types';
+import { apiQueryKeys } from '@/types';
 
 /**
  * Hook to fetch all dashboards
  * Integrates TanStack Query with Zustand Store
  */
-export function useDashboards(): UseQueryResult<DashboardListItem[], Error> {
-  const { dashboards } = useDashboardStore();
-
-  return useQuery<DashboardListItem[], Error>({
+export function useDashboards(): UseQueryResult<Dashboard[], Error> {
+  return useQuery<Dashboard[], Error>({
     ...createQueryOptions.dashboard(),
-    queryKey: queryKeys.dashboardsList(),
-    queryFn: dashboardApi.getAll,
-    ...(dashboards.length > 0 && { initialData: dashboards }),
+    queryKey: apiQueryKeys.dashboards,
+    queryFn: () => dashboardApi.getDashboards(),
   });
 }
 
@@ -29,13 +26,10 @@ export function useDashboards(): UseQueryResult<DashboardListItem[], Error> {
  * Hook to fetch single dashboard
  */
 export function useDashboard(dashboardId: string): UseQueryResult<Dashboard, Error> {
-  const { currentDashboard } = useDashboardStore();
-
   return useQuery({
     ...createQueryOptions.dashboard(dashboardId),
-    queryKey: queryKeys.dashboard(dashboardId),
-    queryFn: () => dashboardApi.getById(dashboardId),
-    ...(currentDashboard?.id === dashboardId && { initialData: currentDashboard }),
+    queryKey: apiQueryKeys.dashboard(dashboardId),
+    queryFn: () => dashboardApi.getDashboard(dashboardId),
     enabled: !!dashboardId,
   });
 }
@@ -43,15 +37,14 @@ export function useDashboard(dashboardId: string): UseQueryResult<Dashboard, Err
 /**
  * Hook to create dashboard
  */
-export function useCreateDashboard(): UseMutationResult<{ dashboardId: string }, Error, CreateDashboardRequest, unknown> {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+export function useCreateDashboard(): UseMutationResult<Dashboard, Error, CreateDashboardRequest, unknown> {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateDashboardRequest) => dashboardApi.create(data),
+    mutationFn: dashboardApi.createDashboard,
     onSuccess: () => {
-      // Invalidate and refetch dashboards list with optimized key
-      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards });
+      // Invalidate and refetch dashboards
+      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
     },
   });
 }
@@ -59,16 +52,15 @@ export function useCreateDashboard(): UseMutationResult<{ dashboardId: string },
 /**
  * Hook to update dashboard
  */
-export function useUpdateDashboard(): UseMutationResult<void, Error, UpdateDashboardRequest, unknown> {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashboard, Error, UpdateDashboardRequest, unknown> {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: dashboardApi.update,
-    onSuccess: (_, variables) => {
-      // Invalidate specific dashboard and list with optimized keys
-      queryClient.invalidateQueries({ queryKey: queryKeys.dashboard(variables.id) });
-      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards });
+    mutationFn: (data: UpdateDashboardRequest) => dashboardApi.updateDashboard(dashboardId, data),
+    onSuccess: () => {
+      // Invalidate specific dashboard and list
+      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboard(dashboardId) });
+      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
     },
   });
 }
@@ -77,14 +69,13 @@ export function useUpdateDashboard(): UseMutationResult<void, Error, UpdateDashb
  * Hook to delete dashboard
  */
 export function useDeleteDashboard(): UseMutationResult<void, Error, string, unknown> {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (dashboardId: string) => dashboardApi.delete(dashboardId),
+    mutationFn: (dashboardId: string) => dashboardApi.deleteDashboard(dashboardId),
     onSuccess: () => {
-      // Invalidate dashboards list with optimized key
-      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards });
+      // Invalidate dashboards list
+      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
     },
   });
 }
