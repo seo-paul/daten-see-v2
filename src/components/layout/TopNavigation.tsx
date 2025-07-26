@@ -34,6 +34,18 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
               Zur Dashboard-Übersicht
             </Link>
             <Link 
+              href="/debugging-dashboard" 
+              className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
+            >
+              🐛 Debug Dashboard
+            </Link>
+            <Link 
+              href="/design-system" 
+              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Design System
+            </Link>
+            <Link 
               href="/community" 
               className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
             >
@@ -91,6 +103,20 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Zur Dashboard-Übersicht
+            </Link>
+            <Link 
+              href="/debugging-dashboard" 
+              className="text-sm font-medium text-blue-600 hover:text-blue-700"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              🐛 Debug Dashboard
+            </Link>
+            <Link 
+              href="/design-system" 
+              className="text-sm font-medium text-gray-600 hover:text-gray-900"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Design System
             </Link>
             <Link 
               href="/community" 

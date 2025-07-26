@@ -68,9 +68,11 @@ export function setupMSWForTestFile(): void {
   });
 }
 
-export default {
+const mswUtils = {
   server,
   setupMSWForTests,
   setupMSWForBrowser,
   startMSW,
 };
+
+export default mswUtils;

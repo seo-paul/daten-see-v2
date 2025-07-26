@@ -26,7 +26,7 @@ export const dashboardKeys = {
  * Hook to fetch dashboard list
  * Replaces the Zustand-based dashboard fetching
  */
-export function useDashboards(): UseQueryResult<Dashboard[], Error> {
+export function useDashboards(): UseQueryResult<DashboardListItem[], Error> {
   return useQuery({
     queryKey: dashboardKeys.lists(),
     queryFn: async (): Promise<DashboardListItem[]> => {

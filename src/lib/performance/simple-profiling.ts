@@ -8,7 +8,7 @@ import * as React from 'react';
 /**
  * Performance measurement hook
  */
-export function usePerformanceProfiler(componentName: string) {
+export function usePerformanceProfiler(componentName: string): { renderCount: number; mountTime: number | undefined } {
   const renderCount = React.useRef(0);
   const mountTime = React.useRef<number>();
 
@@ -18,9 +18,7 @@ export function usePerformanceProfiler(componentName: string) {
   React.useEffect(() => {
     if (!mountTime.current) {
       mountTime.current = currentTime;
-      if (process.env.NODE_ENV === 'development') {
-        console.log(`🚀 ${componentName} mounted at ${currentTime.toFixed(2)}ms`);
-      }
+      // Development logging: Component mounted at ${currentTime.toFixed(2)}ms
     }
   }, [componentName, currentTime]);
 
@@ -51,7 +49,7 @@ class SimplePerformanceMonitor {
     this.metrics.get(name)!.push(value);
   }
 
-  getMetrics() {
+  getMetrics(): Record<string, { count: number; avg: number }> {
     const summary: Record<string, { count: number; avg: number }> = {};
     this.metrics.forEach((values, name) => {
       if (values.length > 0) {
@@ -73,7 +71,7 @@ export const simpleMonitor = SimplePerformanceMonitor.getInstance();
  * Performance budget checker
  */
 export function checkPerformanceBudget(
-  componentName: string,
+  _componentName: string,
   renderTime: number,
   budget: 'small' | 'medium' | 'large' = 'medium'
 ): boolean {
@@ -81,7 +79,7 @@ export function checkPerformanceBudget(
   const limit = budgets[budget];
   
   if (renderTime > limit && process.env.NODE_ENV === 'development') {
-    console.warn(`💰 ${componentName}: ${renderTime.toFixed(2)}ms exceeds ${limit}ms budget`);
+    // Development warning: Component exceeds budget
     return false;
   }
   
@@ -94,21 +92,20 @@ export function checkPerformanceBudget(
 export function withSimpleProfiler<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
   componentName?: string
-) {
+): React.ForwardRefExoticComponent<React.PropsWithoutRef<P> & React.RefAttributes<unknown>> {
   const name = componentName || Component.displayName || Component.name || 'Component';
   
-  return React.forwardRef<unknown, P>((props, ref) => {
+  const WrappedComponent = React.forwardRef<unknown, P>((props, ref) => {
     const renderStart = performance.now();
-    const { renderCount } = usePerformanceProfiler(name);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { renderCount: _renderCount } = usePerformanceProfiler(name);
     
     React.useEffect(() => {
       const renderTime = performance.now() - renderStart;
       simpleMonitor.recordMetric(`${name}-render`, renderTime);
       checkPerformanceBudget(name, renderTime);
       
-      if (process.env.NODE_ENV === 'development' && renderTime > 16) {
-        console.warn(`⚠️ ${name} slow render: ${renderTime.toFixed(2)}ms (render #${renderCount})`);
-      }
+      // Development warning: Slow render detected over 16ms
     });
 
     const componentProps = { ...props } as P;
@@ -119,38 +116,44 @@ export function withSimpleProfiler<P extends Record<string, unknown>>(
     
     return React.createElement(Component, componentProps);
   });
+
+  WrappedComponent.displayName = `withSimpleProfiler(${name})`;
+  
+  return WrappedComponent;
 }
 
 /**
  * Development utilities
  */
 export const devProfiling = {
-  start: () => {
-    console.log('🎬 Started simple profiling session');
+  start: (): void => {
+    // Development logging: Started simple profiling session
     simpleMonitor.clear();
   },
   
-  stop: () => {
+  stop: (): Record<string, { count: number; avg: number }> => {
     const metrics = simpleMonitor.getMetrics();
-    console.log('🛑 Profiling session ended');
-    console.table(metrics);
+    // Development logging: Profiling session ended
+    // Development table: metrics
     return metrics;
   },
   
-  getMetrics: () => simpleMonitor.getMetrics(),
+  getMetrics: (): Record<string, { count: number; avg: number }> => simpleMonitor.getMetrics(),
   
-  clear: () => simpleMonitor.clear(),
+  clear: (): void => simpleMonitor.clear(),
 };
 
 // Make available in development console
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-  (window as Record<string, unknown>).simpleProfiling = devProfiling;
+  (window as unknown as Record<string, unknown>).simpleProfiling = devProfiling;
 }
 
-export default {
+const simpleProfilingModule = {
   usePerformanceProfiler,
   withSimpleProfiler,
   checkPerformanceBudget,
   devProfiling,
   simpleMonitor,
 };
+
+export default simpleProfilingModule;

@@ -1,8 +1,26 @@
-# 🚀 **OPTIMIZED UI-FIRST ROADMAP: SaaS Analytics Dashboard**
+# 🚀 **OPTIMIZED UI-FIRST ROADMAP: BI SaaS Dashboard Platform**
 
+## 🎯 **BUSINESS GOAL**
+**"Intuitive BI SaaS Platform für Non-Technical Users"**
+
+Build a **Business Intelligence SaaS** that enables users to:
+- **📊 Create dashboards easily** with drag-and-drop widgets (charts + content)
+- **🔗 Connect data sources** in few clicks (Meta Ads, Google Ads, Google My Business, CSV uploads)
+- **🎨 Build widgets** selecting data from connected sources with intuitive UI
+- **📅 Apply time filters** with presets (last 7 days) and custom date ranges
+- **📝 Add content widgets** with text, images, videos, tables for storytelling
+- **🔒 Maintain security** with GDPR compliance and conservative best practices
+- **⚖️ Balance simplicity** with deep analytical capabilities for business insights
+
+**TARGET MARKET:** Small-to-medium businesses needing simple BI without technical complexity
+**COMPETITIVE POSITIONING:** Easier than Tableau/Power BI, more powerful than basic dashboard tools
+
+---
+
+## 📋 **ROADMAP OVERVIEW**
 **PROJECT APPROACH:** UI-First development with early debugging, risk-optimized sequencing
-**TIMELINE:** 16 weeks from greenfield to market-ready launch
-**SUCCESS STRATEGY:** Environment + Debugging → UI → Persistence → APIs → Production
+**TIMELINE:** 16 weeks from greenfield to market-ready launch  
+**SUCCESS STRATEGY:** Environment + Debugging → UI → Multi-Source Data → SaaS Architecture → Production
 
 ---
 
@@ -132,6 +150,7 @@
     - [ ] Documentation & examples
     - [ ] React Query DevTools configuration improvements
     - [ ] Advanced Sentry configuration
+    - [ ] Test Coverage Enhancement: Increase from 11% to 70%+ (API Layer Priority)
   - [ ] 1.7.8: **Phase 4 - UI/UX Enhancement (Week 8)**
     - [ ] Mobile responsiveness für alle auth flows
     - [ ] Enhanced error boundary components mit better fallbacks
@@ -185,20 +204,26 @@
   - **Success Criteria:** Complete production-ready authentication system
   - **Why Now:** Authentication foundation ready, production pages needed
 
-#### ✅ **Phase 1G: Widget System Foundation**
-- [ ] **Task 1.12: Widget Grid + Mock Widgets**
+#### ✅ **Phase 1G: Multi-Widget System Foundation (BI SaaS Core)**
+- [ ] **Task 1.12: Widget Grid + Multi-Type Widget System**
   - [ ] **WICHTIG:** Implementierung nach Task 1.8-1.11 (Design System + Header + Auth)
   - [ ] 1.12.1: Install and configure react-grid-layout
-  - [ ] 1.12.2: Create 3 mock widget types (Chart, KPI, Text) with design system
-  - [ ] 1.12.3: Implement basic drag and drop functionality with Pino logging
-  - [ ] 1.12.4: Add widget resize handles and constraints with debug logging
-  - [ ] 1.12.5: Create widget deletion and basic interactions with structured logging
-  - [ ] 1.12.6: Integrate with Modern State Management (TanStack Query für widget data)
-  - [ ] 1.12.7: @radix-ui Primitives - Accessible UI Components
-  - **Tools:** react-grid-layout, mock widgets, drag & drop, Pino logging, TanStack Query, @radix-ui
-  - **Success Criteria:** Interactive dashboard mit design system integration
+  - [ ] 1.12.2: Create **5 widget types** for BI SaaS completeness:
+    - [ ] **Chart Widgets:** Line, Bar, Doughnut (data visualization)
+    - [ ] **KPI Widgets:** Metric cards with trend indicators and sparklines
+    - [ ] **Content Widgets:** Rich text, images, video embeds (storytelling)
+    - [ ] **Table Widgets:** Interactive data tables with sorting/filtering
+    - [ ] **Filter Widgets:** Date range pickers and data filters
+  - [ ] 1.12.3: Implement advanced drag and drop with widget snapping and guidelines
+  - [ ] 1.12.4: Add widget resize handles, constraints, and collision detection
+  - [ ] 1.12.5: Create widget deletion, duplication, and template system
+  - [ ] 1.12.6: **Data Source Abstraction Layer** - Prepare widgets for multiple data sources
+  - [ ] 1.12.7: Widget configuration modal system with type-specific settings
+  - [ ] 1.12.8: @radix-ui Primitives integration for accessibility
+  - **Tools:** react-grid-layout, multi-type widgets, data abstraction, TanStack Query, @radix-ui
+  - **Success Criteria:** Complete BI widget ecosystem ready for real data sources
   - **Timeline:** Nach Design System completion
-  - **Why After:** Widgets need consistent design system and header integration
+  - **Why Enhanced:** BI SaaS needs content widgets as core product, not afterthought
 
 **🚨 WEEK 1-2 BLOCKERS & SOLUTIONS:**
 - **Blocker:** Docker setup complexity → **Solution:** Use proven docker-compose patterns, start simple
@@ -232,54 +257,120 @@
 
 ---
 
-## 📅 **WEEK 3-4: CHART SYSTEM + PERFORMANCE MONITORING**
-### 🎯 **Milestone:** Fully functional chart widgets with performance optimization
+## 📅 **WEEK 3-4: MULTI-SOURCE DATA ARCHITECTURE + CHARTS**
+### 🎯 **Milestone:** BI SaaS data architecture with multiple connectors and enhanced widgets
 
-#### ✅ **Phase 2A: Chart.js Integration + Widget Types**
-- [ ] **Task 2.1: Chart.js Foundation**
-  - [ ] 2.1.1: Install Chart.js and react-chartjs-2
-  - [ ] 2.1.2: Create Line Chart widget component for Google Analytics data
-  - [ ] 2.1.3: Create Bar Chart widget component with configurations
-  - [ ] 2.1.4: Create Doughnut Chart widget with interactive elements
-  - [ ] 2.1.5: Implement chart responsiveness and theme integration
-  - **Tools:** Chart.js, react-chartjs-2, responsive configurations
-  - **Success Criteria:** Multiple chart types displaying realistic data
-  - **Why Now:** Core functionality that users can immediately evaluate
+#### ✅ **Phase 2A: Multi-Data Source Architecture (BI SaaS Critical)**
+- [ ] **Task 2.1: Data Source Abstraction Foundation**
+  - [ ] 2.1.1: Design **Generic Data Source Interface** (TypeScript)
+    - [ ] `DataConnector` base class with standard methods
+    - [ ] `DataTransformer` for normalizing different API formats  
+    - [ ] `DataCache` with invalidation and refresh strategies
+    - [ ] `DataValidator` for schema validation across sources
+  - [ ] 2.1.2: **Connection Management System**
+    - [ ] Data source credential storage (encrypted)
+    - [ ] Connection testing and health monitoring
+    - [ ] Rate limiting and quota management per source
+    - [ ] Auto-retry mechanisms with exponential backoff
+  - [ ] 2.1.3: **Data Pipeline Foundation**
+    - [ ] ETL engine for data transformation and enrichment
+    - [ ] Custom calculated fields and formulas
+    - [ ] Data refresh scheduling (manual, hourly, daily)
+    - [ ] Data quality monitoring and alerting
+  - **Tools:** TypeScript interfaces, encryption, background jobs, data validation
+  - **Success Criteria:** Robust foundation supporting any data source type
+  - **Why Critical:** BI SaaS competitive advantage depends on multi-source capability
 
-- [ ] **Task 2.2: Google API Foundation & Chart Preparation**
-  - [ ] 2.2.1: Google Cloud Console Setup + API Enablement (GA4 & Ads APIs)
-  - [ ] 2.2.2: Chart.js Data Format für GA4/Ads APIs definieren
-  - [ ] 2.2.3: API Client Base Class (TypeScript) mit Error Handling
-  - [ ] 2.2.4: Loading States + Error Boundaries für Real APIs
-  - [ ] 2.2.5: Development Cache für Offline API Development
-  - **Tools:** Google Cloud Console, TypeScript classes, Chart.js, API caching
-  - **Success Criteria:** Charts ready for real Google Analytics data, robust error handling
-  - **Why Now:** Direct preparation for real APIs eliminates mock-to-real migration overhead
+- [ ] **Task 2.2: Priority Data Source Connectors**
+  - [ ] 2.2.1: **Google Analytics 4 + Google Ads Connector**
+    - [ ] OAuth 2.0 authentication with refresh tokens
+    - [ ] GA4 Reporting API integration with custom dimensions
+    - [ ] Google Ads API with campaign, adgroup, keyword data
+    - [ ] Data normalization to common schema
+  - [ ] 2.2.2: **Meta Ads (Facebook/Instagram) Connector**
+    - [ ] Meta Marketing API authentication and setup
+    - [ ] Campaign performance data extraction
+    - [ ] Audience insights and demographic data
+    - [ ] Cross-platform attribution handling
+  - [ ] 2.2.3: **CSV Upload System**
+    - [ ] Drag-and-drop file upload with validation
+    - [ ] Automatic schema detection and type inference
+    - [ ] Data preview and column mapping interface
+    - [ ] Scheduled file refresh via email or URL
+  - [ ] 2.2.4: **Generic REST API Connector**
+    - [ ] Custom API endpoint configuration
+    - [ ] Authentication methods (API key, OAuth, Basic Auth)
+    - [ ] JSON/XML response parsing and transformation
+    - [ ] Custom header and parameter support
+  - **Tools:** OAuth libraries, API clients, file processing, REST clients
+  - **Success Criteria:** All major ad platforms + custom data sources supported
+  - **Why Priority:** Core BI SaaS value proposition - easy data connections
 
-#### ✅ **Phase 2B: Widget Configuration + UX**
-- [ ] **Task 2.3: Widget Configuration System**
-  - [ ] 2.3.1: Create modal component for widget settings
-  - [ ] 2.3.2: Implement chart-specific configuration forms
-  - [ ] 2.3.3: Add color pickers and styling options
-  - [ ] 2.3.4: Create widget title and description editing
-  - [ ] 2.3.5: Add configuration preview and apply mechanisms
-  - **Tools:** Modal components, form handling, color systems
-  - **Success Criteria:** Users can customize widget appearance and behavior
-  - **Why Now:** Complete widget experience needed for user validation
+#### ✅ **Phase 2B: Enhanced Chart System + Content Widgets**
+- [ ] **Task 2.3: Chart.js Foundation + Multi-Source Integration**
+  - [ ] 2.3.1: Install Chart.js and react-chartjs-2 with data source compatibility
+  - [ ] 2.3.2: **Smart Chart Components** with automatic data binding:
+    - [ ] Line Chart with time series optimization for analytics data
+    - [ ] Bar Chart with grouping and stacking for comparative analysis
+    - [ ] Doughnut Chart with drill-down capability for segment analysis
+    - [ ] Scatter Plot for correlation analysis between metrics
+  - [ ] 2.3.3: **Chart Configuration System**
+    - [ ] Data source selection dropdown per chart
+    - [ ] Metric and dimension selection with preview
+    - [ ] Time range filtering with smart defaults
+    - [ ] Automatic chart type recommendations based on data
+  - [ ] 2.3.4: Chart responsiveness and theme integration
+  - **Tools:** Chart.js, react-chartjs-2, data binding, intelligent defaults
+  - **Success Criteria:** Charts automatically work with any connected data source
+  - **Why Enhanced:** BI SaaS needs intelligent, not just pretty, charts
 
-- [ ] **Task 2.4: Widget Creation + Management**
-  - [ ] 2.4.1: Create widget creation modal with type selection
-  - [ ] 2.4.2: Implement widget duplication and templating
-  - [ ] 2.4.3: Add widget deletion with confirmation dialogs
-  - [ ] 2.4.4: Create undo/redo functionality for widget operations
-  - [ ] 2.4.5: Implement widget search and filtering
-  - **Tools:** Modal systems, state management, undo/redo patterns
-  - **Success Criteria:** Complete widget management functionality
-  - **Why Now:** Full CRUD operations needed for comprehensive testing
+- [ ] **Task 2.4: Content Widget System (BI SaaS Core Feature)**
+  - [ ] 2.4.1: **Rich Text Widget** with markdown editor
+    - [ ] WYSIWYG editor with formatting options
+    - [ ] Dynamic variable insertion from data sources
+    - [ ] Link embedding and media support
+  - [ ] 2.4.2: **KPI Card Widget** with trend analysis
+    - [ ] Large metric display with comparison period
+    - [ ] Trend arrows and percentage change calculations
+    - [ ] Sparkline mini-charts for context
+    - [ ] Conditional formatting based on thresholds
+  - [ ] 2.4.3: **Interactive Table Widget**
+    - [ ] Data source binding with column selection
+    - [ ] Sorting, filtering, and pagination
+    - [ ] Export to CSV/Excel functionality
+    - [ ] Click-through to detailed views
+  - [ ] 2.4.4: **Media Widget System**
+    - [ ] Image upload and URL embedding
+    - [ ] Video embedding (YouTube, Vimeo, direct files)
+    - [ ] Responsive media sizing and positioning
+  - **Tools:** Rich text editors, table libraries, media handling, data visualization
+  - **Success Criteria:** Complete storytelling capability within dashboards
+  - **Why Core:** Modern BI tools require narrative context, not just charts
 
-#### ✅ **Phase 2C: Performance + Testing (QUALITY FOUNDATION)**
-- [ ] **Task 2.5: Performance Optimization**
-  - [ ] 2.5.1: Implement lazy loading for off-screen widgets
+#### ✅ **Phase 2C: Universal Widget Configuration System**
+- [ ] **Task 2.5: Advanced Widget Configuration + UX**
+  - [ ] 2.5.1: **Universal Widget Settings Modal**
+    - [ ] Data source selection interface for all widget types
+    - [ ] Type-specific configuration panels (chart options, text formatting, KPI thresholds)
+    - [ ] Live preview system showing changes in real-time
+    - [ ] Template gallery for quick widget setup
+  - [ ] 2.5.2: **Smart Configuration Features**
+    - [ ] Automatic metric suggestions based on selected data source
+    - [ ] Color theme inheritance from dashboard or custom palettes
+    - [ ] Responsive sizing presets and custom breakpoints
+    - [ ] Widget dependency mapping (filters affecting multiple widgets)
+  - [ ] 2.5.3: **Widget Management Operations**
+    - [ ] Drag-and-drop widget creation from sidebar
+    - [ ] Bulk operations (duplicate, delete, resize multiple widgets)
+    - [ ] Widget search and filtering by type, data source, or tag
+    - [ ] Undo/redo functionality for all widget operations
+  - **Tools:** Modal components, form handling, color systems, drag-and-drop, state management
+  - **Success Criteria:** Intuitive widget configuration for non-technical users
+  - **Why Enhanced:** BI SaaS success depends on ease-of-use for business users
+
+#### ✅ **Phase 2D: Performance + Testing (QUALITY FOUNDATION)**
+- [ ] **Task 2.6: Performance Optimization**
+  - [ ] 2.6.1: Implement lazy loading for off-screen widgets
   - [ ] 2.5.2: Add Chart.js performance optimizations
   - [ ] 2.5.3: Implement virtual scrolling for large dashboards
   - [ ] 2.5.4: Add performance monitoring and metrics collection
@@ -307,15 +398,43 @@
 
 ---
 
-## 📅 **WEEK 5-6: GOOGLE API INTEGRATION + LIVE DATA**
-### 🎯 **Milestone:** Live Google Analytics & Ads dashboards with real data
+## 📅 **WEEK 5-6: MULTI-TENANT SAAS ARCHITECTURE + GOOGLE APIS**
+### 🎯 **Milestone:** Multi-tenant SaaS foundation with Google Analytics & Ads integration
 
-#### ✅ **Phase 3A: Google OAuth & Authentication**
-- [ ] **Task 3.1: Google OAuth Integration**
-  - [ ] 3.1.1: Add Google provider to NextAuth.js configuration
-  - [ ] 3.1.2: Configure Google Analytics & Ads scopes and permissions
-  - [ ] 3.1.3: Implement secure token storage with encryption
-  - [ ] 3.1.4: Add token refresh mechanism and error handling
+#### ✅ **Phase 3A: Multi-Tenant SaaS Architecture (BI SaaS Critical)**
+- [ ] **Task 3.1: Organization & Workspace Foundation**
+  - [ ] 3.1.1: **Database Schema Design for Multi-Tenancy**
+    - [ ] `organizations` table with billing, settings, feature flags
+    - [ ] `workspaces` table for team collaboration within orgs
+    - [ ] `memberships` table with role-based permissions (owner, admin, editor, viewer)
+    - [ ] `user_workspace_access` junction table with granular permissions
+    - [ ] Data isolation strategy with Row Level Security (RLS) in Postgres
+  - [ ] 3.1.2: **Organization Management System**
+    - [ ] Organization creation and setup wizard
+    - [ ] Workspace creation and team invitation flows
+    - [ ] Role assignment and permission management UI
+    - [ ] Billing and subscription management foundation
+  - [ ] 3.1.3: **Data Isolation & Security**
+    - [ ] Middleware for automatic tenant context injection
+    - [ ] Database queries with mandatory organization/workspace filtering
+    - [ ] API endpoint protection with tenant validation
+    - [ ] Data export/import with tenant boundaries
+  - [ ] 3.1.4: **User Experience Multi-Tenancy**
+    - [ ] Organization switcher in header navigation
+    - [ ] Workspace-specific dashboard collections
+    - [ ] Team member management interface
+    - [ ] Activity logs and audit trails per workspace
+  - **Tools:** Postgres RLS, NextAuth.js extensions, role-based middleware, team management UI
+  - **Success Criteria:** Complete SaaS multi-tenancy with secure data isolation
+  - **Why Critical:** Foundation for enterprise sales and competitive positioning
+
+#### ✅ **Phase 3B: Google APIs + Enhanced Authentication**
+- [ ] **Task 3.2: Google OAuth Integration + Workspace Context**
+  - [ ] 3.2.1: Add Google provider to NextAuth.js with workspace context
+  - [ ] 3.2.2: Configure Google Analytics & Ads scopes per workspace
+  - [ ] 3.2.3: Implement secure token storage with workspace isolation
+  - [ ] 3.2.4: Add token refresh mechanism with tenant validation
+  - [ ] 3.2.5: Google API access with workspace-level permissions
   - [ ] 3.1.5: Test Google OAuth flow and token management
   - **Tools:** NextAuth.js Google provider, token encryption, OAuth flow
   - **Success Criteria:** Secure Google sign-in with Analytics & Ads permissions
@@ -382,29 +501,53 @@
 
 ---
 
-## 📅 **WEEK 7-8: DATABASE + AUTHENTICATION + SECURITY**
-### 🎯 **Milestone:** Secure user system with data persistence and GDPR compliance
+## 📅 **WEEK 7-8: ADVANCED BI FEATURES + META ADS INTEGRATION**
+### 🎯 **Milestone:** Meta Ads integration, ETL pipeline, and advanced analytics capabilities
 
-#### ✅ **Phase 4A: Database Infrastructure**
-- [ ] **Task 4.1: PostgreSQL + Prisma Setup**
-  - [ ] 4.1.1: Set up PostgreSQL with Docker Compose
-  - [ ] 4.1.2: Install and configure Prisma ORM with TypeScript
-  - [ ] 4.1.3: Design database schema (users, dashboards, widgets, sessions)
-  - [ ] 4.1.4: Create database migrations and seed data
-  - [ ] 4.1.5: Set up connection pooling and performance optimization
-  - **Tools:** PostgreSQL, Prisma, Docker Compose, database design
-  - **Success Criteria:** Robust database foundation with type safety
-  - **Why Now:** Real APIs working, need persistent storage for user dashboards
+#### ✅ **Phase 4A: Meta Ads Integration (BI SaaS Critical)**
+- [ ] **Task 4.1: Meta Marketing API Foundation**
+  - [ ] 4.1.1: **Meta Developer App Setup & Authentication**
+    - [ ] Create Meta Developer account and app registration
+    - [ ] Configure OAuth 2.0 with required marketing API permissions
+    - [ ] Implement secure token storage and refresh mechanism
+    - [ ] Add Meta API client following established Google API patterns
+  - [ ] 4.1.2: **Campaign & Ad Performance Data**
+    - [ ] Campaign-level metrics (reach, impressions, clicks, conversions)
+    - [ ] Ad set performance with audience targeting data
+    - [ ] Individual ad creative performance and insights
+    - [ ] Cross-platform attribution with Google Ads data
+  - [ ] 4.1.3: **Meta Audience & Demographic Data**
+    - [ ] Audience insights API integration for demographic analysis
+    - [ ] Custom audience performance tracking
+    - [ ] Lookalike audience effectiveness metrics
+    - [ ] Pixel data integration for conversion tracking
+  - [ ] 4.1.4: **Data Normalization & Integration**
+    - [ ] Standardize Meta data format with existing Google data schema
+    - [ ] Cross-platform metric correlation and attribution
+    - [ ] Unified reporting across Google and Meta advertising platforms
+  - **Tools:** Meta Marketing API, OAuth 2.0, data normalization, cross-platform analytics
+  - **Success Criteria:** Complete Meta Ads data integration with cross-platform insights
+  - **Why Critical:** Major competitive differentiator - unified Google + Meta reporting
 
-- [ ] **Task 4.2: Data Layer Integration**
-  - [ ] 4.2.1: Create Prisma models for dashboard and widget entities
-  - [ ] 4.2.2: Implement CRUD operations for dashboards
-  - [ ] 4.2.3: Add widget persistence and retrieval
-  - [ ] 4.2.4: Create data validation with Zod schemas
-  - [ ] 4.2.5: Add database error handling and logging
-  - **Tools:** Prisma Client, Zod validation, error handling
-  - **Success Criteria:** All dashboard operations persist to database
-  - **Why Now:** Bridge between working Google APIs and user authentication
+- [ ] **Task 4.2: ETL Pipeline & Data Transformation Engine**
+  - [ ] 4.2.1: **Advanced Data Processing Pipeline**
+    - [ ] Background job system for scheduled data refreshes
+    - [ ] Data transformation engine for custom calculated fields
+    - [ ] Data quality monitoring and validation rules
+    - [ ] Error handling and retry mechanisms for API failures
+  - [ ] 4.2.2: **Custom Metrics & KPI Engine**
+    - [ ] Formula builder for custom calculated fields (ROAS, CAC, LTV)
+    - [ ] Goal tracking and performance benchmarking
+    - [ ] Automated alerting when metrics exceed thresholds
+    - [ ] Historical trend analysis and forecasting
+  - [ ] 4.2.3: **Data Export & Integration Capabilities**
+    - [ ] CSV/Excel export with custom date ranges and filters
+    - [ ] Scheduled report generation and email delivery
+    - [ ] API endpoints for third-party integrations
+    - [ ] Data synchronization with external tools (Google Sheets, Slack)
+  - **Tools:** Background job processing, formula engines, export libraries, integration APIs
+  - **Success Criteria:** Flexible data processing supporting complex business logic
+  - **Why Essential:** BI SaaS requires more than simple data display - needs business intelligence
 
 #### ✅ **Phase 4B: Authentication System (NextAuth.js)**
 - [ ] **Task 4.3: NextAuth.js Configuration**
@@ -457,29 +600,49 @@
 
 ---
 
-## 📅 **WEEK 9-10: PERFORMANCE OPTIMIZATION + REAL-TIME FEATURES**
-### 🎯 **Milestone:** Production-ready performance with real-time updates
+## 📅 **WEEK 9-10: CSV UPLOAD SYSTEM + ADVANCED ANALYTICS ENGINE**
+### 🎯 **Milestone:** Custom data uploads, calculated fields, and business intelligence features
 
-#### ✅ **Phase 5A: Performance Optimization**
-- [ ] **Task 5.1: Multi-API Performance**
-  - [ ] 5.1.1: Implement API rate limiting to prevent quota exhaustion
-  - [ ] 5.1.2: Set up Redis for response caching
-  - [ ] 5.1.3: Add request batching and optimization
-  - [ ] 5.1.4: Implement retry logic with exponential backoff
-  - [ ] 5.1.5: Create API usage monitoring and alerting
-  - **Tools:** Redis, rate limiting middleware, retry mechanisms, monitoring
-  - **Success Criteria:** Efficient API usage within Google quotas
-  - **Why Now:** Google APIs integrated, need production-grade performance
+#### ✅ **Phase 5A: CSV Upload & Custom Data System (BI SaaS Essential)**
+- [ ] **Task 5.1: Advanced File Upload System**
+  - [ ] 5.1.1: **Drag-and-Drop CSV Upload Interface**
+    - [ ] File validation (size limits, format checking, virus scanning)
+    - [ ] Progress indicators and error handling for large files
+    - [ ] Support for Excel files (.xlsx) and other common formats
+    - [ ] Batch upload capability for multiple files
+  - [ ] 5.1.2: **Intelligent Data Processing**
+    - [ ] Automatic schema detection and column type inference
+    - [ ] Data preview with sample rows and statistics
+    - [ ] Column mapping interface for joining with existing data
+    - [ ] Data cleaning suggestions (duplicates, missing values, formatting)
+  - [ ] 5.1.3: **Data Source Management**
+    - [ ] Scheduled file refresh via email attachments or URL monitoring
+    - [ ] Version control for data updates with rollback capability
+    - [ ] Data lineage tracking for compliance and auditing
+    - [ ] Integration with cloud storage (Google Drive, Dropbox, OneDrive)
+  - **Tools:** File processing libraries, data validation, cloud storage APIs, data cleaning algorithms
+  - **Success Criteria:** Non-technical users can upload and configure custom data sources easily
+  - **Why Critical:** Many businesses have custom data not available through standard APIs
 
-- [ ] **Task 5.2: Widget Performance Optimization**
-  - [ ] 5.2.1: Implement lazy loading for off-screen widgets
-  - [ ] 5.2.2: Add Chart.js performance optimizations
-  - [ ] 5.2.3: Implement virtual scrolling for large dashboards
-  - [ ] 5.2.4: Add performance monitoring and metrics collection
-  - [ ] 5.2.5: Optimize bundle size and loading performance
-  - **Tools:** Lazy loading, virtual scrolling, performance monitoring
-  - **Success Criteria:** Smooth performance with 20+ widgets displaying real data
-  - **Why Now:** Real Google API data flowing, need optimized rendering
+- [ ] **Task 5.2: Advanced Analytics & Calculation Engine**
+  - [ ] 5.2.1: **Custom Calculated Fields System**
+    - [ ] Formula builder with business-friendly interface (like Excel formulas)
+    - [ ] Pre-built business calculations (ROAS, CAC, LTV, profit margins)
+    - [ ] Cross-data-source calculations (combine Google Ads cost with CRM revenue)
+    - [ ] Time-based calculations (growth rates, moving averages, seasonality)
+  - [ ] 5.2.2: **Goal Tracking & Benchmarking**
+    - [ ] Goal setting interface with target values and timeframes
+    - [ ] Automated progress tracking and variance analysis
+    - [ ] Benchmark comparisons (industry standards, historical performance)
+    - [ ] Performance scoring and recommendation engine
+  - [ ] 5.2.3: **Advanced Analytics Features**
+    - [ ] Trend analysis and forecasting using statistical models
+    - [ ] Cohort analysis for customer retention and behavior
+    - [ ] Attribution modeling for multi-channel marketing
+    - [ ] Anomaly detection with automated alerts
+  - **Tools:** Formula parsing engines, statistical libraries, machine learning models, alerting systems
+  - **Success Criteria:** Business users can create sophisticated analyses without technical knowledge
+  - **Why Essential:** Competitive differentiation - more than just data visualization, actual business intelligence
 
 #### ✅ **Phase 5B: Real-Time Data System**
 - [ ] **Task 5.3: WebSocket Infrastructure**
@@ -532,28 +695,49 @@
 
 ---
 
-## 📅 **WEEK 11-12: GOOGLE ADS + CROSS-PLATFORM INSIGHTS**
-### 🎯 **Milestone:** Unified Google Analytics + Ads dashboard with cross-platform insights
+## 📅 **WEEK 11-12: EXPORT SYSTEM + SHARING ECOSYSTEM**
+### 🎯 **Milestone:** Professional reporting, export capabilities, and collaboration features
 
-#### ✅ **Phase 6A: Google Ads API Integration**
-- [ ] **Task 6.1: Google Ads API Setup**
-  - [ ] 6.1.1: Enable Google Ads API in existing Google Cloud project
-  - [ ] 6.1.2: Configure additional OAuth scopes for Google Ads
-  - [ ] 6.1.3: Create Google Ads API client following established patterns
-  - [ ] 6.1.4: Implement Google Ads account discovery and selection
-  - [ ] 6.1.5: Integrate Google Ads authentication with existing OAuth flow
-  - **Tools:** Google Ads API, OAuth scope expansion, existing auth patterns
-  - **Success Criteria:** Secure Google Ads API access integrated with current system
-  - **Why Now:** Established Google Auth patterns can be extended for Ads
+#### ✅ **Phase 6A: Professional Export & Reporting System (BI SaaS Essential)**
+- [ ] **Task 6.1: PDF Report Generation Engine**
+  - [ ] 6.1.1: **Automated Report Generation**
+    - [ ] PDF layout engine with branded templates and custom styling
+    - [ ] Dashboard-to-PDF conversion with responsive layout optimization
+    - [ ] Chart and widget rendering in high-resolution for print quality
+    - [ ] Executive summary generation with key insights and trends
+  - [ ] 6.1.2: **Scheduled Reporting System**
+    - [ ] Email delivery automation with customizable schedules (daily, weekly, monthly)
+    - [ ] Report personalization based on recipient roles and preferences
+    - [ ] Delivery status tracking and retry mechanisms for failed sends
+    - [ ] White-label branding options for agencies and resellers
+  - [ ] 6.1.3: **Advanced Export Capabilities**
+    - [ ] Excel workbooks with multiple sheets and preserved formatting
+    - [ ] CSV exports with custom date ranges and filtered data
+    - [ ] PowerPoint slide generation for presentations
+    - [ ] Raw data exports for external analysis tools
+  - **Tools:** PDF generation libraries, email automation, Excel/PowerPoint APIs, scheduling systems
+  - **Success Criteria:** Enterprise-grade reporting capabilities matching traditional BI tools
+  - **Why Critical:** Professional reporting is essential for business stakeholder buy-in
 
-- [ ] **Task 6.2: Google Ads Data Pipeline**
-  - [ ] 6.2.1: Implement campaign performance data retrieval
-  - [ ] 6.2.2: Add keyword performance and search term reporting
-  - [ ] 6.2.3: Create ad group and ad performance metrics
-  - [ ] 6.2.4: Implement conversion tracking and ROI calculations
-  - [ ] 6.2.5: Add cost analysis and budget monitoring
-  - **Tools:** Google Ads API client, performance metrics, cost analysis
-  - **Success Criteria:** Comprehensive Google Ads data available for widgets
+- [ ] **Task 6.2: Collaboration & Sharing Ecosystem**
+  - [ ] 6.2.1: **Public Dashboard Sharing**
+    - [ ] Secure public links with access controls and expiration dates
+    - [ ] Embeddable dashboard widgets for external websites and intranets
+    - [ ] Password protection and domain restrictions for sensitive data
+    - [ ] View-only modes with data masking for confidential metrics
+  - [ ] 6.2.2: **Team Collaboration Features**
+    - [ ] Dashboard commenting and annotation system
+    - [ ] @mention notifications for team collaboration
+    - [ ] Change tracking and approval workflows for published dashboards
+    - [ ] Activity feeds showing team interactions and dashboard updates
+  - [ ] 6.2.3: **Integration Ecosystem**
+    - [ ] Slack integration for automated alerts and dashboard sharing
+    - [ ] Microsoft Teams integration for collaboration workflows
+    - [ ] Zapier/Make.com webhooks for connecting to external business tools
+    - [ ] REST API for custom integrations and data access
+  - **Tools:** Link sharing systems, commenting frameworks, webhook systems, third-party integrations
+  - **Success Criteria:** Seamless collaboration within teams and external stakeholder communication
+  - **Why Essential:** Modern business teams require collaborative analytics, not isolated reporting
   - **Why Now:** Proven data pipeline patterns from GA integration
 
 #### ✅ **Phase 6B: Cross-Platform Analytics**
@@ -597,8 +781,8 @@
 
 ---
 
-## 📅 **WEEK 13-14: SECURITY AUDIT + PRODUCTION HARDENING**
-### 🎯 **Milestone:** Enterprise-grade security and production readiness
+## 📅 **WEEK 13-14: SECURITY AUDIT + GDPR COMPLIANCE + PRODUCTION HARDENING**
+### 🎯 **Milestone:** Enterprise-grade security, GDPR compliance, and production readiness
 
 #### ✅ **Phase 7A: Comprehensive Security Assessment**
 - [ ] **Task 7.1: Security Audit + Penetration Testing**
@@ -708,53 +892,114 @@
   - **Why Now:** Complete system allows comprehensive accessibility implementation
 
 #### ✅ **Phase 8B: Documentation + Support Systems**
-- [ ] **Task 8.3: Comprehensive Documentation**
-  - [ ] 8.3.1: Create detailed user manual with step-by-step tutorials
-  - [ ] 8.3.2: Write complete developer API documentation
-  - [ ] 8.3.3: Create troubleshooting guides for common issues
-  - [ ] 8.3.4: Document Google APIs setup process for end users
-  - [ ] 8.3.5: Create video tutorials for key features and workflows
-  - **Tools:** Documentation platforms, video recording and editing, tutorial creation
-  - **Success Criteria:** Complete user and developer documentation with visual guides
-  - **Why Now:** Stable system allows accurate documentation creation
+- [ ] **Task 8.3: Comprehensive Documentation & Knowledge Base**
+  - [ ] 8.3.1: **User Documentation System**
+    - [ ] Interactive tutorial system with guided walkthroughs
+    - [ ] Video tutorials for key features (dashboard creation, data source connection)
+    - [ ] Step-by-step setup guides for each data source (Meta Ads, Google Ads, CSV)
+    - [ ] Best practices guides for effective BI dashboard design
+  - [ ] 8.3.2: **Developer & Integration Documentation**
+    - [ ] Complete REST API documentation with examples
+    - [ ] Webhook and integration guides for third-party connections
+    - [ ] Plugin/addon development documentation for extensibility
+    - [ ] White-label customization guides for agencies
+  - [ ] 8.3.3: **Support & Troubleshooting Resources**
+    - [ ] Comprehensive FAQ with searchable content
+    - [ ] Error code reference with detailed solutions
+    - [ ] Data source troubleshooting (API permissions, rate limits)
+    - [ ] Performance optimization guides for large datasets
+  - [ ] 8.3.4: **Business & Compliance Documentation**
+    - [ ] GDPR compliance guide for administrators
+    - [ ] Data retention and privacy policy templates
+    - [ ] Security configuration best practices
+    - [ ] Industry-specific use case examples and templates
+  - **Tools:** Documentation platforms, video recording/editing, interactive tutorial frameworks
+  - **Success Criteria:** Comprehensive knowledge base enabling user self-service and developer integration
+  - **Why Essential:** BI SaaS requires extensive education - complex data concepts made simple
 
-- [ ] **Task 8.4: Customer Support Infrastructure**
-  - [ ] 8.4.1: Set up professional help desk and ticketing system
-  - [ ] 8.4.2: Create searchable knowledge base with categorized articles
-  - [ ] 8.4.3: Implement in-app chat support and help widgets
-  - [ ] 8.4.4: Create bug reporting and feature request systems
-  - [ ] 8.4.5: Set up community forum or Discord for user engagement
-  - **Tools:** Support platforms, knowledge base systems, community tools
-  - **Success Criteria:** Professional customer support infrastructure ready for users
-  - **Why Now:** Product ready for users, support systems needed for launch
+- [ ] **Task 8.4: Customer Success & Support Ecosystem**
+  - [ ] 8.4.1: **Multi-Channel Support System**
+    - [ ] Professional help desk with SLA tracking and priority queues
+    - [ ] In-app live chat with smart routing to technical vs business support
+    - [ ] Email support automation with intelligent categorization
+    - [ ] Screen sharing and remote assistance capabilities for complex issues
+  - [ ] 8.4.2: **Self-Service Support Infrastructure**
+    - [ ] AI-powered chatbot for common questions and guided troubleshooting
+    - [ ] Interactive help overlays within the application interface
+    - [ ] Video-based tutorials integrated into feature workflows
+    - [ ] Community-driven Q&A platform with expert moderation
+  - [ ] 8.4.3: **Proactive Customer Success**
+    - [ ] User onboarding success tracking and intervention workflows
+    - [ ] Usage analytics to identify struggling users before they churn
+    - [ ] Automated check-ins and success milestone celebrations
+    - [ ] Feature adoption tracking with targeted education campaigns
+  - [ ] 8.4.4: **Feedback & Product Improvement Loop**
+    - [ ] In-app feedback collection with context-aware prompts
+    - [ ] Feature request voting and roadmap transparency portal
+    - [ ] Beta program management for early access to new features
+    - [ ] Customer advisory board setup for strategic input
+  - **Tools:** Support platforms, AI chatbots, analytics tools, community platforms, customer success software
+  - **Success Criteria:** Comprehensive support ecosystem enabling user success and product improvement
+  - **Why Essential:** BI SaaS requires hands-on support - data complexity demands excellent customer success
 
-#### ✅ **Phase 8C: Business Launch Preparation**
-- [ ] **Task 8.5: Marketing + Business Systems**
-  - [ ] 8.5.1: Create comprehensive product screenshots and feature demos
-  - [ ] 8.5.2: Record professional feature demonstration videos
-  - [ ] 8.5.3: Design and implement marketing landing page
-  - [ ] 8.5.4: Implement complete pricing and subscription billing system
-  - [ ] 8.5.5: Create product comparison charts and competitive analysis
-  - **Tools:** Design software, video editing, landing page builders, billing platforms
-  - **Success Criteria:** Complete marketing assets and monetization system ready
-  - **Why Now:** Product complete, business systems needed for market entry
+#### ✅ **Phase 8C: Business Launch Preparation & Go-to-Market**
+- [ ] **Task 8.5: BI SaaS Marketing & Positioning**
+  - [ ] 8.5.1: **Product Marketing & Positioning**
+    - [ ] BI SaaS value proposition development (easy analytics for non-technical users)
+    - [ ] Competitive differentiation analysis vs Tableau, Power BI, Looker
+    - [ ] Industry-specific use case development (e-commerce, agencies, SaaS)
+    - [ ] ROI calculator and business case templates for enterprise sales
+  - [ ] 8.5.2: **Visual Marketing Assets**
+    - [ ] Professional product demo videos showcasing key BI capabilities
+    - [ ] Interactive product tour highlighting ease of use vs competitors
+    - [ ] Customer success story case studies with real metrics
+    - [ ] Infographics showing data source integration capabilities
+  - [ ] 8.5.3: **Landing Page & Conversion Optimization**
+    - [ ] Conversion-optimized landing page with BI SaaS focus
+    - [ ] Free trial signup flow with immediate value demonstration
+    - [ ] Pricing page optimization with feature comparison matrix
+    - [ ] SEO optimization for "business intelligence," "dashboard software" keywords
+  - [ ] 8.5.4: **SaaS Business Model Implementation**
+    - [ ] Subscription billing system with multiple tiers (Starter, Professional, Enterprise)
+    - [ ] Usage-based pricing options for high-volume customers
+    - [ ] Free trial management with feature limitations and upgrade prompts
+    - [ ] Enterprise sales process automation and lead qualification
+  - **Tools:** Marketing automation, video production, landing page optimization, billing platforms, CRM systems
+  - **Success Criteria:** Complete go-to-market strategy targeting BI SaaS market segments
+  - **Why Essential:** BI market is competitive - requires specialized positioning and proven value demonstration
 
-- [ ] **Task 8.6: Final Quality Assurance + Launch Validation**
-  - [ ] 8.6.1: Execute comprehensive end-to-end testing of all user journeys
-  - [ ] 8.6.2: Validate all Google API integrations with production credentials
-  - [ ] 8.6.3: Test complete billing and subscription workflows
-  - [ ] 8.6.4: Conduct final performance testing under expected launch load
-  - [ ] 8.6.5: Complete final security and compliance verification
-  - **Tools:** E2E testing frameworks, production testing, performance validation
-  - **Success Criteria:** Flawless user experience across all features and workflows
-  - **Why Now:** Final validation before public launch
+- [ ] **Task 8.6: BI SaaS Launch Readiness & Validation**
+  - [ ] 8.6.1: **Complete User Journey Testing**
+    - [ ] End-to-end testing: signup → data source connection → dashboard creation → sharing
+    - [ ] Multi-data-source integration testing (Google Analytics + Meta Ads + CSV)
+    - [ ] Cross-browser and mobile responsiveness validation
+    - [ ] Performance testing with realistic BI workloads (large datasets, multiple users)
+  - [ ] 8.6.2: **Production Environment Validation**
+    - [ ] All API integrations tested with production credentials and rate limits
+    - [ ] Billing system validation with test transactions and subscription management
+    - [ ] GDPR compliance verification including data export/deletion workflows
+    - [ ] Security penetration testing focusing on data access controls
+  - [ ] 8.6.3: **Launch Infrastructure Readiness**
+    - [ ] Monitoring and alerting systems configured for production traffic
+    - [ ] Customer support systems tested with real-world scenarios
+    - [ ] Backup and disaster recovery procedures validated
+    - [ ] Scalability testing to handle expected initial user growth
+  - [ ] 8.6.4: **Soft Launch Preparation**
+    - [ ] Beta user program setup with feedback collection
+    - [ ] Staged rollout plan (internal → beta → limited public → full launch)
+    - [ ] Launch day playbook with rollback procedures
+    - [ ] Success metrics tracking and real-time launch monitoring
+  - **Tools:** E2E testing frameworks, production monitoring, beta management platforms, launch orchestration
+  - **Success Criteria:** Production-ready BI SaaS platform validated across all critical user workflows
+  - **Why Essential:** BI platforms handle sensitive business data - zero tolerance for launch issues
 
 **🚨 WEEK 15-16 BLOCKERS & SOLUTIONS:**
-- **Blocker:** Last-minute critical bugs discovered → **Solution:** Focus only on launch-blocking issues
-- **Blocker:** Documentation completion pressure → **Solution:** Prioritize essential user workflows first
-- **Blocker:** Launch readiness anxiety → **Solution:** Clear launch criteria and staged rollout plan
+- **Blocker:** Last-minute critical BI functionality bugs → **Solution:** Focus only on core dashboard creation and data source connections
+- **Blocker:** Multi-source integration complexity → **Solution:** Launch with Google Analytics first, add Meta Ads/CSV post-launch
+- **Blocker:** Enterprise feature completion pressure → **Solution:** Launch with SMB focus, enterprise features in v2
+- **Blocker:** Documentation and tutorial completeness → **Solution:** Essential workflows only, expand post-launch based on user feedback
 
-**✅ WEEK 15-16 CHECKPOINT:** "Market-ready product with full support systems - proceed with public launch?"
+**✅ WEEK 15-16 CHECKPOINT:** "Production-ready BI SaaS platform with core integrations - proceed with staged public launch?"
 
 ---
 
@@ -781,12 +1026,15 @@
 - [ ] Performance testing with large datasets (1000+ widgets)
 - [ ] Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
 
-### **Business Success Metrics (from PRODUCT-ROADMAP.md)**
-- [ ] 100 monthly active users within first 3 months
-- [ ] Customer retention rate > 85%
-- [ ] Average revenue per user: €45/month
-- [ ] Customer acquisition cost < €150
-- [ ] Net Promoter Score > 50
+### **BI SaaS Business Success Metrics**
+- [ ] 250 monthly active users within first 6 months (BI SaaS has longer sales cycle)
+- [ ] Customer retention rate > 90% (BI tools have high switching costs)
+- [ ] Average revenue per user: €75/month (BI premium pricing)
+- [ ] Customer acquisition cost < €200 (enterprise sales justified)
+- [ ] Net Promoter Score > 60 (BI users become advocates)
+- [ ] Average dashboards per user: 3+ (engagement indicator)
+- [ ] Data source connections per user: 2+ (platform stickiness)
+- [ ] Time to first dashboard: <15 minutes (onboarding success)
 
 ### **Security & Compliance Standards**
 - [ ] Zero critical security vulnerabilities

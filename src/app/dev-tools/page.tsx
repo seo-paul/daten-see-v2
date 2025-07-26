@@ -30,7 +30,7 @@ export default function DevToolsPage(): React.ReactElement {
     min: number;
     max: number;
     total: number;
-  }>>({});
+  } | null>>({});
 
   // Update stats periodically
   React.useEffect(() => {
@@ -39,24 +39,24 @@ export default function DevToolsPage(): React.ReactElement {
       setPerformanceMetrics(performanceMonitor.getAllMetrics());
     }, 1000);
 
-    return () => clearInterval(interval);
+    return (): void => clearInterval(interval);
   }, []);
 
-  const handleStartProfiling = () => {
+  const handleStartProfiling = (): void => {
     devToolsUtils.startProfiling();
     setIsRecording(true);
   };
 
-  const handleStopProfiling = () => {
+  const handleStopProfiling = (): void => {
     devToolsUtils.stopProfiling();
     setIsRecording(false);
   };
 
-  const handleExportData = () => {
+  const handleExportData = (): void => {
     devToolsUtils.exportProfilingData();
   };
 
-  const handleClearData = () => {
+  const handleClearData = (): void => {
     devToolsUtils.clearProfilingData();
     performanceMonitor.clear();
     setProfilingStats({});

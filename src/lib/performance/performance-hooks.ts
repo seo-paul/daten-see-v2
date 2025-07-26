@@ -10,7 +10,7 @@ import { performanceMonitor, recordMetrics } from './monitoring-integration';
 /**
  * Hook to monitor component render performance
  */
-export function useRenderPerformance(componentName: string) {
+export function useRenderPerformance(componentName: string): { renderCount: number } {
   const renderStartTime = React.useRef<number>(0);
   const renderCount = React.useRef<number>(0);
 
@@ -36,11 +36,11 @@ export function useRenderPerformance(componentName: string) {
 /**
  * Hook to monitor memory usage
  */
-export function useMemoryMonitoring(context = 'component') {
+export function useMemoryMonitoring(context = 'component'): void {
   React.useEffect(() => {
     if ('memory' in performance) {
       const memInfo = (performance as Record<string, unknown>).memory as Record<string, number>;
-      if (memInfo) {
+      if (memInfo && typeof memInfo.usedJSHeapSize === 'number') {
         const usedMB = memInfo.usedJSHeapSize / 1024 / 1024;
         recordMetrics.memoryUsage(usedMB, context);
       }
@@ -51,7 +51,7 @@ export function useMemoryMonitoring(context = 'component') {
 /**
  * Hook to monitor TanStack Query performance
  */
-export function useQueryPerformanceMonitoring() {
+export function useQueryPerformanceMonitoring(): { trackQuery: (queryKey: string, startTime: number, fromCache: boolean) => void } {
   const trackQuery = React.useCallback((
     queryKey: string,
     startTime: number,
@@ -67,7 +67,7 @@ export function useQueryPerformanceMonitoring() {
 /**
  * Hook to monitor network requests
  */
-export function useNetworkMonitoring() {
+export function useNetworkMonitoring(): { trackRequest: (url: string, duration: number, status: number) => void } {
   const trackRequest = React.useCallback((
     url: string, 
     duration: number, 
@@ -82,7 +82,7 @@ export function useNetworkMonitoring() {
 /**
  * Hook for custom performance metrics
  */
-export function useCustomMetric() {
+export function useCustomMetric(): { recordCustomMetric: (name: string, value: number, unit: 'ms' | 'kb' | 'count' | 'percentage', tags?: Record<string, string>) => void } {
   const recordCustomMetric = React.useCallback((
     name: string,
     value: number,
@@ -103,7 +103,10 @@ export function useCustomMetric() {
 /**
  * Hook to measure expensive operations
  */
-export function useMeasureOperation() {
+export function useMeasureOperation(): { 
+  measureOperation: <T>(operationName: string, operation: () => T, tags?: Record<string, string>) => T;
+  measureAsyncOperation: <T>(operationName: string, operation: () => Promise<T>, tags?: Record<string, string>) => Promise<T>;
+} {
   const measureOperation = React.useCallback(<T>(
     operationName: string,
     operation: () => T,
@@ -142,13 +145,19 @@ export function useMeasureOperation() {
     return result;
   }, []);
 
-  return { measureOperation, measureAsyncOperation };
+  return { 
+    measureOperation, 
+    measureAsyncOperation 
+  };
 }
 
 /**
  * Hook to monitor component lifecycle performance
  */
-export function useLifecyclePerformance(componentName: string) {
+export function useLifecyclePerformance(componentName: string): {
+  updateCount: number;
+  mountTime: number;
+} {
   const mountTime = React.useRef<number>(0);
   const updateCount = React.useRef<number>(0);
 
@@ -162,7 +171,7 @@ export function useLifecyclePerformance(componentName: string) {
     });
 
     // Cleanup - track unmount
-    return () => {
+    return (): void => {
       const lifetime = performance.now() - mountTime.current;
       recordMetrics.renderTime(`${componentName}-unmount`, lifetime, {
         phase: 'unmount',
@@ -192,7 +201,11 @@ export function useLifecyclePerformance(componentName: string) {
 /**
  * Development-only performance debugging hook
  */
-export function usePerformanceDebug(componentName: string) {
+export function usePerformanceDebug(): {
+  renders: number;
+  slowRenders: number;
+  fastRenders: number;
+} {
   const debugInfo = React.useRef({
     renders: 0,
     slowRenders: 0,
@@ -214,21 +227,14 @@ export function usePerformanceDebug(componentName: string) {
     // Log debug info every 10 renders in development
     if (process.env.NODE_ENV === 'development' && 
         debugInfo.current.renders % 10 === 0) {
-      console.group(`🔍 ${componentName} Performance Debug`);
-      console.log('Total renders:', debugInfo.current.renders);
-      console.log('Slow renders (>16ms):', debugInfo.current.slowRenders);
-      console.log('Fast renders (≤16ms):', debugInfo.current.fastRenders);
-      console.log('Performance ratio:', 
-        `${((debugInfo.current.fastRenders / debugInfo.current.renders) * 100).toFixed(1)}% fast`
-      );
-      console.groupEnd();
+      // Performance debug info logged for component
     }
   });
 
   return debugInfo.current;
 }
 
-export default {
+const performanceHooks = {
   useRenderPerformance,
   useMemoryMonitoring,
   useQueryPerformanceMonitoring,
@@ -238,3 +244,5 @@ export default {
   useLifecyclePerformance,
   usePerformanceDebug,
 };
+
+export default performanceHooks;

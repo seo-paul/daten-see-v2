@@ -38,7 +38,7 @@ export const queryClient = new QueryClient({
 // Global error handler for queries via cache subscription
 queryClient.getQueryCache().subscribe((event) => {
   if (event?.type === 'updated' && event.action?.type === 'error') {
-    const error = event.action.error;
+    const { error } = event.action;
     appLogger.error('Query failed', { 
       queryKey: event.query.queryKey,
       error: error instanceof Error ? error.message : 'Unknown error',

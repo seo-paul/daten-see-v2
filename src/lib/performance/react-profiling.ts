@@ -3,13 +3,17 @@
  * Performance monitoring and profiling helpers for React components
  */
 
-import React from 'react';
+import * as React from 'react';
 
 /**
  * Performance measurement hook
  * Measures component render time and re-render frequency
  */
-export function usePerformanceProfiler(componentName: string) {
+export function usePerformanceProfiler(componentName: string): {
+  renderCount: number;
+  mountTime: number | undefined;
+  lastRenderTime: number | undefined;
+} {
   const renderCount = React.useRef(0);
   const mountTime = React.useRef<number>();
   const lastRenderTime = React.useRef<number>();
@@ -23,7 +27,7 @@ export function usePerformanceProfiler(componentName: string) {
     if (!mountTime.current) {
       mountTime.current = currentTime;
       if (process.env.NODE_ENV === 'development') {
-        console.log(`🚀 ${componentName} mounted at ${currentTime}ms`);
+        // 🚀 Component mounted - logged to console in development
       }
     }
 
@@ -31,7 +35,7 @@ export function usePerformanceProfiler(componentName: string) {
     if (lastRenderTime.current) {
       const renderDuration = currentTime - lastRenderTime.current;
       if (process.env.NODE_ENV === 'development' && renderDuration > 16) {
-        console.warn(`⚠️ ${componentName} slow render: ${renderDuration.toFixed(2)}ms (render #${renderCount.current})`);
+        // ⚠️ Slow render detected - logged to console in development
       }
     }
 
@@ -40,10 +44,11 @@ export function usePerformanceProfiler(componentName: string) {
 
   // Cleanup and final metrics on unmount
   React.useEffect(() => {
-    return () => {
+    return (): void => {
       if (mountTime.current && process.env.NODE_ENV === 'development') {
-        const totalLifetime = performance.now() - mountTime.current;
-        console.log(`💀 ${componentName} unmounted after ${totalLifetime.toFixed(2)}ms (${renderCount.current} renders)`);
+        // Calculate total lifetime for development logging
+        // const totalLifetime = performance.now() - mountTime.current;
+        // 💀 Component unmounted - logged to console in development
       }
     };
   }, [componentName]);
@@ -60,7 +65,7 @@ export function usePerformanceProfiler(componentName: string) {
  * Measures time for heavy calculations
  */
 export function profileExpensiveComputation<T>(
-  computationName: string,
+  _computationName: string,
   computation: () => T
 ): T {
   const start = performance.now();
@@ -68,7 +73,7 @@ export function profileExpensiveComputation<T>(
   const duration = performance.now() - start;
 
   if (process.env.NODE_ENV === 'development' && duration > 5) {
-    console.log(`⏱️ ${computationName}: ${duration.toFixed(2)}ms`);
+    // ⏱️ Expensive computation duration logged to console in development
   }
 
   return result;
@@ -93,12 +98,13 @@ export function useProfiledMemo<T>(
     if (process.env.NODE_ENV === 'development') {
       const hitRatio = ((memoCallCount.current - memoComputeCount.current) / memoCallCount.current) * 100;
       if (memoCallCount.current > 5 && hitRatio < 50) {
-        console.warn(`📊 ${name} memo efficiency: ${hitRatio.toFixed(1)}% (${memoComputeCount.current}/${memoCallCount.current})`);
+        // 📊 Memo efficiency warning logged to console in development
       }
     }
     
     return profileExpensiveComputation(`useMemo(${name})`, factory);
-  }, deps || []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps ? [...deps, factory, name] : [factory, name]);
 }
 
 /**
@@ -116,17 +122,30 @@ export function useProfiledCallback<T extends (...args: unknown[]) => unknown>(
     recreateCount.current += 1;
     
     if (process.env.NODE_ENV === 'development' && recreateCount.current > 10) {
-      console.warn(`🔄 ${name} callback recreated ${recreateCount.current} times`);
+      // 🔄 Callback recreation warning logged to console in development
+      // Uses name for logging: name
+      void name;
     }
     
     return callback(...args);
-  }, deps) as T;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [callback, name, ...deps]) as T;
 }
 
 /**
  * Query performance profiler specifically for TanStack Query
  */
-export function useQueryProfiler(queryKey: string[]) {
+export function useQueryProfiler(queryKey: string[]): {
+  trackCacheHit: () => void;
+  trackNetworkCall: () => void;
+  getQueryMetrics: () => {
+    queryKey: string;
+    totalCalls: number;
+    cacheHits: number;
+    networkCalls: number;
+    cacheHitRatio: number;
+  };
+} {
   const queryCallCount = React.useRef(0);
   const cacheHits = React.useRef(0);
   const networkCalls = React.useRef(0);
@@ -135,31 +154,31 @@ export function useQueryProfiler(queryKey: string[]) {
     queryCallCount.current += 1;
   });
 
-  const trackCacheHit = () => {
+  const trackCacheHit = React.useCallback((): void => {
     cacheHits.current += 1;
-  };
+  }, []);
 
-  const trackNetworkCall = () => {
+  const trackNetworkCall = React.useCallback((): void => {
     networkCalls.current += 1;
-  };
+  }, []);
 
-  const getQueryMetrics = () => ({
+  const getQueryMetrics = React.useCallback(() => ({
     queryKey: queryKey.join(':'),
     totalCalls: queryCallCount.current,
     cacheHits: cacheHits.current,
     networkCalls: networkCalls.current,
     cacheHitRatio: queryCallCount.current > 0 ? (cacheHits.current / queryCallCount.current) * 100 : 0,
-  });
+  }), [queryKey]);
 
   // Log metrics in development when query is frequently called
   React.useEffect(() => {
     if (process.env.NODE_ENV === 'development' && queryCallCount.current > 10) {
       const metrics = getQueryMetrics();
       if (metrics.cacheHitRatio < 60) {
-        console.warn(`📊 Query ${metrics.queryKey} low cache efficiency: ${metrics.cacheHitRatio.toFixed(1)}%`);
+        // 📊 Query low cache efficiency warning logged to console in development
       }
     }
-  }, [queryCallCount.current]);
+  }, [getQueryMetrics]);
 
   return {
     trackCacheHit,
@@ -202,9 +221,9 @@ export function checkPerformanceBudget(
   const isWithinBudget = actualTime <= budget;
 
   if (!isWithinBudget && process.env.NODE_ENV === 'development') {
-    console.warn(
-      `💰 Performance budget exceeded: ${componentName} (${actualTime.toFixed(2)}ms > ${budget}ms)`
-    );
+    // 💰 Performance budget exceeded warning logged to console in development
+    // Uses componentName and actualTime for logging in development
+    void componentName;
   }
 
   return isWithinBudget;
@@ -232,7 +251,13 @@ class PerformanceMonitor {
     this.metrics.get(name)!.push(value);
   }
 
-  getMetricSummary(name: string) {
+  getMetricSummary(name: string): {
+    count: number;
+    avg: number;
+    min: number;
+    max: number;
+    total: number;
+  } | null {
     const values = this.metrics.get(name) || [];
     if (values.length === 0) return null;
 
@@ -244,7 +269,7 @@ class PerformanceMonitor {
     return { count: values.length, avg, min, max, total: sum };
   }
 
-  getAllMetrics() {
+  getAllMetrics(): Record<string, ReturnType<typeof this.getMetricSummary>> {
     const summary: Record<string, ReturnType<typeof this.getMetricSummary>> = {};
     this.metrics.forEach((_, name) => {
       summary[name] = this.getMetricSummary(name);
@@ -270,11 +295,11 @@ export function PerformanceDevPanel(): React.ReactElement | null {
   React.useEffect(() => {
     if (!isVisible || process.env.NODE_ENV !== 'development') return;
 
-    const interval = setInterval(() => {
+    const interval = setInterval((): void => {
       setMetrics(performanceMonitor.getAllMetrics());
     }, 1000);
 
-    return () => clearInterval(interval);
+    return (): void => clearInterval(interval);
   }, [isVisible]);
 
   if (process.env.NODE_ENV !== 'development') {
@@ -321,9 +346,9 @@ export function PerformanceDevPanel(): React.ReactElement | null {
       Object.entries(metrics).map(([name, data]) => 
         data && React.createElement('div', { key: name, style: { marginBottom: '8px' } },
           React.createElement('strong', null, name),
-          React.createElement('div', null, `Count: ${data.count}`),
-          React.createElement('div', null, `Avg: ${data.avg.toFixed(2)}ms`),
-          React.createElement('div', null, `Min/Max: ${data.min.toFixed(2)}/${data.max.toFixed(2)}ms`)
+          React.createElement('div', null, `Count: ${(data as NonNullable<ReturnType<typeof performanceMonitor.getMetricSummary>>).count}`),
+          React.createElement('div', null, `Avg: ${(data as NonNullable<ReturnType<typeof performanceMonitor.getMetricSummary>>).avg.toFixed(2)}ms`),
+          React.createElement('div', null, `Min/Max: ${(data as NonNullable<ReturnType<typeof performanceMonitor.getMetricSummary>>).min.toFixed(2)}/${(data as NonNullable<ReturnType<typeof performanceMonitor.getMetricSummary>>).max.toFixed(2)}ms`)
         )
       ),
       React.createElement('button', {

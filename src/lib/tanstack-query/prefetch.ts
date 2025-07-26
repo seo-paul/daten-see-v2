@@ -62,7 +62,7 @@ export function usePrefetchOnHover(
 } {
   let timeoutId: NodeJS.Timeout;
 
-  const onMouseEnter = () => {
+  const onMouseEnter = (): void => {
     timeoutId = setTimeout(() => {
       // Only prefetch if not already in cache
       const cached = queryClient.getQueryData(['dashboard', dashboardId]);
@@ -72,7 +72,7 @@ export function usePrefetchOnHover(
     }, delay);
   };
 
-  const onMouseLeave = () => {
+  const onMouseLeave = (): void => {
     clearTimeout(timeoutId);
   };
 

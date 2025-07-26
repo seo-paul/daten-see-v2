@@ -38,14 +38,14 @@ class ProfilerDataStore {
     this.isRecording = true;
     this.profileData.clear();
     if (process.env.NODE_ENV === 'development') {
-      console.log('🎬 Started React profiling session');
+      // Started React profiling session
     }
   }
 
   stopRecording(): void {
     this.isRecording = false;
     if (process.env.NODE_ENV === 'development') {
-      console.log('🛑 Stopped React profiling session');
+      // Stopped React profiling session
     }
     this.generateReport();
   }
@@ -69,47 +69,43 @@ class ProfilerDataStore {
   private generateReport(): void {
     if (this.profileData.size === 0) {
       if (process.env.NODE_ENV === 'development') {
-        console.log('📊 No profiling data collected');
+        // No profiling data collected
       }
       return;
     }
 
     if (process.env.NODE_ENV === 'development') {
-      console.group('📊 React Profiler Report');
+      // React Profiler Report
     }
     
-    this.profileData.forEach((sessions, componentId) => {
+    this.profileData.forEach((sessions) => {
       if (sessions.length === 0) return;
 
-      const totalSessions = sessions.length;
       const mounts = sessions.filter(s => s.phase === 'mount').length;
       const updates = sessions.filter(s => s.phase === 'update').length;
       
       const durations = sessions.map(s => s.actualDuration);
       const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
-      const maxDuration = Math.max(...durations);
-      const minDuration = Math.min(...durations);
 
       if (process.env.NODE_ENV === 'development') {
-        console.group(`🔍 ${componentId}`);
-        console.log(`Total renders: ${totalSessions} (${mounts} mounts, ${updates} updates)`);
-        console.log(`Avg duration: ${avgDuration.toFixed(2)}ms`);
-        console.log(`Min/Max duration: ${minDuration.toFixed(2)}ms / ${maxDuration.toFixed(2)}ms`);
+        // Component profiling data collected
+        // Total renders: (${mounts} mounts, ${updates} updates)
+        // Avg duration: ${avgDuration.toFixed(2)}ms
         
         // Highlight performance issues
         if (avgDuration > 16) {
-          console.warn(`⚠️ Average render time exceeds 16ms budget`);
+          // Average render time exceeds 16ms budget
         }
         if (updates > mounts * 3) {
-          console.warn(`⚠️ High update-to-mount ratio (${(updates/mounts).toFixed(1)}:1)`);
+          // High update-to-mount ratio detected
         }
         
-        console.groupEnd();
+        // End component group
       }
     });
 
     if (process.env.NODE_ENV === 'development') {
-      console.groupEnd();
+      // End profiler report
     }
   }
 
@@ -144,7 +140,7 @@ export function createProfilerWrapper(
 ) {
   const { logToConsole = false, trackInteractions = false } = options;
 
-  return function ProfilerWrapper({ children }: { children: React.ReactNode }) {
+  return function ProfilerWrapper({ children }: { children: React.ReactNode }): React.ReactElement {
     const onRender: ProfilerOnRenderCallback = React.useCallback((
       id,
       phase,
@@ -168,16 +164,16 @@ export function createProfilerWrapper(
 
       // Optional console logging
       if (logToConsole && process.env.NODE_ENV === 'development') {
-        console.log(`⏱️ ${id} (${phase}): ${actualDuration.toFixed(2)}ms`);
+        // ${id} (${phase}): ${actualDuration.toFixed(2)}ms
         
         if (actualDuration > baseDuration * 1.5) {
-          console.warn(`🐌 ${id} render was ${((actualDuration/baseDuration) * 100).toFixed(0)}% slower than expected`);
+          // ${id} render was ${((actualDuration/baseDuration) * 100).toFixed(0)}% slower than expected
         }
       }
 
       // Track interactions if enabled (disabled in current React version)
       if (trackInteractions) {
-        console.log(`🖱️ ${id} interactions: [tracking disabled in current React version]`);
+        // ${id} interactions: [tracking disabled in current React version]
       }
     }, []);
 
@@ -195,12 +191,16 @@ export function withProfiler<P extends Record<string, unknown>>(
     logToConsole?: boolean;
     trackInteractions?: boolean;
   } = {}
-) {
+): React.ForwardRefExoticComponent<React.PropsWithoutRef<P> & React.RefAttributes<unknown>> {
   const componentId = options.id || Component.displayName || Component.name || 'Component';
   const ProfilerWrapper = createProfilerWrapper(componentId, options);
 
   const ProfiledComponent = React.forwardRef<unknown, P>((props, ref) => 
-    React.createElement(ProfilerWrapper, {}, React.createElement(Component, { ...props, ref } as P & { ref?: unknown }))
+    // eslint-disable-next-line react/no-children-prop
+    React.createElement(
+      ProfilerWrapper, 
+      { children: React.createElement(Component, { ...props, ref } as P & { ref?: unknown }) }
+    )
   );
 
   ProfiledComponent.displayName = `WithProfiler(${componentId})`;
@@ -214,13 +214,13 @@ export const devToolsUtils = {
   /**
    * Start profiling session
    */
-  startProfiling: () => {
+  startProfiling: (): void => {
     profilerStore.startRecording();
     
     // Enable React DevTools profiling if available
-    if (typeof window !== 'undefined' && (window as Record<string, unknown>).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+    if (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
       if (process.env.NODE_ENV === 'development') {
-        console.log('🔧 React DevTools detected - profiling data will be available in DevTools');
+        // React DevTools detected - profiling data will be available in DevTools
       }
     }
   },
@@ -228,14 +228,14 @@ export const devToolsUtils = {
   /**
    * Stop profiling and generate report
    */
-  stopProfiling: () => {
+  stopProfiling: (): void => {
     profilerStore.stopRecording();
   },
 
   /**
    * Export profiling data for external analysis
    */
-  exportProfilingData: () => {
+  exportProfilingData: (): string => {
     const data = profilerStore.exportData();
     
     // Create downloadable file in development
@@ -251,7 +251,7 @@ export const devToolsUtils = {
       URL.revokeObjectURL(url);
       
       if (process.env.NODE_ENV === 'development') {
-        console.log('📥 Profiling data exported to file');
+        // Profiling data exported to file
       }
     }
     
@@ -261,7 +261,14 @@ export const devToolsUtils = {
   /**
    * Get current profiling statistics
    */
-  getProfilingStats: () => {
+  getProfilingStats: (): Record<string, {
+    renderCount: number;
+    avgDuration: number;
+    maxDuration: number;
+    minDuration: number;
+    mountCount: number;
+    updateCount: number;
+  }> => {
     const allData = profilerStore.getProfileData() as Map<string, ProfilerData[]>;
     const stats: Record<string, {
       renderCount: number;
@@ -295,13 +302,13 @@ export const devToolsUtils = {
   /**
    * Clear all profiling data
    */
-  clearProfilingData: () => {
+  clearProfilingData: (): void => {
     const allData = profilerStore.getProfileData();
     if (allData instanceof Map) {
       allData.clear();
     }
     if (process.env.NODE_ENV === 'development') {
-      console.log('🧹 Profiling data cleared');
+      // Profiling data cleared
     }
   },
 };
@@ -311,17 +318,10 @@ export const devToolsUtils = {
  * Add these to window for easy access in dev console
  */
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-  (window as Record<string, unknown>).reactProfiling = devToolsUtils;
+  (window as unknown as Record<string, unknown>).reactProfiling = devToolsUtils;
   
   if (process.env.NODE_ENV === 'development') {
-    console.log(`
-🛠️ React Profiling Utils Available:
-   • window.reactProfiling.startProfiling()
-   • window.reactProfiling.stopProfiling()  
-   • window.reactProfiling.exportProfilingData()
-   • window.reactProfiling.getProfilingStats()
-   • window.reactProfiling.clearProfilingData()
-  `);
+    // React Profiling Utils Available via window.reactProfiling
   }
 }
 

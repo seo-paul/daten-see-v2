@@ -56,7 +56,7 @@ export function TestQueryWrapper({
  * HOC to wrap render function with Query Client
  * For use with React Testing Library
  */
-export const withQueryClient = (ui: React.ReactElement, queryClient?: QueryClient) => {
+export const withQueryClient = (ui: React.ReactElement, queryClient?: QueryClient): React.ReactElement => {
   return (
     <TestQueryWrapper {...(queryClient && { queryClient })}>
       {ui}

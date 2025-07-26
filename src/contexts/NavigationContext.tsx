@@ -199,7 +199,7 @@ export function useNavigation(): NavigationContextType {
 export function usePageNavigation(options: {
   title?: string;
   breadcrumbs?: Breadcrumb[];
-}) {
+}): void {
   const { setPageTitle, setBreadcrumbs } = useNavigation();
   
   useEffect(() => {

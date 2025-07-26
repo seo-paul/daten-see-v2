@@ -22,13 +22,13 @@ export function withProfiling<P extends Record<string, unknown>>(
     budget?: 'small' | 'medium' | 'large';
     name?: string;
   } = {}
-) {
+): React.ForwardRefExoticComponent<React.PropsWithoutRef<P> & React.RefAttributes<HTMLElement>> {
   const componentName = options.name || WrappedComponent.displayName || WrappedComponent.name || 'Component';
   const budget = options.budget || 'medium';
 
   const ProfiledComponent = React.forwardRef<HTMLElement, P>((props, ref) => {
     const renderStart = React.useRef<number>();
-    const { renderCount } = usePerformanceProfiler(componentName);
+    usePerformanceProfiler(componentName);
 
     // Start timing before render
     renderStart.current = performance.now();
@@ -47,15 +47,15 @@ export function withProfiling<P extends Record<string, unknown>>(
         // Log render performance in development
         if (process.env.NODE_ENV === 'development') {
           if (renderTime > 16) {
-            console.warn(`🐌 Slow render: ${componentName} took ${renderTime.toFixed(2)}ms (render #${renderCount})`);
+            // Slow render detected
           } else if (renderTime > 5) {
-            console.log(`⏱️ ${componentName}: ${renderTime.toFixed(2)}ms (render #${renderCount})`);
+            // Render time logged
           }
         }
       }
     });
 
-    return <WrappedComponent {...props} ref={ref} />;
+    return <WrappedComponent {...(props as P)} ref={ref} />;
   });
 
   ProfiledComponent.displayName = `Profiled(${componentName})`;
@@ -104,7 +104,7 @@ export function createProfiledMemo<T extends React.ComponentType<Record<string, 
   
   const ProfiledMemoComponent = React.memo(
     withProfiling(Component, { name: `Memo(${componentName})`, budget }),
-    options.propsAreEqual
+    options.propsAreEqual as ((prevProps: Readonly<unknown>, nextProps: Readonly<unknown>) => boolean) | undefined
   );
 
   // Track memo effectiveness
@@ -120,7 +120,7 @@ export function createProfiledMemo<T extends React.ComponentType<Record<string, 
       if (process.env.NODE_ENV === 'development' && memoStats.renderCount > 5) {
         const effectiveness = ((memoStats.renderCount - memoStats.memoSkips) / memoStats.renderCount) * 100;
         if (effectiveness < 50) {
-          console.warn(`📊 ${componentName} memo effectiveness: ${effectiveness.toFixed(1)}%`);
+          // Memo effectiveness warning
         }
       }
     });
@@ -170,11 +170,11 @@ export class PerformanceBoundary extends React.Component<
     };
   }
 
-  override componentDidMount() {
+  override componentDidMount(): void {
     this.lastRenderTime = performance.now();
   }
 
-  override componentDidUpdate() {
+  override componentDidUpdate(): void {
     const now = performance.now();
     const renderTime = now - this.lastRenderTime;
     
@@ -195,7 +195,7 @@ export class PerformanceBoundary extends React.Component<
     this.lastRenderTime = now;
   }
 
-  private checkPerformanceIssues(renderTime: number) {
+  private checkPerformanceIssues(renderTime: number): void {
     const { name = 'PerformanceBoundary', onPerformanceIssue } = this.props;
     const { renderCount, slowRenders } = this.state;
 
@@ -223,7 +223,7 @@ export class PerformanceBoundary extends React.Component<
     return this.renderTimes.reduce((sum, time) => sum + time, 0) / this.renderTimes.length;
   }
 
-  override render() {
+  override render(): React.ReactNode {
     return this.props.children;
   }
 }

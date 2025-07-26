@@ -43,7 +43,7 @@ export function useDashboard(dashboardId: string): UseQueryResult<Dashboard, Err
 /**
  * Hook to create dashboard
  */
-export function useCreateDashboard(): UseMutationResult<Dashboard, Error, CreateDashboardRequest, unknown> {
+export function useCreateDashboard(): UseMutationResult<{ dashboardId: string }, Error, CreateDashboardRequest, unknown> {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
@@ -59,7 +59,7 @@ export function useCreateDashboard(): UseMutationResult<Dashboard, Error, Create
 /**
  * Hook to update dashboard
  */
-export function useUpdateDashboard(): UseMutationResult<Dashboard, Error, UpdateDashboardRequest, unknown> {
+export function useUpdateDashboard(): UseMutationResult<void, Error, UpdateDashboardRequest, unknown> {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 

@@ -28,12 +28,65 @@ VERSTEHEN → PLANEN → IMPLEMENTIEREN → VALIDIEREN
 - **Aufbauende Implementation** - jeder Schritt funktioniert vollständig
 - **Ein Feature = Ein funktionierender Baustein**
 
-### **🐳 DOCKER WORKFLOW INTEGRATION (MANDATORY)**
-- **Nach JEDER Code-Änderung**: Automatisch `./scripts/quick-restart.sh` ausführen
-- **Docker-first Development**: NIEMALS `npm run dev` direkt verwenden
-- **Container Debugging**: `docker logs` für Troubleshooting verwenden
-- **Performance Monitoring**: `docker stats` für Resource-Usage überwachen
-- **REGEL**: Code-Änderung → Docker Restart → Test → Nächste Änderung
+### **🔧 HYBRID DEVELOPMENT WORKFLOW**
+
+#### **⚡ QUICK DEV CHECKS (npm-basiert, für Speed):**
+- ✅ **npm run lint** - ESLint Validierung
+- ✅ **npx tsc --noEmit** - TypeScript Compilation Check
+- ✅ **Quick syntax/type checks** für Development Feedback
+
+#### **🐳 INTEGRATION & DEPLOYMENT (Docker-basiert, für Konsistenz):**
+- ✅ **./scripts/quick-restart.sh** - Container rebuild & restart
+- ✅ **docker logs** - Runtime error checking
+- ✅ **Full application testing** in production-like environment
+
+#### **📋 COMPLETE VALIDATION WORKFLOW:**
+```bash
+# Nach Code-Änderungen:
+# 1. SCHNELLE CHECKS (Host):
+npm run lint                    # ESLint errors
+npx tsc --noEmit               # TypeScript compilation
+
+# 2. INTEGRATION TEST (Docker):
+./scripts/quick-restart.sh     # Container rebuild
+docker logs daten-see-app      # Runtime validation
+
+# 3. COMMIT nur wenn beide Stufen erfolgreich
+git add . && git commit -m "fix: description"
+```
+
+#### **🔄 RESTART-TRIGGERING EVENTS:**
+- **IMMER restart**: `package.json` changes, new dependencies, Docker config
+- **NIEMALS restart**: Source code changes (TS/TSX/CSS) → Hot reload genügt
+- **CONDITIONAL restart**: Environment variables, config files
+
+#### **🛠️ DOCKER COMMAND REFERENCE:**
+```bash
+# ✅ VALIDATION (inside container)
+docker exec $CONTAINER_ID npm run lint -- --fix
+docker exec $CONTAINER_ID npm run build         # Production build test
+docker exec $CONTAINER_ID npm run test:coverage # Coverage report
+
+# ✅ DEBUGGING
+./scripts/docker-dev.sh logs    # Application logs
+./scripts/docker-dev.sh shell   # Container shell access
+./scripts/docker-dev.sh stats   # Performance monitoring
+
+# ✅ MANAGEMENT  
+./scripts/quick-restart.sh       # Standard restart
+./scripts/docker-dev.sh rebuild  # Force rebuild (issues)
+```
+
+#### **🚨 ABSOLUTE VERBOTE (Host Commands):**
+```bash
+# ❌ NEVER ON HOST:
+npm run dev
+npm run build  
+npm run lint
+npm test
+npx tsc --noEmit
+# → Use: docker exec $CONTAINER_ID [command]
+```
 
 ### **📋 ROADMAP WORKFLOW (MANDATORY)**
 - **IMMER der Roadmap folgen**: Niemals Tasks überspringen oder eigene Reihenfolge wählen

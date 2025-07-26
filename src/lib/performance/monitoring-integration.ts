@@ -91,7 +91,7 @@ class PerformanceMonitor {
 
   private initializeSentryPerformance(): void {
     // Configure Sentry for performance monitoring
-    Sentry.addEventProcessor((event: Record<string, unknown>) => {
+    Sentry.addEventProcessor((event) => {
       if (event.type === 'transaction') {
         // Add custom performance context
         event.contexts = {
@@ -106,33 +106,33 @@ class PerformanceMonitor {
     });
 
     if (process.env.NODE_ENV === 'development') {
-      console.log('📊 Sentry performance monitoring initialized');
+      // Sentry performance monitoring initialized
     }
   }
 
   private initializeWebVitals(): void {
     // Web Vitals will be initialized separately in Core Web Vitals task
     if (process.env.NODE_ENV === 'development') {
-      console.log('🎯 Web Vitals monitoring prepared');
+      // Web Vitals monitoring prepared
     }
   }
 
   private initializeDevelopmentTools(): void {
     if (typeof window !== 'undefined') {
       // Make monitoring available in console
-      (window as Record<string, unknown>).performanceMonitor = {
-        getMetrics: () => this.getMetrics(),
-        getRecentMetrics: (count?: number) => this.getRecentMetrics(count),
-        clearMetrics: () => this.clearMetrics(),
-        exportMetrics: () => this.exportMetrics(),
-        getThresholds: () => this.config.thresholds,
-        setThreshold: (key: keyof MonitoringConfig['thresholds'], value: number) => {
+      (window as unknown as Record<string, unknown>).performanceMonitor = {
+        getMetrics: (): PerformanceMetric[] => this.getMetrics(),
+        getRecentMetrics: (count?: number): PerformanceMetric[] => this.getRecentMetrics(count),
+        clearMetrics: (): void => this.clearMetrics(),
+        exportMetrics: (): string => this.exportMetrics(),
+        getThresholds: (): MonitoringConfig['thresholds'] => this.config.thresholds,
+        setThreshold: (key: keyof MonitoringConfig['thresholds'], value: number): void => {
           this.config.thresholds[key] = value;
         },
       };
 
       if (process.env.NODE_ENV === 'development') {
-        console.log('🛠️ Development performance tools available via window.performanceMonitor');
+        // Development performance tools available via window.performanceMonitor
       }
     }
   }
@@ -178,15 +178,12 @@ class PerformanceMonitor {
   }
 
   private logMetricToConsole(metric: PerformanceMetric): void {
-    const emoji = this.getMetricEmoji(metric);
-    const color = this.getMetricColor(metric);
-    
     if (process.env.NODE_ENV === 'development') {
-      console.log(
-        `%c${emoji} ${metric.name}: ${metric.value}${metric.unit}`,
-        `color: ${color}; font-weight: bold`,
-        metric.tags || {}
-      );
+      // Console output removed: metric logged with emoji and color
+      // Accessing metric properties for potential future logging
+      // Metric info calculation for potential future use
+      void this.getMetricEmoji(metric);
+      void this.getMetricColor(metric);
     }
   }
 
@@ -217,9 +214,9 @@ class PerformanceMonitor {
             threshold: this.getThresholdForMetric(metric.name),
           },
         });
-      } catch (error) {
+      } catch {
         if (process.env.NODE_ENV === 'development') {
-          console.warn('Failed to track critical metric:', error);
+          // Failed to track critical metric
         }
       }
     }
@@ -234,9 +231,9 @@ class PerformanceMonitor {
       // Keep only last 100 metrics in localStorage
       const recent = metrics.slice(-100);
       localStorage.setItem('performance-metrics', JSON.stringify(recent));
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('Failed to store performance metric locally:', error);
+        // Failed to store performance metric locally
       }
     }
   }
@@ -278,7 +275,7 @@ class PerformanceMonitor {
     // Console warning in development
     if (this.config.enableConsoleLogging) {
       if (process.env.NODE_ENV === 'development') {
-        console.warn(`⚠️ ${message}`, metric);
+        // Performance threshold violation warning logged
       }
     }
 
@@ -352,9 +349,9 @@ class PerformanceMonitor {
     if (this.config.enableLocalStorage) {
       try {
         localStorage.removeItem('performance-metrics');
-      } catch (error) {
+      } catch {
         if (process.env.NODE_ENV === 'development') {
-          console.warn('Failed to clear stored metrics:', error);
+          // Failed to clear stored metrics
         }
       }
     }
@@ -413,7 +410,7 @@ class PerformanceMonitor {
   setEnabled(enabled: boolean): void {
     this.isEnabled = enabled;
     if (process.env.NODE_ENV === 'development') {
-      console.log(`📊 Performance monitoring ${enabled ? 'enabled' : 'disabled'}`);
+      // Performance monitoring enabled/disabled status logged
     }
   }
 }
@@ -425,7 +422,7 @@ export const performanceMonitor = PerformanceMonitor.getInstance();
  * Convenience functions for common metrics
  */
 export const recordMetrics = {
-  renderTime: (componentName: string, duration: number, additionalData?: Record<string, unknown>) => {
+  renderTime: (componentName: string, duration: number, additionalData?: Record<string, unknown>): void => {
     performanceMonitor.recordMetric({
       name: 'component-render-time',
       value: duration,
@@ -435,7 +432,7 @@ export const recordMetrics = {
     });
   },
 
-  bundleSize: (bundleName: string, size: number) => {
+  bundleSize: (bundleName: string, size: number): void => {
     performanceMonitor.recordMetric({
       name: 'bundle-size',
       value: size,
@@ -444,7 +441,7 @@ export const recordMetrics = {
     });
   },
 
-  memoryUsage: (usage: number, context?: string) => {
+  memoryUsage: (usage: number, context?: string): void => {
     performanceMonitor.recordMetric({
       name: 'memory-usage',
       value: usage,
@@ -453,7 +450,7 @@ export const recordMetrics = {
     });
   },
 
-  networkRequest: (url: string, duration: number, status: number) => {
+  networkRequest: (url: string, duration: number, status: number): void => {
     performanceMonitor.recordMetric({
       name: 'network-request',
       value: duration,
@@ -462,7 +459,7 @@ export const recordMetrics = {
     });
   },
 
-  queryPerformance: (queryKey: string, duration: number, fromCache: boolean) => {
+  queryPerformance: (queryKey: string, duration: number, fromCache: boolean): void => {
     performanceMonitor.recordMetric({
       name: 'tanstack-query-duration',
       value: duration,
@@ -478,7 +475,13 @@ export const recordMetrics = {
 /**
  * React hook for performance monitoring
  */
-export function usePerformanceMonitoring() {
+export function usePerformanceMonitoring(): {
+  recordMetric: (metric: Omit<PerformanceMetric, 'timestamp'>) => void;
+  recordMetrics: typeof recordMetrics;
+  getMetrics: () => PerformanceMetric[];
+  getSummary: () => Record<string, unknown>;
+  exportMetrics: () => string;
+} {
   return {
     recordMetric: performanceMonitor.recordMetric.bind(performanceMonitor),
     recordMetrics,

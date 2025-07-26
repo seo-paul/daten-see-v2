@@ -53,7 +53,7 @@ export function Logo({
   const colors = colorStyles[color];
 
   // Logo Icon (from assets/logo.svg)
-  const LogoIcon = ({ className: iconClassName = '' }: { className?: string }) => (
+  const LogoIcon = ({ className: iconClassName = '' }: { className?: string }): React.ReactElement => (
     <svg 
       className={iconClassName}
       viewBox="0 0 488.26 381.45" 
@@ -80,7 +80,7 @@ export function Logo({
   );
 
   // Logo Text
-  const LogoText = ({ className: textClassName = '' }: { className?: string }) => (
+  const LogoText = ({ className: textClassName = '' }: { className?: string }): React.ReactElement => (
     <span 
       className={`font-display font-black tracking-tight ${textClassName}`}
       style={{ color: colors.primary }}
@@ -149,7 +149,7 @@ export function LogoLink({
   onClick,
   ...logoProps 
 }: LogoLinkProps): React.ReactElement {
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent): void => {
     if (onClick) {
       e.preventDefault();
       onClick();

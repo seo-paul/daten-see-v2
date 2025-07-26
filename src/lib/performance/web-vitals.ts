@@ -98,11 +98,11 @@ class WebVitalsCollector {
       
       this.isInitialized = true;
       if (process.env.NODE_ENV === 'development') {
-        console.log('🎯 Core Web Vitals tracking initialized');
+        // Core Web Vitals tracking initialized
       }
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('Failed to initialize Web Vitals tracking:', error);
+        // Failed to initialize Web Vitals tracking: error
       }
     }
   }
@@ -129,9 +129,9 @@ class WebVitalsCollector {
 
       observer.observe({ type: 'largest-contentful-paint', buffered: true });
       this.observers.push(observer);
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('LCP observer not supported:', error);
+        // LCP observer not supported: error
       }
     }
   }
@@ -156,9 +156,9 @@ class WebVitalsCollector {
 
       observer.observe({ type: 'first-input', buffered: true });
       this.observers.push(observer);
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('FID observer not supported:', error);
+        // FID observer not supported: error
       }
     }
   }
@@ -192,9 +192,9 @@ class WebVitalsCollector {
 
       observer.observe({ type: 'layout-shift', buffered: true });
       this.observers.push(observer);
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('CLS observer not supported:', error);
+        // CLS observer not supported: error
       }
     }
   }
@@ -221,9 +221,9 @@ class WebVitalsCollector {
 
       observer.observe({ type: 'paint', buffered: true });
       this.observers.push(observer);
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('FCP observer not supported:', error);
+        // FCP observer not supported: error
       }
     }
   }
@@ -246,9 +246,9 @@ class WebVitalsCollector {
             entries: [navigationEntry],
           });
         }
-      } catch (error) {
+      } catch {
         if (process.env.NODE_ENV === 'development') {
-          console.warn('TTFB measurement failed:', error);
+          // TTFB measurement failed: error
         }
       }
     }
@@ -289,9 +289,9 @@ class WebVitalsCollector {
       }
       
       this.observers.push(observer);
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('INP observer not supported:', error);
+        // INP observer not supported: error
       }
     }
   }
@@ -323,8 +323,7 @@ class WebVitalsCollector {
 
     // Log in development
     if (process.env.NODE_ENV === 'development') {
-      const emoji = this.getMetricEmoji(rating);
-      console.log(`${emoji} ${name}: ${value.toFixed(2)}${this.getMetricUnit(name)} (${rating})`);
+        // Web Vital metric logged: name: value + unit (rating)
     }
 
     // Record to performance monitor
@@ -366,40 +365,27 @@ class WebVitalsCollector {
             captureMessage(`Poor Web Vital: ${metric.name}`, 'warning');
           }
         });
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('Failed to send Web Vital to Sentry:', error);
-        }
+      } catch {
+        // Failed to send Web Vital to Sentry in development
       }
     }
 
     // Send to Google Analytics (if available)
-    if (typeof window !== 'undefined' && (window as Record<string, unknown>).gtag) {
+    if (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).gtag) {
       try {
-        (window as Record<string, unknown>).gtag('event', metric.name, {
+        const gtag = (window as unknown as Record<string, unknown>).gtag as Function;
+        gtag('event', metric.name, {
           event_category: 'Web Vitals',
           value: Math.round(metric.value),
           metric_rating: metric.rating,
           custom_map: { metric_1: metric.name },
         });
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('Failed to send Web Vital to GA:', error);
-        }
+      } catch {
+        // Failed to send Web Vital to GA in development
       }
     }
   }
 
-  /**
-   * Get emoji for metric rating
-   */
-  private getMetricEmoji(rating: WebVitalMetric['rating']): string {
-    switch (rating) {
-      case 'good': return '🟢';
-      case 'needs-improvement': return '🟡';
-      case 'poor': return '🔴';
-    }
-  }
 
   /**
    * Get unit for metric
@@ -535,9 +521,9 @@ class WebVitalsCollector {
     this.observers.forEach(observer => {
       try {
         observer.disconnect();
-      } catch (error) {
+      } catch {
         if (process.env.NODE_ENV === 'development') {
-          console.warn('Failed to disconnect observer:', error);
+          // Failed to disconnect observer: error
         }
       }
     });
@@ -552,7 +538,12 @@ export const webVitalsCollector = WebVitalsCollector.getInstance();
 /**
  * React hook for Web Vitals
  */
-export function useWebVitals() {
+export function useWebVitals(): {
+  metrics: WebVitalMetric[];
+  score: number;
+  summary: ReturnType<typeof webVitalsCollector.getSummary>;
+  getMetric: (name: WebVitalMetric['name']) => WebVitalMetric | undefined;
+} {
   const [metrics, setMetrics] = React.useState<WebVitalMetric[]>([]);
   const [score, setScore] = React.useState<number>(0);
 
@@ -561,14 +552,14 @@ export function useWebVitals() {
     webVitalsCollector.initialize();
 
     // Listen for updates
-    const handleWebVital = (_event: CustomEvent<WebVitalMetric>) => {
+    const handleWebVital = (): void => {
       setMetrics(webVitalsCollector.getMetrics());
       setScore(webVitalsCollector.getScore());
     };
 
     window.addEventListener('web-vital', handleWebVital as EventListener);
 
-    return () => {
+    return (): void => {
       window.removeEventListener('web-vital', handleWebVital as EventListener);
     };
   }, []);
@@ -590,10 +581,10 @@ export function initializeWebVitals(): void {
     
     // Make available in console for debugging
     if (process.env.NODE_ENV === 'development') {
-      (window as Record<string, unknown>).webVitals = {
-        getMetrics: () => webVitalsCollector.getMetrics(),
-        getScore: () => webVitalsCollector.getScore(),
-        getSummary: () => webVitalsCollector.getSummary(),
+      (window as unknown as Record<string, unknown>).webVitals = {
+        getMetrics: (): WebVitalMetric[] => webVitalsCollector.getMetrics(),
+        getScore: (): number => webVitalsCollector.getScore(),
+        getSummary: (): ReturnType<typeof webVitalsCollector.getSummary> => webVitalsCollector.getSummary(),
       };
     }
   }

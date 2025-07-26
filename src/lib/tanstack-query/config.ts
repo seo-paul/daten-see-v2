@@ -68,15 +68,15 @@ export function createOptimizedQueryClient(): QueryClient {
         refetchOnMount: true,
         
         // Error handling
-        retry: (failureCount, error: Record<string, unknown>) => {
+        retry: (failureCount: number, error: Error): boolean => {
           // Don't retry on 404s or authentication errors
-          if (error?.status === 404 || error?.status === 401) {
+          if ((error as { status?: number })?.status === 404 || (error as { status?: number })?.status === 401) {
             return false;
           }
           // Retry up to 3 times for other errors
           return failureCount < 3;
         },
-        retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+        retryDelay: (attemptIndex: number): number => Math.min(1000 * 2 ** attemptIndex, 30000),
         
         // Performance optimization - keep previous data while fetching new data
         placeholderData: (previousData: unknown) => previousData,
@@ -120,7 +120,7 @@ export const createQueryOptions = {
   /**
    * For dashboard data - medium update frequency
    */
-  dashboard: (id?: string) => ({
+  dashboard: (id?: string): Record<string, unknown> => ({
     ...QUERY_CONFIG.DYNAMIC,
     queryKey: id ? queryKeys.dashboard(id) : queryKeys.dashboardsList(),
   }),
@@ -128,7 +128,7 @@ export const createQueryOptions = {
   /**
    * For authentication data - high security, frequent checks
    */
-  auth: () => ({
+  auth: (): Record<string, unknown> => ({
     ...QUERY_CONFIG.CRITICAL,
     queryKey: queryKeys.authUser(),
   }),
@@ -136,7 +136,7 @@ export const createQueryOptions = {
   /**
    * For settings data - infrequent updates
    */
-  settings: (userId?: string) => ({
+  settings: (userId?: string): Record<string, unknown> => ({
     ...QUERY_CONFIG.STATIC,
     queryKey: userId ? queryKeys.userSettings(userId) : queryKeys.settings,
   }),
@@ -144,7 +144,7 @@ export const createQueryOptions = {
   /**
    * For real-time analytics - frequent updates
    */
-  analytics: () => ({
+  analytics: (): Record<string, unknown> => ({
     ...QUERY_CONFIG.REALTIME,
     queryKey: queryKeys.analytics,
   }),
@@ -153,9 +153,9 @@ export const createQueryOptions = {
 /**
  * Network status detection for adaptive behavior
  */
-export function getNetworkOptimizedConfig() {
+export function getNetworkOptimizedConfig(): Record<string, unknown> {
   // Check if we're in a slow network environment
-  const connection = (navigator as Record<string, unknown>)?.connection as Record<string, string> | undefined;
+  const connection = (navigator as unknown as Record<string, unknown>)?.connection as Record<string, string> | undefined;
   const isSlowNetwork = connection?.effectiveType === '2g' || connection?.effectiveType === 'slow-2g';
   
   if (isSlowNetwork) {
@@ -178,14 +178,14 @@ export function createDevQueryClient(): QueryClient {
   if (process.env.NODE_ENV === 'development') {
     // Enable React Query DevTools logging
     client.setMutationDefaults(['debug'], {
-      onSuccess: (data, variables) => {
+      onSuccess: () => {
         if (process.env.NODE_ENV === 'development') {
-          console.log('Mutation success:', { data, variables });
+          // Mutation success
         }
       },
-      onError: (error, variables) => {
+      onError: () => {
         if (process.env.NODE_ENV === 'development') {
-          console.error('Mutation error:', { error, variables });
+          // Mutation error
         }
       },
     });

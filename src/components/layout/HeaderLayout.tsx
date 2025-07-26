@@ -75,10 +75,10 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
   const handleLogout = async (): Promise<void> => {
     try {
       await logout();
-      router.push('/login');
-    } catch (error) {
+      router.push('/');
+    } catch {
       if (process.env.NODE_ENV === 'development') {
-        console.error('Logout failed:', error);
+        // Logout failed
       }
     }
   };
@@ -113,11 +113,15 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
           {showNavigation && (
             <nav className="hidden md:flex items-center space-x-4">
               {navigationItems.map((item) => (
-                <Link key={item.href} href={item.href}>
+                <button 
+                  key={item.href} 
+                  onClick={() => router.push(item.href as '/dashboards' | '/community' | '/')}
+                  className="text-left"
+                >
                   <NavbarButton leftIcon={item.icon}>
                     {item.label}
                   </NavbarButton>
-                </Link>
+                </button>
               ))}
             </nav>
           )}
@@ -154,11 +158,11 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
 
             {/* Login Button (if not authenticated) */}
             {showUserMenu && !user && (
-              <Link href="/login" className="hidden sm:block">
+              <button onClick={() => router.push('/')} className="hidden sm:block">
                 <NavbarButton leftIcon={<User className="w-4 h-4" />}>
                   Login
                 </NavbarButton>
-              </Link>
+              </button>
             )}
 
             {/* Mobile Menu Button */}
@@ -181,11 +185,13 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
               
               {/* Mobile Navigation Items */}
               {showNavigation && navigationItems.map((item) => (
-                <Link 
+                <button
                   key={item.href} 
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block"
+                  onClick={() => {
+                    router.push(item.href as '/dashboards' | '/community' | '/');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left"
                 >
                   <NavbarButton 
                     leftIcon={item.icon}
@@ -194,7 +200,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
                   >
                     {item.label}
                   </NavbarButton>
-                </Link>
+                </button>
               ))}
 
               {/* Mobile Custom Actions */}
@@ -229,14 +235,20 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
               {/* Mobile Login Button */}
               {showUserMenu && !user && (
                 <div className="border-t border-[#E6D7B8] pt-3">
-                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <button 
+                    onClick={() => {
+                      router.push('/');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left"
+                  >
                     <NavbarButton 
                       leftIcon={<User className="w-4 h-4" />}
                       fullWidth
                     >
                       Login
                     </NavbarButton>
-                  </Link>
+                  </button>
                 </div>
               )}
             </div>

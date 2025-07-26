@@ -60,7 +60,7 @@ export function initializePerformanceMonitoring(config?: {
   enableSentry?: boolean;
   enableConsoleLogging?: boolean;
   sampleRate?: number;
-}) {
+}): void {
   // Initialize Sentry performance monitoring
   if (config?.enableSentry !== false) {
     import('./sentry-integration').then(({ configureSentryPerformance }) => {
@@ -80,23 +80,26 @@ export function initializePerformanceMonitoring(config?: {
     // Make performance tools available globally in development
     if (process.env.NODE_ENV === 'development') {
       import('./simple-profiling').then(({ simpleMonitor }) => {
-        (window as Record<string, unknown>).performance = {
-          ...(window as Record<string, unknown>).performance,
+        const windowAny = window as unknown as Record<string, unknown>;
+        windowAny.performance = {
+          ...((windowAny.performance || {}) as Record<string, unknown>),
           monitoring: simpleMonitor,
         };
       });
     }
 
     if (process.env.NODE_ENV === 'development') {
-      console.log('📊 Performance monitoring initialized');
+      // Performance monitoring initialized
     }
   }
 }
 
-export default {
+const performanceConfig = {
   init: initializePerformanceMonitoring,
-  get monitor() {
+  get monitor(): unknown {
     // Lazy load simpleMonitor to avoid circular dependencies
     return require('./simple-profiling').simpleMonitor;
   },
 };
+
+export default performanceConfig;

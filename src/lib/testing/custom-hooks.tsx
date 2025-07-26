@@ -29,7 +29,7 @@ export interface RenderHookWithQueryOptions<TProps> extends Omit<RenderHookOptio
 export function renderHookWithQuery<TResult, TProps>(
   hook: (props: TProps) => TResult,
   options: RenderHookWithQueryOptions<TProps> = {}
-) {
+): ReturnType<typeof renderHook<TResult, TProps>> {
   const {
     queryClient = createTestQueryClient(),
     withAuth = false,
@@ -38,7 +38,7 @@ export function renderHookWithQuery<TResult, TProps>(
   } = options;
 
   const wrapper = withAuth 
-    ? ({ children }: { children: React.ReactNode }) => (
+    ? ({ children }: { children: React.ReactNode }): React.ReactElement => (
         <TestContextWrapper 
           queryClient={queryClient} 
           {...(authValue && { authValue })}
@@ -46,7 +46,7 @@ export function renderHookWithQuery<TResult, TProps>(
           {children}
         </TestContextWrapper>
       )
-    : ({ children }: { children: React.ReactNode }) => (
+    : ({ children }: { children: React.ReactNode }): React.ReactElement => (
         <TestQueryWrapper queryClient={queryClient}>
           {children}
         </TestQueryWrapper>
@@ -65,7 +65,7 @@ export function renderHookWithQuery<TResult, TProps>(
 export function renderHookWithContext<TResult, TProps>(
   hook: (props: TProps) => TResult,
   options: RenderHookWithQueryOptions<TProps> = {}
-) {
+): ReturnType<typeof renderHook<TResult, TProps>> {
   return renderHookWithQuery(hook, {
     ...options,
     withAuth: true,
@@ -128,9 +128,11 @@ export const mockTestData = {
   ],
 } as const;
 
-export default {
+const testingUtils = {
   renderHookWithQuery,
   renderHookWithContext,
   waitForQuery,
   mockTestData,
 };
+
+export default testingUtils;

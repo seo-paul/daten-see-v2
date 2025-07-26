@@ -63,7 +63,7 @@ export const fontVariables = [
 ].join(' ');
 
 // Font utility functions
-export const getFontClass = (font: 'body' | 'accent' | 'display') => {
+export const getFontClass = (font: 'body' | 'accent' | 'display'): string => {
   switch (font) {
     case 'body':
       return poppins.className;
@@ -85,7 +85,7 @@ export const fontCSSVariables = `
   }
 `;
 
-export default {
+const fontConfig = {
   poppins,
   barlow,
   fjallaOne,
@@ -93,3 +93,5 @@ export default {
   getFontClass,
   fontCSSVariables,
 };
+
+export default fontConfig;

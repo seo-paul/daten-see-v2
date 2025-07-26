@@ -133,8 +133,18 @@ export function createDataset(
   data: number[], 
   colorIndex: number = 0,
   type: 'line' | 'bar' | 'doughnut' = 'line'
-) {
-  const color = chartColors[colorIndex % chartColors.length];
+): {
+  label: string;
+  data: number[];
+  backgroundColor: string | string[];
+  borderColor: string;
+  borderWidth: number;
+  pointBackgroundColor: string;
+  pointBorderColor: string;
+  pointBorderWidth: number;
+  fill: boolean;
+} {
+  const color = chartColors[colorIndex % chartColors.length] || chartColors[0];
   const backgroundColor = type === 'doughnut' 
     ? chartColors.slice(0, data.length)
     : color + '20'; // 12.5% opacity for areas
@@ -156,7 +166,17 @@ export function createDataset(
 export function createMultipleDatasets(
   datasets: Array<{ label: string; data: number[] }>,
   type: 'line' | 'bar' | 'doughnut' = 'line'
-) {
+): Array<{
+  label: string;
+  data: number[];
+  backgroundColor: string | string[];
+  borderColor: string;
+  borderWidth: number;
+  pointBackgroundColor: string;
+  pointBorderColor: string;
+  pointBorderWidth: number;
+  fill: boolean;
+}> {
   return datasets.map((dataset, index) => 
     createDataset(dataset.label, dataset.data, index, type)
   );
@@ -188,7 +208,7 @@ export const chartColorsByUse = {
   },
 } as const;
 
-export default {
+const colorConfig = {
   chartColors,
   chartBackgroundColors,
   chartBorderColors,
@@ -198,3 +218,5 @@ export default {
   createMultipleDatasets,
   chartColorsByUse,
 };
+
+export default colorConfig;

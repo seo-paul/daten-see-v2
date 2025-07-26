@@ -191,11 +191,11 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     // Check immediately
     checkTokenRefresh();
 
-    return () => clearInterval(interval);
+    return (): void => clearInterval(interval);
   }, [authState.isAuthenticated, refreshToken]);
 
   // Login function (will be enhanced with TanStack mutation)
-  const login = async (email: string, _password: string): Promise<void> => {
+  const login = async (email: string): Promise<void> => {
     setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {

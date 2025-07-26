@@ -1,0 +1,201 @@
+{
+  "timestamp": "2025-01-26T12:00:00Z",
+  "overall_status": "good",
+  "overall_score": 82,
+  "mode": "standard",
+  "docker_integration": {
+    "status": "excellent",
+    "issues": 0,
+    "checks_total": 4,
+    "metrics": {
+      "container_status": "running",
+      "container_restarts": 0,
+      "build_success_rate": 100,
+      "resource_usage": {
+        "cpu": 12,
+        "memory": 28,
+        "disk": 45
+      },
+      "deployment_frequency": 4.2
+    }
+  },
+  "monitoring_agents": {
+    "code_quality": {
+      "status": "success",
+      "score": 75,
+      "overall": "needs-improvement",
+      "metrics": {
+        "eslint_errors": 162,
+        "eslint_warnings": 15,
+        "typescript_errors": 61,
+        "test_coverage": 68,
+        "code_complexity": 8.2,
+        "outdated_dependencies": 7,
+        "technical_debt_hours": 45
+      }
+    },
+    "performance": {
+      "status": "success",
+      "score": 78,
+      "overall": "good",
+      "metrics": {
+        "lcp": 2.1,
+        "fid": 85,
+        "cls": 0.05,
+        "bundle_size_mb": 2.8,
+        "memory_usage_percent": 28,
+        "api_response_ms": 234,
+        "build_time_seconds": 45,
+        "cache_hit_rate": 87
+      }
+    },
+    "testing": {
+      "status": "success",
+      "score": 80,
+      "overall": "good",
+      "metrics": {
+        "unit_tests": {
+          "passed": 145,
+          "failed": 2,
+          "skipped": 5
+        },
+        "e2e_tests": {
+          "passed": 12,
+          "failed": 0,
+          "skipped": 1
+        },
+        "test_flakiness_percent": 3.5,
+        "test_execution_time": 180,
+        "regression_count": 2,
+        "mtbf_hours": 168
+      }
+    },
+    "security_accessibility": {
+      "status": "success",
+      "score": 88,
+      "overall": "excellent",
+      "metrics": {
+        "vulnerabilities": {
+          "critical": 0,
+          "high": 1,
+          "medium": 3,
+          "low": 8
+        },
+        "gdpr_compliance_score": 92,
+        "wcag_violations": 4,
+        "csp_violations": 0,
+        "dependency_audit_issues": 4,
+        "ssl_grade": "A+",
+        "cookie_compliance_issues": 1
+      }
+    },
+    "infrastructure": {
+      "status": "success"
+    },
+    "api_integration": {
+      "status": "success",
+      "score": 85,
+      "overall": "good",
+      "metrics": {
+        "endpoints_available": 8,
+        "endpoints_total": 12,
+        "avg_latency_ms": 234,
+        "p95_latency_ms": 450,
+        "external_api_status": "operational",
+        "rate_limit_remaining": 4500,
+        "data_freshness_minutes": 5,
+        "data_quality_score": 94
+      }
+    },
+    "development_progress": {
+      "status": "success",
+      "score": 70,
+      "overall": "needs-improvement",
+      "metrics": {
+        "tanstack_migration": {
+          "completed": 3,
+          "total": 15
+        },
+        "features_status": {
+          "completed": 18,
+          "in_progress": 7,
+          "pending": 20
+        },
+        "ui_components": {
+          "implemented": 24,
+          "planned": 35
+        },
+        "mobile_responsive_views": {
+          "tested": 8,
+          "total": 15
+        },
+        "i18n_coverage": 0,
+        "documentation_coverage": 65
+      }
+    },
+    "user_experience": {
+      "status": "success",
+      "score": 82,
+      "overall": "good",
+      "metrics": {
+        "tti_seconds": 3.2,
+        "fmp_ms": 1200,
+        "error_rate_per_1000": 2.5,
+        "bounce_rate_percent": 28,
+        "form_completion_rate": 85,
+        "feature_adoption_percent": 72
+      }
+    }
+  },
+  "workflow": {
+    "automation": {
+      "status": "good",
+      "score": 75
+    },
+    "development_experience": {
+      "status": "excellent",
+      "score": 90,
+      "issues": 0
+    },
+    "deployment_frequency": 4.2,
+    "cycle_time_hours": 48,
+    "pr_merge_rate": 85,
+    "code_churn_lines": 3500,
+    "blocker_count": 3,
+    "technical_debt_ratio": 0.15
+  },
+  "business_metrics": {
+    "active_users": {
+      "daily": 0,
+      "weekly": 0,
+      "monthly": 0
+    },
+    "conversion_rate": 0,
+    "churn_rate": 0,
+    "support_tickets": {
+      "open": 0,
+      "resolved": 0
+    },
+    "nps_score": 0
+  },
+  "costs": {
+    "monthly_total_usd": 0,
+    "cloud_hosting": 0,
+    "external_services": 0,
+    "cdn_costs": 0
+  },
+  "compliance": {
+    "cookie_consent_rate": 0,
+    "data_retention_compliant": true,
+    "user_rights_requests": {
+      "pending": 0,
+      "completed": 0
+    },
+    "audit_log_coverage": 100,
+    "terms_acceptance_rate": 0,
+    "dpa_status": {
+      "signed": 0,
+      "required": 0
+    }
+  }
+}

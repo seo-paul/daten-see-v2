@@ -31,9 +31,7 @@ export default function AuthDemoPage(): React.ReactElement {
           </div>
           
           <LoginForm onSuccess={() => {
-            if (process.env.NODE_ENV === 'development') {
-              console.log('Login successful - redirecting...');
-            }
+            // Login successful - redirecting...
           }} />
         </div>
       </div>
