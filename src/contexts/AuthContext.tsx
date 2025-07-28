@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 
-import { tokenManager } from '@/lib/auth/token';
+import { tokenManager, type TokenManager } from '@/lib/auth/token';
 import { appLogger } from '@/lib/monitoring/logger.config';
 
 // User interface
@@ -41,9 +41,10 @@ export interface AuthContextType extends AuthState {
 // Create context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Props interface
+// Props interface with optional dependency injection
 interface AuthProviderProps {
   children: ReactNode;
+  tokenManager?: TokenManager; // Optional for testing and flexibility
 }
 
 /**
@@ -51,7 +52,74 @@ interface AuthProviderProps {
  * Manages user authentication state without Zustand
  * Uses React Context + TanStack Query for server state
  */
-export function AuthProvider({ children }: AuthProviderProps): React.ReactElement {
+export function AuthProvider({ children, tokenManager: injectedTokenManager }: AuthProviderProps): React.ReactElement {
+  // Dependency Injection: Use injected tokenManager or default to singleton
+  const activeTokenManager = injectedTokenManager ?? tokenManager;
+  
+  // Production safety check
+  if (process.env.NODE_ENV === 'production' && injectedTokenManager && injectedTokenManager !== tokenManager) {
+    appLogger.warn('Custom tokenManager injected in production environment', {
+      isCustomTokenManager: true,
+      hasInjectedTokenManager: !!injectedTokenManager,
+    });
+  }
+  
+  // Comprehensive TokenManager Interface Validation
+  if (injectedTokenManager) {
+    // Type validation
+    if (typeof injectedTokenManager !== 'object' || injectedTokenManager === null) {
+      throw new Error('Invalid tokenManager: must be a non-null object');
+    }
+
+    // Required methods validation
+    const requiredMethods = [
+      'getTokenInfo',
+      'setTokens', 
+      'clearTokens',
+      'updateApiClientToken',
+      'getCurrentUserInfo',
+      'needsRefresh',
+      'getAccessToken',
+      'getRefreshToken',
+      'parseTokenPayload'
+    ];
+
+    const missingMethods = requiredMethods.filter(method => 
+      !injectedTokenManager[method as keyof TokenManager] || typeof injectedTokenManager[method as keyof TokenManager] !== 'function'
+    );
+
+    if (missingMethods.length > 0) {
+      throw new Error(`Invalid tokenManager: missing required methods: ${missingMethods.join(', ')}. TokenManager must implement the full interface.`);
+    }
+
+    // Production environment extra validation
+    if (process.env.NODE_ENV === 'production') {
+      // Check if this looks like a test mock (suspicious patterns)
+      const mockIndicators = [
+        injectedTokenManager.constructor?.name === 'Object', // Plain object (likely mock)
+        'mockReturnValue' in injectedTokenManager.getTokenInfo, // Jest mock function
+        injectedTokenManager.getTokenInfo.toString().includes('jest'), // Jest signature
+      ];
+
+      if (mockIndicators.some(Boolean)) {
+        appLogger.error('Suspicious tokenManager detected in production', {
+          constructorName: injectedTokenManager.constructor?.name,
+          hasMockSignature: mockIndicators[1],
+          hasJestSignature: mockIndicators[2],
+          isProduction: true,
+        });
+        
+        // In production, reject obvious test mocks
+        throw new Error('Invalid tokenManager: test mocks are not allowed in production environment');
+      }
+    }
+
+    appLogger.debug('TokenManager validation passed', {
+      isInjected: true,
+      methodCount: requiredMethods.length,
+      environment: process.env.NODE_ENV,
+    });
+  }
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     isAuthenticated: false,
@@ -65,11 +133,11 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       try {
         appLogger.debug('Initializing authentication state');
 
-        const tokenInfo = tokenManager.getTokenInfo();
+        const tokenInfo = activeTokenManager.getTokenInfo();
         
         if (tokenInfo.isValid && tokenInfo.token) {
           // Get user info from token
-          const userInfo = tokenManager.getCurrentUserInfo();
+          const userInfo = activeTokenManager.getCurrentUserInfo();
           
           if (userInfo?.userId && userInfo?.email) {
             const user: User = {
@@ -80,7 +148,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
             };
 
             // Update API client with token
-            tokenManager.updateApiClientToken();
+            activeTokenManager.updateApiClientToken();
 
             setAuthState({
               user,
@@ -114,7 +182,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
         });
 
         // Clear invalid tokens
-        tokenManager.clearTokens();
+        activeTokenManager.clearTokens();
         
         setAuthState({
           user: null,
@@ -126,12 +194,12 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     };
 
     initializeAuth();
-  }, []);
+  }, [activeTokenManager]);
 
   // Refresh token function
   const refreshToken = useCallback(async (): Promise<boolean> => {
     try {
-      const refreshTokenValue = tokenManager.getRefreshToken();
+      const refreshTokenValue = activeTokenManager.getRefreshToken();
       
       if (!refreshTokenValue) {
         throw new Error('No refresh token available');
@@ -149,8 +217,8 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
         expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
       };
 
-      tokenManager.setTokens(mockTokenData);
-      tokenManager.updateApiClientToken();
+      activeTokenManager.setTokens(mockTokenData);
+      activeTokenManager.updateApiClientToken();
 
       appLogger.info('Token refresh successful');
       return true;
@@ -161,7 +229,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       });
 
       // Clear tokens and update state on refresh failure
-      tokenManager.clearTokens();
+      activeTokenManager.clearTokens();
       setAuthState({
         user: null,
         isAuthenticated: false,
@@ -170,14 +238,14 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       });
       return false;
     }
-  }, []);
+  }, [activeTokenManager]);
 
   // Auto-refresh token when needed
   useEffect(() => {
     if (!authState.isAuthenticated) return;
 
     const checkTokenRefresh = async (): Promise<void> => {
-      if (tokenManager.needsRefresh()) {
+      if (activeTokenManager.needsRefresh()) {
         appLogger.debug('Token needs refresh, attempting refresh');
         refreshToken().catch((error) => {
           appLogger.error('Auto token refresh failed', { error });
@@ -192,7 +260,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     checkTokenRefresh();
 
     return (): void => clearInterval(interval);
-  }, [authState.isAuthenticated, refreshToken]);
+  }, [authState.isAuthenticated, refreshToken, activeTokenManager]);
 
   // Login function (will be enhanced with TanStack mutation)
   const login = async (email: string): Promise<void> => {
@@ -220,8 +288,8 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       };
 
       // Store tokens
-      tokenManager.setTokens(mockTokenData);
-      tokenManager.updateApiClientToken();
+      activeTokenManager.setTokens(mockTokenData);
+      activeTokenManager.updateApiClientToken();
 
       setAuthState({
         user: mockUser,
@@ -259,8 +327,8 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       ...(authState.user?.id && { userId: authState.user.id }),
     });
 
-    // Clear tokens
-    tokenManager.clearTokens();
+    // Clear tokens using active token manager
+    activeTokenManager.clearTokens();
 
     // Reset auth state
     setAuthState({
@@ -298,11 +366,11 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
 
   // Token utilities
   const getAccessToken = (): string | null => {
-    return tokenManager.getAccessToken();
+    return activeTokenManager.getAccessToken();
   };
 
   const needsRefresh = (): boolean => {
-    return tokenManager.needsRefresh();
+    return activeTokenManager.needsRefresh();
   };
 
   // Context value

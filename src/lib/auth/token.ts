@@ -20,13 +20,26 @@ export interface StoredTokenInfo {
   isExpired: boolean;
 }
 
+export interface TokenManager {
+  isClient: boolean;
+  setTokens(tokenData: TokenData): void;
+  getTokenInfo(): StoredTokenInfo;
+  getAccessToken(): string | null;
+  getRefreshToken(): string | null;
+  needsRefresh(): boolean;
+  clearTokens(): void;
+  updateApiClientToken(): void;
+  parseTokenPayload(token: string): Record<string, unknown> | null;
+  getCurrentUserInfo(): { userId?: string; email?: string; role?: string } | null;
+}
+
 /**
- * Secure Token Manager
+ * Secure Token Manager Implementation
  * Handles JWT token storage, validation, and expiration checks
  * Uses localStorage for client-side storage (will be enhanced with httpOnly cookies later)
  */
-class TokenManager {
-  private isClient: boolean;
+class TokenManagerImpl implements TokenManager {
+  public isClient: boolean;
 
   constructor() {
     this.isClient = typeof window !== 'undefined';
@@ -235,7 +248,4 @@ class TokenManager {
 }
 
 // Export singleton instance
-export const tokenManager = new TokenManager();
-
-// Export types
-export type { TokenManager };
+export const tokenManager = new TokenManagerImpl();

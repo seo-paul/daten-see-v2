@@ -61,8 +61,9 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   private handleRetry = (): void => {
+    const { level = 'component' } = this.props;
     appLogger.info('Error Boundary Retry Attempted', {
-      component: `error-boundary-${this.props.level}`,
+      component: `error-boundary-${level}`,
       action: 'retry',
     });
     
@@ -70,10 +71,11 @@ export class ErrorBoundary extends Component<Props, State> {
   };
 
   private handleReportIssue = (): void => {
+    const { level = 'component' } = this.props;
     if (this.state.errorId) {
       appLogger.userAction('report-error', undefined, {
         errorId: this.state.errorId,
-        errorBoundaryLevel: this.props.level,
+        errorBoundaryLevel: level,
       });
       
       // In production, this could open a support ticket
@@ -96,7 +98,7 @@ export class ErrorBoundary extends Component<Props, State> {
       const { level = 'component' } = this.props;
       
       return (
-        <div className="error-boundary-fallback" data-level={level}>
+        <div className="error-boundary-fallback" data-level={level} role="alert">
           <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
             <div className="flex items-start">
               <div className="flex-shrink-0">

@@ -109,7 +109,12 @@ class ApiClient {
       
       try {
         const rawError = await response.json();
-        errorData = ApiErrorSchema.parse(rawError);
+        // Check if it has the expected error structure
+        if (rawError.error && typeof rawError.error === 'object') {
+          errorData = rawError as ApiError;
+        } else {
+          throw new Error('Invalid error format');
+        }
       } catch {
         // Fallback for non-JSON error responses
         errorData = {
@@ -142,7 +147,6 @@ class ApiClient {
 
     appLogger.debug('API request completed', {
       requestId,
-      status: response.status,
       duration,
     });
 
@@ -150,9 +154,12 @@ class ApiClient {
   }
 
   // Core request method
-  private async request<T>(config: RequestConfig): Promise<T> {
+  public async request<T>(config: Omit<RequestConfig, 'headers'> & { headers?: Record<string, string> }): Promise<T> {
     const startTime = Date.now();
-    const preparedConfig = await this.prepareRequest(config);
+    const preparedConfig = await this.prepareRequest({
+      ...config,
+      headers: config.headers || {},
+    } as RequestConfig);
     const requestId = preparedConfig.headers['X-Request-ID'] as string;
 
     try {
@@ -184,8 +191,8 @@ class ApiClient {
           throw new TimeoutError();
         }
 
-        if (error.name === 'TypeError' && error.message.includes('fetch')) {
-          appLogger.error('API network error', { requestId, error: error.message, duration });
+        if (error.name === 'TypeError' || error.message.includes('Network')) {
+          appLogger.error('Network error during API request', { requestId, error: error.message, duration });
           throw new NetworkError('Network connection failed');
         }
       }

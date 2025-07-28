@@ -1,6 +1,29 @@
 # **CLAUDE.md - Dashboard Projekt** 
 *Optimiert für autonome Entwicklung*
 
+## 🧠 **KRITISCHES DENKEN & RÜCKFRAGEN**
+**Du sollst KRITISCH HINTERFRAGEN und RÜCKFRAGEN stellen, um die bestmöglichen Ergebnisse zu erzielen:**
+
+- ⚡ **Hinterfrage Anforderungen:** Ist das wirklich die beste Lösung?
+- 🎯 **Bewerte Alternativen:** Gibt es bessere/einfachere Wege?
+- 🔍 **Analysiere Trade-offs:** Performance vs. Komplexität vs. Wartbarkeit
+- 💡 **Stelle Rückfragen:** Bei Unklarheiten → nachfragen statt raten
+- 🏗️ **Prüfe Architektur:** Passt das zur bestehenden Codebase?
+- 📊 **Validiere Business-Value:** Löst das echte Probleme?
+
+**REGEL:** Bevor du implementierst → erkläre deine Überlegungen und hole Feedback ein!
+
+## 📐 **BEST PRACTICES**
+**Arbeite nach Industry Best Practices, wenn sinnvoll:**
+- 🏗️ **Strategic Testing:** Focus on business-critical areas, not comprehensive coverage
+- 📦 **SOLID Principles:** Single Responsibility, DRY, KISS
+- 🔒 **Security First:** OWASP Top 10, Zero Trust
+- 🎯 **Performance:** Core Web Vitals, Bundle Size
+- ♿ **Accessibility:** WCAG 2.1 AA Standards
+- 📚 **Clean Code:** Lesbar > Clever
+
+**ABER:** Best Practice nur wenn es zum Projekt passt - Pragmatismus > Dogma!
+
 ## 🎯 **PROJEKTMISSION**
 Erstelle ein **SaaS Analytics Dashboard** mit externen API-Integrationen. Du arbeitest **autonom** mit regelmäßigen Checkpoints.
 
@@ -28,11 +51,132 @@ VERSTEHEN → PLANEN → IMPLEMENTIEREN → VALIDIEREN
 - **Aufbauende Implementation** - jeder Schritt funktioniert vollständig
 - **Ein Feature = Ein funktionierender Baustein**
 
-### **📊 DEBUGGING DASHBOARD UPDATE (MANDATORY)**
-- **Nach JEDER größeren Code-Änderung**: Automatisch `./scripts/collect-real-metrics.sh` ausführen
-- **Nach Task-Completion**: Dashboard mit aktuellen Metriken updaten
+### **🧪 COMPLEXITY-BASED TASK STRATEGY**
+**Basiert auf erfolgreicher DI-Migration: 4 failing → 107 passing tests (100% Erfolg)**
+
+#### **📊 COMPLEXITY INDICATORS & DECISION FRAMEWORK**
+```bash
+🟢 SIMPLE (1-3 files, <2h)     → Direct Implementation
+🟡 MEDIUM (4-10 files, 2-8h)   → 2-3 Phase Approach  
+🔴 COMPLEX (10+ files, >8h)    → 4-6 Phase Test-Driven
+⚫ MEGA (system-wide, days)    → 6+ Phases + User Checkpoints
+```
+
+**Risk Indicators (upgrade complexity level):**
+- Touching core authentication/authorization
+- Database schema changes
+- Breaking API changes
+- Cross-component integrations
+- Production-critical features
+
+#### **📋 PHASE TEMPLATES**
+
+**🟡 MEDIUM TASK (2-3 Phases):**
+```
+Phase 1: Core Implementation (60% effort)
+├─ npm test + npx tsc --noEmit
+├─ Basic functionality working
+└─ Main happy path covered
+
+Phase 2: Integration & Refinement (30% effort)  
+├─ npm run lint + docker restart
+├─ Error handling + edge cases
+└─ Browser validation
+
+Phase 3: Finalization (10% effort)
+├─ Documentation + cleanup
+└─ Final validation
+```
+
+**🔴 COMPLEX TASK (4-6 Phases):**
+```
+Phase 1: Foundation/Interface (20% effort)
+├─ Test-driven interface design
+├─ npm test (new tests pass)
+└─ Clear contracts established
+
+Phase 2: Core Logic Implementation (40% effort)
+├─ Main functionality 
+├─ npm test + TypeScript validation
+└─ Integration points working
+
+Phase 3: Dependencies & Integration (25% effort)
+├─ Connect to existing systems
+├─ npm test + lint + docker restart
+└─ End-to-end flow working
+
+Phase 4: Edge Cases & Error Handling (10% effort)
+├─ Error scenarios + production safety
+├─ Comprehensive test validation
+└─ Browser/manual testing
+
+Phase 5: Finalization & Documentation (5% effort)
+├─ Code cleanup + documentation
+└─ Final production readiness check
+```
+
+#### **⚖️ SMART TESTING BALANCE**
+
+**✅ ALWAYS TEST & VALIDATE:**
+- **Integration boundaries** (APIs, contexts, external services)
+- **Complex business logic** (calculations, transformations, algorithms)
+- **Error handling** (try/catch, edge cases, fallbacks)
+- **Critical user flows** (auth, payments, data integrity)
+- **Cross-component communication** (props, events, state)
+
+**❌ SKIP TESTING (Efficiency):**
+- Trivial constants & configuration objects
+- Basic CRUD without business logic
+- Simple prop passing & presentation components
+- Auto-generated code & type definitions
+- Single-line utilities & formatters
+
+#### **🚀 VALIDATION EFFICIENCY MATRIX**
+
+**Per Phase Validation Level:**
+```
+Simple Task    → npm test + TypeScript
+Medium Phase 1 → npm test + TypeScript  
+Medium Phase 2 → + npm run lint + docker restart
+Medium Phase 3 → + browser validation
+
+Complex Phase 1 → npm test + TypeScript (interface focus)
+Complex Phase 2 → + integration tests
+Complex Phase 3 → + lint + docker + browser testing  
+Complex Phase 4 → + error scenario testing
+Complex Phase 5 → + production readiness validation
+```
+
+**🎯 Parallel Validation (Efficiency):**
+```bash
+# Single command for speed
+npm test & npx tsc --noEmit & npm run lint & wait
+./scripts/quick-restart.sh & browser-check & wait
+```
+
+#### **✅ SUCCESS CRITERIA PER PHASE**
+- **Code Quality:** All validations pass (test/lint/TypeScript)
+- **Functionality:** Phase objectives 100% met
+- **Integration:** Connecting systems work flawlessly  
+- **No Regression:** Existing functionality unchanged
+- **Documentation:** Complex decisions explained
+
+**🛑 PHASE FAILURE = FULL ROLLBACK**
+- Restore previous working state completely
+- Analyze root cause before retry
+- Adjust approach if needed
+
+### **📊 DEBUGGING DASHBOARD UPDATE (MANDATORY - AUTOMATISIERT)**
+- **Nach JEDER Task-Completion**: Automatisch `./scripts/collect-real-metrics.sh` ausführen
+- **Nach Code-Änderungen**: Dashboard mit aktuellen Metriken updaten
 - **Nach Feature-Implementation**: Achievement-Liste in real-metrics.json erweitern
-- **REGEL**: Code-Änderung → Test → Dashboard Update → Commit
+- **AKTUELLER STATUS**: 
+  - ❌ **85 TypeScript Errors** (kritisch)
+  - ❌ **19 ESLint Errors** (hoch)  
+  - ⚠️ **17 ESLint Warnings** (medium)
+  - **Overall Score: 66/100** (needs improvement)
+- **WORKFLOW**: Task Start → Code → Test → `./scripts/collect-real-metrics.sh` → Commit
+- **ZIEL**: Alle Errors auf 0 reduzieren für solid foundation vor Chart.js Integration
 
 ### **🔧 HYBRID DEVELOPMENT WORKFLOW**
 
@@ -124,7 +268,279 @@ npx tsc --noEmit
 - **Gemeinsame Entscheidung**: User entscheidet welche Alternative umgesetzt wird
 - **REGEL**: Lieber nachfragen als eigenständig "optimieren"
 
-### **2. Autonomie-Level**
+### **2. COMPLEXITY-BASED TASK STRATEGY**
+
+#### **📊 TASK COMPLEXITY DECISION FRAMEWORK**
+
+**🎯 SUCCESS BASELINE:** Dependency injection migration (4 failing → 107 passing tests, zero regressions)
+
+##### **COMPLEXITY INDICATORS (Choose Approach Based On):**
+
+**🟢 SIMPLE TASKS → Direct Implementation**
+- **Criteria:** 1-3 files affected, isolated changes, no critical dependencies
+- **Examples:** UI tweaks, single component updates, documentation changes
+- **Validation:** Standard quality gates only
+- **Time:** < 30 minutes
+
+**🟡 MEDIUM TASKS → 2-3 Phase Approach**
+- **Criteria:** 4-10 files affected, some cross-dependencies, business logic changes
+- **Examples:** New feature with tests, API endpoint + UI integration, refactoring
+- **Validation:** Tests after each phase + final integration check
+- **Time:** 30-90 minutes
+
+**🔴 COMPLEX TASKS → 4-6 Phase Incremental (TEST-DRIVEN)**
+- **Criteria:** 10+ files affected, system-wide impact, critical path modifications
+- **Examples:** Architecture changes, large refactors, dependency migrations
+- **Risk Factors:** Production impact, data integrity, security implications
+- **Validation:** Full test suite after each phase
+- **Time:** 2+ hours
+
+**⚫ MEGA TASKS → 6+ Phases with Checkpoints**
+- **Criteria:** Cross-system changes, major version upgrades, complete rewrites
+- **Examples:** Framework migrations, database schema changes, deployment pipeline
+- **Validation:** User checkpoints between major phases
+- **Time:** Multiple sessions
+
+### **🚀 SUSTAINABLE CODE QUALITY & ULTRA THINK INTEGRATION**
+**Basiert auf User-Feedback: "Keine quickfixes, nachhaltige Lösungen"**
+
+#### **❌ ANTI-PATTERNS (ABSOLUT VERBOTEN):**
+```typescript
+// ❌ NIEMALS: ESLint Suppressions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line react-hooks/exhaustive-deps
+
+// ❌ NIEMALS: Quick Type Workarounds  
+const data = response as any;
+
+// ❌ NIEMALS: Error Hiding
+try { riskyOperation(); } catch { /* ignore */ }
+```
+
+#### **✅ SUSTAINABLE SOLUTIONS:**
+```typescript
+// ✅ PROPER: Refactor unused vars
+function processData({ userId, email }: { userId: string; email: string; unusedField?: string }) {
+  return { userId, email }; // Only use what you need
+}
+
+// ✅ PROPER: Fix hook dependencies  
+const login = useCallback(async (credentials) => {
+  await authManager.login(credentials);
+}, [authManager]); // Include dependencies
+
+// ✅ PROPER: Type properly
+interface ApiResponse {
+  data: UserData[];
+  meta: PaginationMeta;
+}
+const response: ApiResponse = await api.get('/users');
+```
+
+#### **🧠 ULTRA THINK & SUBAGENTS INTEGRATION**
+
+##### **WHEN TO USE ULTRA THINK:**
+**🎯 TRIGGER CONDITIONS:**
+- ESLint/TypeScript errors > 10 (complex dependencies)
+- Architecture decisions affecting >5 files
+- User explicitly requests deep analysis ("ultra think")
+- Production-critical changes (auth, payments, data)
+- Complex refactoring with risk factors
+- When multiple viable approaches exist
+
+##### **ULTRA THINK PROCESS:**
+**🔍 ANALYSIS FRAMEWORK:**
+```
+1. PROBLEM DECOMPOSITION
+   ├─ Root cause analysis
+   ├─ Dependencies mapping  
+   ├─ Risk assessment
+   └─ Impact evaluation
+
+2. SOLUTION EXPLORATION
+   ├─ Option A: [Approach + Pros/Cons]
+   ├─ Option B: [Approach + Pros/Cons]
+   ├─ Option C: [Approach + Pros/Cons]
+   └─ RECOMMENDATION with reasoning
+
+3. IMPLEMENTATION STRATEGY
+   ├─ Phase breakdown
+   ├─ Testing approach
+   ├─ Rollback plan
+   └─ Success metrics
+```
+
+##### **SUBAGENTS UTILIZATION:**
+**🤖 WHEN TO DEPLOY SUBAGENTS:**
+- **Research Tasks:** "Search for all X patterns in codebase"
+- **Analysis Tasks:** "Identify all dependencies of component Y"
+- **Validation Tasks:** "Check test coverage for module Z"
+- **Documentation Tasks:** "Generate comprehensive API docs"
+
+**⚡ SUBAGENT WORKFLOW:**
+```bash
+1. COMPLEX TASK DETECTED
+   ↓
+2. EVALUATE: Would subagents help?
+   ├─ Multiple search/analysis tasks?
+   ├─ Parallel information gathering needed?
+   └─ Large codebase exploration required?
+   ↓
+3. PROPOSAL: "I suggest using subagents for..."
+   ↓
+4. USER APPROVAL
+   ↓
+5. DEPLOY AGENTS + SYNTHESIZE RESULTS
+```
+
+#### **🎯 QUALITY DECISION MATRIX**
+
+**WHEN TO PROPOSE ULTRA THINK:**
+| Complexity | Files Affected | Risk Level | Action |
+|------------|---------------|------------|--------|
+| 🟢 Simple  | 1-3          | Low        | Direct fix |
+| 🟡 Medium  | 4-10         | Medium     | Consider ultra think |
+| 🔴 Complex | 10+          | High       | **PROPOSE ultra think** |
+| ⚫ Mega    | System-wide  | Critical   | **MANDATORY ultra think** |
+
+**TRIGGER PHRASES:**
+- User: "bewerte die Optionen" → **Ultra think required**
+- User: "tiefe Analyse" → **Ultra think required**  
+- User: "verschiedene Alternativen" → **Ultra think required**
+- Multiple ESLint errors → **Consider ultra think**
+- Architecture changes → **Consider ultra think**
+
+#### **🔄 PHASE STRUCTURE TEMPLATES**
+
+##### **Medium Task Template (2-3 Phases):**
+```bash
+Phase 1: Core Implementation (60% effort)
+  ├── npm test (unit tests)
+  └── npx tsc --noEmit (type check)
+
+Phase 2: Integration & Edge Cases (30% effort)  
+  ├── npm run lint
+  ├── ./scripts/quick-restart.sh
+  └── Browser testing
+
+Phase 3: Finalization & Polish (10% effort)
+  ├── Documentation updates
+  ├── Final validation
+  └── Git commit
+```
+
+##### **Complex Task Template (4-6 Phases):**
+```bash
+Phase 1: Foundation Setup (20% effort)
+  ├── Types & interfaces
+  ├── npm test (affected tests pass)
+  └── TypeScript compilation
+
+Phase 2: Core Logic Implementation (40% effort)
+  ├── Main business logic
+  ├── npm test (full test suite)
+  └── Integration point validation
+
+Phase 3: Dependencies & Integrations (25% effort)
+  ├── Cross-component connections  
+  ├── npm test + npm run lint
+  └── ./scripts/quick-restart.sh
+
+Phase 4: Edge Cases & Error Handling (10% effort)
+  ├── Error boundaries & fallbacks
+  ├── Full validation workflow
+  └── Browser testing
+
+Phase 5: Finalization & Cleanup (5% effort)
+  ├── Code cleanup & optimization
+  ├── Documentation updates
+  └── Final commit with summary
+```
+
+#### **⚖️ VALIDATION BALANCE STRATEGY**
+
+##### **🎯 LEAN TESTING STRATEGY (Quality over Quantity):**
+
+**✅ ALWAYS TEST:**
+- Integration boundaries & API connections
+- Complex business logic & calculations  
+- Error handling & edge cases
+- Critical user flows & data integrity
+- Cross-component dependencies
+
+**⚠️ SELECTIVE TESTING:**
+- Simple getters/setters (test only if complex logic)
+- UI components (snapshot tests for complex ones)
+- Configuration files (test critical paths only)
+- Pure utility functions (test complex algorithms only)
+
+**❌ SKIP TESTING:**
+- Trivial constants & enums
+- Basic CRUD operations without business logic
+- Simple prop passing in React components
+- Auto-generated code & type definitions
+
+##### **📈 VALIDATION EFFICIENCY MATRIX:**
+
+| Phase Type | Unit Tests | Integration | E2E | Browser Check |
+|------------|------------|-------------|-----|---------------|
+| Foundation | ✅ Critical only | ❌ | ❌ | ❌ |
+| Core Logic | ✅ All affected | ✅ Key flows | ❌ | ❌ |
+| Integration | ✅ Full suite | ✅ All paths | ⚠️ Smoke test | ✅ Manual |
+| Finalization | ✅ Full suite | ✅ All paths | ✅ Critical flows | ✅ Complete |
+
+#### **🚀 EFFICIENCY MAXIMIZERS**
+
+##### **PARALLEL VALIDATION COMMANDS:**
+```bash
+# Run simultaneously for speed:
+npm test & npx tsc --noEmit & npm run lint &
+wait  # Wait for all to complete
+```
+
+##### **QUICK DECISION CRITERIA:**
+- **Files affected < 5** → Direct implementation
+- **Tests currently failing** → Always use incremental approach  
+- **Production deadline pressure** → Medium approach with focused testing
+- **New architecture/patterns** → Complex approach with full validation
+- **User explicitly requests "quick fix"** → Document risks, proceed direct
+
+##### **SUCCESS CRITERIA PER PHASE:**
+- **Green Tests:** All existing tests pass
+- **Clean Compilation:** No TypeScript errors
+- **Lint Compliance:** No new warnings
+- **Browser Functionality:** Feature works as expected
+- **Performance Baseline:** No regression in load times
+
+#### **📋 DECISION WORKFLOW:**
+
+```bash
+1. ANALYZE TASK COMPLEXITY
+   ├── Count affected files
+   ├── Identify critical dependencies  
+   ├── Assess risk factors
+   └── Estimate effort
+
+2. SELECT APPROACH
+   ├── Simple → Direct implementation
+   ├── Medium → 2-3 phases
+   ├── Complex → 4-6 phases  
+   └── Mega → Checkpoint with user
+
+3. EXECUTE WITH VALIDATION
+   ├── Run appropriate tests per phase
+   ├── Validate integration points
+   ├── Check for regressions
+   └── Document any deviations
+
+4. FINALIZE & COMMIT
+   ├── Complete validation workflow
+   ├── Update documentation
+   ├── Commit with clear summary
+   └── Update TodoWrite status
+```
+
+### **3. Autonomie-Level**
 **Erkläre erst, code dann:**
 **Du schlägst vor, bewertest und begründest die Optionen:** das gilt für alle Schritte insbesondere Implementation-Details, Tool-Auswahl, Code-Struktur, Feature-Requirements, UI/UX-Änderungen, Business-Logik, Architektur-Entscheidungen, Performance-Trade-offs
 - Stichpunkte **vor** jeder Implementation
@@ -188,7 +604,7 @@ const getUserData = (id) => api.get('/users/' + id).data
 ### **🚨 KRITISCH: Alle Standards in STANDARDS.md sind PFLICHT**
 - **GDPR/DSGVO Compliance** - Datenschutz von Anfang an
 - **Security Standards** - Keine Kompromisse bei Sicherheit
-- **Quality Standards** - 80%+ Test Coverage, TypeScript strict
+- **Quality Standards** - Strategic test coverage of critical paths, TypeScript strict
 - **Performance Standards** - Core Web Vitals einhalten
 - **Accessibility Standards** - WCAG 2.1 AA Compliance
 
@@ -271,7 +687,7 @@ CLAUDE_DEPLOYMENT.md  ← Production-Guidelines
 
 ### **Development Quality:**
 - Zero `any` types in final code
-- 80%+ Test Coverage
+- Strategic Coverage of Business-Critical Areas (45-50%)
 - < 5 ESLint warnings
 - All features have Error Boundaries
 

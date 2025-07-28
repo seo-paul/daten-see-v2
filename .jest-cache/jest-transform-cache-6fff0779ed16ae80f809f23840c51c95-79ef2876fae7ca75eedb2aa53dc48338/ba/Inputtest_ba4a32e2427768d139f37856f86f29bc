@@ -1,0 +1,36 @@
+f4cc68fee9cb66d111697ede1172277d
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _react = require("@testing-library/react");
+const _userevent = /*#__PURE__*/ _interop_require_default(require("@testing-library/user-event"));
+const _Input = require("../Input");
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+describe('Input Component', ()=>{
+    it('should handle value changes', async ()=>{
+        const user = _userevent.default.setup();
+        const mockOnChange = jest.fn();
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Input.Input, {
+            onChange: mockOnChange
+        }));
+        const input = _react.screen.getByRole('textbox');
+        await user.type(input, 'test');
+        expect(mockOnChange).toHaveBeenCalled();
+    });
+    it('should apply disabled state correctly', ()=>{
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Input.Input, {
+            disabled: true,
+            placeholder: "Disabled input"
+        }));
+        const input = _react.screen.getByPlaceholderText('Disabled input');
+        expect(input).toBeDisabled();
+    });
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy96d2VpZ2VuL1NpdGVzL2RhdGVuLXNlZS12Mi9zcmMvY29tcG9uZW50cy91aS9fX3Rlc3RzX18vSW5wdXQudGVzdC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyLCBzY3JlZW4gfSBmcm9tICdAdGVzdGluZy1saWJyYXJ5L3JlYWN0JztcbmltcG9ydCB1c2VyRXZlbnQgZnJvbSAnQHRlc3RpbmctbGlicmFyeS91c2VyLWV2ZW50JztcblxuaW1wb3J0IHsgSW5wdXQgfSBmcm9tICcuLi9JbnB1dCc7XG5cbmRlc2NyaWJlKCdJbnB1dCBDb21wb25lbnQnLCAoKSA9PiB7XG4gIGl0KCdzaG91bGQgaGFuZGxlIHZhbHVlIGNoYW5nZXMnLCBhc3luYyAoKSA9PiB7XG4gICAgY29uc3QgdXNlciA9IHVzZXJFdmVudC5zZXR1cCgpO1xuICAgIGNvbnN0IG1vY2tPbkNoYW5nZSA9IGplc3QuZm4oKTtcbiAgICBcbiAgICByZW5kZXIoPElucHV0IG9uQ2hhbmdlPXttb2NrT25DaGFuZ2V9IC8+KTtcbiAgICBcbiAgICBjb25zdCBpbnB1dCA9IHNjcmVlbi5nZXRCeVJvbGUoJ3RleHRib3gnKTtcbiAgICBhd2FpdCB1c2VyLnR5cGUoaW5wdXQsICd0ZXN0Jyk7XG4gICAgXG4gICAgZXhwZWN0KG1vY2tPbkNoYW5nZSkudG9IYXZlQmVlbkNhbGxlZCgpO1xuICB9KTtcblxuICBpdCgnc2hvdWxkIGFwcGx5IGRpc2FibGVkIHN0YXRlIGNvcnJlY3RseScsICgpID0+IHtcbiAgICByZW5kZXIoPElucHV0IGRpc2FibGVkIHBsYWNlaG9sZGVyPVwiRGlzYWJsZWQgaW5wdXRcIiAvPik7XG4gICAgXG4gICAgY29uc3QgaW5wdXQgPSBzY3JlZW4uZ2V0QnlQbGFjZWhvbGRlclRleHQoJ0Rpc2FibGVkIGlucHV0Jyk7XG4gICAgZXhwZWN0KGlucHV0KS50b0JlRGlzYWJsZWQoKTtcbiAgfSk7XG59KTsiXSwibmFtZXMiOlsiZGVzY3JpYmUiLCJpdCIsInVzZXIiLCJ1c2VyRXZlbnQiLCJzZXR1cCIsIm1vY2tPbkNoYW5nZSIsImplc3QiLCJmbiIsInJlbmRlciIsIklucHV0Iiwib25DaGFuZ2UiLCJpbnB1dCIsInNjcmVlbiIsImdldEJ5Um9sZSIsInR5cGUiLCJleHBlY3QiLCJ0b0hhdmVCZWVuQ2FsbGVkIiwiZGlzYWJsZWQiLCJwbGFjZWhvbGRlciIsImdldEJ5UGxhY2Vob2xkZXJUZXh0IiwidG9CZURpc2FibGVkIl0sIm1hcHBpbmdzIjoiOzs7Ozt1QkFBK0I7a0VBQ1Q7dUJBRUE7Ozs7OztBQUV0QkEsU0FBUyxtQkFBbUI7SUFDMUJDLEdBQUcsK0JBQStCO1FBQ2hDLE1BQU1DLE9BQU9DLGtCQUFTLENBQUNDLEtBQUs7UUFDNUIsTUFBTUMsZUFBZUMsS0FBS0MsRUFBRTtRQUU1QkMsSUFBQUEsYUFBTSxnQkFBQyxxQkFBQ0MsWUFBSztZQUFDQyxVQUFVTDs7UUFFeEIsTUFBTU0sUUFBUUMsYUFBTSxDQUFDQyxTQUFTLENBQUM7UUFDL0IsTUFBTVgsS0FBS1ksSUFBSSxDQUFDSCxPQUFPO1FBRXZCSSxPQUFPVixjQUFjVyxnQkFBZ0I7SUFDdkM7SUFFQWYsR0FBRyx5Q0FBeUM7UUFDMUNPLElBQUFBLGFBQU0sZ0JBQUMscUJBQUNDLFlBQUs7WUFBQ1EsUUFBUTtZQUFDQyxhQUFZOztRQUVuQyxNQUFNUCxRQUFRQyxhQUFNLENBQUNPLG9CQUFvQixDQUFDO1FBQzFDSixPQUFPSixPQUFPUyxZQUFZO0lBQzVCO0FBQ0YifQ==

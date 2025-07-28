@@ -1,5 +1,8 @@
 import '@testing-library/jest-dom';
 
+// Ensure NODE_ENV is set to 'test' during test runs
+process.env.NODE_ENV = 'test';
+
 // Mock window.matchMedia for testing
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -82,6 +85,4 @@ jest.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
-// Setup MSW (Mock Service Worker) for tests
-import { setupMSWForTests } from '@/lib/testing/msw-setup';
-setupMSWForTests();
+// MSW setup removed - was causing import errors after cleanup

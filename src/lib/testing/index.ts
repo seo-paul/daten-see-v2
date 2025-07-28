@@ -1,6 +1,6 @@
 /**
  * Testing Utilities Index
- * Central export for all testing utilities
+ * Central export for all testing utilities (cleaned up)
  */
 
 // TanStack Query testing utilities
@@ -10,38 +10,20 @@ export {
   withQueryClient,
 } from './query-wrapper';
 
-// Context provider testing utilities
+// Enhanced Auth testing utilities with DI support
 export {
-  TestContextWrapper,
-  MinimalTestWrapper,
-  AuthTestWrapper,
-} from './context-wrapper';
+  BaseAuthWrapper,
+  UnauthenticatedWrapper,
+  AuthenticatedWrapper,
+  AdminWrapper,
+  ExpiredTokenWrapper,
+  CustomTokenManagerWrapper,
+  UniversalAuthWrapper,
+} from './auth-wrapper';
 
-// Custom hook testing utilities
-export {
-  renderHookWithQuery,
-  renderHookWithContext,
-  waitForQuery,
-  mockTestData,
-} from './custom-hooks';
-
-// MSW (Mock Service Worker) utilities
-export {
-  handlers,
-  authHandlers,
-  dashboardHandlers,
-  errorHandlers,
-  resetMockData,
-} from './msw-handlers';
-
-export {
-  server,
-  setupMSWForTests,
-  setupMSWForBrowser,
-  startMSW,
-} from './msw-setup';
+// Token Manager Mock Scenarios
+export { TokenManagerMockScenarios, createMockTokenManager } from './token-manager-mock';
 
 // Re-export types for convenience
 export type { TestQueryWrapperProps } from './query-wrapper';
-export type { TestContextWrapperProps } from './context-wrapper';
-export type { RenderHookWithQueryOptions } from './custom-hooks';
+export type { AuthWrapperProps, AuthTestScenario } from './auth-wrapper';

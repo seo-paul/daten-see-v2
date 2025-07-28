@@ -15,13 +15,17 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
   const [showMenu, setShowMenu] = useState(false);
 
   const formatDate = (date: Date): string => {
-    return new Intl.DateTimeFormat('de-DE', {
-      day: '2-digit',
-      month: '2-digit', 
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(date);
+    try {
+      return new Intl.DateTimeFormat('de-DE', {
+        day: '2-digit',
+        month: '2-digit', 
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).format(date);
+    } catch {
+      return 'Invalid Date';
+    }
   };
 
   return (

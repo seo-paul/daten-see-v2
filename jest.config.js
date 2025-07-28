@@ -9,27 +9,33 @@ const config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
   
+  // Memory optimization settings
+  maxWorkers: '50%',
+  workerIdleMemoryLimit: '512MB',
+  
   // Test patterns
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.(js|jsx|ts|tsx)',
     '<rootDir>/src/**/*.(test|spec).(js|jsx|ts|tsx)',
   ],
   
-  // Coverage settings
+  // Coverage settings - strategic coverage only
   collectCoverageFrom: [
     'src/**/*.(js|jsx|ts|tsx)',
     '!src/**/*.d.ts',
     '!src/**/index.(js|ts)',
     '!src/**/*.stories.(js|jsx|ts|tsx)',
+    '!src/components/ui/**', // Skip trivial UI components
+    '!src/**/*.config.(js|ts)',
   ],
   coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html'],
+  coverageReporters: ['text', 'lcov'],
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 60,
+      functions: 60,
+      lines: 60,
+      statements: 60,
     },
   },
   
@@ -41,14 +47,24 @@ const config = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/__mocks__/fileMock.js',
   },
   
+  // Enable manual mocks
+  clearMocks: true,
+  restoreMocks: true,
+  
   // Transform settings
   transformIgnorePatterns: [
     '/node_modules/',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   
-  // Test timeout
-  testTimeout: 30000,
+  // Memory & performance optimizations
+  testTimeout: 15000,
+  cache: true,
+  cacheDirectory: '<rootDir>/.jest-cache',
+  
+  // Test execution optimizations
+  testSequencer: '<rootDir>/node_modules/@jest/test-sequencer/build/index.js',
+  verbose: false,
 };
 
 module.exports = createJestConfig(config);

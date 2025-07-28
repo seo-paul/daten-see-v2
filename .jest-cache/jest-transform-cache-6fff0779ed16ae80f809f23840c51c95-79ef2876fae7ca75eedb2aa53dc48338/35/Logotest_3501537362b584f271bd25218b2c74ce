@@ -1,0 +1,54 @@
+e76bb8f18b2e6af3d5595970decd076f
+/**
+ * Logo Component Tests - Streamlined
+ * Testing core DATEN-SEE logo functionality only
+ */ "use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _react = require("@testing-library/react");
+const _react1 = /*#__PURE__*/ _interop_require_default(require("react"));
+const _Logo = require("../Logo");
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+describe('Logo Component', ()=>{
+    it('should render full logo with icon and text by default', ()=>{
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Logo.Logo, {}));
+        expect(_react.screen.getByLabelText('DATEN-SEE Logo')).toBeInTheDocument();
+        expect(_react.screen.getByText('DATEN-SEE')).toBeInTheDocument();
+    });
+    it('should render icon-only variant', ()=>{
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Logo.Logo, {
+            variant: "icon"
+        }));
+        expect(_react.screen.getByLabelText('DATEN-SEE Logo')).toBeInTheDocument();
+        expect(_react.screen.queryByText('DATEN-SEE')).not.toBeInTheDocument();
+    });
+    it('should render text-only variant', ()=>{
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Logo.Logo, {
+            variant: "text"
+        }));
+        expect(_react.screen.getByText('DATEN-SEE')).toBeInTheDocument();
+        expect(_react.screen.queryByLabelText('DATEN-SEE Logo')).not.toBeInTheDocument();
+    });
+    it('should be accessible with proper ARIA label', ()=>{
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Logo.Logo, {
+            variant: "icon"
+        }));
+        const logo = _react.screen.getByLabelText('DATEN-SEE Logo');
+        expect(logo).toHaveAttribute('aria-label', 'DATEN-SEE Logo');
+    });
+    it('should accept custom className prop', ()=>{
+        (0, _react.render)(/*#__PURE__*/ (0, _jsxruntime.jsx)(_Logo.Logo, {
+            className: "custom-class"
+        }));
+        const container = _react.screen.getByText('DATEN-SEE').parentElement;
+        expect(container).toHaveClass('custom-class');
+    });
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy96d2VpZ2VuL1NpdGVzL2RhdGVuLXNlZS12Mi9zcmMvY29tcG9uZW50cy9icmFuZC9fX3Rlc3RzX18vTG9nby50ZXN0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIExvZ28gQ29tcG9uZW50IFRlc3RzIC0gU3RyZWFtbGluZWRcbiAqIFRlc3RpbmcgY29yZSBEQVRFTi1TRUUgbG9nbyBmdW5jdGlvbmFsaXR5IG9ubHlcbiAqL1xuXG5pbXBvcnQgeyByZW5kZXIsIHNjcmVlbiB9IGZyb20gJ0B0ZXN0aW5nLWxpYnJhcnkvcmVhY3QnO1xuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcblxuaW1wb3J0IHsgTG9nbyB9IGZyb20gJy4uL0xvZ28nO1xuXG5kZXNjcmliZSgnTG9nbyBDb21wb25lbnQnLCAoKSA9PiB7XG4gIGl0KCdzaG91bGQgcmVuZGVyIGZ1bGwgbG9nbyB3aXRoIGljb24gYW5kIHRleHQgYnkgZGVmYXVsdCcsICgpID0+IHtcbiAgICByZW5kZXIoPExvZ28gLz4pO1xuICAgIFxuICAgIGV4cGVjdChzY3JlZW4uZ2V0QnlMYWJlbFRleHQoJ0RBVEVOLVNFRSBMb2dvJykpLnRvQmVJblRoZURvY3VtZW50KCk7XG4gICAgZXhwZWN0KHNjcmVlbi5nZXRCeVRleHQoJ0RBVEVOLVNFRScpKS50b0JlSW5UaGVEb2N1bWVudCgpO1xuICB9KTtcblxuICBpdCgnc2hvdWxkIHJlbmRlciBpY29uLW9ubHkgdmFyaWFudCcsICgpID0+IHtcbiAgICByZW5kZXIoPExvZ28gdmFyaWFudD1cImljb25cIiAvPik7XG4gICAgXG4gICAgZXhwZWN0KHNjcmVlbi5nZXRCeUxhYmVsVGV4dCgnREFURU4tU0VFIExvZ28nKSkudG9CZUluVGhlRG9jdW1lbnQoKTtcbiAgICBleHBlY3Qoc2NyZWVuLnF1ZXJ5QnlUZXh0KCdEQVRFTi1TRUUnKSkubm90LnRvQmVJblRoZURvY3VtZW50KCk7XG4gIH0pO1xuXG4gIGl0KCdzaG91bGQgcmVuZGVyIHRleHQtb25seSB2YXJpYW50JywgKCkgPT4ge1xuICAgIHJlbmRlcig8TG9nbyB2YXJpYW50PVwidGV4dFwiIC8+KTtcbiAgICBcbiAgICBleHBlY3Qoc2NyZWVuLmdldEJ5VGV4dCgnREFURU4tU0VFJykpLnRvQmVJblRoZURvY3VtZW50KCk7XG4gICAgZXhwZWN0KHNjcmVlbi5xdWVyeUJ5TGFiZWxUZXh0KCdEQVRFTi1TRUUgTG9nbycpKS5ub3QudG9CZUluVGhlRG9jdW1lbnQoKTtcbiAgfSk7XG5cbiAgaXQoJ3Nob3VsZCBiZSBhY2Nlc3NpYmxlIHdpdGggcHJvcGVyIEFSSUEgbGFiZWwnLCAoKSA9PiB7XG4gICAgcmVuZGVyKDxMb2dvIHZhcmlhbnQ9XCJpY29uXCIgLz4pO1xuICAgIFxuICAgIGNvbnN0IGxvZ28gPSBzY3JlZW4uZ2V0QnlMYWJlbFRleHQoJ0RBVEVOLVNFRSBMb2dvJyk7XG4gICAgZXhwZWN0KGxvZ28pLnRvSGF2ZUF0dHJpYnV0ZSgnYXJpYS1sYWJlbCcsICdEQVRFTi1TRUUgTG9nbycpO1xuICB9KTtcblxuICBpdCgnc2hvdWxkIGFjY2VwdCBjdXN0b20gY2xhc3NOYW1lIHByb3AnLCAoKSA9PiB7XG4gICAgcmVuZGVyKDxMb2dvIGNsYXNzTmFtZT1cImN1c3RvbS1jbGFzc1wiIC8+KTtcbiAgICBcbiAgICBjb25zdCBjb250YWluZXIgPSBzY3JlZW4uZ2V0QnlUZXh0KCdEQVRFTi1TRUUnKS5wYXJlbnRFbGVtZW50O1xuICAgIGV4cGVjdChjb250YWluZXIpLnRvSGF2ZUNsYXNzKCdjdXN0b20tY2xhc3MnKTtcbiAgfSk7XG59KTsiXSwibmFtZXMiOlsiZGVzY3JpYmUiLCJpdCIsInJlbmRlciIsIkxvZ28iLCJleHBlY3QiLCJzY3JlZW4iLCJnZXRCeUxhYmVsVGV4dCIsInRvQmVJblRoZURvY3VtZW50IiwiZ2V0QnlUZXh0IiwidmFyaWFudCIsInF1ZXJ5QnlUZXh0Iiwibm90IiwicXVlcnlCeUxhYmVsVGV4dCIsImxvZ28iLCJ0b0hhdmVBdHRyaWJ1dGUiLCJjbGFzc05hbWUiLCJjb250YWluZXIiLCJwYXJlbnRFbGVtZW50IiwidG9IYXZlQ2xhc3MiXSwibWFwcGluZ3MiOiJBQUFBOzs7Q0FHQzs7Ozs7dUJBRThCOytEQUNiO3NCQUVHOzs7Ozs7QUFFckJBLFNBQVMsa0JBQWtCO0lBQ3pCQyxHQUFHLHlEQUF5RDtRQUMxREMsSUFBQUEsYUFBTSxnQkFBQyxxQkFBQ0MsVUFBSTtRQUVaQyxPQUFPQyxhQUFNLENBQUNDLGNBQWMsQ0FBQyxtQkFBbUJDLGlCQUFpQjtRQUNqRUgsT0FBT0MsYUFBTSxDQUFDRyxTQUFTLENBQUMsY0FBY0QsaUJBQWlCO0lBQ3pEO0lBRUFOLEdBQUcsbUNBQW1DO1FBQ3BDQyxJQUFBQSxhQUFNLGdCQUFDLHFCQUFDQyxVQUFJO1lBQUNNLFNBQVE7O1FBRXJCTCxPQUFPQyxhQUFNLENBQUNDLGNBQWMsQ0FBQyxtQkFBbUJDLGlCQUFpQjtRQUNqRUgsT0FBT0MsYUFBTSxDQUFDSyxXQUFXLENBQUMsY0FBY0MsR0FBRyxDQUFDSixpQkFBaUI7SUFDL0Q7SUFFQU4sR0FBRyxtQ0FBbUM7UUFDcENDLElBQUFBLGFBQU0sZ0JBQUMscUJBQUNDLFVBQUk7WUFBQ00sU0FBUTs7UUFFckJMLE9BQU9DLGFBQU0sQ0FBQ0csU0FBUyxDQUFDLGNBQWNELGlCQUFpQjtRQUN2REgsT0FBT0MsYUFBTSxDQUFDTyxnQkFBZ0IsQ0FBQyxtQkFBbUJELEdBQUcsQ0FBQ0osaUJBQWlCO0lBQ3pFO0lBRUFOLEdBQUcsK0NBQStDO1FBQ2hEQyxJQUFBQSxhQUFNLGdCQUFDLHFCQUFDQyxVQUFJO1lBQUNNLFNBQVE7O1FBRXJCLE1BQU1JLE9BQU9SLGFBQU0sQ0FBQ0MsY0FBYyxDQUFDO1FBQ25DRixPQUFPUyxNQUFNQyxlQUFlLENBQUMsY0FBYztJQUM3QztJQUVBYixHQUFHLHVDQUF1QztRQUN4Q0MsSUFBQUEsYUFBTSxnQkFBQyxxQkFBQ0MsVUFBSTtZQUFDWSxXQUFVOztRQUV2QixNQUFNQyxZQUFZWCxhQUFNLENBQUNHLFNBQVMsQ0FBQyxhQUFhUyxhQUFhO1FBQzdEYixPQUFPWSxXQUFXRSxXQUFXLENBQUM7SUFDaEM7QUFDRiJ9

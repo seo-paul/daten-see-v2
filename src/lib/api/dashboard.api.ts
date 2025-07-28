@@ -5,8 +5,8 @@
 
 import type { Dashboard, DashboardListItem, CreateDashboardRequest, UpdateDashboardRequest } from '@/types/dashboard.types';
 
-// Mock data for development - will be replaced with real API calls
-const mockDashboards: DashboardListItem[] = [
+// Initial mock data for development - will be replaced with real API calls
+const initialMockDashboards: DashboardListItem[] = [
   {
     id: 'dash-1',
     name: 'Sales Analytics',
@@ -32,6 +32,14 @@ const mockDashboards: DashboardListItem[] = [
     widgetCount: 4,
   },
 ];
+
+// Working copy of mock data that can be mutated
+let mockDashboards = [...initialMockDashboards];
+
+// Reset function for testing
+export const resetMockDashboards = (): void => {
+  mockDashboards = initialMockDashboards.map(d => ({ ...d }));
+};
 
 export const dashboardApi = {
   /**
@@ -93,18 +101,18 @@ export const dashboardApi = {
   /**
    * Update existing dashboard
    */
-  async update(data: UpdateDashboardRequest): Promise<void> {
+  async update(id: string, data: UpdateDashboardRequest): Promise<void> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 600));
     
-    const index = mockDashboards.findIndex(d => d.id === data.id);
+    const index = mockDashboards.findIndex(d => d.id === id);
     if (index === -1) {
-      throw new Error(`Dashboard with ID ${data.id} not found`);
+      throw new Error(`Dashboard with ID ${id} not found`);
     }
 
     const existingDashboard = mockDashboards[index];
     if (!existingDashboard) {
-      throw new Error(`Dashboard with ID ${data.id} not found`);
+      throw new Error(`Dashboard with ID ${id} not found`);
     }
     
     mockDashboards[index] = {

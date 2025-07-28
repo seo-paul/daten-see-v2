@@ -108,6 +108,7 @@ export function EditDashboardModal({
               type="button"
               onClick={handleClose}
               className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -117,10 +118,11 @@ export function EditDashboardModal({
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {/* Name Field */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="edit-dashboard-name" className="block text-sm font-medium text-gray-700 mb-2">
                 Dashboard Name
               </label>
               <input
+                id="edit-dashboard-name"
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
@@ -137,10 +139,11 @@ export function EditDashboardModal({
 
             {/* Description Field */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="edit-dashboard-description" className="block text-sm font-medium text-gray-700 mb-2">
                 Beschreibung
               </label>
               <textarea
+                id="edit-dashboard-description"
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 rows={3}
