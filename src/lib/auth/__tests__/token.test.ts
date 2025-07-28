@@ -11,9 +11,7 @@
  * 6. Server-Side vs Client-Side Behavior
  */
 
-import { appLogger } from '@/lib/monitoring/logger.config';
-
-import { tokenManager, type TokenData, type StoredTokenInfo } from '../token';
+import { tokenManager, type TokenData } from '../token';
 
 // Mock logger to avoid console noise in tests (allowing actual logging for debugging)
 jest.mock('@/lib/monitoring/logger.config', () => ({

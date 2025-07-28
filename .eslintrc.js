@@ -3,7 +3,9 @@ module.exports = {
     'next/core-web-vitals',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint',
+  ],
   rules: {
     // TypeScript strict rules
     '@typescript-eslint/no-explicit-any': 'error',
@@ -91,6 +93,24 @@ module.exports = {
         selector: 'CallExpression[callee.name="useInfiniteQuery"]:not([arguments.0.type="ObjectExpression"])',
         message: 'useInfiniteQuery should always use object syntax for consistency',
       },
+      // TanStack Query Performance Optimizations
+      {
+        selector: 'CallExpression[callee.name="useQuery"] ObjectExpression:has(Property[key.name="enabled"][value.type!="Identifier"]:not([value.type="CallExpression"]:has(MemberExpression)))',
+        message: 'useQuery enabled should use computed values or boolean variables, not inline conditions',
+      },
+      {
+        selector: 'CallExpression[callee.name="useQuery"] ObjectExpression:not(:has(Property[key.name="queryKey"]))',
+        message: 'useQuery must have explicit queryKey for proper caching',
+      },
+      {
+        selector: 'CallExpression[callee.name="useMutation"] ObjectExpression:not(:has(Property[key.name="mutationFn"]))',
+        message: 'useMutation must have explicit mutationFn',
+      },
+      // Hook dependency optimizations
+      {
+        selector: 'CallExpression[callee.name="useQueryClient"]:has(~ CallExpression[callee.name="useMutation"])',
+        message: 'useQueryClient should be declared once at the top of the hook, not inline with mutations',
+      },
     ],
     
     // Custom Hook Rules
@@ -115,6 +135,22 @@ module.exports = {
     // Performance Rules for Hooks
     'no-array-constructor': 'error',
     'no-object-constructor': 'error',
+    
+    // Query Optimization Rules
+    'no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+        allowTaggedTemplates: true,
+      }
+    ],
+    
+    // Memory Leak Prevention
+    'no-implicit-globals': 'error',
+    
+    // TanStack Query Best Practices (implemented via no-restricted-syntax)
+    // Custom rules moved to no-restricted-syntax patterns above
   },
   overrides: [
     {
@@ -143,6 +179,30 @@ module.exports = {
         // Performance in custom hooks
         'no-array-constructor': 'error',
         'no-object-constructor': 'error',
+        
+        // TanStack Query Hook Optimizations  
+        'no-restricted-syntax': [
+          'error',
+          {
+            selector: 'CallExpression[callee.name="useQueryClient"][parent.type="VariableDeclarator"][parent.id.type="Identifier"]:has(~ * CallExpression[callee.name="useMutation"])',
+            message: 'useQueryClient should be extracted to prevent re-renders. Declare it once at hook level.',
+          },
+          {
+            selector: 'CallExpression[callee.name="useMutation"] ObjectExpression Property[key.name="onSuccess"] ArrowFunctionExpression BlockStatement:has(ExpressionStatement > CallExpression[callee.object.name="queryClient"][callee.property.name="invalidateQueries"]) ~ ExpressionStatement > CallExpression[callee.object.name="queryClient"][callee.property.name="invalidateQueries"]',
+            message: 'Multiple queryClient.invalidateQueries calls should be batched for performance',
+          },
+          // Prevent manual ESLint disables for exhaustive-deps in hooks
+          {
+            selector: 'Program > :matches(ExpressionStatement, VariableDeclaration) :matches(LineComment, BlockComment)[value*="eslint-disable"][value*="exhaustive-deps"]',
+            message: 'Avoid disabling exhaustive-deps in hook files. Fix the dependency array instead.',
+          },
+        ],
+        
+        // Query Key Consistency
+        'prefer-template': 'error', // Use template literals for dynamic query keys
+        
+        // Hook Return Consistency
+        'consistent-return': ['error', { treatUndefinedAsUnspecified: false }],
       },
     },
     {

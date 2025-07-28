@@ -10,7 +10,7 @@
  * 5. Cache Persistence & Garbage Collection (4 tests)
  */
 
-import { QueryClient, QueryCache, MutationCache } from '@tanstack/react-query';
+import { QueryClient, QueryCache } from '@tanstack/react-query';
 
 import {
   createOptimizedQueryClient,
@@ -35,12 +35,9 @@ Object.defineProperty(navigator, 'connection', {
 describe('TanStack Query Cache Management Tests - 80% Cache Coverage', () => {
   let queryClient: QueryClient;
   let queryCache: QueryCache;
-  let mutationCache: MutationCache;
-
   beforeEach(() => {
     queryClient = createOptimizedQueryClient();
     queryCache = queryClient.getQueryCache();
-    mutationCache = queryClient.getMutationCache();
     
     // Clear all caches
     queryClient.clear();
@@ -192,7 +189,7 @@ describe('TanStack Query Cache Management Tests - 80% Cache Coverage', () => {
   describe('Network-Aware Cache Management', () => {
     it('should optimize cache for slow networks', () => {
       // Mock slow network
-      (mockConnection as Record<string, string>).effectiveType = 'slow-2g';
+      (mockConnection as unknown as Record<string, string>).effectiveType = 'slow-2g';
       
       const networkConfig = getNetworkOptimizedConfig();
       
@@ -205,7 +202,7 @@ describe('TanStack Query Cache Management Tests - 80% Cache Coverage', () => {
 
     it('should use default config for fast networks', () => {
       // Mock fast network
-      (mockConnection as Record<string, string>).effectiveType = '4g';
+      (mockConnection as unknown as Record<string, string>).effectiveType = '4g';
       
       const networkConfig = getNetworkOptimizedConfig();
       
@@ -377,8 +374,8 @@ describe('TanStack Query Cache Management Tests - 80% Cache Coverage', () => {
       }));
       
       expect(cacheState).toHaveLength(1);
-      expect(cacheState[0].queryKey).toEqual(queryKeys.dashboardsList());
-      expect(cacheState[0].state.data).toEqual(testData);
+      expect(cacheState[0]?.queryKey).toEqual(queryKeys.dashboardsList());
+      expect(cacheState[0]?.state.data).toEqual(testData);
       
       // Clear and restore (simulate hydration)
       queryClient.clear();
@@ -433,11 +430,11 @@ describe('TanStack Query Cache Management Tests - 80% Cache Coverage', () => {
       // Test retry logic for different error types
       if (typeof retryFn === 'function') {
         // Should not retry 404 errors
-        const notFoundError = { status: 404 } as Error;
+        const notFoundError = { status: 404 } as unknown as Error;
         expect(retryFn(1, notFoundError)).toBe(false);
         
         // Should not retry 401 errors
-        const authError = { status: 401 } as Error;
+        const authError = { status: 401 } as unknown as Error;
         expect(retryFn(1, authError)).toBe(false);
         
         // Should retry network errors

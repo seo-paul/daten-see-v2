@@ -16,7 +16,6 @@ import { LoginResponseSchema, RefreshTokenResponseSchema } from '@/types/api.typ
  * Handles user authentication via TanStack Query
  */
 export function useLoginMutation(): UseMutationResult<LoginResponse, Error, LoginRequest> {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -38,7 +37,7 @@ export function useLoginMutation(): UseMutationResult<LoginResponse, Error, Logi
 
       return validatedResponse;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       // Store tokens securely
       tokenManager.setTokens({
         token: data.data.token,
@@ -49,9 +48,11 @@ export function useLoginMutation(): UseMutationResult<LoginResponse, Error, Logi
       // Update API client with new token
       tokenManager.updateApiClientToken();
 
-      // Invalidate relevant queries
-      queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboards'] });
+      // Invalidate relevant queries (batched for performance)
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['user', 'profile'] }),
+        queryClient.invalidateQueries({ queryKey: ['dashboards'] }),
+      ]);
 
       appLogger.info('Login mutation completed successfully', {
         userId: data.data.user.id,
@@ -74,7 +75,6 @@ export function useLoginMutation(): UseMutationResult<LoginResponse, Error, Logi
  * Handles user logout and cleanup
  */
 export function useLogoutMutation(): UseMutationResult<void, Error, void> {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -184,7 +184,6 @@ export function useRefreshTokenMutation(): UseMutationResult<RefreshTokenRespons
  * Simulates API calls without actual backend
  */
 export function useMockLoginMutation(): UseMutationResult<LoginResponse, Error, LoginRequest> {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -232,7 +231,7 @@ export function useMockLoginMutation(): UseMutationResult<LoginResponse, Error, 
       // Update API client with new token
       tokenManager.updateApiClientToken();
 
-      // Invalidate relevant queries
+      // Invalidate relevant queries  
       queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
 
       appLogger.info('Mock login completed successfully', {

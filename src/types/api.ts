@@ -6,7 +6,7 @@
 // ===== DASHBOARD TYPES =====
 export interface Dashboard {
   id: string;
-  title: string;
+  name: string;
   description?: string;
   widgets: DashboardWidget[];
   createdAt: string;
@@ -83,7 +83,7 @@ export interface TimeRange {
 
 // ===== REQUEST/RESPONSE TYPES =====
 export interface CreateDashboardRequest {
-  title: string;
+  name: string;
   description?: string;
   isPublic?: boolean;
   organizationId?: string;
@@ -91,7 +91,7 @@ export interface CreateDashboardRequest {
 }
 
 export interface UpdateDashboardRequest {
-  title?: string;
+  name?: string;
   description?: string;
   isPublic?: boolean;
   widgets?: DashboardWidget[];
@@ -303,7 +303,7 @@ export function isDashboard(obj: unknown): obj is Dashboard {
   return typeof obj === 'object' && 
          obj !== null && 
          'id' in obj && 
-         'title' in obj && 
+         'name' in obj && 
          'widgets' in obj;
 }
 

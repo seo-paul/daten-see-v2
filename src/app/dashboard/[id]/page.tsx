@@ -1,7 +1,5 @@
 'use client';
 
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -31,24 +29,14 @@ export default function DashboardDetailPage(): React.ReactElement {
 
   return (
     <MainLayout>
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        {/* Back Navigation */}
-        <div className="bg-white border-b border-gray-200 px-6 py-3">
-          <Link 
-            href="/dashboards"
-            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Zurück zur Übersicht
-          </Link>
-        </div>
+      <div className="flex flex-col h-full bg-[#FEFCF9]">
 
         {/* Loading State */}
         {isLoading && (
           <div className="flex-1 flex items-center justify-center">
-            <div className="text-center text-gray-500">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center animate-pulse">
-                <div className="w-8 h-8 border-2 border-gray-300 border-dashed rounded animate-spin"></div>
+            <div className="text-center text-[#5d5d5d]">
+              <div className="w-16 h-16 mx-auto mb-4 bg-[#FBF5ED] rounded-lg flex items-center justify-center animate-pulse">
+                <div className="w-8 h-8 border-2 border-[#E6D7B8] border-dashed rounded animate-spin"></div>
               </div>
               <p className="text-lg font-medium">Lade Dashboard...</p>
             </div>
@@ -97,22 +85,23 @@ export default function DashboardDetailPage(): React.ReactElement {
               }).format(currentDashboard.updatedAt)}
             />
 
-            {/* Main Dashboard Content */}
+            {/* Main Dashboard Content - Full Width Widget Area */}
             <DashboardGrid>
               {currentDashboard.widgets.length === 0 ? (
-                <div className="text-center text-gray-500 py-12">
-                  <p className="text-lg font-medium mb-2">Keine Widgets vorhanden</p>
-                  <p className="text-sm">Widgets werden in Task 1.7 implementiert</p>
+                <div className="text-center text-[#5d5d5d] py-16">
+                  <p className="text-lg font-medium mb-2">Dashboard Widget-Bereich</p>
+                  <p className="text-sm mb-4">Dieser Bereich entspricht der Design-Referenz - volle Bildschirmbreite für Widgets</p>
+                  <p className="text-xs text-[#5d5d5d]">Widgets werden in Task 1.7 implementiert</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {currentDashboard.widgets.map(widget => (
                     <div
                       key={widget.id}
-                      className="bg-white rounded-lg border border-gray-200 p-4"
+                      className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-4 shadow-sm hover:shadow-md transition-shadow"
                     >
-                      <h4 className="font-medium text-gray-900 mb-2">{widget.title}</h4>
-                      <p className="text-sm text-gray-500">Widget Type: {widget.type}</p>
+                      <h4 className="font-medium text-[#3d3d3d] mb-2">{widget.title}</h4>
+                      <p className="text-sm text-[#5d5d5d]">Widget Type: {widget.type}</p>
                     </div>
                   ))}
                 </div>

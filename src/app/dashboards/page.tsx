@@ -7,6 +7,7 @@ import { CreateDashboardModal } from '@/components/dashboard/CreateDashboardModa
 import { DashboardCard } from '@/components/dashboard/DashboardCard';
 import { EditDashboardModal } from '@/components/dashboard/EditDashboardModal';
 import { MainLayout } from '@/components/layout/MainLayout';
+import { Button } from '@/components/ui/Button';
 import { useDashboardStore } from '@/store/dashboard.store';
 import type { DashboardListItem } from '@/types/dashboard.types';
 
@@ -56,10 +57,10 @@ export default function DashboardsPage(): React.ReactElement {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-[#3d3d3d]">
                 Dashboard-Übersicht
               </h1>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[#5d5d5d] mt-1">
                 {dashboards.length > 0 
                   ? `${dashboards.length} Dashboard${dashboards.length === 1 ? '' : 's'} verfügbar`
                   : 'Noch keine Dashboards erstellt'
@@ -67,26 +68,26 @@ export default function DashboardsPage(): React.ReactElement {
               </p>
             </div>
 
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              context="page"
               onClick={() => setShowCreateModal(true)}
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              leftIcon={<Plus className="w-4 h-4" />}
             >
-              <Plus className="w-4 h-4 mr-2" />
               Neues Dashboard
-            </button>
+            </Button>
           </div>
 
           {/* Search Bar */}
           {dashboards.length > 0 && (
             <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#5d5d5d] w-5 h-5" />
               <input
                 type="text"
                 placeholder="Dashboards durchsuchen..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-[#E6D7B8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F4F73] focus:border-transparent"
               />
             </div>
           )}
@@ -112,10 +113,10 @@ export default function DashboardsPage(): React.ReactElement {
 
           {/* Loading State */}
           {isLoading && dashboards.length === 0 && (
-            <div className="bg-white rounded-lg border border-gray-200 p-8">
-              <div className="text-center text-gray-500">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center animate-pulse">
-                  <div className="w-8 h-8 border-2 border-gray-300 border-dashed rounded animate-spin"></div>
+            <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-8">
+              <div className="text-center text-[#5d5d5d]">
+                <div className="w-16 h-16 mx-auto mb-4 bg-[#FBF5ED] rounded-lg flex items-center justify-center animate-pulse">
+                  <div className="w-8 h-8 border-2 border-[#E6D7B8] border-dashed rounded animate-spin"></div>
                 </div>
                 <p className="text-lg font-medium">Lade Dashboards...</p>
               </div>
@@ -138,33 +139,33 @@ export default function DashboardsPage(): React.ReactElement {
 
           {/* Empty State */}
           {!isLoading && dashboards.length === 0 && (
-            <div className="bg-white rounded-lg border border-gray-200 p-8">
-              <div className="text-center text-gray-500">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <div className="w-8 h-8 border-2 border-gray-300 border-dashed rounded"></div>
+            <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-8">
+              <div className="text-center text-[#5d5d5d]">
+                <div className="w-16 h-16 mx-auto mb-4 bg-[#FBF5ED] rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 border-2 border-[#E6D7B8] border-dashed rounded"></div>
                 </div>
                 <p className="text-lg font-medium mb-2">Noch keine Dashboards</p>
-                <p className="text-sm text-gray-400 mb-4">
+                <p className="text-sm text-[#5d5d5d] mb-4">
                   Erstellen Sie Ihr erstes Dashboard, um loszulegen.
                 </p>
-                <button
-                  type="button"
+                <Button
+                  variant="primary"
+                  context="page"
                   onClick={() => setShowCreateModal(true)}
-                  className="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Erstes Dashboard erstellen
-                </button>
+                </Button>
               </div>
             </div>
           )}
 
           {/* No Search Results */}
           {!isLoading && dashboards.length > 0 && filteredDashboards.length === 0 && (
-            <div className="bg-white rounded-lg border border-gray-200 p-8">
-              <div className="text-center text-gray-500">
-                <Search className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+            <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-8">
+              <div className="text-center text-[#5d5d5d]">
+                <Search className="w-16 h-16 mx-auto mb-4 text-[#E6D7B8]" />
                 <p className="text-lg font-medium mb-2">Keine Suchergebnisse</p>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[#5d5d5d]">
                   Keine Dashboards gefunden für &quot;{searchQuery}&quot;
                 </p>
               </div>

@@ -1,8 +1,12 @@
 'use client';
 
-import { Menu, Settings, X } from 'lucide-react';
+import { Menu, Settings, X, Bug, Users, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+
+import { Logo } from '@/components/brand/Logo';
+import { NavbarButton } from '@/components/ui/Button';
+import { useRouteContext } from '@/hooks/useRouteContext';
 
 interface TopNavigationProps {
   className?: string;
@@ -10,57 +14,45 @@ interface TopNavigationProps {
 
 export function TopNavigation({ className = '' }: TopNavigationProps): React.ReactElement {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  return (
-    <header className={`bg-white border-b border-gray-200 px-6 py-4 ${className}`}>
-      <div className="flex items-center justify-between">
-        {/* Left Section: Logo and Main Navigation */}
-        <div className="flex items-center space-x-8">
-          {/* DATEN-SEE Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <div className="w-5 h-5 bg-white rounded-sm opacity-90"></div>
-            </div>
-            <span className="text-xl font-bold text-gray-900 tracking-tight">
-              DATEN-SEE
-            </span>
-          </Link>
+  const { showDashboardOverviewButton, showCommunityButton } = useRouteContext();
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link 
-              href="/dashboards" 
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Zur Dashboard-Übersicht
-            </Link>
-            <Link 
-              href="/debugging-dashboard" 
-              className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
-            >
-              🐛 Debug Dashboard
-            </Link>
-            <Link 
-              href="/design-system" 
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Design System
-            </Link>
-            <Link 
-              href="/community" 
-              className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-            >
-              Community
-            </Link>
-          </nav>
+  return (
+    <header className={`bg-[#FDF9F3] border-b border-[#E6D7B8] px-4 sm:px-6 py-2 ${className}`}>
+      <div className="grid grid-cols-3 items-center w-full">
+        {/* Left: Logo - Always Present */}
+        <div className="flex items-center justify-start">
+          <Link href="/" className="flex items-center">
+            <Logo variant="full" size="sm" />
+          </Link>
         </div>
 
-        {/* Right Section: User Controls */}
-        <div className="flex items-center space-x-3">
+        {/* Center: Conditional Navigation Links */}
+        <div className="hidden md:flex items-center justify-center">
+          <div className="flex items-center space-x-6">
+            {showDashboardOverviewButton && (
+              <Link href="/dashboards">
+                <NavbarButton size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+                  Zur Dashboard-Übersicht
+                </NavbarButton>
+              </Link>
+            )}
+            {showCommunityButton && (
+              <Link href="/community">
+                <NavbarButton size="sm" leftIcon={<Users className="w-4 h-4" />}>
+                  Community
+                </NavbarButton>
+              </Link>
+            )}
+          </div>
+        </div>
+
+        {/* Right: Action Buttons */}
+        <div className="flex items-center justify-end space-x-2 sm:space-x-3">
           {/* Mobile Menu Toggle */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+            className="md:hidden p-2 text-[#3d3d3d]/60 hover:text-[#3d3d3d] hover:bg-[#F6F0E0] rounded-md transition-colors touch-manipulation"
             aria-label="Menü öffnen"
           >
             {isMobileMenuOpen ? (
@@ -70,61 +62,48 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
             )}
           </button>
 
-          {/* Settings Button */}
-          <button
-            type="button"
-            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
-            aria-label="Einstellungen"
-          >
-            <Settings className="w-5 h-5" />
-          </button>
-
-          {/* User Menu */}
-          <div className="relative">
-            <button
-              type="button"
-              className="flex items-center space-x-2 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+          {/* Action Buttons */}
+          <div className="hidden sm:flex items-center space-x-2">
+            <NavbarButton
+              size="sm"
+              aria-label="Debug"
+              className="!px-2"
             >
-              <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-medium">N</span>
-              </div>
-            </button>
+              <Bug className="w-4 h-4" />
+            </NavbarButton>
+            <NavbarButton
+              size="sm"
+              aria-label="Einstellungen"
+              className="!px-2"
+            >
+              <Settings className="w-4 h-4" />
+            </NavbarButton>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - Conditional Items */}
       {isMobileMenuOpen && (
-        <nav className="md:hidden mt-4 pt-4 border-t border-gray-100">
-          <div className="flex flex-col space-y-3">
-            <Link 
-              href="/dashboards" 
-              className="text-sm font-medium text-gray-600 hover:text-gray-900"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Zur Dashboard-Übersicht
-            </Link>
-            <Link 
-              href="/debugging-dashboard" 
-              className="text-sm font-medium text-blue-600 hover:text-blue-700"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              🐛 Debug Dashboard
-            </Link>
-            <Link 
-              href="/design-system" 
-              className="text-sm font-medium text-gray-600 hover:text-gray-900"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Design System
-            </Link>
-            <Link 
-              href="/community" 
-              className="text-sm font-medium text-gray-600 hover:text-gray-900"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Community
-            </Link>
+        <nav className="md:hidden mt-4 pt-4 border-t border-[#E6D7B8] bg-[#FDF9F3]">
+          <div className="flex flex-col space-y-3 pb-2">
+            {showDashboardOverviewButton && (
+              <Link 
+                href="/dashboards" 
+                className="text-base font-medium text-[#3d3d3d]/70 hover:text-[#3d3d3d] py-2 px-2 -mx-2 rounded transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Zur Dashboard-Übersicht
+              </Link>
+            )}
+            {showCommunityButton && (
+              <Link 
+                href="/community" 
+                className="text-base font-medium text-[#3d3d3d]/70 hover:text-[#3d3d3d] py-2 px-2 -mx-2 rounded transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Community
+              </Link>
+            )}
           </div>
         </nav>
       )}

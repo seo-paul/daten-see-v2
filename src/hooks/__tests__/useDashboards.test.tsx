@@ -35,15 +35,15 @@ jest.mock('@/lib/tanstack-query/config', () => ({
 }));
 
 // Mock query keys
-jest.mock('@/types', () => ({
+jest.mock('@/types', (): object => ({
   ...jest.requireActual('@/types'),
   apiQueryKeys: {
     dashboards: ['dashboards'],
-    dashboard: (id: string) => ['dashboard', id],
+    dashboard: (id: string): string[] => ['dashboard', id],
   },
 }));
 
-describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', () => {
+describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (): void => {
   let queryClient: QueryClient;
 
   // Test data
@@ -83,11 +83,15 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
   const mockDashboard = mockDashboards[0];
 
   // Wrapper for TanStack Query
-  const createWrapper = () => ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
+  const createWrapper = (): React.FC<{ children: React.ReactNode }> => {
+    const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    );
+    TestWrapper.displayName = 'UseDashboardsTestWrapper';
+    return TestWrapper;
+  };
 
-  beforeEach(() => {
+  beforeEach((): void => {
     // Fresh QueryClient for each test
     queryClient = new QueryClient({
       defaultOptions: {
@@ -98,12 +102,12 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     jest.clearAllMocks();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     queryClient.clear();
   });
 
-  describe('useDashboards - Fetch All Dashboards', () => {
-    it('should fetch dashboards successfully', async () => {
+  describe('useDashboards - Fetch All Dashboards', (): void => {
+    it('should fetch dashboards successfully', async (): Promise<void> => {
       (dashboardApi.getDashboards as jest.Mock).mockResolvedValue(mockDashboards);
 
       const { result } = renderHook(() => useDashboards(), {
@@ -122,7 +126,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.getDashboards).toHaveBeenCalledTimes(1);
     });
 
-    it('should handle fetch dashboards error', async () => {
+    it('should handle fetch dashboards error', async (): Promise<void> => {
       const error = new Error('Failed to fetch dashboards');
       (dashboardApi.getDashboards as jest.Mock).mockRejectedValue(error);
 
@@ -138,7 +142,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.data).toBeUndefined();
     });
 
-    it('should handle empty dashboards list', async () => {
+    it('should handle empty dashboards list', async (): Promise<void> => {
       (dashboardApi.getDashboards as jest.Mock).mockResolvedValue([]);
 
       const { result } = renderHook(() => useDashboards(), {
@@ -152,7 +156,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.data).toEqual([]);
     });
 
-    it('should use correct query key and options', async () => {
+    it('should use correct query key and options', async (): Promise<void> => {
       (dashboardApi.getDashboards as jest.Mock).mockResolvedValue(mockDashboards);
 
       renderHook(() => useDashboards(), {
@@ -169,8 +173,8 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     });
   });
 
-  describe('useDashboard - Fetch Single Dashboard', () => {
-    it('should fetch single dashboard successfully', async () => {
+  describe('useDashboard - Fetch Single Dashboard', (): void => {
+    it('should fetch single dashboard successfully', async (): Promise<void> => {
       (dashboardApi.getDashboard as jest.Mock).mockResolvedValue(mockDashboard);
 
       const { result } = renderHook(() => useDashboard('dash-1'), {
@@ -185,7 +189,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.getDashboard).toHaveBeenCalledWith('dash-1');
     });
 
-    it('should not fetch when dashboardId is empty', () => {
+    it('should not fetch when dashboardId is empty', (): void => {
       const { result } = renderHook(() => useDashboard(''), {
         wrapper: createWrapper(),
       });
@@ -195,7 +199,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.getDashboard).not.toHaveBeenCalled();
     });
 
-    it('should handle fetch single dashboard error', async () => {
+    it('should handle fetch single dashboard error', async (): Promise<void> => {
       const error = new Error('Dashboard not found');
       (dashboardApi.getDashboard as jest.Mock).mockRejectedValue(error);
 
@@ -210,7 +214,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.error).toEqual(error);
     });
 
-    it('should refetch when dashboardId changes', async () => {
+    it('should refetch when dashboardId changes', async (): Promise<void> => {
       (dashboardApi.getDashboard as jest.Mock).mockResolvedValue(mockDashboard);
 
       const { result, rerender } = renderHook(
@@ -238,8 +242,8 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     });
   });
 
-  describe('useCreateDashboard - Create Operations', () => {
-    it('should create dashboard successfully', async () => {
+  describe('useCreateDashboard - Create Operations', (): void => {
+    it('should create dashboard successfully', async (): Promise<void> => {
       const newDashboard = { ...mockDashboard, id: 'dash-new' };
       const createRequest: CreateDashboardRequest = {
         name: 'New Dashboard',
@@ -266,7 +270,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.createDashboard).toHaveBeenCalledWith(createRequest);
     });
 
-    it('should handle create dashboard error', async () => {
+    it('should handle create dashboard error', async (): Promise<void> => {
       const error = new Error('Failed to create dashboard');
       const createRequest: CreateDashboardRequest = {
         name: 'New Dashboard',
@@ -289,7 +293,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.error).toEqual(error);
     });
 
-    it('should invalidate dashboards cache on success', async () => {
+    it('should invalidate dashboards cache on success', async (): Promise<void> => {
       const newDashboard = { ...mockDashboard, id: 'dash-new' };
       const createRequest: CreateDashboardRequest = {
         name: 'New Dashboard',
@@ -318,8 +322,8 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     });
   });
 
-  describe('useUpdateDashboard - Update Operations', () => {
-    it('should update dashboard successfully', async () => {
+  describe('useUpdateDashboard - Update Operations', (): void => {
+    it('should update dashboard successfully', async (): Promise<void> => {
       const updatedDashboard = { ...mockDashboard, name: 'Updated Dashboard' };
       const updateRequest: UpdateDashboardRequest = {
         id: 'dash-1',
@@ -344,7 +348,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.updateDashboard).toHaveBeenCalledWith('dash-1', updateRequest);
     });
 
-    it('should handle update dashboard error', async () => {
+    it('should handle update dashboard error', async (): Promise<void> => {
       const error = new Error('Failed to update dashboard');
       const updateRequest: UpdateDashboardRequest = {
         id: 'dash-1',
@@ -368,7 +372,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.error).toEqual(error);
     });
 
-    it('should invalidate both specific and list caches on success', async () => {
+    it('should invalidate both specific and list caches on success', async (): Promise<void> => {
       const updatedDashboard = { ...mockDashboard, name: 'Updated Dashboard' };
       const updateRequest: UpdateDashboardRequest = {
         id: 'dash-1',
@@ -396,8 +400,8 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     });
   });
 
-  describe('useDeleteDashboard - Delete Operations', () => {
-    it('should delete dashboard successfully', async () => {
+  describe('useDeleteDashboard - Delete Operations', (): void => {
+    it('should delete dashboard successfully', async (): Promise<void> => {
       (dashboardApi.deleteDashboard as jest.Mock).mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useDeleteDashboard(), {
@@ -413,7 +417,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.deleteDashboard).toHaveBeenCalledWith('dash-1');
     });
 
-    it('should handle delete dashboard error', async () => {
+    it('should handle delete dashboard error', async (): Promise<void> => {
       const error = new Error('Failed to delete dashboard');
       (dashboardApi.deleteDashboard as jest.Mock).mockRejectedValue(error);
 
@@ -430,7 +434,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.error).toEqual(error);
     });
 
-    it('should invalidate dashboards cache on success', async () => {
+    it('should invalidate dashboards cache on success', async (): Promise<void> => {
       (dashboardApi.deleteDashboard as jest.Mock).mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useDeleteDashboard(), {
@@ -448,7 +452,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(invalidateSpy).toHaveBeenCalledWith({ queryKey: ['dashboards'] });
     });
 
-    it('should handle delete non-existent dashboard', async () => {
+    it('should handle delete non-existent dashboard', async (): Promise<void> => {
       const error = new Error('Dashboard not found');
       (dashboardApi.deleteDashboard as jest.Mock).mockRejectedValue(error);
 
@@ -466,8 +470,8 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     });
   });
 
-  describe('Cache Management & Performance', () => {
-    it('should properly cache dashboard queries', async () => {
+  describe('Cache Management & Performance', (): void => {
+    it('should properly cache dashboard queries', async (): Promise<void> => {
       (dashboardApi.getDashboards as jest.Mock).mockResolvedValue(mockDashboards);
 
       // First render
@@ -491,7 +495,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(dashboardApi.getDashboards).toHaveBeenCalledTimes(1);
     });
 
-    it('should handle concurrent mutations properly', async () => {
+    it('should handle concurrent mutations properly', async (): Promise<void> => {
       const createRequest1: CreateDashboardRequest = {
         name: 'Dashboard 1',
         description: 'Description 1',
@@ -529,8 +533,8 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
     });
   });
 
-  describe('Edge Cases & Error Scenarios', () => {
-    it('should handle network timeouts gracefully', async () => {
+  describe('Edge Cases & Error Scenarios', (): void => {
+    it('should handle network timeouts gracefully', async (): Promise<void> => {
       const timeoutError = new Error('Network timeout');
       (dashboardApi.getDashboards as jest.Mock).mockRejectedValue(timeoutError);
 
@@ -552,7 +556,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.failureCount).toBeGreaterThan(0);
     });
 
-    it('should handle malformed API responses', async () => {
+    it('should handle malformed API responses', async (): Promise<void> => {
       (dashboardApi.getDashboards as jest.Mock).mockResolvedValue(null);
 
       const { result } = renderHook(() => useDashboards(), {
@@ -566,7 +570,7 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       expect(result.current.data).toBeNull();
     });
 
-    it('should handle very large dashboard lists', async () => {
+    it('should handle very large dashboard lists', async (): Promise<void> => {
       const largeDashboardList = Array.from({ length: 1000 }, (_, i) => ({
         ...mockDashboard,
         id: `dash-${i}`,
@@ -584,7 +588,9 @@ describe('useDashboards Hook Tests - Critical Business Logic (90%+ Coverage)', (
       });
 
       expect(result.current.data).toHaveLength(1000);
-      expect(result.current.data?.[999]?.name).toBe('Dashboard 999');
+      if (result.current.data && result.current.data.length === 1000) {
+        expect(result.current.data[999]?.name).toBe('Dashboard 999');
+      }
     });
   });
 });

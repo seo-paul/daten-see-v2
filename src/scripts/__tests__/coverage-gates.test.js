@@ -190,7 +190,7 @@ describe('Coverage Gates Implementation', () => {
       // Check that all threshold categories have required metrics
       const requiredMetrics = ['statements', 'branches', 'functions', 'lines'];
       
-      Object.entries(COVERAGE_THRESHOLDS).forEach(([category, config]) => {
+      Object.entries(COVERAGE_THRESHOLDS).forEach(([, config]) => {
         requiredMetrics.forEach(metric => {
           expect(config[metric]).toBeDefined();
           expect(typeof config[metric]).toBe('number');

@@ -11,12 +11,12 @@ interface MainLayoutProps {
 
 export function MainLayout({ children, className = '' }: MainLayoutProps): React.ReactElement {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="h-screen bg-[#FEFCF9] flex flex-col">
       {/* Top Navigation */}
       <TopNavigation />
       
       {/* Main Content */}
-      <main className={`flex-1 ${className}`}>
+      <main className={`flex-1 flex flex-col overflow-hidden ${className}`}>
         {children}
       </main>
     </div>

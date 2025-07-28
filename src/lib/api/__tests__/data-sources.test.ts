@@ -9,47 +9,53 @@ import { DataSourceService, AnalyticsService } from '../data-sources';
 import { apiClient } from '../index';
 
 // Mock the API client
-jest.mock('../index', () => ({
+jest.mock('../index', (): object => ({
   apiClient: {
     get: jest.fn(),
     post: jest.fn(),
     put: jest.fn(),
     delete: jest.fn(),
   },
-  createQueryFunction: (fn: Function) => fn,
+  createQueryFunction: (fn: Function): (() => Promise<any>) => async (): Promise<any> => {
+    const response = await fn();
+    if (!response.success) {
+      throw new Error(response.message || 'API request failed');
+    }
+    return response.data;
+  },
 }));
 
-describe('DataSourceService', () => {
+describe('DataSourceService', (): void => {
   const mockApiClient = apiClient as jest.Mocked<typeof apiClient>;
 
-  beforeEach(() => {
+  beforeEach((): void => {
     jest.clearAllMocks();
   });
 
-  describe('getDataSources', () => {
+  describe('getDataSources', (): void => {
     const mockDataSources: DataSource[] = [
       {
         id: 'ds-1',
-        name: 'Production Database',
-        type: 'postgresql',
+        name: 'Google Analytics',
+        type: 'google_analytics',
         status: 'connected',
+        organizationId: 'org-1',
         workspaceId: 'ws-1',
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15'),
+        lastSync: '2024-01-15T10:00:00Z',
         config: {
-          host: 'db.example.com',
-          port: 5432,
-          database: 'production',
+          accountId: '12345',
+          propertyId: '67890',
+          viewId: '11111',
         },
       },
       {
         id: 'ds-2',
         name: 'Analytics API',
-        type: 'rest-api',
+        type: 'rest_api',
         status: 'connected',
+        organizationId: 'org-1',
         workspaceId: 'ws-1',
-        createdAt: new Date('2024-01-05'),
-        updatedAt: new Date('2024-01-20'),
+        lastSync: '2024-01-20T10:00:00Z',
         config: {
           baseUrl: 'https://api.analytics.com',
           authType: 'bearer',
@@ -57,8 +63,12 @@ describe('DataSourceService', () => {
       },
     ];
 
-    it('should get all data sources without workspace filter', async () => {
-      mockApiClient.get.mockResolvedValueOnce(mockDataSources);
+    it('should get all data sources without workspace filter', async (): Promise<void> => {
+      const mockResponse = {
+        data: mockDataSources,
+        success: true,
+      };
+      mockApiClient.get.mockResolvedValueOnce(mockResponse);
 
       const result = await DataSourceService.getDataSources();
 
@@ -66,49 +76,59 @@ describe('DataSourceService', () => {
       expect(result).toEqual(mockDataSources);
     });
 
-    it('should get data sources filtered by workspace', async () => {
-      mockApiClient.get.mockResolvedValueOnce([mockDataSources[0]]);
+    it('should get data sources filtered by workspace', async (): Promise<void> => {
+      const mockResponse = {
+        data: [mockDataSources[0]],
+        success: true,
+      };
+      mockApiClient.get.mockResolvedValueOnce(mockResponse);
 
       const result = await DataSourceService.getDataSources('ws-1');
 
       expect(mockApiClient.get).toHaveBeenCalledWith('/data-sources?workspaceId=ws-1');
       expect(result).toHaveLength(1);
-      expect(result[0].workspaceId).toBe('ws-1');
+      expect(result[0]?.workspaceId).toBe('ws-1');
     });
 
-    it('should handle empty data sources', async () => {
-      mockApiClient.get.mockResolvedValueOnce([]);
+    it('should handle empty data sources', async (): Promise<void> => {
+      const mockResponse = {
+        data: [],
+        success: true,
+      };
+      mockApiClient.get.mockResolvedValueOnce(mockResponse);
 
       const result = await DataSourceService.getDataSources();
 
       expect(result).toEqual([]);
     });
 
-    it('should handle API errors', async () => {
+    it('should handle API errors', async (): Promise<void> => {
       mockApiClient.get.mockRejectedValueOnce(new Error('Network error'));
 
       await expect(DataSourceService.getDataSources()).rejects.toThrow('Network error');
     });
   });
 
-  describe('getDataSource', () => {
+  describe('getDataSource', (): void => {
     const mockDataSource: DataSource = {
       id: 'ds-1',
       name: 'Production Database',
-      type: 'postgresql',
+      type: 'rest_api',
       status: 'connected',
+      organizationId: 'org-1',
       workspaceId: 'ws-1',
-      createdAt: new Date('2024-01-01'),
-      updatedAt: new Date('2024-01-15'),
       config: {
-        host: 'db.example.com',
-        port: 5432,
-        database: 'production',
+        baseUrl: 'https://db.example.com',
+        authType: 'bearer',
       },
     };
 
-    it('should get single data source by ID', async () => {
-      mockApiClient.get.mockResolvedValueOnce(mockDataSource);
+    it('should get single data source by ID', async (): Promise<void> => {
+      const mockResponse = {
+        data: mockDataSource,
+        success: true,
+      };
+      mockApiClient.get.mockResolvedValueOnce(mockResponse);
 
       const result = await DataSourceService.getDataSource('ds-1');
 
@@ -116,22 +136,20 @@ describe('DataSourceService', () => {
       expect(result).toEqual(mockDataSource);
     });
 
-    it('should handle not found error', async () => {
+    it('should handle not found error', async (): Promise<void> => {
       mockApiClient.get.mockRejectedValueOnce(new Error('Data source not found'));
 
       await expect(DataSourceService.getDataSource('non-existent')).rejects.toThrow('Data source not found');
     });
   });
 
-  describe('createDataSource', () => {
+  describe('createDataSource', (): void => {
     const createRequest = {
       name: 'New Data Source',
-      type: 'mysql' as DataSourceType,
+      type: 'rest_api' as DataSourceType,
       config: {
-        host: 'localhost',
-        port: 3306,
-        database: 'test_db',
-        username: 'test_user',
+        baseUrl: 'https://localhost:3306',
+        authType: 'bearer' as const,
       },
       workspaceId: 'ws-1',
     };
@@ -139,12 +157,11 @@ describe('DataSourceService', () => {
     const mockCreatedDataSource: DataSource = {
       id: 'ds-new',
       ...createRequest,
-      status: 'connecting',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      organizationId: 'org-1',
+      status: 'connected',
     };
 
-    it('should create new data source', async () => {
+    it('should create new data source', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
         success: true,
         data: mockCreatedDataSource,
@@ -156,8 +173,9 @@ describe('DataSourceService', () => {
       expect(result).toEqual(mockCreatedDataSource);
     });
 
-    it('should handle creation failure', async () => {
+    it('should handle creation failure', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
+        data: null,
         success: false,
         message: 'Invalid configuration',
       });
@@ -166,21 +184,24 @@ describe('DataSourceService', () => {
         .rejects.toThrow('Invalid configuration');
     });
 
-    it('should handle generic creation error', async () => {
+    it('should handle generic creation error', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
+        data: null,
         success: false,
+        message: 'Failed to create data source',
       });
 
       await expect(DataSourceService.createDataSource(createRequest))
         .rejects.toThrow('Failed to create data source');
     });
 
-    it('should create data source without workspace', async () => {
+    it('should create data source without workspace', async (): Promise<void> => {
       const requestWithoutWorkspace = {
         name: 'Global Data Source',
-        type: 'rest-api' as DataSourceType,
+        type: 'rest_api' as DataSourceType,
         config: {
           baseUrl: 'https://api.example.com',
+          authType: 'none' as const,
         },
       };
 
@@ -189,9 +210,8 @@ describe('DataSourceService', () => {
         data: {
           id: 'ds-global',
           ...requestWithoutWorkspace,
+          organizationId: 'org-1',
           status: 'connected',
-          createdAt: new Date(),
-          updatedAt: new Date(),
         },
       });
 
@@ -201,30 +221,28 @@ describe('DataSourceService', () => {
     });
   });
 
-  describe('updateDataSource', () => {
+  describe('updateDataSource', (): void => {
     const updateRequest = {
       name: 'Updated Database',
       config: {
-        host: 'new-db.example.com',
+        baseUrl: 'https://new-db.example.com',
       },
     };
 
     const mockUpdatedDataSource: DataSource = {
       id: 'ds-1',
       name: 'Updated Database',
-      type: 'postgresql',
+      type: 'rest_api',
       status: 'connected',
+      organizationId: 'org-1',
       workspaceId: 'ws-1',
-      createdAt: new Date('2024-01-01'),
-      updatedAt: new Date(),
       config: {
-        host: 'new-db.example.com',
-        port: 5432,
-        database: 'production',
+        baseUrl: 'https://new-db.example.com',
+        authType: 'bearer',
       },
     };
 
-    it('should update data source', async () => {
+    it('should update data source', async (): Promise<void> => {
       mockApiClient.put.mockResolvedValueOnce({
         success: true,
         data: mockUpdatedDataSource,
@@ -236,7 +254,7 @@ describe('DataSourceService', () => {
       expect(result).toEqual(mockUpdatedDataSource);
     });
 
-    it('should update only name', async () => {
+    it('should update only name', async (): Promise<void> => {
       const nameOnlyUpdate = { name: 'Renamed Database' };
       
       mockApiClient.put.mockResolvedValueOnce({
@@ -250,8 +268,9 @@ describe('DataSourceService', () => {
       expect(result.name).toBe('Renamed Database');
     });
 
-    it('should handle update failure', async () => {
+    it('should handle update failure', async (): Promise<void> => {
       mockApiClient.put.mockResolvedValueOnce({
+        data: null,
         success: false,
         message: 'Connection failed with new config',
       });
@@ -261,16 +280,19 @@ describe('DataSourceService', () => {
     });
   });
 
-  describe('deleteDataSource', () => {
-    it('should delete data source', async () => {
-      mockApiClient.delete.mockResolvedValueOnce({ success: true });
+  describe('deleteDataSource', (): void => {
+    it('should delete data source', async (): Promise<void> => {
+      mockApiClient.delete.mockResolvedValueOnce({ 
+        data: undefined,
+        success: true 
+      });
 
       await expect(DataSourceService.deleteDataSource('ds-1')).resolves.not.toThrow();
 
       expect(mockApiClient.delete).toHaveBeenCalledWith('/data-sources/ds-1');
     });
 
-    it('should handle delete error', async () => {
+    it('should handle delete error', async (): Promise<void> => {
       mockApiClient.delete.mockRejectedValueOnce(new Error('Cannot delete active data source'));
 
       await expect(DataSourceService.deleteDataSource('ds-1'))
@@ -278,8 +300,8 @@ describe('DataSourceService', () => {
     });
   });
 
-  describe('testConnection', () => {
-    it('should test successful connection', async () => {
+  describe('testConnection', (): void => {
+    it('should test successful connection', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
         success: true,
         data: {
@@ -295,7 +317,7 @@ describe('DataSourceService', () => {
       });
     });
 
-    it('should test failed connection', async () => {
+    it('should test failed connection', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
         success: true,
         data: {
@@ -312,36 +334,48 @@ describe('DataSourceService', () => {
       });
     });
 
-    it('should handle test API error', async () => {
+    it('should handle test API error', async (): Promise<void> => {
       mockApiClient.post.mockRejectedValueOnce(new Error('API error'));
 
       await expect(DataSourceService.testConnection('ds-1')).rejects.toThrow('API error');
     });
   });
 
-  describe('AnalyticsService.query', () => {
+  describe('AnalyticsService.query', (): void => {
     const mockQuery: AnalyticsQuery = {
-      dataSourceId: 'ds-1',
-      query: 'SELECT * FROM users LIMIT 10',
-      parameters: {},
+      dataSource: 'ds-1',
+      metrics: ['users', 'sessions'],
+      dimensions: ['country', 'device'],
+      timeRange: {
+        start: '2024-01-01',
+        end: '2024-01-31',
+        preset: 'last30days',
+      },
     };
 
     const mockResponse = {
       success: true,
       data: {
-        rows: [
-          { id: 1, name: 'User 1', email: 'user1@example.com' },
-          { id: 2, name: 'User 2', email: 'user2@example.com' },
+        data: [
+          {
+            dimensions: { country: 'US', device: 'desktop' },
+            metrics: { users: 1000, sessions: 1500 },
+            timestamp: '2024-01-01',
+          },
+          {
+            dimensions: { country: 'DE', device: 'mobile' },
+            metrics: { users: 800, sessions: 1200 },
+            timestamp: '2024-01-02',
+          },
         ],
-        metadata: {
-          columns: ['id', 'name', 'email'],
-          rowCount: 2,
-          executionTime: 45,
-        },
+        totalRows: 2,
+        query: mockQuery,
+        executionTime: 45,
+        cached: false,
       },
     };
 
-    it('should execute query successfully', async () => {
+    it('should execute query successfully', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce(mockResponse);
 
       const result = await AnalyticsService.query(mockQuery);
@@ -350,24 +384,28 @@ describe('DataSourceService', () => {
       expect(result).toEqual(mockResponse.data);
     });
 
-    it('should execute query with parameters', async () => {
-      const queryWithParams = {
+    it('should execute query with filters', async (): Promise<void> => {
+      const queryWithFilters = {
         ...mockQuery,
-        parameters: {
-          userId: 123,
-          startDate: '2024-01-01',
-        },
+        filters: [
+          {
+            field: 'country',
+            operator: 'equals' as const,
+            value: 'US',
+          },
+        ],
       };
 
       mockApiClient.post.mockResolvedValueOnce(mockResponse);
 
-      await AnalyticsService.query(queryWithParams);
+      await AnalyticsService.query(queryWithFilters);
 
-      expect(mockApiClient.post).toHaveBeenCalledWith('/analytics/query', queryWithParams);
+      expect(mockApiClient.post).toHaveBeenCalledWith('/analytics/query', queryWithFilters);
     });
 
-    it('should handle query execution error', async () => {
+    it('should handle query execution error', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
+        data: null,
         success: false,
         message: 'Syntax error in SQL query',
       });
@@ -376,32 +414,35 @@ describe('DataSourceService', () => {
         .rejects.toThrow('Syntax error in SQL query');
     });
 
-    it('should handle empty query results', async () => {
+    it('should handle empty query results', async (): Promise<void> => {
       mockApiClient.post.mockResolvedValueOnce({
         success: true,
         data: {
-          rows: [],
-          metadata: {
-            columns: [],
-            rowCount: 0,
-            executionTime: 10,
-          },
+          data: [],
+          totalRows: 0,
+          query: mockQuery,
+          executionTime: 10,
+          cached: false,
         },
       });
 
       const result = await AnalyticsService.query(mockQuery);
 
-      expect(result.rows).toHaveLength(0);
-      expect(result.metadata.rowCount).toBe(0);
+      expect(result.data).toHaveLength(0);
+      expect(result.totalRows).toBe(0);
     });
   });
 
-  describe('getAvailableMetrics and getAvailableDimensions', () => {
+  describe('getAvailableMetrics and getAvailableDimensions', (): void => {
     const mockMetrics = ['revenue', 'users', 'sessions', 'pageviews'];
     const mockDimensions = ['country', 'device', 'browser', 'page'];
 
-    it('should get available metrics', async () => {
-      mockApiClient.get.mockResolvedValueOnce(mockMetrics);
+    it('should get available metrics', async (): Promise<void> => {
+      const mockResponse = {
+        data: mockMetrics,
+        success: true,
+      };
+      mockApiClient.get.mockResolvedValueOnce(mockResponse);
 
       const result = await DataSourceService.getAvailableMetrics('ds-1');
 
@@ -409,8 +450,12 @@ describe('DataSourceService', () => {
       expect(result).toEqual(mockMetrics);
     });
 
-    it('should get available dimensions', async () => {
-      mockApiClient.get.mockResolvedValueOnce(mockDimensions);
+    it('should get available dimensions', async (): Promise<void> => {
+      const mockResponse = {
+        data: mockDimensions,
+        success: true,
+      };
+      mockApiClient.get.mockResolvedValueOnce(mockResponse);
 
       const result = await DataSourceService.getAvailableDimensions('ds-1');
 

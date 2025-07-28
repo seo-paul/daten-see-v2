@@ -20,8 +20,6 @@ export function createMockTokenManager(options: MockTokenManagerOptions = {}): T
   const {
     user = null,
     isAuthenticated = false,
-    isLoading = false,
-    error = null,
   } = options;
 
   const mockTokenInfo: StoredTokenInfo = {
@@ -157,7 +155,7 @@ export interface MockAuthContextState {
   clearError?: jest.Mock;
 }
 
-export function createMockAuthContext(state: MockAuthContextState = {}) {
+export function createMockAuthContext(state: MockAuthContextState = {}): MockAuthContextState & { login: jest.Mock; logout: jest.Mock; clearError: jest.Mock } {
   return {
     user: state.user || null,
     isAuthenticated: state.isAuthenticated || false,
@@ -172,7 +170,7 @@ export function createMockAuthContext(state: MockAuthContextState = {}) {
 /**
  * Utility to create authenticated mock context
  */
-export function createAuthenticatedMockContext(user: User = mockUsers.user) {
+export function createAuthenticatedMockContext(user: User = mockUsers.user): MockAuthContextState & { login: jest.Mock; logout: jest.Mock; clearError: jest.Mock } {
   return createMockAuthContext({
     user,
     isAuthenticated: true,
@@ -184,7 +182,7 @@ export function createAuthenticatedMockContext(user: User = mockUsers.user) {
 /**
  * Utility to create unauthenticated mock context
  */
-export function createUnauthenticatedMockContext() {
+export function createUnauthenticatedMockContext(): MockAuthContextState & { login: jest.Mock; logout: jest.Mock; clearError: jest.Mock } {
   return createMockAuthContext({
     user: null,
     isAuthenticated: false,
@@ -196,7 +194,7 @@ export function createUnauthenticatedMockContext() {
 /**
  * Utility to create loading mock context
  */
-export function createLoadingMockContext() {
+export function createLoadingMockContext(): MockAuthContextState & { login: jest.Mock; logout: jest.Mock; clearError: jest.Mock } {
   return createMockAuthContext({
     user: null,
     isAuthenticated: false,
@@ -208,7 +206,7 @@ export function createLoadingMockContext() {
 /**
  * Utility to create error mock context
  */
-export function createErrorMockContext(error: string = 'Authentication failed') {
+export function createErrorMockContext(error: string = 'Authentication failed'): MockAuthContextState & { login: jest.Mock; logout: jest.Mock; clearError: jest.Mock } {
   return createMockAuthContext({
     user: null,
     isAuthenticated: false,

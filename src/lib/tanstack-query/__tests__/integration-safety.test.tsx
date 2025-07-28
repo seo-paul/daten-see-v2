@@ -12,7 +12,7 @@ import React from 'react';
 import { createOptimizedQueryClient, QUERY_CONFIG, queryKeys } from '../config';
 
 // Test wrapper with QueryClient
-const createTestQueryClient = () => {
+const createTestQueryClient = (): QueryClient => {
   return new QueryClient({
     defaultOptions: {
       queries: {
@@ -27,28 +27,30 @@ const createTestQueryClient = () => {
   });
 };
 
-const createWrapper = (queryClient: QueryClient) => {
-  return ({ children }: { children: React.ReactNode }) => (
+const createWrapper = (queryClient: QueryClient): React.FC<{ children: React.ReactNode }> => {
+  const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
     <QueryClientProvider client={queryClient}>
       {children}
     </QueryClientProvider>
   );
+  TestWrapper.displayName = 'TanStackQueryTestWrapper';
+  return TestWrapper;
 };
 
-describe('TanStack Query Integration Safety Tests', () => {
+describe('TanStack Query Integration Safety Tests', (): void => {
   let queryClient: QueryClient;
 
-  beforeEach(() => {
+  beforeEach((): void => {
     queryClient = createTestQueryClient();
     jest.clearAllMocks();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     queryClient.clear();
   });
 
-  describe('Query Configuration Safety', () => {
-    it('should use safe default configurations', () => {
+  describe('Query Configuration Safety', (): void => {
+    it('should use safe default configurations', (): void => {
       const optimizedClient = createOptimizedQueryClient();
       const defaultOptions = optimizedClient.getDefaultOptions();
 
@@ -69,7 +71,7 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(QUERY_CONFIG.STATIC.staleTime).toBe(15 * 60 * 1000); // 15 minutes
     });
 
-    it('should prevent dangerous query configurations', () => {
+    it('should prevent dangerous query configurations', (): void => {
       // Verify no infinite refetch intervals
       Object.values(QUERY_CONFIG).forEach(config => {
         if (config.refetchInterval) {
@@ -84,7 +86,7 @@ describe('TanStack Query Integration Safety Tests', () => {
       });
     });
 
-    it('should validate retry delay prevents overwhelming server', () => {
+    it('should validate retry delay prevents overwhelming server', (): void => {
       const optimizedClient = createOptimizedQueryClient();
       const defaultOptions = optimizedClient.getDefaultOptions();
       const retryDelay = defaultOptions.queries?.retryDelay as (attemptIndex: number) => number;
@@ -97,11 +99,11 @@ describe('TanStack Query Integration Safety Tests', () => {
     });
   });
 
-  describe('Query State Management Safety', () => {
-    it('should handle basic query lifecycle correctly', async () => {
+  describe('Query State Management Safety', (): void => {
+    it('should handle basic query lifecycle correctly', async (): Promise<void> => {
       const mockQueryFn = jest.fn().mockResolvedValue(['item1', 'item2']);
       
-      const useTestQuery = () => useQuery({
+      const useTestQuery = (): any => useQuery({
         queryKey: ['test'],
         queryFn: mockQueryFn,
       });
@@ -125,11 +127,11 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(mockQueryFn).toHaveBeenCalledTimes(1);
     });
 
-    it('should handle query errors gracefully', async () => {
+    it('should handle query errors gracefully', async (): Promise<void> => {
       const mockError = new Error('Test error');
       const mockQueryFn = jest.fn().mockRejectedValue(mockError);
       
-      const useTestQuery = () => useQuery({
+      const useTestQuery = (): any => useQuery({
         queryKey: ['test-error'],
         queryFn: mockQueryFn,
       });
@@ -147,10 +149,10 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(result.current.data).toBeUndefined();
     });
 
-    it('should handle enabled/disabled queries correctly', async () => {
+    it('should handle enabled/disabled queries correctly', async (): Promise<void> => {
       const mockQueryFn = jest.fn().mockResolvedValue('data');
       
-      const useTestQuery = (enabled: boolean) => useQuery({
+      const useTestQuery = (enabled: boolean): any => useQuery({
         queryKey: ['test-enabled'],
         queryFn: mockQueryFn,
         enabled,
@@ -180,11 +182,11 @@ describe('TanStack Query Integration Safety Tests', () => {
     });
   });
 
-  describe('Mutation Safety', () => {
-    it('should handle mutations with proper error boundaries', async () => {
+  describe('Mutation Safety', (): void => {
+    it('should handle mutations with proper error boundaries', async (): Promise<void> => {
       const mockMutationFn = jest.fn().mockResolvedValue({ id: 'new-item', name: 'Created' });
       
-      const useTestMutation = () => useMutation({
+      const useTestMutation = (): any => useMutation({
         mutationFn: mockMutationFn,
       });
 
@@ -210,11 +212,11 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(mockMutationFn).toHaveBeenCalledWith({ name: 'Test Item' });
     });
 
-    it('should handle mutation errors without breaking', async () => {
+    it('should handle mutation errors without breaking', async (): Promise<void> => {
       const mockError = new Error('Mutation failed');
       const mockMutationFn = jest.fn().mockRejectedValue(mockError);
       
-      const useTestMutation = () => useMutation({
+      const useTestMutation = (): any => useMutation({
         mutationFn: mockMutationFn,
       });
 
@@ -235,8 +237,8 @@ describe('TanStack Query Integration Safety Tests', () => {
     });
   });
 
-  describe('Cache Management Safety', () => {
-    it('should prevent memory leaks through proper cache cleanup', async () => {
+  describe('Cache Management Safety', (): void => {
+    it('should prevent memory leaks through proper cache cleanup', async (): Promise<void> => {
       const initialQueries = queryClient.getQueryCache().getAll().length;
 
       // Create query
@@ -262,7 +264,7 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(queriesAfterCleanup).toBe(0);
     });
 
-    it('should handle cache invalidation safely', async () => {
+    it('should handle cache invalidation safely', async (): Promise<void> => {
       const mockQueryFn = jest.fn().mockResolvedValue(['item1', 'item2']);
       
       const { result } = renderHook(
@@ -290,8 +292,8 @@ describe('TanStack Query Integration Safety Tests', () => {
     });
   });
 
-  describe('Query Key Safety', () => {
-    it('should use consistent query keys', () => {
+  describe('Query Key Safety', (): void => {
+    it('should use consistent query keys', (): void => {
       // Verify query keys are deterministic
       const dashboardId = 'test-id';
       
@@ -308,7 +310,7 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(detailKey1).not.toEqual(detailKey3);
     });
 
-    it('should prevent query key conflicts', () => {
+    it('should prevent query key conflicts', (): void => {
       // Verify query key structure prevents conflicts
       const authKey = queryKeys.authUser();
       const dashboardKey = queryKeys.dashboardsList();
@@ -318,8 +320,8 @@ describe('TanStack Query Integration Safety Tests', () => {
     });
   });
 
-  describe('Error Recovery Safety', () => {
-    it('should recover from network errors', async () => {
+  describe('Error Recovery Safety', (): void => {
+    it('should recover from network errors', async (): Promise<void> => {
       let shouldFail = true;
       const mockQueryFn = jest.fn().mockImplementation(() => {
         if (shouldFail) {
@@ -355,7 +357,7 @@ describe('TanStack Query Integration Safety Tests', () => {
       expect(result.current.data).toBe('success');
     });
 
-    it('should maintain state consistency during errors', async () => {
+    it('should maintain state consistency during errors', async (): Promise<void> => {
       const mockQueryFn = jest.fn()
         .mockResolvedValueOnce('initial-data')
         .mockRejectedValueOnce(new Error('Update failed'));

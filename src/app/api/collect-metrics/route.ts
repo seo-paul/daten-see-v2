@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+
+import { NextResponse } from 'next/server';
 
 const execAsync = promisify(exec);
 
@@ -8,8 +9,9 @@ const execAsync = promisify(exec);
  * API Endpoint: Trigger Metrics Collection
  * Executes the collect-real-metrics.sh script and returns updated metrics
  */
-export async function POST(_request: NextRequest) {
+export async function POST(): Promise<NextResponse> {
   try {
+    // eslint-disable-next-line no-console
     console.log('🔄 Manual metrics collection triggered from dashboard');
     
     // Execute the metrics collection script
@@ -19,9 +21,11 @@ export async function POST(_request: NextRequest) {
     });
     
     if (stderr) {
+      // eslint-disable-next-line no-console
       console.warn('⚠️ Script stderr:', stderr);
     }
     
+    // eslint-disable-next-line no-console
     console.log('✅ Metrics collection completed:', stdout.split('\n').slice(-6).join('\n'));
     
     return NextResponse.json({
@@ -32,6 +36,7 @@ export async function POST(_request: NextRequest) {
     });
     
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('❌ Failed to collect metrics:', error);
     
     return NextResponse.json({
@@ -48,7 +53,7 @@ export async function POST(_request: NextRequest) {
 /**
  * Handle unsupported methods
  */
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   return NextResponse.json({
     message: 'Method not allowed. Use POST to trigger metrics collection.',
   }, {

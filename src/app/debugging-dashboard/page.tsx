@@ -203,6 +203,7 @@ const loadRealMetrics = async (): Promise<LiveMetrics> => {
     const response = await fetch('/debugging-dashboard/data/real-metrics.json?' + Date.now());
     const realData = await response.json();
     
+    // eslint-disable-next-line no-console
     console.log('📊 Loaded real metrics:', {
       eslintErrors: realData.code_quality.eslint_errors,
       typescriptErrors: realData.code_quality.typescript_errors,
@@ -348,6 +349,7 @@ const loadRealMetrics = async (): Promise<LiveMetrics> => {
       last_updated: realData.last_updated
     };
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('❌ Failed to load real metrics, falling back to default data:', error);
     // Fallback to minimal data if JSON loading fails
     return {
@@ -477,6 +479,7 @@ export default function AdvancedDashboardPage(): React.ReactElement {
                     // Reload metrics
                     await loadMetrics();
                   } catch (error) {
+                    // eslint-disable-next-line no-console
                     console.error('Failed to refresh metrics:', error);
                     // Still try to reload existing data
                     await loadMetrics();

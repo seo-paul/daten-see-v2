@@ -73,7 +73,6 @@ export function EditDashboardModal({
 
     try {
       await onSubmit({
-        id: dashboard.id,
         name: formData.name,
         description: formData.description,
         isPublic: formData.isPublic
@@ -98,16 +97,16 @@ export function EditDashboardModal({
       
       {/* Modal */}
       <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div className="bg-[#FDF9F3] rounded-lg shadow-xl w-full max-w-md">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">
+          <div className="flex items-center justify-between p-6 border-b border-[#E6D7B8]">
+            <h2 className="text-lg font-semibold text-[#3d3d3d]">
               Dashboard bearbeiten
             </h2>
             <button
               type="button"
               onClick={handleClose}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 text-[#5d5d5d] hover:text-[#3d3d3d] hover:bg-[#FBF5ED] rounded-lg transition-colors"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -118,7 +117,7 @@ export function EditDashboardModal({
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {/* Name Field */}
             <div>
-              <label htmlFor="edit-dashboard-name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="edit-dashboard-name" className="block text-sm font-medium text-[#3d3d3d] mb-2">
                 Dashboard Name
               </label>
               <input
@@ -126,8 +125,8 @@ export function EditDashboardModal({
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                  errors.name ? 'border-red-300' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F4F73] transition-colors ${
+                  errors.name ? 'border-red-300' : 'border-[#E6D7B8]'
                 }`}
                 placeholder="z.B. Sales Analytics"
                 disabled={isLoading}
@@ -139,7 +138,7 @@ export function EditDashboardModal({
 
             {/* Description Field */}
             <div>
-              <label htmlFor="edit-dashboard-description" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="edit-dashboard-description" className="block text-sm font-medium text-[#3d3d3d] mb-2">
                 Beschreibung
               </label>
               <textarea
@@ -147,8 +146,8 @@ export function EditDashboardModal({
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 rows={3}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none transition-colors ${
-                  errors.description ? 'border-red-300' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F4F73] resize-none transition-colors ${
+                  errors.description ? 'border-red-300' : 'border-[#E6D7B8]'
                 }`}
                 placeholder="Beschreibe das Dashboard und seinen Zweck..."
                 disabled={isLoading}
@@ -165,21 +164,21 @@ export function EditDashboardModal({
                 id="isPublic"
                 checked={formData.isPublic}
                 onChange={(e) => setFormData(prev => ({ ...prev, isPublic: e.target.checked }))}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                className="w-4 h-4 text-[#2F4F73] border-[#E6D7B8] rounded focus:ring-[#2F4F73]"
                 disabled={isLoading}
               />
-              <label htmlFor="isPublic" className="ml-2 text-sm text-gray-700">
+              <label htmlFor="isPublic" className="ml-2 text-sm text-[#3d3d3d]">
                 Dashboard öffentlich machen
               </label>
             </div>
           </form>
 
           {/* Footer */}
-          <div className="flex items-center justify-end space-x-3 p-6 border-t border-gray-200">
+          <div className="flex items-center justify-end space-x-3 p-6 border-t border-[#E6D7B8]">
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              className="px-4 py-2 text-sm font-medium text-[#3d3d3d] bg-[#FBF5ED] hover:bg-[#F5EFE7] rounded-lg transition-colors"
               disabled={isLoading}
             >
               Abbrechen
@@ -188,7 +187,7 @@ export function EditDashboardModal({
               type="submit"
               onClick={handleSubmit}
               disabled={isLoading}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 text-sm font-medium text-white bg-[#2F4F73] hover:bg-[#365C83] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Speichere...' : 'Änderungen speichern'}
             </button>

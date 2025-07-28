@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { designTokens } from '@/lib/design/tokens';
+import { barlow } from '@/lib/fonts';
 
 interface LogoProps {
   variant?: 'full' | 'icon' | 'text';
@@ -82,8 +83,8 @@ export function Logo({
   // Logo Text
   const LogoText = ({ className: textClassName = '' }: { className?: string }): React.ReactElement => (
     <span 
-      className={`font-display font-black tracking-tight ${textClassName}`}
-      style={{ color: colors.primary }}
+      className={`${barlow.className} font-extralight tracking-wide ${textClassName}`}
+      style={{ color: colors.primary, fontWeight: '200' }}
     >
       DATEN-SEE
     </span>

@@ -176,7 +176,9 @@ describe('ApiClient', () => {
   // Timeout error test
   it('should handle timeout errors', async () => {
     mockFetch.mockImplementationOnce(() => 
-      new Promise((resolve) => setTimeout(resolve, 10000))
+      new Promise((_, reject) => {
+        setTimeout(() => reject(new DOMException('The operation was aborted.', 'AbortError')), 50);
+      })
     );
 
     const shortTimeoutClient = new ApiClient('http://localhost:3001/api', 100);
@@ -219,9 +221,14 @@ describe('ApiClient', () => {
 
   // Error response parsing test
   it('should parse error responses with details', async () => {
-    const errorResponse = { 
-      message: 'Validation failed', 
-      errors: { name: 'Required field' } 
+    const errorResponse = {
+      success: false,
+      error: {
+        code: 'VALIDATION_ERROR',
+        message: 'Validation failed',
+        details: { name: 'Required field' }
+      },
+      timestamp: new Date().toISOString()
     };
     
     mockFetch.mockResolvedValueOnce({
@@ -236,7 +243,7 @@ describe('ApiClient', () => {
     } catch (error) {
       expect(error).toBeInstanceOf(ApiClientError);
       expect((error as ApiClientError).message).toBe('Validation failed');
-      expect((error as ApiClientError).details).toEqual(errorResponse.errors);
+      expect((error as ApiClientError).details).toEqual(errorResponse.error.details);
     }
   });
 

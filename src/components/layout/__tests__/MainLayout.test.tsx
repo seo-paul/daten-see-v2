@@ -8,8 +8,8 @@ import { TokenManagerMockScenarios } from '@/lib/testing/token-manager-mock';
 import { MainLayout } from '../MainLayout';
 
 // Mock TopNavigation component
-jest.mock('../TopNavigation', () => ({
-  TopNavigation: () => <nav data-testid="top-navigation">Top Navigation</nav>,
+jest.mock('../TopNavigation', (): object => ({
+  TopNavigation: (): JSX.Element => <nav data-testid="top-navigation">Top Navigation</nav>,
 }));
 
 // Mock Sentry
@@ -47,8 +47,8 @@ const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-describe('MainLayout', () => {
-  it('should render with authenticated user', () => {
+describe('MainLayout', (): void => {
+  it('should render with authenticated user', (): void => {
     render(
       <TestWrapper>
         <MainLayout>
@@ -61,7 +61,7 @@ describe('MainLayout', () => {
     expect(screen.getByTestId('main-content')).toBeInTheDocument();
   });
 
-  it('should render children in main element', () => {
+  it('should render children in main element', (): void => {
     render(
       <TestWrapper>
         <MainLayout>
@@ -74,7 +74,7 @@ describe('MainLayout', () => {
     expect(mainElement).toContainElement(screen.getByRole('heading'));
   });
 
-  it('should apply custom className to main element', () => {
+  it('should apply custom className to main element', (): void => {
     render(
       <TestWrapper>
         <MainLayout className="custom-class">

@@ -7,16 +7,17 @@ import { useQuery, useMutation, useQueryClient, type UseQueryResult, type UseMut
 
 import { dashboardApi } from '@/lib/api/dashboard';
 import { createQueryOptions } from '@/lib/tanstack-query/config';
-import type { Dashboard, CreateDashboardRequest, UpdateDashboardRequest } from '@/types';
-import { apiQueryKeys } from '@/types';
+import { queryKeys } from '@/lib/tanstack-query/query-keys';
+import type { Dashboard } from '@/types/api';
+import type { CreateDashboardRequest, UpdateDashboardRequest } from '@/types/dashboard.types';
 
 /**
  * Hook to fetch all dashboards
  */
-export function useDashboards(): UseQueryResult<Dashboard[], Error> {
-  return useQuery<Dashboard[], Error>({
+export function useDashboards(): ReturnType<typeof useQuery> {
+  return useQuery({
     ...createQueryOptions.dashboard(),
-    queryKey: apiQueryKeys.dashboards,
+    queryKey: queryKeys.dashboards.lists(),
     queryFn: () => dashboardApi.getDashboards(),
   });
 }
@@ -27,7 +28,7 @@ export function useDashboards(): UseQueryResult<Dashboard[], Error> {
 export function useDashboard(dashboardId: string): UseQueryResult<Dashboard, Error> {
   return useQuery({
     ...createQueryOptions.dashboard(dashboardId),
-    queryKey: apiQueryKeys.dashboard(dashboardId),
+    queryKey: queryKeys.dashboards.detail(dashboardId),
     queryFn: () => dashboardApi.getDashboard(dashboardId),
     enabled: !!dashboardId,
   });
@@ -36,14 +37,14 @@ export function useDashboard(dashboardId: string): UseQueryResult<Dashboard, Err
 /**
  * Hook to create dashboard
  */
-export function useCreateDashboard(): UseMutationResult<Dashboard, Error, CreateDashboardRequest, unknown> {
+export function useCreateDashboard(): UseMutationResult<Dashboard, Error, CreateDashboardRequest> {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (data: CreateDashboardRequest) => dashboardApi.createDashboard(data),
     onSuccess: () => {
       // Invalidate and refetch dashboards
-      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
+      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards.lists() });
     },
   });
 }
@@ -51,15 +52,15 @@ export function useCreateDashboard(): UseMutationResult<Dashboard, Error, Create
 /**
  * Hook to update dashboard
  */
-export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashboard, Error, UpdateDashboardRequest, unknown> {
+export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashboard, Error, UpdateDashboardRequest> {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (data: UpdateDashboardRequest) => dashboardApi.updateDashboard(dashboardId, data),
     onSuccess: () => {
       // Invalidate specific dashboard and list
-      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboard(dashboardId) });
-      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
+      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards.detail(dashboardId) });
+      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards.lists() });
     },
   });
 }
@@ -67,14 +68,14 @@ export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashb
 /**
  * Hook to delete dashboard
  */
-export function useDeleteDashboard(): UseMutationResult<void, Error, string, unknown> {
+export function useDeleteDashboard(): UseMutationResult<void, Error, string> {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (dashboardId: string) => dashboardApi.deleteDashboard(dashboardId),
     onSuccess: () => {
       // Invalidate dashboards list
-      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
+      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards.lists() });
     },
   });
 }
@@ -82,15 +83,15 @@ export function useDeleteDashboard(): UseMutationResult<void, Error, string, unk
 /**
  * Hook to duplicate dashboard
  */
-export function useDuplicateDashboard(): UseMutationResult<Dashboard, Error, { id: string; title?: string }, unknown> {
+export function useDuplicateDashboard(): UseMutationResult<Dashboard, Error, { id: string; name?: string }> {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, title }: { id: string; title?: string }) => 
-      dashboardApi.duplicateDashboard(id, title),
+    mutationFn: ({ id, name }: { id: string; name?: string }) => 
+      dashboardApi.duplicateDashboard(id, name),
     onSuccess: () => {
       // Invalidate dashboards list to show new dashboard
-      queryClient.invalidateQueries({ queryKey: apiQueryKeys.dashboards });
+      queryClient.invalidateQueries({ queryKey: queryKeys.dashboards.lists() });
     },
   });
 }

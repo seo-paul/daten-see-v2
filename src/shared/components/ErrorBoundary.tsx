@@ -116,13 +116,13 @@ export class ErrorBoundary extends Component<Props, State> {
               </div>
               <div className="ml-3">
                 <h3 className="text-sm font-medium text-red-800">
-                  Something went wrong
+                  Oops! Etwas ist schiefgelaufen
                 </h3>
                 <div className="mt-2 text-sm text-red-700">
                   <p>
-                    {level === 'page' && 'This page encountered an error and cannot be displayed.'}
-                    {level === 'widget' && 'This widget encountered an error and cannot be displayed.'}
-                    {level === 'component' && 'This component encountered an error.'}
+                    {level === 'page' && 'Diese Seite ist auf einen Fehler gestoßen und kann nicht angezeigt werden.'}
+                    {level === 'widget' && 'Dieses Widget ist auf einen Fehler gestoßen und kann nicht angezeigt werden.'}
+                    {level === 'component' && 'Diese Komponente ist auf einen Fehler gestoßen.'}
                   </p>
                   
                   {process.env.NODE_ENV === 'development' && this.state.error && (
@@ -144,7 +144,7 @@ export class ErrorBoundary extends Component<Props, State> {
                     onClick={this.handleRetry}
                     className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
-                    Try Again
+                    Seite neu laden
                   </button>
                   
                   {this.state.errorId && process.env.NODE_ENV === 'production' && (

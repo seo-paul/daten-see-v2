@@ -252,6 +252,7 @@ describe('Dashboard API', () => {
       const originalUpdatedAt = originalDashboard?.updatedAt;
 
       const updateRequest: UpdateDashboardRequest = {
+        id: 'dash-3',
         description: 'Updated customer insights',
       };
 

@@ -16,8 +16,8 @@ const mockRouter = {
   push: jest.fn(),
 };
 
-jest.mock('next/navigation', () => ({
-  useRouter: () => mockRouter,
+jest.mock('next/navigation', (): object => ({
+  useRouter: (): object => mockRouter,
 }));
 
 const mockDashboard: DashboardListItem = {
@@ -29,15 +29,15 @@ const mockDashboard: DashboardListItem = {
   widgetCount: 5,
 };
 
-describe('DashboardCard Component', () => {
+describe('DashboardCard Component', (): void => {
   const mockOnEdit = jest.fn();
   const mockOnDelete = jest.fn();
 
-  beforeEach(() => {
+  beforeEach((): void => {
     jest.clearAllMocks();
   });
 
-  it('should render dashboard information correctly', () => {
+  it('should render dashboard information correctly', (): void => {
     render(
       <DashboardCard 
         dashboard={mockDashboard}
@@ -52,7 +52,7 @@ describe('DashboardCard Component', () => {
     expect(screen.getByText('Privat')).toBeInTheDocument();
   });
 
-  it('should have clickable title link', () => {
+  it('should have clickable title link', (): void => {
     render(
       <DashboardCard 
         dashboard={mockDashboard}
@@ -65,7 +65,7 @@ describe('DashboardCard Component', () => {
     expect(titleLink).toHaveAttribute('href', '/dashboard/dashboard-1');
   });
 
-  it('should call onEdit when edit action is clicked', async () => {
+  it('should call onEdit when edit action is clicked', async (): Promise<void> => {
     const user = userEvent.setup();
     render(
       <DashboardCard 
@@ -81,7 +81,7 @@ describe('DashboardCard Component', () => {
     expect(mockOnEdit).toHaveBeenCalledWith(mockDashboard);
   });
 
-  it('should call onDelete when delete action is clicked', async () => {
+  it('should call onDelete when delete action is clicked', async (): Promise<void> => {
     const user = userEvent.setup();
     render(
       <DashboardCard 
@@ -97,7 +97,7 @@ describe('DashboardCard Component', () => {
     expect(mockOnDelete).toHaveBeenCalledWith(mockDashboard.id);
   });
 
-  it('should display public status correctly', () => {
+  it('should display public status correctly', (): void => {
     const publicDashboard = { ...mockDashboard, isPublic: true };
     render(
       <DashboardCard 
@@ -110,7 +110,7 @@ describe('DashboardCard Component', () => {
     expect(screen.getByText('Öffentlich')).toBeInTheDocument();
   });
 
-  it('should show actions menu when button is clicked', async () => {
+  it('should show actions menu when button is clicked', async (): Promise<void> => {
     const user = userEvent.setup();
     render(
       <DashboardCard 

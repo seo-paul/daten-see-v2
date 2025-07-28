@@ -22,7 +22,7 @@ export default function DashboardPage(): React.ReactElement {
 
   return (
     <MainLayout>
-      <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="flex flex-col min-h-screen bg-[#FEFCF9]">
         {/* Dashboard Header */}
         <DashboardHeader
           title="Marketing Analytics"
@@ -32,7 +32,7 @@ export default function DashboardPage(): React.ReactElement {
         {/* Main Dashboard Content */}
         <DashboardGrid>
           {/* Show loading state or dashboard info */}
-          <div className="text-center text-gray-500 py-12">
+          <div className="text-center text-[#5d5d5d] py-12">
             {isLoading ? (
               <p className="text-lg font-medium mb-2">Loading dashboards...</p>
             ) : (

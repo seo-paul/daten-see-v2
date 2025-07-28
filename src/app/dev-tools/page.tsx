@@ -68,10 +68,10 @@ export default function DevToolsPage(): React.ReactElement {
       <MainLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+            <h1 className="text-2xl font-bold text-[#3d3d3d] mb-4">
               Dev Tools - Development Only
             </h1>
-            <p className="text-gray-600">
+            <p className="text-[#5d5d5d]">
               This page is only available in development mode.
             </p>
           </div>
@@ -85,17 +85,17 @@ export default function DevToolsPage(): React.ReactElement {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          <h1 className="text-3xl font-bold text-[#3d3d3d] mb-2">
             React DevTools & Performance Profiling
           </h1>
-          <p className="text-gray-600">
+          <p className="text-[#5d5d5d]">
             Monitor React component performance and analyze rendering behavior
           </p>
         </div>
 
         {/* Controls */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+        <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-6 mb-8">
+          <h2 className="text-xl font-semibold text-[#3d3d3d] mb-4 flex items-center">
             <Settings className="w-5 h-5 mr-2" />
             Profiling Controls
           </h2>
@@ -150,36 +150,36 @@ export default function DevToolsPage(): React.ReactElement {
 
         {/* React Profiling Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+          <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-6">
+            <h2 className="text-xl font-semibold text-[#3d3d3d] mb-4 flex items-center">
               <BarChart3 className="w-5 h-5 mr-2" />
               React Profiling Stats
             </h2>
             
             {Object.keys(profilingStats).length === 0 ? (
-              <p className="text-gray-500 italic">
+              <p className="text-[#5d5d5d] italic">
                 No profiling data available. Start profiling to see component stats.
               </p>
             ) : (
               <div className="space-y-4">
                 {Object.entries(profilingStats).map(([componentId, stats]) => (
                   <div key={componentId} className="border-b border-gray-100 pb-4 last:border-b-0">
-                    <h3 className="font-medium text-gray-800 mb-2">{componentId}</h3>
+                    <h3 className="font-medium text-[#3d3d3d] mb-2">{componentId}</h3>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="text-gray-600">Renders:</span>
+                        <span className="text-[#5d5d5d]">Renders:</span>
                         <span className="ml-2 font-medium">{stats.renderCount}</span>
                       </div>
                       <div>
-                        <span className="text-gray-600">Avg Duration:</span>
+                        <span className="text-[#5d5d5d]">Avg Duration:</span>
                         <span className="ml-2 font-medium">{stats.avgDuration.toFixed(2)}ms</span>
                       </div>
                       <div>
-                        <span className="text-gray-600">Mounts:</span>
+                        <span className="text-[#5d5d5d]">Mounts:</span>
                         <span className="ml-2 font-medium">{stats.mountCount}</span>
                       </div>
                       <div>
-                        <span className="text-gray-600">Updates:</span>
+                        <span className="text-[#5d5d5d]">Updates:</span>
                         <span className="ml-2 font-medium">{stats.updateCount}</span>
                       </div>
                     </div>
@@ -209,13 +209,13 @@ export default function DevToolsPage(): React.ReactElement {
           </div>
 
           {/* Performance Metrics */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-6">
+            <h2 className="text-xl font-semibold text-[#3d3d3d] mb-4">
               Performance Metrics
             </h2>
             
             {Object.keys(performanceMetrics).length === 0 ? (
-              <p className="text-gray-500 italic">
+              <p className="text-[#5d5d5d] italic">
                 No performance metrics available yet.
               </p>
             ) : (
@@ -223,22 +223,22 @@ export default function DevToolsPage(): React.ReactElement {
                 {Object.entries(performanceMetrics).map(([name, data]) => (
                   data && (
                     <div key={name} className="border-b border-gray-100 pb-4 last:border-b-0">
-                      <h3 className="font-medium text-gray-800 mb-2">{name}</h3>
+                      <h3 className="font-medium text-[#3d3d3d] mb-2">{name}</h3>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="text-gray-600">Count:</span>
+                          <span className="text-[#5d5d5d]">Count:</span>
                           <span className="ml-2 font-medium">{data.count}</span>
                         </div>
                         <div>
-                          <span className="text-gray-600">Average:</span>
+                          <span className="text-[#5d5d5d]">Average:</span>
                           <span className="ml-2 font-medium">{data.avg.toFixed(2)}ms</span>
                         </div>
                         <div>
-                          <span className="text-gray-600">Min:</span>
+                          <span className="text-[#5d5d5d]">Min:</span>
                           <span className="ml-2 font-medium">{data.min.toFixed(2)}ms</span>
                         </div>
                         <div>
-                          <span className="text-gray-600">Max:</span>
+                          <span className="text-[#5d5d5d]">Max:</span>
                           <span className="ml-2 font-medium">{data.max.toFixed(2)}ms</span>
                         </div>
                       </div>

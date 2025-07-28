@@ -37,7 +37,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
   };
 
   return React.createElement('div', {
-    className: `fixed bottom-4 left-4 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50 ${className}`,
+    className: `fixed bottom-4 left-4 bg-[#FDF9F3] border border-[#E6D7B8] rounded-lg shadow-lg p-4 z-50 ${className}`,
     style: { minWidth: '280px', fontSize: '12px' }
   },
     // Header
@@ -45,7 +45,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
       className: 'flex items-center justify-between mb-3'
     },
       React.createElement('h3', {
-        className: 'font-semibold text-gray-800',
+        className: 'font-semibold text-[#3d3d3d]',
         style: { fontSize: '14px' }
       }, '🎯 Core Web Vitals'),
       React.createElement('div', {
@@ -67,7 +67,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
           className: 'flex items-center justify-between'
         },
           React.createElement('span', {
-            className: 'text-gray-600'
+            className: 'text-[#5d5d5d]'
           }, metric.name),
           React.createElement('div', {
             className: 'flex items-center gap-2'
@@ -89,10 +89,10 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
       className: 'mt-3 pt-3 border-t border-gray-200'
     },
       React.createElement('div', {
-        className: 'text-xs text-gray-600 mb-2'
+        className: 'text-xs text-[#5d5d5d] mb-2'
       }, 'Recommendations:'),
       React.createElement('ul', {
-        className: 'text-xs text-gray-500 space-y-1'
+        className: 'text-xs text-[#5d5d5d] space-y-1'
       },
         summary.recommendations.slice(0, 3).map((rec, index) =>
           React.createElement('li', {
@@ -108,7 +108,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
 
     // Legend
     React.createElement('div', {
-      className: 'mt-3 pt-3 border-t border-gray-200 flex items-center gap-4 text-xs'
+      className: 'mt-3 pt-3 border-t border-[#E6D7B8] flex items-center gap-4 text-xs'
     },
       React.createElement('div', {
         className: 'flex items-center gap-1'
@@ -117,7 +117,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
           className: 'w-2 h-2 rounded-full bg-green-500'
         }),
         React.createElement('span', {
-          className: 'text-gray-600'
+          className: 'text-[#5d5d5d]'
         }, 'Good')
       ),
       React.createElement('div', {
@@ -127,7 +127,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
           className: 'w-2 h-2 rounded-full bg-yellow-500'
         }),
         React.createElement('span', {
-          className: 'text-gray-600'
+          className: 'text-[#5d5d5d]'
         }, 'Needs Improvement')
       ),
       React.createElement('div', {
@@ -137,7 +137,7 @@ export function WebVitalsDisplay({ className = '', showDetails = false }: WebVit
           className: 'w-2 h-2 rounded-full bg-red-500'
         }),
         React.createElement('span', {
-          className: 'text-gray-600'
+          className: 'text-[#5d5d5d]'
         }, 'Poor')
       )
     )

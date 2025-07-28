@@ -29,7 +29,7 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 hover:border-gray-300 transition-colors group">
+    <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-6 hover:border-gray-300 transition-colors group">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
@@ -37,11 +37,11 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
             href={`/dashboard/${dashboard.id}` as Route}
             className="block hover:text-blue-600 transition-colors"
           >
-            <h3 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
+            <h3 className="text-lg font-semibold text-[#3d3d3d] mb-1 group-hover:text-blue-600">
               {dashboard.name}
             </h3>
           </Link>
-          <p className="text-sm text-gray-600 line-clamp-2">
+          <p className="text-sm text-[#3d3d3d]/70 line-clamp-2">
             {dashboard.description}
           </p>
         </div>
@@ -51,7 +51,7 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
           <button
             type="button"
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md transition-colors opacity-0 group-hover:opacity-100"
+            className="p-1.5 text-gray-400 hover:text-[#3d3d3d]/70 hover:bg-gray-100 rounded-md transition-colors opacity-0 group-hover:opacity-100"
           >
             <MoreVertical className="w-4 h-4" />
           </button>
@@ -65,7 +65,7 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
               />
               
               {/* Menu */}
-              <div className="absolute right-0 top-8 z-20 bg-white rounded-lg border border-gray-200 shadow-lg py-1 min-w-[150px]">
+              <div className="absolute right-0 top-8 z-20 bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] shadow-lg py-1 min-w-[150px]">
                 <button
                   type="button"
                   onClick={() => {
@@ -95,7 +95,7 @@ export function DashboardCard({ dashboard, onEdit, onDelete }: DashboardCardProp
       </div>
 
       {/* Meta Information */}
-      <div className="flex items-center justify-between text-sm text-gray-500">
+      <div className="flex items-center justify-between text-sm text-[#3d3d3d]/60">
         <div className="flex items-center space-x-4">
           {/* Privacy */}
           <div className="flex items-center">

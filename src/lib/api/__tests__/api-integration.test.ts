@@ -30,7 +30,7 @@ describe('API Type Integration', () => {
       const client = new ApiClient();
       const mockDashboard: Dashboard = {
         id: 'test-123',
-        title: 'Test Dashboard',
+        name: 'Test Dashboard',
         description: 'Test description',
         widgets: [],
         createdAt: '2024-01-01T00:00:00Z',
@@ -77,7 +77,7 @@ describe('API Type Integration', () => {
   describe('Dashboard Service Types', () => {
     it('should create dashboard with proper types', async () => {
       const createRequest: CreateDashboardRequest = {
-        title: 'New Dashboard',
+        name: 'New Dashboard',
         description: 'Test dashboard',
         isPublic: false,
         organizationId: 'org-123',
@@ -86,7 +86,7 @@ describe('API Type Integration', () => {
 
       const mockResponse: Dashboard = {
         id: 'new-dashboard',
-        title: createRequest.title,
+        name: createRequest.name,
         ...(createRequest.description && { description: createRequest.description }),
         isPublic: createRequest.isPublic || false,
         widgets: [],
@@ -108,7 +108,7 @@ describe('API Type Integration', () => {
       const result = await DashboardService.createDashboard(createRequest);
       
       expect(result.id).toBe('new-dashboard');
-      expect(result.title).toBe(createRequest.title);
+      expect(result.name).toBe(createRequest.name);
     });
 
     it('should validate widget types', () => {
@@ -230,7 +230,7 @@ describe('API Type Integration', () => {
     it('should validate dashboard objects', () => {
       const validDashboard = {
         id: 'test-123',
-        title: 'Test Dashboard',
+        name: 'Test Dashboard',
         widgets: [],
       };
 
@@ -252,13 +252,13 @@ describe('API Type Integration', () => {
   describe('Error Handling Types', () => {
     it('should handle structured API errors', () => {
       const apiError = new ApiClientError('Test error', [
-        { code: 'VALIDATION_ERROR', message: 'Title is required', field: 'title' },
+        { code: 'VALIDATION_ERROR', message: 'Name is required', field: 'name' },
         { code: 'PERMISSION_DENIED', message: 'Insufficient permissions' },
       ]);
 
       expect(apiError.errors).toHaveLength(2);
       expect(apiError.errors[0]?.code).toBe('VALIDATION_ERROR');
-      expect(apiError.errors[0]?.field).toBe('title');
+      expect(apiError.errors[0]?.field).toBe('name');
     });
   });
 
@@ -270,7 +270,7 @@ describe('API Type Integration', () => {
       const mockDashboardResponse: Dashboard[] = [
         {
           id: 'dash-1',
-          title: 'Dashboard 1',
+          name: 'Dashboard 1',
           description: 'Test dashboard',
           widgets: [],
           createdAt: '2024-01-01T00:00:00Z',
@@ -294,13 +294,13 @@ describe('Compile-time Type Validation', () => {
   it('should enforce exact optional properties', () => {
     // This test ensures our exactOptionalPropertyTypes works
     const createRequest: CreateDashboardRequest = {
-      title: 'Test Dashboard',
+      name: 'Test Dashboard',
       // description intentionally omitted - should be fine
       // isPublic intentionally omitted - should be fine  
       organizationId: 'org-123',
     };
 
-    expect(createRequest.title).toBe('Test Dashboard');
+    expect(createRequest.name).toBe('Test Dashboard');
     expect(createRequest.description).toBeUndefined();
   });
 

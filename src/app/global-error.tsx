@@ -62,7 +62,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps): React.R
     <html lang="en">
       <body>
         <div className="min-h-screen flex items-center justify-center bg-red-50 px-4">
-          <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
+          <div className="max-w-md w-full bg-[#FDF9F3] shadow-lg rounded-lg p-6">
             <div className="flex items-center mb-4">
               <div className="flex-shrink-0">
                 <svg
@@ -142,7 +142,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps): React.R
             </div>
             
             <div className="mt-4 text-center">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-[#5d5d5d]">
                 Error ID: {error.digest?.slice(0, 8) || 'unknown'}
               </p>
             </div>

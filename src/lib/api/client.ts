@@ -1,6 +1,5 @@
 import { appLogger } from '@/lib/monitoring/logger.config';
 import type { ApiError } from '@/types/api.types';
-import { ApiErrorSchema } from '@/types/api.types';
 
 // API Configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';

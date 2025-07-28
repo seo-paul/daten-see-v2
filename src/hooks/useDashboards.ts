@@ -3,19 +3,18 @@
  * TanStack Query hooks for dashboard operations
  */
 
-import { useQuery, useMutation, useQueryClient, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, type UseQueryResult, type UseMutationResult } from '@tanstack/react-query';
 
 import { dashboardApi } from '@/lib/api/dashboard';
 import { createQueryOptions } from '@/lib/tanstack-query/config';
-import type { Dashboard, CreateDashboardRequest, UpdateDashboardRequest } from '@/types';
-import { apiQueryKeys } from '@/types';
+import { apiQueryKeys, type Dashboard, type CreateDashboardRequest, type UpdateDashboardRequest } from '@/types';
 
 /**
  * Hook to fetch all dashboards
  * Integrates TanStack Query with Zustand Store
  */
 export function useDashboards(): UseQueryResult<Dashboard[], Error> {
-  return useQuery<Dashboard[], Error>({
+  return useQuery({
     ...createQueryOptions.dashboard(),
     queryKey: apiQueryKeys.dashboards,
     queryFn: () => dashboardApi.getDashboards(),
@@ -37,7 +36,7 @@ export function useDashboard(dashboardId: string): UseQueryResult<Dashboard, Err
 /**
  * Hook to create dashboard
  */
-export function useCreateDashboard(): UseMutationResult<Dashboard, Error, CreateDashboardRequest, unknown> {
+export function useCreateDashboard(): UseMutationResult<Dashboard, Error, CreateDashboardRequest> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -52,7 +51,7 @@ export function useCreateDashboard(): UseMutationResult<Dashboard, Error, Create
 /**
  * Hook to update dashboard
  */
-export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashboard, Error, UpdateDashboardRequest, unknown> {
+export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashboard, Error, UpdateDashboardRequest> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -68,7 +67,7 @@ export function useUpdateDashboard(dashboardId: string): UseMutationResult<Dashb
 /**
  * Hook to delete dashboard
  */
-export function useDeleteDashboard(): UseMutationResult<void, Error, string, unknown> {
+export function useDeleteDashboard(): UseMutationResult<void, Error, string> {
   const queryClient = useQueryClient();
 
   return useMutation({

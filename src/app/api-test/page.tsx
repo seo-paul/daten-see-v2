@@ -28,55 +28,35 @@ export default function ApiTestPage(): React.JSX.Element {
   // Test type creation
   const [testDashboard] = React.useState<Dashboard>({
     id: 'test-123',
-    title: 'Test Dashboard',
+    name: 'Test Dashboard',
     description: 'Testing our new API types',
+    isPublic: false,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-15T00:00:00Z',
+    owner: 'user-123',
     widgets: [
       {
         id: 'widget-1',
         type: 'chart',
         title: 'Sessions Chart',
+        position: { x: 0, y: 0, w: 6, h: 4 },
         config: {
           chartType: 'line',
           metrics: ['sessions', 'pageviews'],
           dimensions: ['date'],
-          timeRange: {
-            start: '2024-01-01',
-            end: '2024-01-31',
-            preset: 'last30days',
-          },
         },
-        position: { x: 0, y: 0, w: 6, h: 4 },
-        dataSource: 'google-analytics-1',
       },
       {
         id: 'widget-2',
         type: 'kpi',
         title: 'Total Sessions',
+        position: { x: 6, y: 0, w: 3, h: 2 },
         config: {
           metric: 'sessions',
           target: 10000,
-          comparison: 'previous_period',
         },
-        position: { x: 6, y: 0, w: 3, h: 2 },
-        dataSource: 'google-analytics-1',
-      },
-      {
-        id: 'widget-3',
-        type: 'text',
-        title: 'Dashboard Description',
-        config: {
-          content: 'This dashboard shows key website metrics',
-          markdown: true,
-        },
-        position: { x: 0, y: 4, w: 12, h: 2 },
       },
     ],
-    createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z',
-    isPublic: false,
-    owner: 'user-123',
-    organizationId: 'org-123',
-    workspaceId: 'workspace-123',
   });
 
   const [testDataSources] = React.useState<DataSource[]>([
@@ -153,11 +133,9 @@ export default function ApiTestPage(): React.JSX.Element {
   });
 
   const [createRequest] = React.useState<CreateDashboardRequest>({
-    title: 'New Dashboard',
+    name: 'New Dashboard',
     description: 'Created via API',
     isPublic: false,
-    organizationId: 'org-123',
-    workspaceId: 'workspace-123',
   });
 
   // Test type guards
@@ -166,13 +144,13 @@ export default function ApiTestPage(): React.JSX.Element {
 
   return (
     <div className="container mx-auto p-6 space-y-8">
-      <h1 className="text-2xl font-bold text-gray-900">API Types Test Page</h1>
-      <p className="text-gray-600">
+      <h1 className="text-2xl font-bold text-[#3d3d3d]">API Types Test Page</h1>
+      <p className="text-[#5d5d5d]">
         This page tests our new API types and ensures they work correctly in React components.
       </p>
 
       {/* Query Keys Test */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">Query Keys</h2>
         <div className="space-y-2 font-mono text-sm">
           <div>Dashboards: {JSON.stringify(apiQueryKeys.dashboards)}</div>
@@ -183,11 +161,11 @@ export default function ApiTestPage(): React.JSX.Element {
       </section>
 
       {/* Dashboard Type Test */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">Dashboard Type</h2>
         <div className="space-y-2">
           <div><strong>ID:</strong> {testDashboard.id}</div>
-          <div><strong>Title:</strong> {testDashboard.title}</div>
+          <div><strong>Name:</strong> {testDashboard.name}</div>
           <div><strong>Widgets:</strong> {testDashboard.widgets.length}</div>
           <div><strong>Public:</strong> {testDashboard.isPublic ? 'Yes' : 'No'}</div>
           <div><strong>Organization:</strong> {testDashboard.organizationId}</div>
@@ -197,7 +175,7 @@ export default function ApiTestPage(): React.JSX.Element {
         <h3 className="font-medium mt-4 mb-2">Widget Types:</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {testDashboard.widgets.map((widget) => (
-            <div key={widget.id} className="bg-gray-50 p-3 rounded">
+            <div key={widget.id} className="bg-[#FBF5ED] p-3 rounded">
               <div><strong>Type:</strong> {widget.type}</div>
               <div><strong>Title:</strong> {widget.title}</div>
               <div><strong>Position:</strong> {widget.position.x},{widget.position.y}</div>
@@ -209,11 +187,11 @@ export default function ApiTestPage(): React.JSX.Element {
       </section>
 
       {/* Data Sources Test */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">Data Sources</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {testDataSources.map((source) => (
-            <div key={source.id} className="bg-gray-50 p-3 rounded">
+            <div key={source.id} className="bg-[#FBF5ED] p-3 rounded">
               <div><strong>Name:</strong> {source.name}</div>
               <div><strong>Type:</strong> {source.type}</div>
               <div><strong>Status:</strong> {source.status}</div>
@@ -224,7 +202,7 @@ export default function ApiTestPage(): React.JSX.Element {
       </section>
 
       {/* Analytics Query Test */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">Analytics Query</h2>
         <div className="space-y-2">
           <div><strong>Data Source:</strong> {testQuery.dataSource}</div>
@@ -239,7 +217,7 @@ export default function ApiTestPage(): React.JSX.Element {
           <div className="mt-4">
             <h3 className="font-medium mb-2">Filter Details:</h3>
             {testQuery.filters.map((filter, index) => (
-              <div key={index} className="bg-gray-50 p-2 rounded mb-2">
+              <div key={index} className="bg-[#FBF5ED] p-2 rounded mb-2">
                 <strong>{filter.field}</strong> {filter.operator} <em>{filter.value}</em>
               </div>
             ))}
@@ -248,10 +226,10 @@ export default function ApiTestPage(): React.JSX.Element {
       </section>
 
       {/* Create Request Test */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">Create Dashboard Request</h2>
         <div className="space-y-2">
-          <div><strong>Title:</strong> {createRequest.title}</div>
+          <div><strong>Name:</strong> {createRequest.name}</div>
           <div><strong>Description:</strong> {createRequest.description}</div>
           <div><strong>Public:</strong> {createRequest.isPublic ? 'Yes' : 'No'}</div>
           <div><strong>Organization:</strong> {createRequest.organizationId}</div>
@@ -260,7 +238,7 @@ export default function ApiTestPage(): React.JSX.Element {
       </section>
 
       {/* Type Guards Test */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">Type Guards</h2>
         <div className="space-y-2">
           <div>
@@ -279,7 +257,7 @@ export default function ApiTestPage(): React.JSX.Element {
       </section>
 
       {/* TanStack Query Integration */}
-      <section className="bg-white p-6 rounded-lg border">
+      <section className="bg-[#FDF9F3] p-6 rounded-lg border border-[#E6D7B8]">
         <h2 className="text-lg font-semibold mb-4">TanStack Query Integration</h2>
         <div className="space-y-2">
           <div><strong>Query Status:</strong> {dashboardsQuery.status}</div>
@@ -287,7 +265,7 @@ export default function ApiTestPage(): React.JSX.Element {
           <div><strong>Is Error:</strong> {dashboardsQuery.isError ? 'Yes' : 'No'}</div>
           <div><strong>Data Length:</strong> {Array.isArray(dashboardsQuery.data) ? dashboardsQuery.data.length : 'N/A'}</div>
         </div>
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="text-sm text-[#3d3d3d]/60 mt-2">
           Query is disabled for demo purposes. In real usage, this would fetch dashboards using our typed API service.
         </p>
       </section>

@@ -105,10 +105,10 @@ export class DashboardService {
   /**
    * Duplicate dashboard
    */
-  static async duplicateDashboard(id: string, title?: string): Promise<Dashboard> {
-    const response = await apiClient.post<Dashboard, { title?: string }>(
+  static async duplicateDashboard(id: string, name?: string): Promise<Dashboard> {
+    const response = await apiClient.post<Dashboard, { name?: string }>(
       `/dashboards/${id}/duplicate`,
-      title ? { title } : {}
+      name ? { name } : {}
     );
     
     if (!response.success) {

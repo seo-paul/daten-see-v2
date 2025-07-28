@@ -36,14 +36,14 @@ export function Breadcrumbs({
             <li key={breadcrumb.href} className="flex items-center">
               {/* Separator (not for first item) */}
               {index > 0 && (
-                <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />
+                <ChevronRight className="h-4 w-4 text-[#5d5d5d] mx-2" />
               )}
 
               {/* Breadcrumb Link */}
               {isLast ? (
                 // Active/current page - no link
                 <span 
-                  className="font-medium text-gray-900 flex items-center"
+                  className="font-medium text-[#3d3d3d] flex items-center"
                   aria-current="page"
                 >
                   {isHome && showHome && <Home className="h-4 w-4 mr-1" />}
@@ -53,7 +53,7 @@ export function Breadcrumbs({
                 // Clickable breadcrumb
                 <Link
                   href={breadcrumb.href as Route}
-                  className="text-gray-500 hover:text-gray-700 transition-colors flex items-center"
+                  className="text-[#5d5d5d] hover:text-[#3d3d3d] transition-colors flex items-center"
                 >
                   {isHome && showHome && <Home className="h-4 w-4 mr-1" />}
                   {breadcrumb.label}
@@ -85,9 +85,9 @@ export function CompactBreadcrumbs({ className = '' }: { className?: string }): 
       <ol className="flex items-center space-x-2">
         {/* Show ellipsis if we're truncating */}
         {breadcrumbs.length > 2 && (
-          <li className="text-gray-400">
+          <li className="text-[#5d5d5d]">
             <span>...</span>
-            <ChevronRight className="h-4 w-4 text-gray-400 mx-2 inline" />
+            <ChevronRight className="h-4 w-4 text-[#5d5d5d] mx-2 inline" />
           </li>
         )}
 
@@ -98,13 +98,13 @@ export function CompactBreadcrumbs({ className = '' }: { className?: string }): 
             <li key={breadcrumb.href} className="flex items-center">
               {/* Separator (not for first item) */}
               {index > 0 && (
-                <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />
+                <ChevronRight className="h-4 w-4 text-[#5d5d5d] mx-2" />
               )}
 
               {/* Breadcrumb Link */}
               {isLast ? (
                 <span 
-                  className="font-medium text-gray-900"
+                  className="font-medium text-[#3d3d3d]"
                   aria-current="page"
                 >
                   {breadcrumb.label}
@@ -112,7 +112,7 @@ export function CompactBreadcrumbs({ className = '' }: { className?: string }): 
               ) : (
                 <Link
                   href={breadcrumb.href as Route}
-                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                  className="text-[#5d5d5d] hover:text-[#3d3d3d] transition-colors"
                 >
                   {breadcrumb.label}
                 </Link>
