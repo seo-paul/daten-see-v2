@@ -1,18 +1,27 @@
 'use client';
 
-import { Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 
-import { CreateDashboardModal } from '@/components/dashboard/CreateDashboardModal';
-import { DashboardCard } from '@/components/dashboard/DashboardCard';
-import { EditDashboardModal } from '@/components/dashboard/EditDashboardModal';
+import { DashboardEmptyState } from '@/components/dashboard/DashboardEmptyState';
+import { DashboardErrorMessage } from '@/components/dashboard/DashboardErrorMessage';
+import { DashboardGrid } from '@/components/dashboard/DashboardGrid';
+import { DashboardLoadingState } from '@/components/dashboard/DashboardLoadingState';
+import { DashboardModals } from '@/components/dashboard/DashboardModals';
+import { DashboardNoSearchResults } from '@/components/dashboard/DashboardNoSearchResults';
+import { DashboardOverviewHeader } from '@/components/dashboard/DashboardOverviewHeader';
+import { DashboardSearchBar } from '@/components/dashboard/DashboardSearchBar';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { Button } from '@/components/ui/Button';
 import { useDashboards, useCreateDashboard, useUpdateDashboard, useDeleteDashboard } from '@/hooks/dashboard/useDashboardQueries';
 import type { DashboardListItem, CreateDashboardRequest, UpdateDashboardRequest } from '@/types/dashboard.types';
 
 export default function DashboardsPage(): React.ReactElement {
-  // TanStack Query hooks for server state
+  /**
+   * STATE MANAGEMENT STRATEGY:
+   * 🔄 TanStack Query = Server State (Dashboard CRUD, API calls, caching)
+   * 🎨 Local React State = UI State (modals, search, editing state)
+   */
+  
+  // TanStack Query hooks for server state - Dashboard list from API
   const { data: dashboards = [], isLoading, error } = useDashboards();
   const createDashboardMutation = useCreateDashboard();
   const updateDashboardMutation = useUpdateDashboard('dummy-id');
@@ -50,147 +59,70 @@ export default function DashboardsPage(): React.ReactElement {
     await updateDashboardMutation.mutateAsync(data);
   };
 
+  // Computed values for component display logic
+  const dashboardsTyped = dashboards as DashboardListItem[];
+  const errorTyped = error as Error | null;
+  
+  const showSearch = dashboardsTyped.length > 0;
+  const showLoading = isLoading && dashboardsTyped.length === 0;
+  const showGrid = !isLoading && filteredDashboards.length > 0;
+  const showEmptyState = !isLoading && dashboardsTyped.length === 0;
+  const showNoResults = !isLoading && dashboardsTyped.length > 0 && filteredDashboards.length === 0;
+
   return (
     <MainLayout>
       <div className="px-6 py-8">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-            <div>
-              <h1 className="text-2xl font-bold text-[#3d3d3d]">
-                Dashboard-Übersicht
-              </h1>
-              <p className="text-sm text-[#5d5d5d] mt-1">
-                {(dashboards as DashboardListItem[]).length > 0 
-                  ? `${(dashboards as DashboardListItem[]).length} Dashboard${(dashboards as DashboardListItem[]).length === 1 ? '' : 's'} verfügbar`
-                  : 'Noch keine Dashboards erstellt'
-                }
-              </p>
-            </div>
+          <DashboardOverviewHeader
+            dashboards={dashboardsTyped}
+            onCreateClick={() => setShowCreateModal(true)}
+          />
 
-            <Button
-              variant="primary"
-              context="page"
-              onClick={() => setShowCreateModal(true)}
-              leftIcon={<Plus className="w-4 h-4" />}
-            >
-              Neues Dashboard
-            </Button>
-          </div>
+          <DashboardSearchBar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            showSearch={showSearch}
+          />
 
-          {/* Search Bar */}
-          {(dashboards as DashboardListItem[]).length > 0 && (
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#5d5d5d] w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Dashboards durchsuchen..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-[#E6D7B8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F4F73] focus:border-transparent"
-              />
-            </div>
-          )}
+          <DashboardErrorMessage error={errorTyped} />
 
-          {/* Error Message */}
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="text-red-600 text-sm">
-                    <strong>Fehler:</strong> {(error as Error)?.message || 'Unbekannter Fehler'}
-                  </div>
-                </div>
-                <button
-                  onClick={() => window.location.reload()}
-                  className="text-red-600 hover:text-red-800 text-sm underline"
-                >
-                  Neu laden
-                </button>
-              </div>
-            </div>
-          )}
+          <DashboardLoadingState 
+            isLoading={isLoading}
+            showLoading={showLoading}
+          />
 
-          {/* Loading State */}
-          {isLoading && (dashboards as DashboardListItem[]).length === 0 && (
-            <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-8">
-              <div className="text-center text-[#5d5d5d]">
-                <div className="w-16 h-16 mx-auto mb-4 bg-[#FBF5ED] rounded-lg flex items-center justify-center animate-pulse">
-                  <div className="w-8 h-8 border-2 border-[#E6D7B8] border-dashed rounded animate-spin"></div>
-                </div>
-                <p className="text-lg font-medium">Lade Dashboards...</p>
-              </div>
-            </div>
-          )}
+          <DashboardGrid
+            dashboards={filteredDashboards}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            showGrid={showGrid}
+          />
 
-          {/* Dashboard Grid */}
-          {!isLoading && filteredDashboards.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredDashboards.map((dashboard: DashboardListItem) => (
-                <DashboardCard
-                  key={dashboard.id}
-                  dashboard={dashboard}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                />
-              ))}
-            </div>
-          )}
+          <DashboardEmptyState
+            onCreateClick={() => setShowCreateModal(true)}
+            showEmptyState={showEmptyState}
+          />
 
-          {/* Empty State */}
-          {!isLoading && (dashboards as DashboardListItem[]).length === 0 && (
-            <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-8">
-              <div className="text-center text-[#5d5d5d]">
-                <div className="w-16 h-16 mx-auto mb-4 bg-[#FBF5ED] rounded-lg flex items-center justify-center">
-                  <div className="w-8 h-8 border-2 border-[#E6D7B8] border-dashed rounded"></div>
-                </div>
-                <p className="text-lg font-medium mb-2">Noch keine Dashboards</p>
-                <p className="text-sm text-[#5d5d5d] mb-4">
-                  Erstellen Sie Ihr erstes Dashboard, um loszulegen.
-                </p>
-                <Button
-                  variant="primary"
-                  context="page"
-                  onClick={() => setShowCreateModal(true)}
-                >
-                  Erstes Dashboard erstellen
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* No Search Results */}
-          {!isLoading && (dashboards as DashboardListItem[]).length > 0 && filteredDashboards.length === 0 && (
-            <div className="bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-8">
-              <div className="text-center text-[#5d5d5d]">
-                <Search className="w-16 h-16 mx-auto mb-4 text-[#E6D7B8]" />
-                <p className="text-lg font-medium mb-2">Keine Suchergebnisse</p>
-                <p className="text-sm text-[#5d5d5d]">
-                  Keine Dashboards gefunden für &quot;{searchQuery}&quot;
-                </p>
-              </div>
-            </div>
-          )}
+          <DashboardNoSearchResults
+            searchQuery={searchQuery}
+            showNoResults={showNoResults}
+          />
         </div>
       </div>
 
-      {/* Modals */}
-      <CreateDashboardModal
-        isOpen={showCreateModal}
-        onClose={() => setShowCreateModal(false)}
-        onSubmit={handleCreate}
-        isLoading={createDashboardMutation.isPending}
-      />
-
-      <EditDashboardModal
-        dashboard={editingDashboard}
-        isOpen={showEditModal}
-        onClose={() => {
+      <DashboardModals
+        showCreateModal={showCreateModal}
+        showEditModal={showEditModal}
+        editingDashboard={editingDashboard}
+        createLoading={createDashboardMutation.isPending}
+        updateLoading={updateDashboardMutation.isPending}
+        onCreateClose={() => setShowCreateModal(false)}
+        onEditClose={() => {
           setShowEditModal(false);
           setEditingDashboard(null);
         }}
-        onSubmit={handleUpdate}
-        isLoading={updateDashboardMutation.isPending}
+        onCreateSubmit={handleCreate}
+        onUpdateSubmit={handleUpdate}
       />
     </MainLayout>
   );

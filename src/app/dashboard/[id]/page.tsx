@@ -1,206 +1,58 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useEffect, useCallback } from 'react';
-import type { Layout, Layouts } from 'react-grid-layout';
 
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { 
-  ResponsiveDashboard, 
-  generateDefaultLayouts, 
-  mergeLayouts,
-  removeWidgetFromLayouts,
-} from '@/components/dashboard/ResponsiveDashboard';
-import { createDefaultWidget } from '@/components/dashboard/WidgetRenderer';
-import type { DashboardWidget } from '@/components/dashboard/DashboardCanvas';
-import { sanitizeName } from '@/lib/utils/sanitization';
+import { ResponsiveDashboard } from '@/components/dashboard/ResponsiveDashboard';
+import { WidgetConfigModal } from '@/components/dashboard/WidgetConfigModal';
 import { useDashboard } from '@/hooks/dashboard/useDashboardQueries';
-import { useDashboardUIStore } from '@/store/dashboard.store';
+import { useDashboardUIState } from '@/hooks/dashboard/useDashboardUIState';
 
 export default function DashboardDetailPage(): React.ReactElement {
   const params = useParams();
   const dashboardId = params.id as string;
   
-  // TanStack Query for server state
+  /**
+   * STATE MANAGEMENT STRATEGY:
+   * 
+   * 🔄 TanStack Query = Server State Management
+   * - Dashboard data from API (currentDashboard)
+   * - Loading states, error handling, caching
+   * - Optimistic updates, invalidation, background refetch
+   * 
+   * 🎨 Zustand (via useDashboardUIState) = UI State Management  
+   * - Edit mode toggle, widget layouts, undo/redo stacks
+   * - Local user interactions that don't require server sync
+   * - Component-specific UI state (modals, selections, transient data)
+   */
+  
+  // TanStack Query for server state - Dashboard data from API
   const { data: currentDashboard, isLoading, error } = useDashboard(dashboardId);
   
-  // Zustand for UI state
+  // Custom hook for UI state management - Edit mode, widgets, undo/redo
   const {
     isEditMode,
-    hasChanges,
     widgets,
     layouts,
-    undoStack,
-    redoStack,
-    setEditMode,
-    setHasChanges,
-    setWidgets,
-    setLayouts,
-    pushUndoState,
-    clearRedoStack,
-    undo,
-    redo
-  } = useDashboardUIStore();
-
-  // Initialize demo widgets if empty (will be replaced with real data later)
-  useEffect(() => {
-    if (widgets.length === 0) {
-      const demoWidgets: DashboardWidget[] = [
-        {
-          id: 'widget-1',
-          type: 'line',
-          title: 'Marketing Performance',
-          config: {},
-        },
-        {
-          id: 'widget-2',
-          type: 'kpi',
-          title: 'Gesamtumsatz',
-          config: {
-            metric: 'Gesamtumsatz',
-            value: 89500,
-            previousValue: 76200,
-            unit: 'currency',
-            trend: 'up',
-          },
-        },
-      ];
-
-      const demoLayouts: Layouts = {
-        lg: [
-          { i: 'widget-1', x: 0, y: 0, w: 8, h: 4 },
-          { i: 'widget-2', x: 8, y: 0, w: 4, h: 3 },
-        ],
-        md: [
-          { i: 'widget-1', x: 0, y: 0, w: 6, h: 4 },
-          { i: 'widget-2', x: 6, y: 0, w: 4, h: 3 },
-        ],
-        sm: [
-          { i: 'widget-1', x: 0, y: 0, w: 6, h: 4 },
-          { i: 'widget-2', x: 0, y: 4, w: 6, h: 3 },
-        ],
-        xs: [
-          { i: 'widget-1', x: 0, y: 0, w: 4, h: 4 },
-          { i: 'widget-2', x: 0, y: 4, w: 4, h: 3 },
-        ],
-        xxs: [
-          { i: 'widget-1', x: 0, y: 0, w: 2, h: 4 },
-          { i: 'widget-2', x: 0, y: 4, w: 2, h: 3 },
-        ],
-      };
-
-      setWidgets(demoWidgets);
-      setLayouts(demoLayouts);
-    }
-  }, [widgets.length, setWidgets, setLayouts]);
-
-  // Handle layout changes
-  const handleLayoutChange = useCallback((_currentLayout: Layout[], allLayouts: Layouts) => {
-    setLayouts(allLayouts);
-  }, [setLayouts]);
-
-  // Edit Mode Handlers
-  const handleToggleEditMode = useCallback(() => {
-    setEditMode(!isEditMode);
-    if (isEditMode && hasChanges) {
-      // Save changes when exiting edit mode
-      console.log('Saving dashboard changes:', { widgets, layouts });
-      setHasChanges(false);
-    }
-  }, [isEditMode, hasChanges, widgets, layouts, setEditMode, setHasChanges]);
-
-  // Add new widget
-  const handleAddWidget = useCallback(() => {
-    const widgetType = prompt('Widget-Typ wählen: line, bar, pie, kpi, text') as DashboardWidget['type'];
-    if (!widgetType || !['line', 'bar', 'pie', 'kpi', 'text'].includes(widgetType)) {
-      return;
-    }
-
-    // Save current state to undo stack
-    pushUndoState({ widgets, layouts });
-    clearRedoStack();
-
-    const newWidgetId = `widget-${Date.now()}`;
-    const newWidget: DashboardWidget = {
-      id: newWidgetId,
-      ...createDefaultWidget(widgetType),
-    };
-
-    setWidgets([...widgets, newWidget]);
-    setLayouts(mergeLayouts(layouts, generateDefaultLayouts(newWidgetId, widgetType)));
-  }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts]);
-
-  // Delete widget (no confirmation dialog)
-  const handleDeleteWidget = useCallback((widgetId: string) => {
-    // Save current state to undo stack
-    pushUndoState({ widgets, layouts });
-    clearRedoStack();
-
-    setWidgets(widgets.filter(w => w.id !== widgetId));
-    setLayouts(removeWidgetFromLayouts(layouts, widgetId));
-  }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts]);
-
-  // Duplicate widget
-  const handleDuplicateWidget = useCallback((widgetId: string) => {
-    const widget = widgets.find(w => w.id === widgetId);
-    if (!widget) return;
-
-    // Save current state to undo stack
-    pushUndoState({ widgets, layouts });
-    clearRedoStack();
-
-    const newWidgetId = `widget-${Date.now()}`;
-    const newWidget: DashboardWidget = {
-      ...widget,
-      id: newWidgetId,
-      title: `${widget.title} (Kopie)`,
-    };
-
-    setWidgets([...widgets, newWidget]);
-    setLayouts(mergeLayouts(layouts, generateDefaultLayouts(newWidgetId, widget.type)));
-  }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts]);
-
-  // Edit widget
-  const handleEditWidget = useCallback((widgetId: string) => {
-    const widget = widgets.find(w => w.id === widgetId);
-    if (!widget) return;
-
-    const newTitle = prompt('Widget-Titel:', widget.title);
-    if (newTitle && newTitle !== widget.title) {
-      try {
-        // Sanitize widget title
-        const sanitizedTitle = sanitizeName(newTitle, 50);
-        
-        // Save current state to undo stack
-        pushUndoState({ widgets, layouts });
-        clearRedoStack();
-
-        setWidgets(widgets.map(w => 
-          w.id === widgetId ? { ...w, title: sanitizedTitle } : w
-        ));
-      } catch (error) {
-        if (error instanceof Error) {
-          alert(`Fehler: ${error.message}`);
-        }
-      }
-    }
-  }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets]);
-
-  // Undo/Redo handlers
-  const handleUndo = useCallback(() => {
-    const previousState = undo();
-    if (previousState) {
-      // State is already updated by undo() function
-    }
-  }, [undo]);
-
-  const handleRedo = useCallback(() => {
-    const nextState = redo();
-    if (nextState) {
-      // State is already updated by redo() function
-    }
-  }, [redo]);
+    canUndo,
+    canRedo,
+    widgetModalOpen,
+    widgetModalMode,
+    widgetModalData,
+    actions: {
+      handleToggleEditMode,
+      handleAddWidget,
+      handleDeleteWidget,
+      handleDuplicateWidget,
+      handleEditWidget,
+      handleLayoutChange,
+      handleUndo,
+      handleRedo,
+      handleCloseWidgetModal,
+      handleWidgetModalSubmit,
+    },
+  } = useDashboardUIState();
 
   return (
     <MainLayout>
@@ -257,8 +109,8 @@ export default function DashboardDetailPage(): React.ReactElement {
               onAddWidget={handleAddWidget}
               onUndo={handleUndo}
               onRedo={handleRedo}    
-              canUndo={undoStack.length > 0}
-              canRedo={redoStack.length > 0}
+              canUndo={canUndo}
+              canRedo={canRedo}
             />
 
             {/* Main Dashboard Content - Full Width Widget Area (No container background) */}
@@ -296,6 +148,15 @@ export default function DashboardDetailPage(): React.ReactElement {
             </div>
           </>
         )}
+
+        {/* Widget Configuration Modal */}
+        <WidgetConfigModal
+          isOpen={widgetModalOpen}
+          mode={widgetModalMode}
+          {...(widgetModalData && { widget: widgetModalData })}
+          onClose={handleCloseWidgetModal}
+          onSubmit={handleWidgetModalSubmit}
+        />
       </div>
     </MainLayout>
   );

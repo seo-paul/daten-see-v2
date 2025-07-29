@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import type { Layout, Layouts } from 'react-grid-layout';
 
-import { DashboardWidget } from './DashboardCanvas';
+import type { GridWidget } from '@/types/dashboard.types';
 import { WidgetRenderer } from './WidgetRenderer';
 
 // Import grid layout styles
@@ -17,7 +17,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
  * Responsive Dashboard Props
  */
 interface ResponsiveDashboardProps {
-  widgets: DashboardWidget[];
+  widgets: GridWidget[];
   layouts: Layouts;
   onLayoutChange?: (currentLayout: Layout[], allLayouts: Layouts) => void;
   isEditMode?: boolean;
@@ -85,7 +85,7 @@ export function ResponsiveDashboard({
 /**
  * Generate default layouts for a widget
  */
-export function generateDefaultLayouts(widgetId: string, type: DashboardWidget['type']): Layouts {
+export function generateDefaultLayouts(widgetId: string, type: GridWidget['type']): Layouts {
   // Default sizes based on widget type
   const defaultSizes = {
     line: { w: 6, h: 4 },

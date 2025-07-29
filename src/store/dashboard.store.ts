@@ -1,11 +1,18 @@
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-import type { DashboardWidget } from '@/components/dashboard/DashboardCanvas';
+import type { GridWidget } from '@/types/dashboard.types';
 import type { Layouts } from 'react-grid-layout';
 
 /**
- * Dashboard UI State Store
+ * Dashboard UI State Store (Zustand)
+ * 
+ * 🎨 UI STATE MANAGEMENT ONLY
+ * 
+ * STATE MANAGEMENT STRATEGY:
+ * 🔄 TanStack Query = Server State (API data, caching, loading, optimistic updates)
+ * 🎨 Zustand Store = UI State (edit mode, layouts, undo/redo, widget management)
+ * 
  * Handles ONLY client-side UI state (edit mode, undo/redo, widget states)
  * Server state is managed by TanStack Query
  */
@@ -15,25 +22,25 @@ interface DashboardUIStore {
   hasChanges: boolean;
   
   // Widget Management State  
-  widgets: DashboardWidget[];
+  widgets: GridWidget[];
   layouts: Layouts;
   
   // Undo/Redo State
-  undoStack: {widgets: DashboardWidget[]; layouts: Layouts}[];
-  redoStack: {widgets: DashboardWidget[]; layouts: Layouts}[];
+  undoStack: {widgets: GridWidget[]; layouts: Layouts}[];
+  redoStack: {widgets: GridWidget[]; layouts: Layouts}[];
   
   // UI Actions
   setEditMode: (isEditMode: boolean) => void;
   setHasChanges: (hasChanges: boolean) => void;
-  setWidgets: (widgets: DashboardWidget[]) => void;
+  setWidgets: (widgets: GridWidget[]) => void;
   setLayouts: (layouts: Layouts) => void;
   
   // Undo/Redo Actions
-  pushUndoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}) => void;
-  pushRedoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}) => void;
+  pushUndoState: (state: {widgets: GridWidget[]; layouts: Layouts}) => void;
+  pushRedoState: (state: {widgets: GridWidget[]; layouts: Layouts}) => void;
   clearRedoStack: () => void;
-  undo: () => {widgets: DashboardWidget[]; layouts: Layouts} | null;
-  redo: () => {widgets: DashboardWidget[]; layouts: Layouts} | null;
+  undo: () => {widgets: GridWidget[]; layouts: Layouts} | null;
+  redo: () => {widgets: GridWidget[]; layouts: Layouts} | null;
   
   // Reset
   resetUIState: () => void;
@@ -66,7 +73,7 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       set({ hasChanges });
     },
 
-    setWidgets: (widgets: DashboardWidget[]): void => {
+    setWidgets: (widgets: GridWidget[]): void => {
       set({ widgets, hasChanges: true });
     },
 
@@ -75,13 +82,13 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
     },
 
     // Undo/Redo Actions
-    pushUndoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}): void => {
+    pushUndoState: (state: {widgets: GridWidget[]; layouts: Layouts}): void => {
       set(current => ({
         undoStack: [...current.undoStack, state]
       }));
     },
 
-    pushRedoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}): void => {
+    pushRedoState: (state: {widgets: GridWidget[]; layouts: Layouts}): void => {
       set(current => ({
         redoStack: [...current.redoStack, state]
       }));
@@ -91,11 +98,13 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       set({ redoStack: [] });
     },
 
-    undo: (): {widgets: DashboardWidget[]; layouts: Layouts} | null => {
+    undo: (): {widgets: GridWidget[]; layouts: Layouts} | null => {
       const { undoStack } = get();
       if (undoStack.length === 0) return null;
       
       const previousState = undoStack[undoStack.length - 1];
+      if (!previousState) return null;
+      
       set(current => ({
         undoStack: current.undoStack.slice(0, -1),
         widgets: previousState.widgets,
@@ -106,11 +115,13 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       return previousState;
     },
 
-    redo: (): {widgets: DashboardWidget[]; layouts: Layouts} | null => {
+    redo: (): {widgets: GridWidget[]; layouts: Layouts} | null => {
       const { redoStack } = get();
       if (redoStack.length === 0) return null;
       
       const nextState = redoStack[redoStack.length - 1];
+      if (!nextState) return null;
+      
       set(current => ({
         redoStack: current.redoStack.slice(0, -1),
         widgets: nextState.widgets,

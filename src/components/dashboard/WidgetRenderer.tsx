@@ -9,13 +9,13 @@ import {
   DashboardKPICard,
   type SimpleChartData,
 } from '@/components/charts';
-import type { DashboardWidget } from './DashboardCanvas';
+import type { GridWidget } from '@/types/dashboard.types';
 
 /**
  * Widget Renderer Props
  */
 interface WidgetRendererProps {
-  widget: DashboardWidget;
+  widget: GridWidget;
   isEditMode: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -80,7 +80,7 @@ export function WidgetRenderer({
  * Widget Content Component
  * Renders the appropriate chart component based on widget type
  */
-function WidgetContent({ widget }: { widget: DashboardWidget }) {
+function WidgetContent({ widget }: { widget: GridWidget }) {
   // Mock data for demonstration - will be replaced with real data
   const mockLineData: SimpleChartData = {
     labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun'],
@@ -170,7 +170,7 @@ function WidgetContent({ widget }: { widget: DashboardWidget }) {
 /**
  * Generate a new widget with default configuration
  */
-export function createDefaultWidget(type: DashboardWidget['type']): Omit<DashboardWidget, 'id'> {
+export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 'id'> {
   const defaultConfigs = {
     line: {
       title: 'Liniendiagramm',

@@ -42,6 +42,19 @@ export type WidgetType =
   | 'text'
   | 'image';
 
+/**
+ * Grid Layout Widget Interface
+ * Used by dashboard grid system (react-grid-layout)
+ * Different from API DashboardWidget which uses position/size objects
+ */
+export interface GridWidget {
+  id: string;
+  type: 'line' | 'bar' | 'pie' | 'kpi' | 'text';
+  title: string;
+  config: Record<string, any>;
+  dataSource?: string;
+}
+
 export interface CreateDashboardRequest {
   name: string;
   description: string;
