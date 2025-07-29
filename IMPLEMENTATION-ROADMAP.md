@@ -85,18 +85,119 @@
 - [x] 1.4.6: Integrate grid system with chart components ✅ **COMPLETED**
 - **Success Criteria:** Intuitive dashboard creation with drag-drop widgets ✅ **ACHIEVED**
 - **Why Essential:** This differentiates us from static chart tools
-- **Demo:** Available at `/dashboard-builder` with full drag-drop functionality
+- **Demo:** Integrated in main dashboard functionality (demo pages removed for cleaner codebase)
 
 **Task 1.5: Dashboard & Widget System Optimization** *(Week 4)*
-- [ ] 1.5.1: User consultation - evaluate current system and identify optimization needs
-- [ ] 1.5.2: Dashboard creation UX improvements (based on consultation findings)
-- [ ] 1.5.3: Widget management optimization (CRUD operations refinement)
-- [ ] 1.5.4: Performance optimization for grid system and chart rendering
-- [ ] 1.5.5: Mobile responsiveness improvements for touch interactions
-- [ ] 1.5.6: Advanced widget configuration options (styling, data formatting)
-- **Success Criteria:** Polished dashboard builder ready for data integration
-- **Why Critical:** Ensures excellent UX foundation before adding complex data flows
-- **Status:** Waiting for user input to identify specific optimization priorities
+- [x] 1.5.1: User consultation - evaluate current system and identify optimization needs ✅ **COMPLETED**
+- [ ] 1.5.2: Dashboard overview functionality verification and fixes
+  - [ ] Verify dashboard CRUD operations (create, read, update, delete)  
+  - [ ] Fix any broken functionality in dashboard management
+  - [ ] Ensure dashboard list and navigation work correctly
+- [ ] 1.5.3: Professional edit mode implementation (based on design-reference-edit-mode.png)
+  - [ ] Edit mode toggle: "Bearbeiten" ↔ "Ansicht" button functionality
+  - [ ] Replace "Teilen" with "Widget hinzufügen" button in edit mode
+  - [ ] Replace time filter with centered "Undo/Redo" buttons in edit mode
+  - [ ] Widget visual state: light blue transparent overlay in edit mode
+  - [ ] Widget delete button (small X) in top-right corner (edit mode only)
+  - [ ] Widget resize handle (small icon) in bottom-right corner (edit mode only)
+- [ ] 1.5.4: Advanced grid system with stepped sizing
+  - [ ] Define minimum widget sizes for each widget type
+  - [ ] Implement stepped/grid-based resizing (not completely free)
+  - [ ] Ensure flexible positioning while maintaining grid structure
+  - [ ] Restrict drag/resize/delete operations to edit mode only
+- [ ] 1.5.5: Improved collision system and layout management
+  - [ ] Refine collision detection for better widget placement
+  - [ ] Improve automatic layout adjustments
+  - [ ] Optimize grid compaction behavior
+- [ ] 1.5.6: Responsive widget content scaling
+  - [ ] Remove scrollbars from widgets - content scales to widget size
+  - [ ] Implement adaptive chart sizing based on widget dimensions
+  - [ ] Ensure text and content always fits within widget bounds
+- **Success Criteria:** Professional dashboard edit mode matching design reference, improved grid system with stepped sizing
+- **Why Critical:** Essential UX foundation for professional dashboard management before data integration
+- **Design Reference:** assets/design-reference-edit-mode.png and assets/design-reference-dashboard.png
+
+**Task 1.6: Architecture & Code Quality Remediation** *(Week 4-5)*
+**Purpose:** Clean up technical debt before Phase 2 to ensure maintainable, scalable foundation
+
+#### **1.6.1: State Management Consolidation**
+- [ ] 1.6.1.1: **Remove duplicate state systems** - Delete `/src/hooks/useDashboards.ts` (legacy hook conflicting with TanStack Query)
+- [ ] 1.6.1.2: **Refactor dashboard.store.ts** - Keep ONLY UI state (editMode, selectedWidgets, undoStack), remove all data fetching logic
+- [ ] 1.6.1.3: **Consolidate to TanStack Query** - Use `useDashboard(id)` for all server state, remove fetchDashboard from store
+- [ ] 1.6.1.4: **Create useDashboardUIState hook** - Extract edit mode, undo/redo logic from page component into dedicated hook
+- [ ] 1.6.1.5: **Document state strategy** - Add clear comments: "TanStack Query = Server State, Zustand = UI State"
+- **Success Criteria:** Single source of truth for each state type, no conflicting systems
+
+#### **1.6.2: Component Architecture Refactoring**
+- [ ] 1.6.2.1: **Split DashboardDetailPage (312 lines)** into:
+  - `DashboardContainer.tsx` - Main orchestration component (50 lines)
+  - `useDashboardState.ts` - All state management logic (100 lines)
+  - `useWidgetManagement.ts` - Widget CRUD operations (80 lines)
+  - `useUndoRedo.ts` - Undo/redo functionality (50 lines)
+- [ ] 1.6.2.2: **Delete DashboardCanvas.tsx** - Remove redundant component, use only ResponsiveDashboard
+- [ ] 1.6.2.3: **Extract EditModeToolbar** - Create dedicated component for edit mode controls
+- [ ] 1.6.2.4: **Create WidgetConfigModal** - Unified modal for widget creation/editing (reduce duplication)
+- [ ] 1.6.2.5: **Implement proper prop interfaces** - Replace inline props with explicit TypeScript interfaces
+- **Success Criteria:** No component >150 lines, clear separation of concerns
+
+#### **1.6.3: Type System Unification**
+- [ ] 1.6.3.1: **Create central widget types** in `/src/types/dashboard.types.ts`:
+  ```typescript
+  export type WidgetType = 'line-chart' | 'bar-chart' | 'pie-chart' | 'kpi-card' | 'text-block';
+  export interface Widget { id: string; type: WidgetType; title: string; config: WidgetConfig; }
+  ```
+- [ ] 1.6.3.2: **Remove conflicting DashboardWidget interface** from DashboardCanvas.tsx
+- [ ] 1.6.3.3: **Update all imports** - Search/replace to use central types from dashboard.types.ts
+- [ ] 1.6.3.4: **Fix Chart.js type issues** - Use proper ChartConfiguration types instead of `any`
+- [ ] 1.6.3.5: **Validate type consistency** - Run `npx tsc --noEmit` and fix all type errors
+- **Success Criteria:** Zero TypeScript errors, single source for type definitions
+
+#### **1.6.4: Code Quality Cleanup**
+- [ ] 1.6.4.1: **Fix all 76 TypeScript errors** - Focus on Chart.js font weight, optional properties, type assertions
+- [ ] 1.6.4.2: **Resolve 16 ESLint errors** - No eslint-disable comments, fix root causes
+- [ ] 1.6.4.3: **Clean 17 ESLint warnings** - Unused vars, missing dependencies, formatting
+- [ ] 1.6.4.4: **Remove unused imports** - Use ESLint auto-fix for all files
+- [ ] 1.6.4.5: **Add missing React.memo** - Memoize WidgetRenderer, ResponsiveDashboard, chart components
+- [ ] 1.6.4.6: **Extract mock data** - Move to `/src/lib/mock-data/` as JSON files
+- **Success Criteria:** Zero ESLint errors/warnings, zero TypeScript errors
+
+#### **1.6.5: Performance Optimizations**
+- [ ] 1.6.5.1: **Implement widget memoization**:
+  ```typescript
+  const MemoizedWidgetRenderer = React.memo(WidgetRenderer);
+  const MemoizedResponsiveDashboard = React.memo(ResponsiveDashboard);
+  ```
+- [ ] 1.6.5.2: **Add useMemo for expensive operations** - Layout calculations, widget filtering
+- [ ] 1.6.5.3: **Lazy load Chart.js components**:
+  ```typescript
+  const LineChart = lazy(() => import('@/components/charts/LineChart'));
+  ```
+- [ ] 1.6.5.4: **Optimize re-renders** - Use React DevTools Profiler to identify unnecessary renders
+- [ ] 1.6.5.5: **Add loading boundaries** - Suspense wrappers for lazy-loaded components
+- **Success Criteria:** <16ms render time per widget, no unnecessary re-renders
+
+#### **1.6.6: Routing & Navigation Cleanup**
+- [ ] 1.6.6.1: **Rename /dashboard-uebersicht to /dashboards** - Consistent English naming
+- [ ] 1.6.6.2: **Update all Link references** - Global search/replace dashboard-uebersicht → dashboards
+- [ ] 1.6.6.3: **Add redirect** from /dashboard to /dashboards (avoid confusion)
+- [ ] 1.6.6.4: **Create breadcrumb component** - Show navigation hierarchy
+- [ ] 1.6.6.5: **Fix empty /dashboard/page.tsx** - Either redirect or show default dashboard
+- **Success Criteria:** Consistent URL structure, intuitive navigation
+
+#### **1.6.7: Testing Infrastructure Enhancement**
+- [ ] 1.6.7.1: **Add tests for dashboard state hooks** - Unit tests for useDashboardState, useUndoRedo
+- [ ] 1.6.7.2: **Create widget renderer tests** - Test each widget type renders correctly
+- [ ] 1.6.7.3: **Add integration tests** - Dashboard creation flow, widget management
+- [ ] 1.6.7.4: **Implement E2E test** - Critical user journey: create dashboard → add widget → save
+- [ ] 1.6.7.5: **Set up coverage gates** - Enforce minimum 60% coverage on new code
+- **Success Criteria:** Test coverage >60% for dashboard features, all tests green
+
+**🎯 Task 1.6 Success Metrics:**
+- Zero TypeScript/ESLint errors
+- No component >150 lines
+- Single state management pattern
+- Test coverage >60%
+- Performance: All widgets render <16ms
 
 **🎯 PHASE 1 CHECKPOINT:** *"Professional dashboard UI with interactive charts displaying realistic business data - ready for external API connections?"*
 
@@ -221,6 +322,132 @@
 - **Why Differentiating:** Advanced features justify premium pricing
 
 **🎯 FINAL CHECKPOINT:** *"Production-ready BI SaaS platform with live data, secure multi-user architecture, and comprehensive monitoring - ready for customer launch?"*
+
+---
+
+## 📅 **PHASE 5: SECURITY & GDPR COMPLIANCE** *(2-3 weeks)*
+### 🎯 **Milestone:** Secure, GDPR-compliant platform ready for European markets
+
+#### **🔒 SECURITY HARDENING**
+
+**Task 5.1: Authentication & Session Security** *(Week 15)*
+- [ ] 5.1.1: **Replace localStorage JWT with httpOnly cookies** - Move all token storage from localStorage to secure cookies with `httpOnly`, `secure`, `sameSite: 'strict'`
+- [ ] 5.1.2: **Implement proper JWT validation** - Server-side signature verification, not just client-side parsing
+- [ ] 5.1.3: **Add session invalidation** - Logout endpoint that blacklists tokens server-side
+- [ ] 5.1.4: **Implement refresh token rotation** - New refresh token with each use, invalidate old ones
+- [ ] 5.1.5: **Add brute force protection** - Rate limiting on login attempts (5 attempts per 15 min)
+- **Success Criteria:** No tokens in localStorage, secure session management
+
+**Task 5.2: Input Validation & XSS Prevention** *(Week 15-16)*
+- [ ] 5.2.1: **Install DOMPurify** - `npm install dompurify @types/dompurify`
+- [ ] 5.2.2: **Create input sanitization utility**:
+  ```typescript
+  export const sanitizeUserInput = (input: string) => 
+    DOMPurify.sanitize(input, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+  ```
+- [ ] 5.2.3: **Sanitize all dashboard/widget names** - Apply sanitization in CreateDashboardModal, EditDashboardModal, widget creation
+- [ ] 5.2.4: **Implement Zod validation schemas** - Replace runtime checks with validated schemas for all user inputs
+- [ ] 5.2.5: **Fix widget content rendering** - Ensure no `dangerouslySetInnerHTML` without sanitization
+- [ ] 5.2.6: **Add Content Security Policy headers** - Prevent inline scripts, restrict sources
+- **Success Criteria:** All user inputs sanitized, no XSS vulnerabilities
+
+**Task 5.3: API Security & Rate Limiting** *(Week 16)*
+- [ ] 5.3.1: **Implement API rate limiting** - 100 requests/minute per user using express-rate-limit
+- [ ] 5.3.2: **Add request validation middleware** - Validate all API inputs with Zod schemas
+- [ ] 5.3.3: **Implement CORS properly** - Whitelist only allowed origins, not wildcard
+- [ ] 5.3.4: **Add API authentication middleware** - Verify JWT on all protected routes
+- [ ] 5.3.5: **Implement request logging** - Log all API access with user context (not passwords)
+- **Success Criteria:** Rate limiting active, all endpoints validated
+
+**Task 5.4: Security Headers & Infrastructure** *(Week 16)*
+- [ ] 5.4.1: **Configure security headers** in next.config.js:
+  ```javascript
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin'
+  ```
+- [ ] 5.4.2: **Enable HTTPS everywhere** - Force SSL, no mixed content
+- [ ] 5.4.3: **Implement secrets management** - Use environment variables, never commit secrets
+- [ ] 5.4.4: **Add security monitoring** - Failed login attempts, suspicious patterns
+- [ ] 5.4.5: **Configure dependency scanning** - GitHub Dependabot, npm audit in CI
+- **Success Criteria:** A+ rating on securityheaders.com
+
+#### **📊 GDPR COMPLIANCE**
+
+**Task 5.5: Consent Management System** *(Week 16-17)*
+- [ ] 5.5.1: **Create consent types**:
+  ```typescript
+  interface ConsentState {
+    essential: true; // Always true
+    analytics: boolean;
+    marketing: boolean;
+    performance: boolean;
+    timestamp: Date;
+    version: string;
+  }
+  ```
+- [ ] 5.5.2: **Build cookie consent banner** - Clear opt-in/opt-out for each category
+- [ ] 5.5.3: **Implement consent storage** - Store consent choices with timestamp
+- [ ] 5.5.4: **Gate analytics/monitoring** - Only track with explicit consent
+- [ ] 5.5.5: **Create consent management UI** - Allow users to change consent anytime
+- **Success Criteria:** No tracking without consent, granular control
+
+**Task 5.6: User Rights Implementation** *(Week 17)*
+- [ ] 5.6.1: **Data export endpoint** - Export all user data as JSON/CSV within 48h
+- [ ] 5.6.2: **Account deletion flow** - Complete data removal with confirmation
+- [ ] 5.6.3: **Data rectification UI** - Users can edit all their personal data
+- [ ] 5.6.4: **Data portability** - Export dashboards in standard format
+- [ ] 5.6.5: **Audit trail** - Log all data access/changes for compliance
+- **Success Criteria:** All GDPR Article 15-20 rights implemented
+
+**Task 5.7: Privacy by Design** *(Week 17)*
+- [ ] 5.7.1: **Data minimization audit** - Remove unnecessary data collection
+- [ ] 5.7.2: **Implement data retention**:
+  ```typescript
+  const retentionPolicy = {
+    userActivity: 90, // days
+    dashboardAnalytics: 365,
+    deletedUserData: 0 // immediate
+  };
+  ```
+- [ ] 5.7.3: **Pseudonymize analytics** - Hash user IDs in analytics data
+- [ ] 5.7.4: **Document data flows** - Create data processing documentation
+- [ ] 5.7.5: **Privacy policy generator** - Auto-generate based on actual data usage
+- **Success Criteria:** GDPR-compliant data handling throughout
+
+**🎯 PHASE 5 CHECKPOINT:** *"Platform passes security audit and GDPR compliance check - ready for European launch?"*
+
+---
+
+## 📅 **PHASE 6: STANDARDS & DOCUMENTATION UPDATE** *(1 week)*
+### 🎯 **Milestone:** Updated standards reflecting learnings and best practices
+
+**Task 6.1: CLAUDE.md Enhancement** *(2 days)*
+- [ ] 6.1.1: **Add Security-First Development section** - XSS prevention workflow, input validation checklist, dashboard-specific security patterns
+- [ ] 6.1.2: **GDPR-First Workflow section** - Legal basis checks, data minimization checklist, dashboard-specific GDPR requirements
+- [ ] 6.1.3: **Modern Performance Guidelines** - Bundle size budgets (Dashboard <150KB), Core Web Vitals targets, widget performance metrics
+- [ ] 6.1.4: **AI-Development Standards** - Ultra Think usage guidelines, subagent deployment patterns, AI code quality gates
+- [ ] 6.1.5: **Update Testing Strategy** - Reflect actual 60% strategic coverage approach, priority-based testing
+- **Success Criteria:** CLAUDE.md reflects all learnings from project
+
+**Task 6.2: STANDARDS.md Dashboard Extensions** *(2 days)*
+- [ ] 6.2.1: **Dashboard-Specific Security Standards** - Widget content validation schemas, grid security patterns, XSS prevention for charts
+- [ ] 6.2.2: **Dashboard Performance Standards** - Widget render time <16ms, grid interaction <100ms, dashboard load <2s
+- [ ] 6.2.3: **Widget Standards** - Type definitions, configuration schemas, rendering patterns
+- [ ] 6.2.4: **State Management Standards** - TanStack Query for server state, Zustand for UI state patterns
+- [ ] 6.2.5: **Component Architecture Standards** - Max 150 lines per component, separation of concerns, hook patterns
+- **Success Criteria:** Dashboard-specific standards documented
+
+**Task 6.3: Architecture Documentation** *(3 days)*
+- [ ] 6.3.1: **Create ARCHITECTURE.md** - System overview, component hierarchy, state flow diagrams
+- [ ] 6.3.2: **Document Decision Records** - Why TanStack Query, why react-grid-layout, why Chart.js
+- [ ] 6.3.3: **API Documentation** - Dashboard endpoints, widget data formats, authentication flow
+- [ ] 6.3.4: **Component Library Docs** - Usage examples for all dashboard components
+- [ ] 6.3.5: **Deployment Guide** - Production setup, monitoring configuration, scaling guidelines
+- **Success Criteria:** New developers can understand system in <2 hours
+
+**🎯 PHASE 6 CHECKPOINT:** *"Comprehensive documentation capturing all learnings - ready for team scaling?"*
 
 ---
 

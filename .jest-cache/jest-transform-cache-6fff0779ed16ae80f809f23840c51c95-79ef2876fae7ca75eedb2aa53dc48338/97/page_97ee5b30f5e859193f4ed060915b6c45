@@ -1,0 +1,368 @@
+2fd15580415e0055a93f2510b6922eeb
+"use strict";
+
+/* istanbul ignore next */
+function cov_hslhv78yk() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/app/page.tsx";
+  var hash = "ddb0449452999ebcb9f6378cccc05e56099a9b5d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/app/page.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 8,
+          column: 8
+        },
+        end: {
+          line: 8,
+          column: 20
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 20
+        },
+        end: {
+          line: 11,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 12,
+          column: 28
+        },
+        end: {
+          line: 12,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 13,
+          column: 20
+        },
+        end: {
+          line: 13,
+          column: 62
+        }
+      },
+      "6": {
+        start: {
+          line: 15,
+          column: 4
+        },
+        end: {
+          line: 17,
+          column: 6
+        }
+      },
+      "7": {
+        start: {
+          line: 20,
+          column: 4
+        },
+        end: {
+          line: 82,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 9
+          },
+          end: {
+            line: 7,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 20
+          },
+          end: {
+            line: 9,
+            column: 5
+          }
+        },
+        line: 7
+      },
+      "1": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 14,
+            column: 9
+          },
+          end: {
+            line: 14,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 39
+          },
+          end: {
+            line: 18,
+            column: 1
+          }
+        },
+        line: 14
+      },
+      "2": {
+        name: "Home",
+        decl: {
+          start: {
+            line: 19,
+            column: 9
+          },
+          end: {
+            line: 19,
+            column: 13
+          }
+        },
+        loc: {
+          start: {
+            line: 19,
+            column: 16
+          },
+          end: {
+            line: 83,
+            column: 1
+          }
+        },
+        line: 19
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 15,
+            column: 35
+          },
+          end: {
+            line: 15,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 41
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        }],
+        line: 15
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 15,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 15,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 18
+          },
+          end: {
+            line: 15,
+            column: 32
+          }
+        }],
+        line: 15
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/app/page.tsx"],
+      sourcesContent: ["import Link from 'next/link';\n\nimport { MainLayout } from '@/components/layout/MainLayout';\n\nexport default function Home(): React.ReactElement {\n  return (\n    <MainLayout>\n      <div className=\"flex items-center justify-center min-h-[80vh]\">\n        <div className=\"text-center max-w-md mx-auto px-6\">\n          <h1 className=\"text-3xl font-bold text-[#3d3d3d] mb-4\">\n            Willkommen bei Daten-See\n          </h1>\n          <p className=\"text-lg text-[#5d5d5d] mb-8\">\n            Ihr Analytics Dashboard f\xFCr datengetriebene Entscheidungen\n          </p>\n          \n          <div className=\"space-y-4\">\n            <Link \n              href=\"/dashboard\"\n              className=\"inline-block w-full px-6 py-3 bg-[#2F4F73] text-white font-medium rounded-lg hover:bg-[#365c83] transition-colors\"\n            >\n              Dashboard \xF6ffnen\n            </Link>\n            <Link \n              href=\"/dashboard-uebersicht\"\n              className=\"inline-block w-full px-6 py-3 border border-[#E6D7B8] text-[#3d3d3d] font-medium rounded-lg hover:bg-[#FDF9F3] transition-colors\"\n            >\n              Dashboard-\xDCbersicht\n            </Link>\n          </div>\n\n          <div className=\"mt-12 text-xs text-[#5d5d5d] bg-[#FDF9F3] p-4 rounded-lg border border-[#E6D7B8]\">\n            <p className=\"font-medium text-[#2F4F73] mb-2\">\u2705 Task 1.2.2 Modular Header System implementiert</p>\n            <div className=\"space-y-1 text-left\">\n              <p>\u2022 Logo bleibt immer links bestehen</p>\n              <p>\u2022 Navigationsinhalte variieren je nach Seite</p>\n              <p>\u2022 Dashboard-\xDCbersicht Button nur auf relevanten Seiten</p>\n              <p>\u2022 Dashboard-Detail-Seiten behalten ihren Header</p>\n            </div>\n            <p className=\"mt-3 text-[#2F4F73] font-medium\">\u2192 N\xE4chster Schritt: Auth-Seiten Design System Update</p>\n          </div>\n        </div>\n      </div>\n    </MainLayout>\n  );\n}"],
+      names: ["Home", "MainLayout", "div", "className", "h1", "p", "Link", "href"],
+      mappings: ";;;;+BAIA;;;eAAwBA;;;;6DAJP;4BAEU;;;;;;AAEZ,SAASA;IACtB,qBACE,qBAACC,sBAAU;kBACT,cAAA,qBAACC;YAAIC,WAAU;sBACb,cAAA,sBAACD;gBAAIC,WAAU;;kCACb,qBAACC;wBAAGD,WAAU;kCAAyC;;kCAGvD,qBAACE;wBAAEF,WAAU;kCAA8B;;kCAI3C,sBAACD;wBAAIC,WAAU;;0CACb,qBAACG,aAAI;gCACHC,MAAK;gCACLJ,WAAU;0CACX;;0CAGD,qBAACG,aAAI;gCACHC,MAAK;gCACLJ,WAAU;0CACX;;;;kCAKH,sBAACD;wBAAIC,WAAU;;0CACb,qBAACE;gCAAEF,WAAU;0CAAkC;;0CAC/C,sBAACD;gCAAIC,WAAU;;kDACb,qBAACE;kDAAE;;kDACH,qBAACA;kDAAE;;kDACH,qBAACA;kDAAE;;kDACH,qBAACA;kDAAE;;;;0CAEL,qBAACA;gCAAEF,WAAU;0CAAkC;;;;;;;;AAM3D"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "ddb0449452999ebcb9f6378cccc05e56099a9b5d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_hslhv78yk = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_hslhv78yk();
+cov_hslhv78yk().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_hslhv78yk().s[1]++;
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_hslhv78yk().f[0]++;
+    cov_hslhv78yk().s[2]++;
+    return Home;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_hslhv78yk().s[3]++, require("react/jsx-runtime"));
+const _link =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_hslhv78yk().s[4]++, _interop_require_default(require("next/link")));
+const _MainLayout =
+/* istanbul ignore next */
+(cov_hslhv78yk().s[5]++, require("../components/layout/MainLayout"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_hslhv78yk().f[1]++;
+  cov_hslhv78yk().s[6]++;
+  return /* istanbul ignore next */(cov_hslhv78yk().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_hslhv78yk().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_hslhv78yk().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_hslhv78yk().b[0][1]++, {
+    default: obj
+  });
+}
+function Home() {
+  /* istanbul ignore next */
+  cov_hslhv78yk().f[2]++;
+  cov_hslhv78yk().s[7]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsx)(_MainLayout.MainLayout, {
+    children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+      className: "flex items-center justify-center min-h-[80vh]",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "text-center max-w-md mx-auto px-6",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h1", {
+          className: "text-3xl font-bold text-[#3d3d3d] mb-4",
+          children: "Willkommen bei Daten-See"
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+          className: "text-lg text-[#5d5d5d] mb-8",
+          children: "Ihr Analytics Dashboard f\xfcr datengetriebene Entscheidungen"
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "space-y-4",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_link.default, {
+            href: "/dashboard",
+            className: "inline-block w-full px-6 py-3 bg-[#2F4F73] text-white font-medium rounded-lg hover:bg-[#365c83] transition-colors",
+            children: "Dashboard \xf6ffnen"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_link.default, {
+            href: "/dashboard-uebersicht",
+            className: "inline-block w-full px-6 py-3 border border-[#E6D7B8] text-[#3d3d3d] font-medium rounded-lg hover:bg-[#FDF9F3] transition-colors",
+            children: "Dashboard-\xdcbersicht"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "mt-12 text-xs text-[#5d5d5d] bg-[#FDF9F3] p-4 rounded-lg border border-[#E6D7B8]",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "font-medium text-[#2F4F73] mb-2",
+            children: "✅ Task 1.2.2 Modular Header System implementiert"
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "space-y-1 text-left",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              children: "• Logo bleibt immer links bestehen"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              children: "• Navigationsinhalte variieren je nach Seite"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              children: "• Dashboard-\xdcbersicht Button nur auf relevanten Seiten"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              children: "• Dashboard-Detail-Seiten behalten ihren Header"
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "mt-3 text-[#2F4F73] font-medium",
+            children: "→ N\xe4chster Schritt: Auth-Seiten Design System Update"
+          })]
+        })]
+      })
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJIb21lIiwiY292X2hzbGh2Nzh5ayIsImYiLCJzIiwiX2pzeHJ1bnRpbWUiLCJqc3giLCJfTWFpbkxheW91dCIsIk1haW5MYXlvdXQiLCJjbGFzc05hbWUiLCJqc3hzIiwiX2xpbmsiLCJkZWZhdWx0IiwiaHJlZiJdLCJzb3VyY2VzIjpbIi9Vc2Vycy96d2VpZ2VuL1NpdGVzL2RhdGVuLXNlZS12Mi9zcmMvYXBwL3BhZ2UudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBMaW5rIGZyb20gJ25leHQvbGluayc7XG5cbmltcG9ydCB7IE1haW5MYXlvdXQgfSBmcm9tICdAL2NvbXBvbmVudHMvbGF5b3V0L01haW5MYXlvdXQnO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBIb21lKCk6IFJlYWN0LlJlYWN0RWxlbWVudCB7XG4gIHJldHVybiAoXG4gICAgPE1haW5MYXlvdXQ+XG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG1pbi1oLVs4MHZoXVwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1heC13LW1kIG14LWF1dG8gcHgtNlwiPlxuICAgICAgICAgIDxoMSBjbGFzc05hbWU9XCJ0ZXh0LTN4bCBmb250LWJvbGQgdGV4dC1bIzNkM2QzZF0gbWItNFwiPlxuICAgICAgICAgICAgV2lsbGtvbW1lbiBiZWkgRGF0ZW4tU2VlXG4gICAgICAgICAgPC9oMT5cbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWxnIHRleHQtWyM1ZDVkNWRdIG1iLThcIj5cbiAgICAgICAgICAgIElociBBbmFseXRpY3MgRGFzaGJvYXJkIGbDvHIgZGF0ZW5nZXRyaWViZW5lIEVudHNjaGVpZHVuZ2VuXG4gICAgICAgICAgPC9wPlxuICAgICAgICAgIFxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS00XCI+XG4gICAgICAgICAgICA8TGluayBcbiAgICAgICAgICAgICAgaHJlZj1cIi9kYXNoYm9hcmRcIlxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJpbmxpbmUtYmxvY2sgdy1mdWxsIHB4LTYgcHktMyBiZy1bIzJGNEY3M10gdGV4dC13aGl0ZSBmb250LW1lZGl1bSByb3VuZGVkLWxnIGhvdmVyOmJnLVsjMzY1YzgzXSB0cmFuc2l0aW9uLWNvbG9yc1wiXG4gICAgICAgICAgICA+XG4gICAgICAgICAgICAgIERhc2hib2FyZCDDtmZmbmVuXG4gICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICA8TGluayBcbiAgICAgICAgICAgICAgaHJlZj1cIi9kYXNoYm9hcmQtdWViZXJzaWNodFwiXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImlubGluZS1ibG9jayB3LWZ1bGwgcHgtNiBweS0zIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIHRleHQtWyMzZDNkM2RdIGZvbnQtbWVkaXVtIHJvdW5kZWQtbGcgaG92ZXI6YmctWyNGREY5RjNdIHRyYW5zaXRpb24tY29sb3JzXCJcbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgRGFzaGJvYXJkLcOcYmVyc2ljaHRcbiAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtMTIgdGV4dC14cyB0ZXh0LVsjNWQ1ZDVkXSBiZy1bI0ZERjlGM10gcC00IHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF1cIj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImZvbnQtbWVkaXVtIHRleHQtWyMyRjRGNzNdIG1iLTJcIj7inIUgVGFzayAxLjIuMiBNb2R1bGFyIEhlYWRlciBTeXN0ZW0gaW1wbGVtZW50aWVydDwvcD5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0xIHRleHQtbGVmdFwiPlxuICAgICAgICAgICAgICA8cD7igKIgTG9nbyBibGVpYnQgaW1tZXIgbGlua3MgYmVzdGVoZW48L3A+XG4gICAgICAgICAgICAgIDxwPuKAoiBOYXZpZ2F0aW9uc2luaGFsdGUgdmFyaWllcmVuIGplIG5hY2ggU2VpdGU8L3A+XG4gICAgICAgICAgICAgIDxwPuKAoiBEYXNoYm9hcmQtw5xiZXJzaWNodCBCdXR0b24gbnVyIGF1ZiByZWxldmFudGVuIFNlaXRlbjwvcD5cbiAgICAgICAgICAgICAgPHA+4oCiIERhc2hib2FyZC1EZXRhaWwtU2VpdGVuIGJlaGFsdGVuIGlocmVuIEhlYWRlcjwvcD5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibXQtMyB0ZXh0LVsjMkY0RjczXSBmb250LW1lZGl1bVwiPuKGkiBOw6RjaHN0ZXIgU2Nocml0dDogQXV0aC1TZWl0ZW4gRGVzaWduIFN5c3RlbSBVcGRhdGU8L3A+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgPC9NYWluTGF5b3V0PlxuICApO1xufSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsrQkFJQTs7Ozs7O1dBQXdCQSxJQUFBOzs7Ozs7Ozt1RUFKUDs7O2lDQUVVOzs7Ozs7Ozs7Ozs7Ozs7QUFFWixTQUFTQSxLQUFBO0VBQUE7RUFBQUMsYUFBQSxHQUFBQyxDQUFBO0VBQUFELGFBQUEsR0FBQUUsQ0FBQTtFQUN0QixvQkFDRSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsV0FBQSxDQUFBQyxVQUFVO2NBQ1QsaUJBQUFILFdBQUEsQ0FBQUMsR0FBQSxFQUFDO01BQUlHLFNBQUEsRUFBVTtnQkFDYixpQkFBQUosV0FBQSxDQUFBSyxJQUFBLEVBQUM7UUFBSUQsU0FBQSxFQUFVO2dDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1VBQUdHLFNBQUEsRUFBVTtvQkFBeUM7eUJBR3ZELElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1VBQUVHLFNBQUEsRUFBVTtvQkFBOEI7eUJBSTNDLElBQUFKLFdBQUEsQ0FBQUssSUFBQSxFQUFDO1VBQUlELFNBQUEsRUFBVTtrQ0FDYixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQ0ssS0FBQSxDQUFBQyxPQUFJO1lBQ0hDLElBQUEsRUFBSztZQUNMSixTQUFBLEVBQVU7c0JBQ1g7MkJBR0QsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUNLLEtBQUEsQ0FBQUMsT0FBSTtZQUNIQyxJQUFBLEVBQUs7WUFDTEosU0FBQSxFQUFVO3NCQUNYOzt5QkFLSCxJQUFBSixXQUFBLENBQUFLLElBQUEsRUFBQztVQUFJRCxTQUFBLEVBQVU7a0NBQ2IsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7WUFBRUcsU0FBQSxFQUFVO3NCQUFrQzsyQkFDL0MsSUFBQUosV0FBQSxDQUFBSyxJQUFBLEVBQUM7WUFBSUQsU0FBQSxFQUFVO29DQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO3dCQUFFOzZCQUNILElBQUFELFdBQUEsQ0FBQUMsR0FBQSxFQUFDO3dCQUFFOzZCQUNILElBQUFELFdBQUEsQ0FBQUMsR0FBQSxFQUFDO3dCQUFFOzZCQUNILElBQUFELFdBQUEsQ0FBQUMsR0FBQSxFQUFDO3dCQUFFOzsyQkFFTCxJQUFBRCxXQUFBLENBQUFDLEdBQUEsRUFBQztZQUFFRyxTQUFBLEVBQVU7c0JBQWtDOzs7Ozs7QUFNM0QiLCJpZ25vcmVMaXN0IjpbXX0=

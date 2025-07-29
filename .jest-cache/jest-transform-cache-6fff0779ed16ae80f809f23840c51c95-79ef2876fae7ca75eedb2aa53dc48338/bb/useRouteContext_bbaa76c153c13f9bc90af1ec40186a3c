@@ -1,0 +1,334 @@
+c1397c01fc6dd8b04d897bb3dd1db627
+'use client';
+"use strict";
+
+/* istanbul ignore next */
+function cov_1mpduaofv8() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/hooks/useRouteContext.ts";
+  var hash = "784111685c59efe135bb30a31547e6b9c4b45d3c";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/hooks/useRouteContext.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 11,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 9,
+          column: 8
+        },
+        end: {
+          line: 9,
+          column: 31
+        }
+      },
+      "3": {
+        start: {
+          line: 12,
+          column: 20
+        },
+        end: {
+          line: 12,
+          column: 46
+        }
+      },
+      "4": {
+        start: {
+          line: 14,
+          column: 21
+        },
+        end: {
+          line: 14,
+          column: 51
+        }
+      },
+      "5": {
+        start: {
+          line: 15,
+          column: 23
+        },
+        end: {
+          line: 15,
+          column: 39
+        }
+      },
+      "6": {
+        start: {
+          line: 16,
+          column: 32
+        },
+        end: {
+          line: 16,
+          column: 58
+        }
+      },
+      "7": {
+        start: {
+          line: 17,
+          column: 30
+        },
+        end: {
+          line: 17,
+          column: 93
+        }
+      },
+      "8": {
+        start: {
+          line: 18,
+          column: 28
+        },
+        end: {
+          line: 18,
+          column: 53
+        }
+      },
+      "9": {
+        start: {
+          line: 19,
+          column: 4
+        },
+        end: {
+          line: 28,
+          column: 6
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 8,
+            column: 9
+          },
+          end: {
+            line: 8,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 20
+          },
+          end: {
+            line: 10,
+            column: 5
+          }
+        },
+        line: 8
+      },
+      "1": {
+        name: "useRouteContext",
+        decl: {
+          start: {
+            line: 13,
+            column: 9
+          },
+          end: {
+            line: 13,
+            column: 24
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 27
+          },
+          end: {
+            line: 29,
+            column: 1
+          }
+        },
+        line: 13
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 17,
+            column: 30
+          },
+          end: {
+            line: 17,
+            column: 93
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 17,
+            column: 30
+          },
+          end: {
+            line: 17,
+            column: 64
+          }
+        }, {
+          start: {
+            line: 17,
+            column: 68
+          },
+          end: {
+            line: 17,
+            column: 93
+          }
+        }],
+        line: 17
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 25,
+            column: 37
+          },
+          end: {
+            line: 25,
+            column: 72
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 25,
+            column: 37
+          },
+          end: {
+            line: 25,
+            column: 48
+          }
+        }, {
+          start: {
+            line: 25,
+            column: 52
+          },
+          end: {
+            line: 25,
+            column: 72
+          }
+        }],
+        line: 25
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/hooks/useRouteContext.ts"],
+      sourcesContent: ["'use client';\n\nimport { usePathname } from 'next/navigation';\n\ninterface RouteContext {\n  isHomePage: boolean;\n  isDashboardOverview: boolean;\n  isDashboardDetail: boolean;\n  isCommunityPage: boolean;\n  showDashboardOverviewButton: boolean;\n  showCommunityButton: boolean;\n}\n\n/**\n * Hook to determine current route context for conditional navigation\n */\nexport function useRouteContext(): RouteContext {\n  const pathname = usePathname();\n\n  const isHomePage = pathname === '/';\n  const isDashboardOverview = pathname === '/dashboards';\n  const isDashboardDetail = pathname.startsWith('/dashboard/') && pathname !== '/dashboard';\n  const isCommunityPage = pathname === '/community';\n\n  return {\n    isHomePage,\n    isDashboardOverview,\n    isDashboardDetail,\n    isCommunityPage,\n    // Hide dashboard overview button on home and dashboard overview pages\n    showDashboardOverviewButton: !isHomePage && !isDashboardOverview,\n    // Always show community button for now\n    showCommunityButton: true,\n  };\n}"],
+      names: ["useRouteContext", "pathname", "usePathname", "isHomePage", "isDashboardOverview", "isDashboardDetail", "startsWith", "isCommunityPage", "showDashboardOverviewButton", "showCommunityButton"],
+      mappings: "AAAA;;;;;+BAgBgBA;;;eAAAA;;;4BAdY;AAcrB,SAASA;IACd,MAAMC,WAAWC,IAAAA,uBAAW;IAE5B,MAAMC,aAAaF,aAAa;IAChC,MAAMG,sBAAsBH,aAAa;IACzC,MAAMI,oBAAoBJ,SAASK,UAAU,CAAC,kBAAkBL,aAAa;IAC7E,MAAMM,kBAAkBN,aAAa;IAErC,OAAO;QACLE;QACAC;QACAC;QACAE;QACA,sEAAsE;QACtEC,6BAA6B,CAACL,cAAc,CAACC;QAC7C,uCAAuC;QACvCK,qBAAqB;IACvB;AACF"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "784111685c59efe135bb30a31547e6b9c4b45d3c"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1mpduaofv8 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1mpduaofv8();
+cov_1mpduaofv8().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1mpduaofv8().s[1]++;
+Object.defineProperty(exports, "useRouteContext", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1mpduaofv8().f[0]++;
+    cov_1mpduaofv8().s[2]++;
+    return useRouteContext;
+  }
+});
+const _navigation =
+/* istanbul ignore next */
+(cov_1mpduaofv8().s[3]++, require("next/navigation"));
+function useRouteContext() {
+  /* istanbul ignore next */
+  cov_1mpduaofv8().f[1]++;
+  const pathname =
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().s[4]++, (0, _navigation.usePathname)());
+  const isHomePage =
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().s[5]++, pathname === '/');
+  const isDashboardOverview =
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().s[6]++, pathname === '/dashboards');
+  const isDashboardDetail =
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().s[7]++,
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().b[0][0]++, pathname.startsWith('/dashboard/')) &&
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().b[0][1]++, pathname !== '/dashboard'));
+  const isCommunityPage =
+  /* istanbul ignore next */
+  (cov_1mpduaofv8().s[8]++, pathname === '/community');
+  /* istanbul ignore next */
+  cov_1mpduaofv8().s[9]++;
+  return {
+    isHomePage,
+    isDashboardOverview,
+    isDashboardDetail,
+    isCommunityPage,
+    // Hide dashboard overview button on home and dashboard overview pages
+    showDashboardOverviewButton:
+    /* istanbul ignore next */
+    (cov_1mpduaofv8().b[1][0]++, !isHomePage) &&
+    /* istanbul ignore next */
+    (cov_1mpduaofv8().b[1][1]++, !isDashboardOverview),
+    // Always show community button for now
+    showCommunityButton: true
+  };
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMW1wZHVhb2Z2OCIsImFjdHVhbENvdmVyYWdlIiwicyIsInVzZVJvdXRlQ29udGV4dCIsImYiLCJwYXRobmFtZSIsIl9uYXZpZ2F0aW9uIiwidXNlUGF0aG5hbWUiLCJpc0hvbWVQYWdlIiwiaXNEYXNoYm9hcmRPdmVydmlldyIsImlzRGFzaGJvYXJkRGV0YWlsIiwiYiIsInN0YXJ0c1dpdGgiLCJpc0NvbW11bml0eVBhZ2UiLCJzaG93RGFzaGJvYXJkT3ZlcnZpZXdCdXR0b24iLCJzaG93Q29tbXVuaXR5QnV0dG9uIl0sInNvdXJjZXMiOlsiL1VzZXJzL3p3ZWlnZW4vU2l0ZXMvZGF0ZW4tc2VlLXYyL3NyYy9ob29rcy91c2VSb3V0ZUNvbnRleHQudHMiXSwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBjbGllbnQnO1xuXG5pbXBvcnQgeyB1c2VQYXRobmFtZSB9IGZyb20gJ25leHQvbmF2aWdhdGlvbic7XG5cbmludGVyZmFjZSBSb3V0ZUNvbnRleHQge1xuICBpc0hvbWVQYWdlOiBib29sZWFuO1xuICBpc0Rhc2hib2FyZE92ZXJ2aWV3OiBib29sZWFuO1xuICBpc0Rhc2hib2FyZERldGFpbDogYm9vbGVhbjtcbiAgaXNDb21tdW5pdHlQYWdlOiBib29sZWFuO1xuICBzaG93RGFzaGJvYXJkT3ZlcnZpZXdCdXR0b246IGJvb2xlYW47XG4gIHNob3dDb21tdW5pdHlCdXR0b246IGJvb2xlYW47XG59XG5cbi8qKlxuICogSG9vayB0byBkZXRlcm1pbmUgY3VycmVudCByb3V0ZSBjb250ZXh0IGZvciBjb25kaXRpb25hbCBuYXZpZ2F0aW9uXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiB1c2VSb3V0ZUNvbnRleHQoKTogUm91dGVDb250ZXh0IHtcbiAgY29uc3QgcGF0aG5hbWUgPSB1c2VQYXRobmFtZSgpO1xuXG4gIGNvbnN0IGlzSG9tZVBhZ2UgPSBwYXRobmFtZSA9PT0gJy8nO1xuICBjb25zdCBpc0Rhc2hib2FyZE92ZXJ2aWV3ID0gcGF0aG5hbWUgPT09ICcvZGFzaGJvYXJkcyc7XG4gIGNvbnN0IGlzRGFzaGJvYXJkRGV0YWlsID0gcGF0aG5hbWUuc3RhcnRzV2l0aCgnL2Rhc2hib2FyZC8nKSAmJiBwYXRobmFtZSAhPT0gJy9kYXNoYm9hcmQnO1xuICBjb25zdCBpc0NvbW11bml0eVBhZ2UgPSBwYXRobmFtZSA9PT0gJy9jb21tdW5pdHknO1xuXG4gIHJldHVybiB7XG4gICAgaXNIb21lUGFnZSxcbiAgICBpc0Rhc2hib2FyZE92ZXJ2aWV3LFxuICAgIGlzRGFzaGJvYXJkRGV0YWlsLFxuICAgIGlzQ29tbXVuaXR5UGFnZSxcbiAgICAvLyBIaWRlIGRhc2hib2FyZCBvdmVydmlldyBidXR0b24gb24gaG9tZSBhbmQgZGFzaGJvYXJkIG92ZXJ2aWV3IHBhZ2VzXG4gICAgc2hvd0Rhc2hib2FyZE92ZXJ2aWV3QnV0dG9uOiAhaXNIb21lUGFnZSAmJiAhaXNEYXNoYm9hcmRPdmVydmlldyxcbiAgICAvLyBBbHdheXMgc2hvdyBjb21tdW5pdHkgYnV0dG9uIGZvciBub3dcbiAgICBzaG93Q29tbXVuaXR5QnV0dG9uOiB0cnVlLFxuICB9O1xufSJdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQW9CUTtJQUFBQSxjQUFBLFlBQUFBLENBQUE7TUFBQSxPQUFBQyxjQUFBO0lBQUE7RUFBQTtFQUFBLE9BQUFBLGNBQUE7QUFBQTtBQUFBRCxjQUFBO0FBQUFBLGNBQUEsR0FBQUUsQ0FBQTs7Ozs7OytCQUpROzs7Ozs7V0FBQUMsZUFBQTs7Ozs7a0NBZFk7QUFjckIsU0FBU0EsZ0JBQUE7RUFBQTtFQUFBSCxjQUFBLEdBQUFJLENBQUE7RUFDZCxNQUFNQyxRQUFBO0VBQUE7RUFBQSxDQUFBTCxjQUFBLEdBQUFFLENBQUEsT0FBVyxJQUFBSSxXQUFBLENBQUFDLFdBQVc7RUFFNUIsTUFBTUMsVUFBQTtFQUFBO0VBQUEsQ0FBQVIsY0FBQSxHQUFBRSxDQUFBLE9BQWFHLFFBQUEsS0FBYTtFQUNoQyxNQUFNSSxtQkFBQTtFQUFBO0VBQUEsQ0FBQVQsY0FBQSxHQUFBRSxDQUFBLE9BQXNCRyxRQUFBLEtBQWE7RUFDekMsTUFBTUssaUJBQUE7RUFBQTtFQUFBLENBQUFWLGNBQUEsR0FBQUUsQ0FBQTtFQUFvQjtFQUFBLENBQUFGLGNBQUEsR0FBQVcsQ0FBQSxVQUFBTixRQUFBLENBQVNPLFVBQVUsQ0FBQztFQUFBO0VBQUEsQ0FBQVosY0FBQSxHQUFBVyxDQUFBLFVBQWtCTixRQUFBLEtBQWE7RUFDN0UsTUFBTVEsZUFBQTtFQUFBO0VBQUEsQ0FBQWIsY0FBQSxHQUFBRSxDQUFBLE9BQWtCRyxRQUFBLEtBQWE7RUFBQTtFQUFBTCxjQUFBLEdBQUFFLENBQUE7RUFFckMsT0FBTztJQUNMTSxVQUFBO0lBQ0FDLG1CQUFBO0lBQ0FDLGlCQUFBO0lBQ0FHLGVBQUE7SUFDQTtJQUNBQywyQkFBQTtJQUE2QjtJQUFBLENBQUFkLGNBQUEsR0FBQVcsQ0FBQSxXQUFDSCxVQUFBO0lBQUE7SUFBQSxDQUFBUixjQUFBLEdBQUFXLENBQUEsVUFBYyxDQUFDRixtQkFBQTtJQUM3QztJQUNBTSxtQkFBQSxFQUFxQjtFQUN2QjtBQUNGIiwiaWdub3JlTGlzdCI6W119

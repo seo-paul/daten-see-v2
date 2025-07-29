@@ -3,6 +3,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { sanitizeName, sanitizeTextContent } from '@/lib/utils/sanitization';
 import type { DashboardListItem, UpdateDashboardRequest } from '@/types/dashboard.types';
 
 interface EditDashboardModalProps {
@@ -72,15 +73,24 @@ export function EditDashboardModal({
     }
 
     try {
-      await onSubmit({
+      // Sanitize input data before submission
+      const sanitizedData: UpdateDashboardRequest = {
         id: dashboard.id,
-        name: formData.name,
-        description: formData.description,
+        name: sanitizeName(formData.name, 100),
+        description: sanitizeTextContent(formData.description),
         isPublic: formData.isPublic
-      });
+      };
+
+      await onSubmit(sanitizedData);
       onClose();
-    } catch {
-      // Error handling is done in the parent component
+    } catch (error) {
+      // Check if it's a sanitization error
+      if (error instanceof Error && error.message.includes('Name cannot')) {
+        setErrors({ name: error.message });
+      } else {
+        // Other errors are handled in the parent component
+        throw error;
+      }
     }
   };
 

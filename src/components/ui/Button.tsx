@@ -51,6 +51,7 @@ const buttonVariants = cva(
       },
       
       size: {
+        xs: 'h-6 px-2 text-xs',       // Extra small for widget controls
         sm: 'h-8 px-3 text-sm',
         md: 'h-10 px-4 text-base',     // Standard size from design reference
         lg: 'h-12 px-6 text-lg',
@@ -171,6 +172,7 @@ export interface IconButtonProps extends Omit<ButtonProps, 'leftIcon' | 'rightIc
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ icon, size = 'md', className, context = 'page', ...props }, ref) => {
     const sizeClasses = {
+      xs: 'h-6 w-6 p-0',
       sm: 'h-8 w-8 p-0',
       md: 'h-10 w-10 p-0', 
       lg: 'h-12 w-12 p-0',

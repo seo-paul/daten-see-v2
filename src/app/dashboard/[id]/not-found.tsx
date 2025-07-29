@@ -21,7 +21,7 @@ export default function DashboardNotFound(): React.ReactElement {
           </p>
           
           <Link
-            href="/dashboards"
+            href="/dashboard-uebersicht"
             className="inline-flex items-center px-4 py-2 bg-[#2F4F73] text-white font-medium rounded-lg hover:bg-[#365C83] transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

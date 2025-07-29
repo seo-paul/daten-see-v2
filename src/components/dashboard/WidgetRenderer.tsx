@@ -1,7 +1,6 @@
 'use client';
 
-import { Edit3, Copy, Trash2, MoreVertical } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { X, Move3D } from 'lucide-react';
 
 import { 
   DashboardLineChart, 
@@ -30,84 +29,50 @@ interface WidgetRendererProps {
 export function WidgetRenderer({
   widget,
   isEditMode,
-  onEdit,
   onDelete,
-  onDuplicate,
 }: WidgetRendererProps) {
-  const [showMenu, setShowMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowMenu(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
-    <>
+    <div className={`widget-container relative h-full ${isEditMode ? 'widget-edit-mode' : ''}`}>
+      {/* Edit Mode Overlay */}
+      {isEditMode && (
+        <div className="absolute inset-0 bg-blue-100/30 border-2 border-blue-300/50 rounded-lg pointer-events-none z-5" />
+      )}
+      
+      {/* Resize Handle - Only visible in edit mode */}
+      {isEditMode && (
+        <div className="absolute bottom-2 right-2 z-20 w-6 h-6 bg-gray-500 hover:bg-gray-600 text-white rounded-sm flex items-center justify-center cursor-se-resize transition-colors shadow-sm">
+          <Move3D className="w-3 h-3" />
+        </div>
+      )}
+
       <div className="widget-header">
         <h3 className="text-sm font-medium text-[#3d3d3d] truncate">
           {widget.title}
         </h3>
         {isEditMode && (
-          <div className="widget-toolbar" ref={menuRef}>
+          <div className="widget-toolbar">
             <button
-              onClick={() => setShowMenu(!showMenu)}
-              title="Widget-Optionen"
-              aria-label="Widget-Optionen"
-              className="relative"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (onDelete) {
+                  onDelete();
+                }
+              }}
+              title="Widget löschen"
+              aria-label="Widget löschen"
+              className="w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors shadow-[1px_2px_0px_0px_#DC2626] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[2px] relative z-30 pointer-events-auto"
             >
-              <MoreVertical className="w-4 h-4" />
+              <X className="w-3 h-3" />
             </button>
-            
-            {showMenu && (
-              <div className="absolute right-0 top-8 z-50 bg-white rounded-lg shadow-lg border border-[#E6D7B8] py-1 min-w-[160px]">
-                <button
-                  onClick={() => {
-                    onEdit?.();
-                    setShowMenu(false);
-                  }}
-                  className="w-full px-4 py-2 text-left text-sm text-[#3d3d3d] hover:bg-[#F5EFE7] flex items-center gap-2"
-                >
-                  <Edit3 className="w-4 h-4" />
-                  Bearbeiten
-                </button>
-                <button
-                  onClick={() => {
-                    onDuplicate?.();
-                    setShowMenu(false);
-                  }}
-                  className="w-full px-4 py-2 text-left text-sm text-[#3d3d3d] hover:bg-[#F5EFE7] flex items-center gap-2"
-                >
-                  <Copy className="w-4 h-4" />
-                  Duplizieren
-                </button>
-                <hr className="my-1 border-[#E6D7B8]" />
-                <button
-                  onClick={() => {
-                    onDelete?.();
-                    setShowMenu(false);
-                  }}
-                  className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Löschen
-                </button>
-              </div>
-            )}
           </div>
         )}
       </div>
       <div className="widget-body">
         <WidgetContent widget={widget} />
       </div>
-    </>
+    </div>
   );
 }
 

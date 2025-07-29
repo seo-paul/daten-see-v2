@@ -30,7 +30,7 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
         <div className="hidden md:flex items-center justify-center">
           <div className="flex items-center space-x-6">
             {showDashboardOverviewButton && (
-              <Link href="/dashboards">
+              <Link href="/dashboard-uebersicht">
                 <NavbarButton size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
                   Zur Dashboard-Übersicht
                 </NavbarButton>
@@ -64,15 +64,6 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
 
           {/* Action Buttons */}
           <div className="hidden sm:flex items-center space-x-2">
-            <Link href="/charts-demo">
-              <NavbarButton
-                size="sm"
-                aria-label="Charts Demo"
-                className="!px-2"
-              >
-                📊
-              </NavbarButton>
-            </Link>
             <NavbarButton
               size="sm"
               aria-label="Debug"
@@ -97,7 +88,7 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
           <div className="flex flex-col space-y-3 pb-2">
             {showDashboardOverviewButton && (
               <Link 
-                href="/dashboards" 
+                href="/dashboard-uebersicht" 
                 className="text-base font-medium text-[#3d3d3d]/70 hover:text-[#3d3d3d] py-2 px-2 -mx-2 rounded transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

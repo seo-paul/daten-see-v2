@@ -1,0 +1,407 @@
+1c7d569604816d2d9c34fe9cb933a6ac
+'use client';
+"use strict";
+
+/* istanbul ignore next */
+function cov_1zcrumhqij() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/app/charts-demo-simple/page.tsx";
+  var hash = "f3b193f8274ad86a0269d8e48855be3e7c9a71dc";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/app/charts-demo-simple/page.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 14,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 12,
+          column: 8
+        },
+        end: {
+          line: 12,
+          column: 36
+        }
+      },
+      "3": {
+        start: {
+          line: 15,
+          column: 20
+        },
+        end: {
+          line: 15,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 16,
+          column: 21
+        },
+        end: {
+          line: 16,
+          column: 67
+        }
+      },
+      "5": {
+        start: {
+          line: 17,
+          column: 16
+        },
+        end: {
+          line: 17,
+          column: 50
+        }
+      },
+      "6": {
+        start: {
+          line: 19,
+          column: 24
+        },
+        end: {
+          line: 68,
+          column: 5
+        }
+      },
+      "7": {
+        start: {
+          line: 69,
+          column: 25
+        },
+        end: {
+          line: 95,
+          column: 5
+        }
+      },
+      "8": {
+        start: {
+          line: 96,
+          column: 4
+        },
+        end: {
+          line: 254,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 11,
+            column: 9
+          },
+          end: {
+            line: 11,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 20
+          },
+          end: {
+            line: 13,
+            column: 5
+          }
+        },
+        line: 11
+      },
+      "1": {
+        name: "SimpleChartsDemoPage",
+        decl: {
+          start: {
+            line: 18,
+            column: 9
+          },
+          end: {
+            line: 18,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 18,
+            column: 32
+          },
+          end: {
+            line: 255,
+            column: 1
+          }
+        },
+        line: 18
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {},
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/app/charts-demo-simple/page.tsx"],
+      sourcesContent: ["'use client';\n\nimport { SimpleChart, SimpleKPICard } from '@/components/charts/SimpleChart';\nimport { CHART_COLORS } from '@/lib/charts/config';\n\n/**\n * Simple Charts Demo Page\n * Showcases simplified chart components without Chart.js complexity\n */\nexport default function SimpleChartsDemoPage(): React.ReactElement {\n  \n  const monthlyData = [\n    { label: 'Jan', value: 45000 },\n    { label: 'Feb', value: 52000 },\n    { label: 'M\xE4r', value: 48000 },\n    { label: 'Apr', value: 61000 },\n    { label: 'Mai', value: 55000 },\n    { label: 'Jun', value: 67000 },\n    { label: 'Jul', value: 71000 },\n    { label: 'Aug', value: 69000 },\n    { label: 'Sep', value: 63000 },\n    { label: 'Okt', value: 58000 },\n    { label: 'Nov', value: 62000 },\n    { label: 'Dez', value: 74000 },\n  ];\n  \n  const categoryData = [\n    { label: 'Marketing', value: 35000, color: CHART_COLORS.dataColors[0] },\n    { label: 'Personal', value: 45000, color: CHART_COLORS.dataColors[1] },\n    { label: 'Technologie', value: 25000, color: CHART_COLORS.dataColors[2] },\n    { label: 'B\xFCro', value: 15000, color: CHART_COLORS.dataColors[3] },\n    { label: 'Sonstiges', value: 10000, color: CHART_COLORS.dataColors[4] },\n  ];\n\n  return (\n    <div className=\"min-h-screen bg-[#FBF5ED] p-4 sm:p-6 lg:p-8\">\n      <div className=\"max-w-7xl mx-auto space-y-8\">\n        \n        {/* Header */}\n        <div className=\"text-center space-y-4\">\n          <h1 className=\"text-3xl font-bold text-[#3d3d3d]\">\n            Charts Demo - Simplified Version\n          </h1>\n          <p className=\"text-[#5d5d5d] max-w-2xl mx-auto\">\n            Vereinfachte Chart-Komponenten mit Design System v2.3 Theming.\n            Diese werden in Task 1.3.3 durch vollst\xE4ndige Chart.js Implementierungen ersetzt.\n          </p>\n        </div>\n        \n        {/* KPI Grid */}\n        <section className=\"space-y-4\">\n          <h2 className=\"text-2xl font-semibold text-[#3d3d3d]\">\n            KPI Metriken\n          </h2>\n          <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6\">\n            <SimpleKPICard\n              title=\"Gesamtumsatz\"\n              value={125000}\n              previousValue={118000}\n              unit=\"currency\"\n              color={CHART_COLORS.success}\n            />\n            <SimpleKPICard\n              title=\"Neue Kunden\"\n              value={247}\n              previousValue={234}\n              unit=\"number\"\n              color={CHART_COLORS.primary}\n            />\n            <SimpleKPICard\n              title=\"Konversionsrate\"\n              value={3.2}\n              previousValue={2.8}\n              unit=\"percentage\"\n              color={CHART_COLORS.info}\n            />\n            <SimpleKPICard\n              title=\"Monatswachstum\"\n              value={8.5}\n              previousValue={6.2}\n              unit=\"percentage\"\n              color={CHART_COLORS.warning}\n            />\n          </div>\n        </section>\n        \n        {/* Charts Grid */}\n        <section className=\"space-y-6\">\n          <h2 className=\"text-2xl font-semibold text-[#3d3d3d]\">\n            Chart Komponenten\n          </h2>\n          \n          <div className=\"grid grid-cols-1 lg:grid-cols-2 gap-6\">\n            {/* Bar Chart */}\n            <SimpleChart\n              type=\"bar\"\n              title=\"Monatlicher Umsatz 2024\"\n              data={monthlyData}\n              height={300}\n            />\n            \n            {/* Line Chart */}\n            <SimpleChart\n              type=\"line\"\n              title=\"Umsatztrend \xFCber das Jahr\"\n              data={monthlyData}\n              height={300}\n            />\n          </div>\n          \n          {/* Pie Chart */}\n          <SimpleChart\n            type=\"pie\"\n            title=\"Ausgaben nach Kategorien\"\n            data={categoryData}\n            height={400}\n          />\n        </section>\n        \n        {/* Features Status */}\n        <section className=\"bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-6\">\n          <h3 className=\"text-lg font-semibold text-[#3d3d3d] mb-4\">\n            \uD83D\uDEA7 Implementation Status - Task 1.3\n          </h3>\n          <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4 text-sm\">\n            <div>\n              <h4 className=\"font-medium text-[#3d3d3d] mb-2\">\u2705 Completed:</h4>\n              <ul className=\"space-y-1 text-[#5d5d5d]\">\n                <li>\u2022 Chart.js v4 + react-chartjs-2 installation</li>\n                <li>\u2022 Design System v2.3 color integration</li>\n                <li>\u2022 Basic chart component structure</li>\n                <li>\u2022 Simplified demo implementations</li>\n              </ul>\n            </div>\n            <div>\n              <h4 className=\"font-medium text-[#3d3d3d] mb-2\">\uD83D\uDEA7 Next Steps:</h4>\n              <ul className=\"space-y-1 text-[#5d5d5d]\">\n                <li>\u2022 Fix Chart.js TypeScript compatibility (Task 1.3.3)</li>\n                <li>\u2022 Implement responsive configurations</li>\n                <li>\u2022 Add chart customization UI</li>\n                <li>\u2022 Integrate with TanStack Query</li>\n              </ul>\n            </div>\n          </div>\n        </section>\n        \n      </div>\n    </div>\n  );\n}"],
+      names: ["SimpleChartsDemoPage", "monthlyData", "label", "value", "categoryData", "color", "CHART_COLORS", "dataColors", "div", "className", "h1", "p", "section", "h2", "SimpleKPICard", "title", "previousValue", "unit", "success", "primary", "info", "warning", "SimpleChart", "type", "data", "height", "h3", "h4", "ul", "li"],
+      mappings: "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"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "f3b193f8274ad86a0269d8e48855be3e7c9a71dc"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1zcrumhqij = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1zcrumhqij();
+cov_1zcrumhqij().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1zcrumhqij().s[1]++;
+Object.defineProperty(exports,
+/**
+* Simple Charts Demo Page
+* Showcases simplified chart components without Chart.js complexity
+*/
+"default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1zcrumhqij().f[0]++;
+    cov_1zcrumhqij().s[2]++;
+    return SimpleChartsDemoPage;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_1zcrumhqij().s[3]++, require("react/jsx-runtime"));
+const _SimpleChart =
+/* istanbul ignore next */
+(cov_1zcrumhqij().s[4]++, require("../../components/charts/SimpleChart"));
+const _config =
+/* istanbul ignore next */
+(cov_1zcrumhqij().s[5]++, require("../../lib/charts/config"));
+function SimpleChartsDemoPage() {
+  /* istanbul ignore next */
+  cov_1zcrumhqij().f[1]++;
+  const monthlyData =
+  /* istanbul ignore next */
+  (cov_1zcrumhqij().s[6]++, [{
+    label: 'Jan',
+    value: 45000
+  }, {
+    label: 'Feb',
+    value: 52000
+  }, {
+    label: 'Mär',
+    value: 48000
+  }, {
+    label: 'Apr',
+    value: 61000
+  }, {
+    label: 'Mai',
+    value: 55000
+  }, {
+    label: 'Jun',
+    value: 67000
+  }, {
+    label: 'Jul',
+    value: 71000
+  }, {
+    label: 'Aug',
+    value: 69000
+  }, {
+    label: 'Sep',
+    value: 63000
+  }, {
+    label: 'Okt',
+    value: 58000
+  }, {
+    label: 'Nov',
+    value: 62000
+  }, {
+    label: 'Dez',
+    value: 74000
+  }]);
+  const categoryData =
+  /* istanbul ignore next */
+  (cov_1zcrumhqij().s[7]++, [{
+    label: 'Marketing',
+    value: 35000,
+    color: _config.CHART_COLORS.dataColors[0]
+  }, {
+    label: 'Personal',
+    value: 45000,
+    color: _config.CHART_COLORS.dataColors[1]
+  }, {
+    label: 'Technologie',
+    value: 25000,
+    color: _config.CHART_COLORS.dataColors[2]
+  }, {
+    label: 'Büro',
+    value: 15000,
+    color: _config.CHART_COLORS.dataColors[3]
+  }, {
+    label: 'Sonstiges',
+    value: 10000,
+    color: _config.CHART_COLORS.dataColors[4]
+  }]);
+  /* istanbul ignore next */
+  cov_1zcrumhqij().s[8]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+    className: "min-h-screen bg-[#FBF5ED] p-4 sm:p-6 lg:p-8",
+    children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+      className: "max-w-7xl mx-auto space-y-8",
+      children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "text-center space-y-4",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h1", {
+          className: "text-3xl font-bold text-[#3d3d3d]",
+          children: "Charts Demo - Simplified Version"
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+          className: "text-[#5d5d5d] max-w-2xl mx-auto",
+          children: "Vereinfachte Chart-Komponenten mit Design System v2.3 Theming. Diese werden in Task 1.3.3 durch vollst\xe4ndige Chart.js Implementierungen ersetzt."
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("section", {
+        className: "space-y-4",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+          className: "text-2xl font-semibold text-[#3d3d3d]",
+          children: "KPI Metriken"
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleKPICard, {
+            title: "Gesamtumsatz",
+            value: 125000,
+            previousValue: 118000,
+            unit: "currency",
+            color: _config.CHART_COLORS.success
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleKPICard, {
+            title: "Neue Kunden",
+            value: 247,
+            previousValue: 234,
+            unit: "number",
+            color: _config.CHART_COLORS.primary
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleKPICard, {
+            title: "Konversionsrate",
+            value: 3.2,
+            previousValue: 2.8,
+            unit: "percentage",
+            color: _config.CHART_COLORS.info
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleKPICard, {
+            title: "Monatswachstum",
+            value: 8.5,
+            previousValue: 6.2,
+            unit: "percentage",
+            color: _config.CHART_COLORS.warning
+          })]
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("section", {
+        className: "space-y-6",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+          className: "text-2xl font-semibold text-[#3d3d3d]",
+          children: "Chart Komponenten"
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleChart, {
+            type: "bar",
+            title: "Monatlicher Umsatz 2024",
+            data: monthlyData,
+            height: 300
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleChart, {
+            type: "line",
+            title: "Umsatztrend \xfcber das Jahr",
+            data: monthlyData,
+            height: 300
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)(_SimpleChart.SimpleChart, {
+          type: "pie",
+          title: "Ausgaben nach Kategorien",
+          data: categoryData,
+          height: 400
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("section", {
+        className: "bg-[#FDF9F3] rounded-lg border border-[#E6D7B8] p-6",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+          className: "text-lg font-semibold text-[#3d3d3d] mb-4",
+          children: "\uD83D\uDEA7 Implementation Status - Task 1.3"
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "grid grid-cols-1 md:grid-cols-2 gap-4 text-sm",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+              className: "font-medium text-[#3d3d3d] mb-2",
+              children: "✅ Completed:"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("ul", {
+              className: "space-y-1 text-[#5d5d5d]",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Chart.js v4 + react-chartjs-2 installation"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Design System v2.3 color integration"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Basic chart component structure"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Simplified demo implementations"
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+              className: "font-medium text-[#3d3d3d] mb-2",
+              children: "\uD83D\uDEA7 Next Steps:"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("ul", {
+              className: "space-y-1 text-[#5d5d5d]",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Fix Chart.js TypeScript compatibility (Task 1.3.3)"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Implement responsive configurations"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Add chart customization UI"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("li", {
+                children: "• Integrate with TanStack Query"
+              })]
+            })]
+          })]
+        })]
+      })]
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJTaW1wbGVDaGFydHNEZW1vUGFnZSIsImNvdl8xemNydW1ocWlqIiwiZiIsIm1vbnRobHlEYXRhIiwicyIsImxhYmVsIiwidmFsdWUiLCJjYXRlZ29yeURhdGEiLCJjb2xvciIsIl9jb25maWciLCJDSEFSVF9DT0xPUlMiLCJkYXRhQ29sb3JzIiwiX2pzeHJ1bnRpbWUiLCJqc3giLCJjbGFzc05hbWUiLCJqc3hzIiwiX1NpbXBsZUNoYXJ0IiwiU2ltcGxlS1BJQ2FyZCIsInRpdGxlIiwicHJldmlvdXNWYWx1ZSIsInVuaXQiLCJzdWNjZXNzIiwicHJpbWFyeSIsImluZm8iLCJ3YXJuaW5nIiwiU2ltcGxlQ2hhcnQiLCJ0eXBlIiwiZGF0YSIsImhlaWdodCJdLCJzb3VyY2VzIjpbIi9Vc2Vycy96d2VpZ2VuL1NpdGVzL2RhdGVuLXNlZS12Mi9zcmMvYXBwL2NoYXJ0cy1kZW1vLXNpbXBsZS9wYWdlLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIGNsaWVudCc7XG5cbmltcG9ydCB7IFNpbXBsZUNoYXJ0LCBTaW1wbGVLUElDYXJkIH0gZnJvbSAnQC9jb21wb25lbnRzL2NoYXJ0cy9TaW1wbGVDaGFydCc7XG5pbXBvcnQgeyBDSEFSVF9DT0xPUlMgfSBmcm9tICdAL2xpYi9jaGFydHMvY29uZmlnJztcblxuLyoqXG4gKiBTaW1wbGUgQ2hhcnRzIERlbW8gUGFnZVxuICogU2hvd2Nhc2VzIHNpbXBsaWZpZWQgY2hhcnQgY29tcG9uZW50cyB3aXRob3V0IENoYXJ0LmpzIGNvbXBsZXhpdHlcbiAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gU2ltcGxlQ2hhcnRzRGVtb1BhZ2UoKTogUmVhY3QuUmVhY3RFbGVtZW50IHtcbiAgXG4gIGNvbnN0IG1vbnRobHlEYXRhID0gW1xuICAgIHsgbGFiZWw6ICdKYW4nLCB2YWx1ZTogNDUwMDAgfSxcbiAgICB7IGxhYmVsOiAnRmViJywgdmFsdWU6IDUyMDAwIH0sXG4gICAgeyBsYWJlbDogJ03DpHInLCB2YWx1ZTogNDgwMDAgfSxcbiAgICB7IGxhYmVsOiAnQXByJywgdmFsdWU6IDYxMDAwIH0sXG4gICAgeyBsYWJlbDogJ01haScsIHZhbHVlOiA1NTAwMCB9LFxuICAgIHsgbGFiZWw6ICdKdW4nLCB2YWx1ZTogNjcwMDAgfSxcbiAgICB7IGxhYmVsOiAnSnVsJywgdmFsdWU6IDcxMDAwIH0sXG4gICAgeyBsYWJlbDogJ0F1ZycsIHZhbHVlOiA2OTAwMCB9LFxuICAgIHsgbGFiZWw6ICdTZXAnLCB2YWx1ZTogNjMwMDAgfSxcbiAgICB7IGxhYmVsOiAnT2t0JywgdmFsdWU6IDU4MDAwIH0sXG4gICAgeyBsYWJlbDogJ05vdicsIHZhbHVlOiA2MjAwMCB9LFxuICAgIHsgbGFiZWw6ICdEZXonLCB2YWx1ZTogNzQwMDAgfSxcbiAgXTtcbiAgXG4gIGNvbnN0IGNhdGVnb3J5RGF0YSA9IFtcbiAgICB7IGxhYmVsOiAnTWFya2V0aW5nJywgdmFsdWU6IDM1MDAwLCBjb2xvcjogQ0hBUlRfQ09MT1JTLmRhdGFDb2xvcnNbMF0gfSxcbiAgICB7IGxhYmVsOiAnUGVyc29uYWwnLCB2YWx1ZTogNDUwMDAsIGNvbG9yOiBDSEFSVF9DT0xPUlMuZGF0YUNvbG9yc1sxXSB9LFxuICAgIHsgbGFiZWw6ICdUZWNobm9sb2dpZScsIHZhbHVlOiAyNTAwMCwgY29sb3I6IENIQVJUX0NPTE9SUy5kYXRhQ29sb3JzWzJdIH0sXG4gICAgeyBsYWJlbDogJ0LDvHJvJywgdmFsdWU6IDE1MDAwLCBjb2xvcjogQ0hBUlRfQ09MT1JTLmRhdGFDb2xvcnNbM10gfSxcbiAgICB7IGxhYmVsOiAnU29uc3RpZ2VzJywgdmFsdWU6IDEwMDAwLCBjb2xvcjogQ0hBUlRfQ09MT1JTLmRhdGFDb2xvcnNbNF0gfSxcbiAgXTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuIGJnLVsjRkJGNUVEXSBwLTQgc206cC02IGxnOnAtOFwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0byBzcGFjZS15LThcIj5cbiAgICAgICAgXG4gICAgICAgIHsvKiBIZWFkZXIgKi99XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgc3BhY2UteS00XCI+XG4gICAgICAgICAgPGgxIGNsYXNzTmFtZT1cInRleHQtM3hsIGZvbnQtYm9sZCB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgQ2hhcnRzIERlbW8gLSBTaW1wbGlmaWVkIFZlcnNpb25cbiAgICAgICAgICA8L2gxPlxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtWyM1ZDVkNWRdIG1heC13LTJ4bCBteC1hdXRvXCI+XG4gICAgICAgICAgICBWZXJlaW5mYWNodGUgQ2hhcnQtS29tcG9uZW50ZW4gbWl0IERlc2lnbiBTeXN0ZW0gdjIuMyBUaGVtaW5nLlxuICAgICAgICAgICAgRGllc2Ugd2VyZGVuIGluIFRhc2sgMS4zLjMgZHVyY2ggdm9sbHN0w6RuZGlnZSBDaGFydC5qcyBJbXBsZW1lbnRpZXJ1bmdlbiBlcnNldHp0LlxuICAgICAgICAgIDwvcD5cbiAgICAgICAgPC9kaXY+XG4gICAgICAgIFxuICAgICAgICB7LyogS1BJIEdyaWQgKi99XG4gICAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInNwYWNlLXktNFwiPlxuICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJ0ZXh0LTJ4bCBmb250LXNlbWlib2xkIHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICBLUEkgTWV0cmlrZW5cbiAgICAgICAgICA8L2gyPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBtZDpncmlkLWNvbHMtMiBsZzpncmlkLWNvbHMtNCBnYXAtNlwiPlxuICAgICAgICAgICAgPFNpbXBsZUtQSUNhcmRcbiAgICAgICAgICAgICAgdGl0bGU9XCJHZXNhbXR1bXNhdHpcIlxuICAgICAgICAgICAgICB2YWx1ZT17MTI1MDAwfVxuICAgICAgICAgICAgICBwcmV2aW91c1ZhbHVlPXsxMTgwMDB9XG4gICAgICAgICAgICAgIHVuaXQ9XCJjdXJyZW5jeVwiXG4gICAgICAgICAgICAgIGNvbG9yPXtDSEFSVF9DT0xPUlMuc3VjY2Vzc31cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgICA8U2ltcGxlS1BJQ2FyZFxuICAgICAgICAgICAgICB0aXRsZT1cIk5ldWUgS3VuZGVuXCJcbiAgICAgICAgICAgICAgdmFsdWU9ezI0N31cbiAgICAgICAgICAgICAgcHJldmlvdXNWYWx1ZT17MjM0fVxuICAgICAgICAgICAgICB1bml0PVwibnVtYmVyXCJcbiAgICAgICAgICAgICAgY29sb3I9e0NIQVJUX0NPTE9SUy5wcmltYXJ5fVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICAgIDxTaW1wbGVLUElDYXJkXG4gICAgICAgICAgICAgIHRpdGxlPVwiS29udmVyc2lvbnNyYXRlXCJcbiAgICAgICAgICAgICAgdmFsdWU9ezMuMn1cbiAgICAgICAgICAgICAgcHJldmlvdXNWYWx1ZT17Mi44fVxuICAgICAgICAgICAgICB1bml0PVwicGVyY2VudGFnZVwiXG4gICAgICAgICAgICAgIGNvbG9yPXtDSEFSVF9DT0xPUlMuaW5mb31cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgICA8U2ltcGxlS1BJQ2FyZFxuICAgICAgICAgICAgICB0aXRsZT1cIk1vbmF0c3dhY2hzdHVtXCJcbiAgICAgICAgICAgICAgdmFsdWU9ezguNX1cbiAgICAgICAgICAgICAgcHJldmlvdXNWYWx1ZT17Ni4yfVxuICAgICAgICAgICAgICB1bml0PVwicGVyY2VudGFnZVwiXG4gICAgICAgICAgICAgIGNvbG9yPXtDSEFSVF9DT0xPUlMud2FybmluZ31cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvc2VjdGlvbj5cbiAgICAgICAgXG4gICAgICAgIHsvKiBDaGFydHMgR3JpZCAqL31cbiAgICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICAgICAgPGgyIGNsYXNzTmFtZT1cInRleHQtMnhsIGZvbnQtc2VtaWJvbGQgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgIENoYXJ0IEtvbXBvbmVudGVuXG4gICAgICAgICAgPC9oMj5cbiAgICAgICAgICBcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTEgbGc6Z3JpZC1jb2xzLTIgZ2FwLTZcIj5cbiAgICAgICAgICAgIHsvKiBCYXIgQ2hhcnQgKi99XG4gICAgICAgICAgICA8U2ltcGxlQ2hhcnRcbiAgICAgICAgICAgICAgdHlwZT1cImJhclwiXG4gICAgICAgICAgICAgIHRpdGxlPVwiTW9uYXRsaWNoZXIgVW1zYXR6IDIwMjRcIlxuICAgICAgICAgICAgICBkYXRhPXttb250aGx5RGF0YX1cbiAgICAgICAgICAgICAgaGVpZ2h0PXszMDB9XG4gICAgICAgICAgICAvPlxuICAgICAgICAgICAgXG4gICAgICAgICAgICB7LyogTGluZSBDaGFydCAqL31cbiAgICAgICAgICAgIDxTaW1wbGVDaGFydFxuICAgICAgICAgICAgICB0eXBlPVwibGluZVwiXG4gICAgICAgICAgICAgIHRpdGxlPVwiVW1zYXR6dHJlbmQgw7xiZXIgZGFzIEphaHJcIlxuICAgICAgICAgICAgICBkYXRhPXttb250aGx5RGF0YX1cbiAgICAgICAgICAgICAgaGVpZ2h0PXszMDB9XG4gICAgICAgICAgICAvPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIFxuICAgICAgICAgIHsvKiBQaWUgQ2hhcnQgKi99XG4gICAgICAgICAgPFNpbXBsZUNoYXJ0XG4gICAgICAgICAgICB0eXBlPVwicGllXCJcbiAgICAgICAgICAgIHRpdGxlPVwiQXVzZ2FiZW4gbmFjaCBLYXRlZ29yaWVuXCJcbiAgICAgICAgICAgIGRhdGE9e2NhdGVnb3J5RGF0YX1cbiAgICAgICAgICAgIGhlaWdodD17NDAwfVxuICAgICAgICAgIC8+XG4gICAgICAgIDwvc2VjdGlvbj5cbiAgICAgICAgXG4gICAgICAgIHsvKiBGZWF0dXJlcyBTdGF0dXMgKi99XG4gICAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cImJnLVsjRkRGOUYzXSByb3VuZGVkLWxnIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIHAtNlwiPlxuICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJ0ZXh0LWxnIGZvbnQtc2VtaWJvbGQgdGV4dC1bIzNkM2QzZF0gbWItNFwiPlxuICAgICAgICAgICAg8J+apyBJbXBsZW1lbnRhdGlvbiBTdGF0dXMgLSBUYXNrIDEuM1xuICAgICAgICAgIDwvaDM+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0xIG1kOmdyaWQtY29scy0yIGdhcC00IHRleHQtc21cIj5cbiAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LW1lZGl1bSB0ZXh0LVsjM2QzZDNkXSBtYi0yXCI+4pyFIENvbXBsZXRlZDo8L2g0PlxuICAgICAgICAgICAgICA8dWwgY2xhc3NOYW1lPVwic3BhY2UteS0xIHRleHQtWyM1ZDVkNWRdXCI+XG4gICAgICAgICAgICAgICAgPGxpPuKAoiBDaGFydC5qcyB2NCArIHJlYWN0LWNoYXJ0anMtMiBpbnN0YWxsYXRpb248L2xpPlxuICAgICAgICAgICAgICAgIDxsaT7igKIgRGVzaWduIFN5c3RlbSB2Mi4zIGNvbG9yIGludGVncmF0aW9uPC9saT5cbiAgICAgICAgICAgICAgICA8bGk+4oCiIEJhc2ljIGNoYXJ0IGNvbXBvbmVudCBzdHJ1Y3R1cmU8L2xpPlxuICAgICAgICAgICAgICAgIDxsaT7igKIgU2ltcGxpZmllZCBkZW1vIGltcGxlbWVudGF0aW9uczwvbGk+XG4gICAgICAgICAgICAgIDwvdWw+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LW1lZGl1bSB0ZXh0LVsjM2QzZDNkXSBtYi0yXCI+8J+apyBOZXh0IFN0ZXBzOjwvaDQ+XG4gICAgICAgICAgICAgIDx1bCBjbGFzc05hbWU9XCJzcGFjZS15LTEgdGV4dC1bIzVkNWQ1ZF1cIj5cbiAgICAgICAgICAgICAgICA8bGk+4oCiIEZpeCBDaGFydC5qcyBUeXBlU2NyaXB0IGNvbXBhdGliaWxpdHkgKFRhc2sgMS4zLjMpPC9saT5cbiAgICAgICAgICAgICAgICA8bGk+4oCiIEltcGxlbWVudCByZXNwb25zaXZlIGNvbmZpZ3VyYXRpb25zPC9saT5cbiAgICAgICAgICAgICAgICA8bGk+4oCiIEFkZCBjaGFydCBjdXN0b21pemF0aW9uIFVJPC9saT5cbiAgICAgICAgICAgICAgICA8bGk+4oCiIEludGVncmF0ZSB3aXRoIFRhblN0YWNrIFF1ZXJ5PC9saT5cbiAgICAgICAgICAgICAgPC91bD5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L3NlY3Rpb24+XG4gICAgICAgIFxuICAgICAgPC9kaXY+XG4gICAgPC9kaXY+XG4gICk7XG59Il0sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBS0E7Ozs7QUFJQTs7Ozs7O1dBQXdCQSxvQkFBQTs7Ozs7Ozs7a0NBUG1COzs7a0NBQ2Q7QUFNZCxTQUFTQSxxQkFBQTtFQUFBO0VBQUFDLGNBQUEsR0FBQUMsQ0FBQTtFQUV0QixNQUFNQyxXQUFBO0VBQUE7RUFBQSxDQUFBRixjQUFBLEdBQUFHLENBQUEsT0FBYyxDQUNsQjtJQUFFQyxLQUFBLEVBQU87SUFBT0MsS0FBQSxFQUFPO0VBQU0sR0FDN0I7SUFBRUQsS0FBQSxFQUFPO0lBQU9DLEtBQUEsRUFBTztFQUFNLEdBQzdCO0lBQUVELEtB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

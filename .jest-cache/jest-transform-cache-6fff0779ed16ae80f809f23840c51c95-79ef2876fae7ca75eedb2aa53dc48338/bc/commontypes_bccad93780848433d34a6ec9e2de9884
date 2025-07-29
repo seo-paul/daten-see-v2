@@ -1,0 +1,60 @@
+70c59f5ed66fd5e8ebc6b3239fb951bd
+// Common TypeScript Types for the application
+"use strict";
+
+/* istanbul ignore next */
+function cov_14os6chiao() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/shared/types/common.types.ts";
+  var hash = "67621e015b6dc8b367e632733bff78bc48574fe2";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/shared/types/common.types.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 3
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/shared/types/common.types.ts"],
+      sourcesContent: ["// Common TypeScript Types for the application\n\nexport interface BaseEntity {\n  id: string;\n  createdAt: Date;\n  updatedAt: Date;\n}\n\nexport interface User extends BaseEntity {\n  email: string;\n  name: string;\n  avatar?: string;\n  role: UserRole;\n}\n\nexport type UserRole = 'admin' | 'user' | 'viewer';\n\nexport interface ApiResponse<T = unknown> {\n  data: T;\n  success: boolean;\n  message?: string;\n  errors?: string[];\n}\n\nexport interface PaginatedResponse<T = unknown> extends ApiResponse<T[]> {\n  pagination: {\n    page: number;\n    limit: number;\n    total: number;\n    totalPages: number;\n  };\n}\n\nexport interface LoadingState {\n  isLoading: boolean;\n  error?: string | null;\n  lastUpdated?: Date;\n}\n\n// UI State Types\nexport type Theme = 'light' | 'dark' | 'system';\nexport type Size = 'sm' | 'md' | 'lg' | 'xl';\nexport type Variant = 'primary' | 'secondary' | 'success' | 'warning' | 'danger';\n\n// Error Types\nexport interface AppError {\n  code: string;\n  message: string;\n  details?: Record<string, unknown>;\n  timestamp: Date;\n}"],
+      names: [],
+      mappings: "AAAA,8CAA8C"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "67621e015b6dc8b367e632733bff78bc48574fe2"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_14os6chiao = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_14os6chiao();
+cov_14os6chiao().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3p3ZWlnZW4vU2l0ZXMvZGF0ZW4tc2VlLXYyL3NyYy9zaGFyZWQvdHlwZXMvY29tbW9uLnR5cGVzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIENvbW1vbiBUeXBlU2NyaXB0IFR5cGVzIGZvciB0aGUgYXBwbGljYXRpb25cblxuZXhwb3J0IGludGVyZmFjZSBCYXNlRW50aXR5IHtcbiAgaWQ6IHN0cmluZztcbiAgY3JlYXRlZEF0OiBEYXRlO1xuICB1cGRhdGVkQXQ6IERhdGU7XG59XG5cbmV4cG9ydCBpbnRlcmZhY2UgVXNlciBleHRlbmRzIEJhc2VFbnRpdHkge1xuICBlbWFpbDogc3RyaW5nO1xuICBuYW1lOiBzdHJpbmc7XG4gIGF2YXRhcj86IHN0cmluZztcbiAgcm9sZTogVXNlclJvbGU7XG59XG5cbmV4cG9ydCB0eXBlIFVzZXJSb2xlID0gJ2FkbWluJyB8ICd1c2VyJyB8ICd2aWV3ZXInO1xuXG5leHBvcnQgaW50ZXJmYWNlIEFwaVJlc3BvbnNlPFQgPSB1bmtub3duPiB7XG4gIGRhdGE6IFQ7XG4gIHN1Y2Nlc3M6IGJvb2xlYW47XG4gIG1lc3NhZ2U/OiBzdHJpbmc7XG4gIGVycm9ycz86IHN0cmluZ1tdO1xufVxuXG5leHBvcnQgaW50ZXJmYWNlIFBhZ2luYXRlZFJlc3BvbnNlPFQgPSB1bmtub3duPiBleHRlbmRzIEFwaVJlc3BvbnNlPFRbXT4ge1xuICBwYWdpbmF0aW9uOiB7XG4gICAgcGFnZTogbnVtYmVyO1xuICAgIGxpbWl0OiBudW1iZXI7XG4gICAgdG90YWw6IG51bWJlcjtcbiAgICB0b3RhbFBhZ2VzOiBudW1iZXI7XG4gIH07XG59XG5cbmV4cG9ydCBpbnRlcmZhY2UgTG9hZGluZ1N0YXRlIHtcbiAgaXNMb2FkaW5nOiBib29sZWFuO1xuICBlcnJvcj86IHN0cmluZyB8IG51bGw7XG4gIGxhc3RVcGRhdGVkPzogRGF0ZTtcbn1cblxuLy8gVUkgU3RhdGUgVHlwZXNcbmV4cG9ydCB0eXBlIFRoZW1lID0gJ2xpZ2h0JyB8ICdkYXJrJyB8ICdzeXN0ZW0nO1xuZXhwb3J0IHR5cGUgU2l6ZSA9ICdzbScgfCAnbWQnIHwgJ2xnJyB8ICd4bCc7XG5leHBvcnQgdHlwZSBWYXJpYW50ID0gJ3ByaW1hcnknIHwgJ3NlY29uZGFyeScgfCAnc3VjY2VzcycgfCAnd2FybmluZycgfCAnZGFuZ2VyJztcblxuLy8gRXJyb3IgVHlwZXNcbmV4cG9ydCBpbnRlcmZhY2UgQXBwRXJyb3Ige1xuICBjb2RlOiBzdHJpbmc7XG4gIG1lc3NhZ2U6IHN0cmluZztcbiAgZGV0YWlscz86IFJlY29yZDxzdHJpbmcsIHVua25vd24+O1xuICB0aW1lc3RhbXA6IERhdGU7XG59Il0sIm1hcHBpbmdzIjoiQUFBQSIsImlnbm9yZUxpc3QiOltdfQ==

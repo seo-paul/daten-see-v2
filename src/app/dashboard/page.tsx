@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { DashboardGrid } from '@/components/layout/DashboardGrid';
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { useDashboards } from '@/hooks/useDashboards';
+import { useDashboards } from '@/hooks/dashboard/useDashboardQueries';
 import { prefetchDashboards } from '@/lib/tanstack-query/prefetch';
 
 

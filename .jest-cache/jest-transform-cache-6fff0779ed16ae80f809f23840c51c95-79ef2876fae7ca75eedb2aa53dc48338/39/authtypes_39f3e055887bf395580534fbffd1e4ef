@@ -1,0 +1,63 @@
+64f67a44619d5c098fd4b7e8949caa63
+/**
+ * Authentication Types
+ * Core types for authentication and authorization
+ */ // Extract User type from API types
+"use strict";
+
+/* istanbul ignore next */
+function cov_1qsvhhwqlo() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/types/auth.types.ts";
+  var hash = "c996e4cc083f5e6321c8326166954db510a04862";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/types/auth.types.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 8,
+          column: 3
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/types/auth.types.ts"],
+      sourcesContent: ["/**\n * Authentication Types\n * Core types for authentication and authorization\n */\n\n// Extract User type from API types\nexport interface User {\n  id: string;\n  email: string;\n  name: string;\n  role: 'user' | 'admin';\n  avatar?: string;\n  createdAt?: string;\n  updatedAt?: string;\n}\n\n// Auth state types\nexport interface AuthState {\n  user: User | null;\n  isAuthenticated: boolean;\n  isLoading: boolean;\n  error: string | null;\n}\n\n// Auth context methods\nexport interface AuthActions {\n  login: (credentials: { email: string; password: string }) => Promise<void>;\n  logout: () => Promise<void>;\n  clearError: () => void;\n}\n\n// Combined auth context interface\nexport interface AuthContextType extends AuthState, AuthActions {}\n\n// Token information\nexport interface TokenInfo {\n  token: string | null;\n  refreshToken: string | null;\n  expiresAt: string | null;\n}\n\n// Token payload (JWT claims)\nexport interface TokenPayload {\n  sub: string; // User ID\n  email: string;\n  name: string;\n  role: 'user' | 'admin';\n  exp: number; // Expiration timestamp\n  iat: number; // Issued at timestamp\n  [key: string]: unknown; // Additional claims\n}\n\n// Auth storage interface\nexport interface AuthStorage {\n  getItem: (key: string) => string | null;\n  setItem: (key: string, value: string) => void;\n  removeItem: (key: string) => void;\n}\n\n// Role definitions\nexport type UserRole = 'user' | 'admin';\n\n// Permission definitions\nexport interface Permission {\n  resource: string;\n  action: string;\n}\n\n// Route protection options\nexport interface RouteProtectionOptions {\n  requireAuth?: boolean;\n  requiredRole?: UserRole;\n  requiredPermissions?: Permission[];\n  redirectTo?: string;\n}\n\n// Auth provider configuration\nexport interface AuthProviderConfig {\n  apiBaseUrl?: string;\n  tokenStorageKey?: string;\n  refreshTokenStorageKey?: string;\n  autoRefresh?: boolean;\n  refreshThreshold?: number; // Minutes before expiry to refresh\n}\n\n// Auth hook return types\nexport interface UseAuthReturn extends AuthState {\n  login: (credentials: { email: string; password: string }) => Promise<void>;\n  logout: () => Promise<void>;\n  clearError: () => void;\n  refresh: () => Promise<void>;\n}\n\nexport interface UseRouteProtectionReturn {\n  isLoading: boolean;\n  isAuthenticated: boolean;\n  user: User | null;\n  hasAccess: boolean;\n}\n\n// Auth event types\nexport type AuthEvent = \n  | 'login'\n  | 'logout' \n  | 'token_refresh'\n  | 'token_expired'\n  | 'auth_error';\n\nexport interface AuthEventData {\n  type: AuthEvent;\n  user?: User | null;\n  error?: string;\n  timestamp: number;\n}\n\n// Auth listener callback\nexport type AuthEventListener = (data: AuthEventData) => void;"],
+      names: [],
+      mappings: "AAAA;;;CAGC,GAED,mCAAmC"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c996e4cc083f5e6321c8326166954db510a04862"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1qsvhhwqlo = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1qsvhhwqlo();
+cov_1qsvhhwqlo().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3p3ZWlnZW4vU2l0ZXMvZGF0ZW4tc2VlLXYyL3NyYy90eXBlcy9hdXRoLnR5cGVzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQXV0aGVudGljYXRpb24gVHlwZXNcbiAqIENvcmUgdHlwZXMgZm9yIGF1dGhlbnRpY2F0aW9uIGFuZCBhdXRob3JpemF0aW9uXG4gKi9cblxuLy8gRXh0cmFjdCBVc2VyIHR5cGUgZnJvbSBBUEkgdHlwZXNcbmV4cG9ydCBpbnRlcmZhY2UgVXNlciB7XG4gIGlkOiBzdHJpbmc7XG4gIGVtYWlsOiBzdHJpbmc7XG4gIG5hbWU6IHN0cmluZztcbiAgcm9sZTogJ3VzZXInIHwgJ2FkbWluJztcbiAgYXZhdGFyPzogc3RyaW5nO1xuICBjcmVhdGVkQXQ/OiBzdHJpbmc7XG4gIHVwZGF0ZWRBdD86IHN0cmluZztcbn1cblxuLy8gQXV0aCBzdGF0ZSB0eXBlc1xuZXhwb3J0IGludGVyZmFjZSBBdXRoU3RhdGUge1xuICB1c2VyOiBVc2VyIHwgbnVsbDtcbiAgaXNBdXRoZW50aWNhdGVkOiBib29sZWFuO1xuICBpc0xvYWRpbmc6IGJvb2xlYW47XG4gIGVycm9yOiBzdHJpbmcgfCBudWxsO1xufVxuXG4vLyBBdXRoIGNvbnRleHQgbWV0aG9kc1xuZXhwb3J0IGludGVyZmFjZSBBdXRoQWN0aW9ucyB7XG4gIGxvZ2luOiAoY3JlZGVudGlhbHM6IHsgZW1haWw6IHN0cmluZzsgcGFzc3dvcmQ6IHN0cmluZyB9KSA9PiBQcm9taXNlPHZvaWQ+O1xuICBsb2dvdXQ6ICgpID0+IFByb21pc2U8dm9pZD47XG4gIGNsZWFyRXJyb3I6ICgpID0+IHZvaWQ7XG59XG5cbi8vIENvbWJpbmVkIGF1dGggY29udGV4dCBpbnRlcmZhY2VcbmV4cG9ydCBpbnRlcmZhY2UgQXV0aENvbnRleHRUeXBlIGV4dGVuZHMgQXV0aFN0YXRlLCBBdXRoQWN0aW9ucyB7fVxuXG4vLyBUb2tlbiBpbmZvcm1hdGlvblxuZXhwb3J0IGludGVyZmFjZSBUb2tlbkluZm8ge1xuICB0b2tlbjogc3RyaW5nIHwgbnVsbDtcbiAgcmVmcmVzaFRva2VuOiBzdHJpbmcgfCBudWxsO1xuICBleHBpcmVzQXQ6IHN0cmluZyB8IG51bGw7XG59XG5cbi8vIFRva2VuIHBheWxvYWQgKEpXVCBjbGFpbXMpXG5leHBvcnQgaW50ZXJmYWNlIFRva2VuUGF5bG9hZCB7XG4gIHN1Yjogc3RyaW5nOyAvLyBVc2VyIElEXG4gIGVtYWlsOiBzdHJpbmc7XG4gIG5hbWU6IHN0cmluZztcbiAgcm9sZTogJ3VzZXInIHwgJ2FkbWluJztcbiAgZXhwOiBudW1iZXI7IC8vIEV4cGlyYXRpb24gdGltZXN0YW1wXG4gIGlhdDogbnVtYmVyOyAvLyBJc3N1ZWQgYXQgdGltZXN0YW1wXG4gIFtrZXk6IHN0cmluZ106IHVua25vd247IC8vIEFkZGl0aW9uYWwgY2xhaW1zXG59XG5cbi8vIEF1dGggc3RvcmFnZSBpbnRlcmZhY2VcbmV4cG9ydCBpbnRlcmZhY2UgQXV0aFN0b3JhZ2Uge1xuICBnZXRJdGVtOiAoa2V5OiBzdHJpbmcpID0+IHN0cmluZyB8IG51bGw7XG4gIHNldEl0ZW06IChrZXk6IHN0cmluZywgdmFsdWU6IHN0cmluZykgPT4gdm9pZDtcbiAgcmVtb3ZlSXRlbTogKGtleTogc3RyaW5nKSA9PiB2b2lkO1xufVxuXG4vLyBSb2xlIGRlZmluaXRpb25zXG5leHBvcnQgdHlwZSBVc2VyUm9sZSA9ICd1c2VyJyB8ICdhZG1pbic7XG5cbi8vIFBlcm1pc3Npb24gZGVmaW5pdGlvbnNcbmV4cG9ydCBpbnRlcmZhY2UgUGVybWlzc2lvbiB7XG4gIHJlc291cmNlOiBzdHJpbmc7XG4gIGFjdGlvbjogc3RyaW5nO1xufVxuXG4vLyBSb3V0ZSBwcm90ZWN0aW9uIG9wdGlvbnNcbmV4cG9ydCBpbnRlcmZhY2UgUm91dGVQcm90ZWN0aW9uT3B0aW9ucyB7XG4gIHJlcXVpcmVBdXRoPzogYm9vbGVhbjtcbiAgcmVxdWlyZWRSb2xlPzogVXNlclJvbGU7XG4gIHJlcXVpcmVkUGVybWlzc2lvbnM/OiBQZXJtaXNzaW9uW107XG4gIHJlZGlyZWN0VG8/OiBzdHJpbmc7XG59XG5cbi8vIEF1dGggcHJvdmlkZXIgY29uZmlndXJhdGlvblxuZXhwb3J0IGludGVyZmFjZSBBdXRoUHJvdmlkZXJDb25maWcge1xuICBhcGlCYXNlVXJsPzogc3RyaW5nO1xuICB0b2tlblN0b3JhZ2VLZXk/OiBzdHJpbmc7XG4gIHJlZnJlc2hUb2tlblN0b3JhZ2VLZXk/OiBzdHJpbmc7XG4gIGF1dG9SZWZyZXNoPzogYm9vbGVhbjtcbiAgcmVmcmVzaFRocmVzaG9sZD86IG51bWJlcjsgLy8gTWludXRlcyBiZWZvcmUgZXhwaXJ5IHRvIHJlZnJlc2hcbn1cblxuLy8gQXV0aCBob29rIHJldHVybiB0eXBlc1xuZXhwb3J0IGludGVyZmFjZSBVc2VBdXRoUmV0dXJuIGV4dGVuZHMgQXV0aFN0YXRlIHtcbiAgbG9naW46IChjcmVkZW50aWFsczogeyBlbWFpbDogc3RyaW5nOyBwYXNzd29yZDogc3RyaW5nIH0pID0+IFByb21pc2U8dm9pZD47XG4gIGxvZ291dDogKCkgPT4gUHJvbWlzZTx2b2lkPjtcbiAgY2xlYXJFcnJvcjogKCkgPT4gdm9pZDtcbiAgcmVmcmVzaDogKCkgPT4gUHJvbWlzZTx2b2lkPjtcbn1cblxuZXhwb3J0IGludGVyZmFjZSBVc2VSb3V0ZVByb3RlY3Rpb25SZXR1cm4ge1xuICBpc0xvYWRpbmc6IGJvb2xlYW47XG4gIGlzQXV0aGVudGljYXRlZDogYm9vbGVhbjtcbiAgdXNlcjogVXNlciB8IG51bGw7XG4gIGhhc0FjY2VzczogYm9vbGVhbjtcbn1cblxuLy8gQXV0aCBldmVudCB0eXBlc1xuZXhwb3J0IHR5cGUgQXV0aEV2ZW50ID0gXG4gIHwgJ2xvZ2luJ1xuICB8ICdsb2dvdXQnIFxuICB8ICd0b2tlbl9yZWZyZXNoJ1xuICB8ICd0b2tlbl9leHBpcmVkJ1xuICB8ICdhdXRoX2Vycm9yJztcblxuZXhwb3J0IGludGVyZmFjZSBBdXRoRXZlbnREYXRhIHtcbiAgdHlwZTogQXV0aEV2ZW50O1xuICB1c2VyPzogVXNlciB8IG51bGw7XG4gIGVycm9yPzogc3RyaW5nO1xuICB0aW1lc3RhbXA6IG51bWJlcjtcbn1cblxuLy8gQXV0aCBsaXN0ZW5lciBjYWxsYmFja1xuZXhwb3J0IHR5cGUgQXV0aEV2ZW50TGlzdGVuZXIgPSAoZGF0YTogQXV0aEV2ZW50RGF0YSkgPT4gdm9pZDsiXSwibWFwcGluZ3MiOiJBQUFBOzs7R0FBQSxDQUtBIiwiaWdub3JlTGlzdCI6W119

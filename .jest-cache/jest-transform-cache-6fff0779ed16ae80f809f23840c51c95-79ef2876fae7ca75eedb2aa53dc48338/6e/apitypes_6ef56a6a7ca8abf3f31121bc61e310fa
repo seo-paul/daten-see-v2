@@ -1,0 +1,60 @@
+1968cf9a03ff83c189bc43f845eb1df0
+// API-related TypeScript Types
+"use strict";
+
+/* istanbul ignore next */
+function cov_17m6uv7lbz() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/shared/types/api.types.ts";
+  var hash = "6c8bd15ced146fd965405e9c7ede8f0f2bb97b69";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/shared/types/api.types.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 3
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/shared/types/api.types.ts"],
+      sourcesContent: ["// API-related TypeScript Types\n\nexport interface ApiConfig {\n  baseUrl: string;\n  timeout: number;\n  retryAttempts: number;\n  headers: Record<string, string>;\n}\n\nexport interface ApiRequestConfig {\n  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';\n  url: string;\n  data?: unknown;\n  params?: Record<string, unknown>;\n  headers?: Record<string, string>;\n}\n\nexport interface ApiError {\n  status: number;\n  statusText: string;\n  data: {\n    message: string;\n    errors?: Record<string, string[]>;\n  };\n}\n\n// HTTP Status Code Types\nexport type HttpStatusCode = \n  | 200 | 201 | 204 // Success\n  | 400 | 401 | 403 | 404 | 409 | 422 // Client Errors  \n  | 500 | 502 | 503 | 504; // Server Errors\n\n// Google APIs Types (will be expanded in later phases)\nexport interface GoogleOAuthConfig {\n  clientId: string;\n  clientSecret: string;\n  redirectUri: string;\n  scopes: string[];\n}\n\nexport interface GoogleApiCredentials {\n  accessToken: string;\n  refreshToken: string;\n  expiresAt: number;\n  tokenType: 'Bearer';\n}"],
+      names: [],
+      mappings: "AAAA,+BAA+B"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "6c8bd15ced146fd965405e9c7ede8f0f2bb97b69"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_17m6uv7lbz = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_17m6uv7lbz();
+cov_17m6uv7lbz().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3p3ZWlnZW4vU2l0ZXMvZGF0ZW4tc2VlLXYyL3NyYy9zaGFyZWQvdHlwZXMvYXBpLnR5cGVzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIEFQSS1yZWxhdGVkIFR5cGVTY3JpcHQgVHlwZXNcblxuZXhwb3J0IGludGVyZmFjZSBBcGlDb25maWcge1xuICBiYXNlVXJsOiBzdHJpbmc7XG4gIHRpbWVvdXQ6IG51bWJlcjtcbiAgcmV0cnlBdHRlbXB0czogbnVtYmVyO1xuICBoZWFkZXJzOiBSZWNvcmQ8c3RyaW5nLCBzdHJpbmc+O1xufVxuXG5leHBvcnQgaW50ZXJmYWNlIEFwaVJlcXVlc3RDb25maWcge1xuICBtZXRob2Q6ICdHRVQnIHwgJ1BPU1QnIHwgJ1BVVCcgfCAnREVMRVRFJyB8ICdQQVRDSCc7XG4gIHVybDogc3RyaW5nO1xuICBkYXRhPzogdW5rbm93bjtcbiAgcGFyYW1zPzogUmVjb3JkPHN0cmluZywgdW5rbm93bj47XG4gIGhlYWRlcnM/OiBSZWNvcmQ8c3RyaW5nLCBzdHJpbmc+O1xufVxuXG5leHBvcnQgaW50ZXJmYWNlIEFwaUVycm9yIHtcbiAgc3RhdHVzOiBudW1iZXI7XG4gIHN0YXR1c1RleHQ6IHN0cmluZztcbiAgZGF0YToge1xuICAgIG1lc3NhZ2U6IHN0cmluZztcbiAgICBlcnJvcnM/OiBSZWNvcmQ8c3RyaW5nLCBzdHJpbmdbXT47XG4gIH07XG59XG5cbi8vIEhUVFAgU3RhdHVzIENvZGUgVHlwZXNcbmV4cG9ydCB0eXBlIEh0dHBTdGF0dXNDb2RlID0gXG4gIHwgMjAwIHwgMjAxIHwgMjA0IC8vIFN1Y2Nlc3NcbiAgfCA0MDAgfCA0MDEgfCA0MDMgfCA0MDQgfCA0MDkgfCA0MjIgLy8gQ2xpZW50IEVycm9ycyAgXG4gIHwgNTAwIHwgNTAyIHwgNTAzIHwgNTA0OyAvLyBTZXJ2ZXIgRXJyb3JzXG5cbi8vIEdvb2dsZSBBUElzIFR5cGVzICh3aWxsIGJlIGV4cGFuZGVkIGluIGxhdGVyIHBoYXNlcylcbmV4cG9ydCBpbnRlcmZhY2UgR29vZ2xlT0F1dGhDb25maWcge1xuICBjbGllbnRJZDogc3RyaW5nO1xuICBjbGllbnRTZWNyZXQ6IHN0cmluZztcbiAgcmVkaXJlY3RVcmk6IHN0cmluZztcbiAgc2NvcGVzOiBzdHJpbmdbXTtcbn1cblxuZXhwb3J0IGludGVyZmFjZSBHb29nbGVBcGlDcmVkZW50aWFscyB7XG4gIGFjY2Vzc1Rva2VuOiBzdHJpbmc7XG4gIHJlZnJlc2hUb2tlbjogc3RyaW5nO1xuICBleHBpcmVzQXQ6IG51bWJlcjtcbiAgdG9rZW5UeXBlOiAnQmVhcmVyJztcbn0iXSwibWFwcGluZ3MiOiJBQUFBIiwiaWdub3JlTGlzdCI6W119

@@ -132,6 +132,11 @@
   opacity: 1;
 }
 
+/* Ensure toolbar is always visible in edit mode */
+.widget-edit-mode .widget-toolbar {
+  opacity: 1 !important;
+}
+
 .widget-toolbar button {
   width: 28px;
   height: 28px;
@@ -167,14 +172,48 @@
   background: #FBF5ED;
 }
 
+/* Widget edit mode styling */
+.widget-edit-mode {
+  position: relative;
+}
+
+.widget-edit-mode .widget-header {
+  background: rgba(59, 130, 246, 0.05);
+  border-bottom-color: rgba(59, 130, 246, 0.2);
+}
+
+.widget-edit-mode .widget-body {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.widget-edit-mode .widget-toolbar {
+  opacity: 1;
+}
+
+/* Edit mode overlay animation */
+.widget-edit-mode .bg-blue-100\/30 {
+  animation: editModeOverlay 2s ease-in-out infinite alternate;
+}
+
+@keyframes editModeOverlay {
+  0% {
+    background-color: rgba(147, 197, 253, 0.15);
+  }
+  100% {
+    background-color: rgba(147, 197, 253, 0.25);
+  }
+}
+
+/* Hide resize handles in view mode */
+.react-grid-item:not(.dashboard-edit-mode *) > .react-resizable-handle {
+  display: none;
+}
+
 /* Responsive grid containers */
 .dashboard-grid-container {
   width: 100%;
   min-height: 600px;
-  background: #FBF5ED;
   padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #E6D7B8;
 }
 
 @media (max-width: 768px) {

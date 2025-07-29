@@ -22,7 +22,7 @@ export default function Home(): React.ReactElement {
               Dashboard öffnen
             </Link>
             <Link 
-              href="/dashboards"
+              href="/dashboard-uebersicht"
               className="inline-block w-full px-6 py-3 border border-[#E6D7B8] text-[#3d3d3d] font-medium rounded-lg hover:bg-[#FDF9F3] transition-colors"
             >
               Dashboard-Übersicht

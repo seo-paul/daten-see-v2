@@ -1,0 +1,1069 @@
+407d96ad3333debee45f7a32c854f99b
+'use client';
+"use strict";
+
+/* istanbul ignore next */
+function cov_21mdtw907s() {
+  var path = "/Users/zweigen/Sites/daten-see-v2/src/app/design-system/page.tsx";
+  var hash = "2bdd6ada8ea5219ffadbd07137fe044f0712c861";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/zweigen/Sites/daten-see-v2/src/app/design-system/page.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 14,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 12,
+          column: 8
+        },
+        end: {
+          line: 12,
+          column: 32
+        }
+      },
+      "3": {
+        start: {
+          line: 15,
+          column: 20
+        },
+        end: {
+          line: 15,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 16,
+          column: 21
+        },
+        end: {
+          line: 16,
+          column: 44
+        }
+      },
+      "5": {
+        start: {
+          line: 17,
+          column: 14
+        },
+        end: {
+          line: 17,
+          column: 52
+        }
+      },
+      "6": {
+        start: {
+          line: 18,
+          column: 16
+        },
+        end: {
+          line: 18,
+          column: 53
+        }
+      },
+      "7": {
+        start: {
+          line: 20,
+          column: 4
+        },
+        end: {
+          line: 1027,
+          column: 7
+        }
+      },
+      "8": {
+        start: {
+          line: 122,
+          column: 80
+        },
+        end: {
+          line: 133,
+          column: 64
+        }
+      },
+      "9": {
+        start: {
+          line: 153,
+          column: 80
+        },
+        end: {
+          line: 164,
+          column: 64
+        }
+      },
+      "10": {
+        start: {
+          line: 184,
+          column: 80
+        },
+        end: {
+          line: 196,
+          column: 64
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 11,
+            column: 9
+          },
+          end: {
+            line: 11,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 20
+          },
+          end: {
+            line: 13,
+            column: 5
+          }
+        },
+        line: 11
+      },
+      "1": {
+        name: "DesignSystemPage",
+        decl: {
+          start: {
+            line: 19,
+            column: 9
+          },
+          end: {
+            line: 19,
+            column: 25
+          }
+        },
+        loc: {
+          start: {
+            line: 19,
+            column: 28
+          },
+          end: {
+            line: 1028,
+            column: 1
+          }
+        },
+        line: 19
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 122,
+            column: 58
+          },
+          end: {
+            line: 122,
+            column: 59
+          }
+        },
+        loc: {
+          start: {
+            line: 122,
+            column: 80
+          },
+          end: {
+            line: 133,
+            column: 64
+          }
+        },
+        line: 122
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 153,
+            column: 58
+          },
+          end: {
+            line: 153,
+            column: 59
+          }
+        },
+        loc: {
+          start: {
+            line: 153,
+            column: 80
+          },
+          end: {
+            line: 164,
+            column: 64
+          }
+        },
+        line: 153
+      },
+      "4": {
+        name: "(anonymous_4)",
+        decl: {
+          start: {
+            line: 184,
+            column: 58
+          },
+          end: {
+            line: 184,
+            column: 59
+          }
+        },
+        loc: {
+          start: {
+            line: 184,
+            column: 80
+          },
+          end: {
+            line: 196,
+            column: 64
+          }
+        },
+        line: 184
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    b: {},
+    inputSourceMap: {
+      version: 3,
+      sources: ["/Users/zweigen/Sites/daten-see-v2/src/app/design-system/page.tsx"],
+      sourcesContent: ["'use client';\n\nimport { Plus, Settings, Share, Edit, Eye, X, BarChart3, Home, User, Palette } from 'lucide-react';\n\nimport { Logo, LogoCompact } from '@/components/brand/Logo';\nimport { Button, IconButton, NavbarButton } from '@/components/ui/Button';\n\n/**\n * DATEN-SEE Design System v2.3 - Tailwind Arbitrary Values\n * Beige layering system with consistent gray text using direct color values\n */\nexport default function DesignSystemPage(): React.ReactElement {\n  return (\n    <div className=\"min-h-screen p-6 bg-[#FEFCF9]\">\n      <div className=\"max-w-7xl mx-auto space-y-8\">\n        \n        {/* Header */}\n        <div className=\"relative\">\n          <div className=\"text-center py-16 rounded-3xl shadow-sm border border-[#E6D7B8] relative overflow-hidden bg-[#FDF9F3]\">\n            <div className=\"relative z-10\">\n              <div className=\"inline-flex items-center gap-3 mb-6\">\n                <div className=\"w-12 h-12 rounded-2xl flex items-center justify-center border border-[#E6D7B8] bg-[#FBF5ED]\">\n                  <Palette className=\"w-6 h-6 text-[#3d3d3d]\" />\n                </div>\n                <h1 className=\"font-display font-black text-5xl text-[#3d3d3d]\">\n                  DATEN-SEE\n                </h1>\n              </div>\n              \n              <h2 className=\"font-display text-2xl mb-4 text-[#3d3d3d]\">\n                Design System v2.3\n              </h2>\n              \n              <p className=\"text-lg max-w-3xl mx-auto leading-relaxed mb-8 text-[#3d3d3d]\">\n                Stimmiges Design-System mit gestaffelten Beige-Ebenen und konsistentem Grau-Text. \n                Monochrom, harmonisch, professionell.\n              </p>\n              \n              <div className=\"flex justify-center gap-4\">\n                <div className=\"px-6 py-3 rounded-xl shadow-sm border border-[#E6D7B8] bg-[#FBF5ED]\">\n                  <code className=\"text-sm font-mono text-[#3d3d3d]\">Stacked Layers</code>\n                </div>\n                <div className=\"px-6 py-3 rounded-xl shadow-sm border border-[#E6D7B8] bg-[#FBF5ED]\">\n                  <code className=\"text-sm font-mono text-[#3d3d3d]\">Monochrome Text</code>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        {/* Logo System */}\n        <div className=\"shadow-sm rounded-lg border border-[#E6D7B8] bg-[#F9F4EA]\">\n          <div className=\"rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]\">\n            <h2 className=\"text-2xl flex items-center gap-3 text-[#3d3d3d]\">\n              <div className=\"w-6 h-6 rounded flex items-center justify-center border border-[#E6D7B8] bg-[#F3EBD6]\">\n                <LogoCompact size=\"sm\" />\n              </div>\n              Logo System\n            </h2>\n            <p className=\"text-base mt-2 text-[#3d3d3d]\">\n              Professionelle Logo-Komponenten auf harmonischen Beige-Hintergr\xFCnden\n            </p>\n          </div>\n          <div className=\"p-8\">\n            <div className=\"grid grid-cols-1 lg:grid-cols-3 gap-8\">\n              \n              {/* Full Logo */}\n              <div className=\"space-y-6\">\n                <div className=\"p-6 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n                  <h4 className=\"font-semibold text-lg mb-6 text-center text-[#3d3d3d]\">\n                    Vollst\xE4ndiges Logo\n                  </h4>\n                  <div className=\"space-y-6\">\n                    {['sm', 'md', 'lg'].map((size) => (\n                      <div \n                        key={size} \n                        className=\"p-6 rounded-xl border border-[#E6D7B8] flex flex-col items-center gap-3 hover:shadow-sm transition-shadow bg-[#F3EBD6]\"\n                      >\n                        <Logo size={size as 'sm' | 'md' | 'lg'} />\n                        <span className=\"text-xs font-medium px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F0E7CC]\">\n                          {size.toUpperCase()}\n                        </span>\n                      </div>\n                    ))}\n                  </div>\n                </div>\n              </div>\n\n              {/* Icon Only */}\n              <div className=\"space-y-6\">\n                <div className=\"p-6 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n                  <h4 className=\"font-semibold text-lg mb-6 text-center text-[#3d3d3d]\">\n                    Nur Icon\n                  </h4>\n                  <div className=\"space-y-6\">\n                    {['sm', 'md', 'lg'].map((size) => (\n                      <div \n                        key={size} \n                        className=\"p-6 rounded-xl border border-[#E6D7B8] flex flex-col items-center gap-3 hover:shadow-sm transition-shadow bg-[#F3EBD6]\"\n                      >\n                        <LogoCompact size={size as 'sm' | 'md' | 'lg'} />\n                        <span className=\"text-xs font-medium px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F0E7CC]\">\n                          {size.toUpperCase()}\n                        </span>\n                      </div>\n                    ))}\n                  </div>\n                </div>\n              </div>\n\n              {/* Text Only */}\n              <div className=\"space-y-6\">\n                <div className=\"p-6 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n                  <h4 className=\"font-semibold text-lg mb-6 text-center text-[#3d3d3d]\">\n                    Nur Text\n                  </h4>\n                  <div className=\"space-y-6\">\n                    {['sm', 'md', 'lg'].map((size) => (\n                      <div \n                        key={size} \n                        className=\"p-6 rounded-xl border border-[#E6D7B8] flex flex-col items-center gap-3 hover:shadow-sm transition-shadow bg-[#F3EBD6]\"\n                      >\n                        <Logo variant=\"text\" size={size as 'sm' | 'md' | 'lg'} />\n                        <span className=\"text-xs font-medium px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F0E7CC]\">\n                          {size.toUpperCase()}\n                        </span>\n                      </div>\n                    ))}\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        {/* Farbsystem */}\n        <div className=\"shadow-sm bg-[#F9F4EA] rounded-lg border border-[#E6D7B8]\">\n          <div className=\"rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]\">\n            <h2 className=\"text-2xl flex items-center gap-3 text-[#3d3d3d]\">\n              <Palette className=\"w-6 h-6\" />\n              Farbsystem\n            </h2>\n            <p className=\"text-base mt-2 text-[#3d3d3d]\">\n              Harmonisches Farbkonzept mit Beige-Layering und gezielten Blau-Akzenten\n            </p>\n          </div>\n          <div className=\"p-8\">\n            <div className=\"grid grid-cols-1 md:grid-cols-5 gap-6\">\n              \n              {/* Page Background (20%) */}\n              <div className=\"text-center\">\n                <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#FEFCF9]\">\n                  <span className=\"text-lg font-bold text-[#3d3d3d]\">20%</span>\n                </div>\n                <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Page Background</h4>\n                <p className=\"text-sm text-[#3d3d3d]\">20% Beige gestapelt</p>\n                <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#FEFCF9</code>\n              </div>\n\n              {/* Primary Cards (40%) */}\n              <div className=\"text-center\">\n                <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#FDF9F3]\">\n                  <span className=\"text-lg font-bold text-[#3d3d3d]\">40%</span>\n                </div>\n                <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Primary Cards</h4>\n                <p className=\"text-sm text-[#3d3d3d]\">40% Beige gestapelt</p>\n                <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#FDF9F3</code>\n              </div>\n\n              {/* Secondary Cards (60%) */}\n              <div className=\"text-center\">\n                <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#FBF5ED]\">\n                  <span className=\"text-lg font-bold text-[#3d3d3d]\">60%</span>\n                </div>\n                <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Secondary Cards</h4>\n                <p className=\"text-sm text-[#3d3d3d]\">60% Beige gestapelt</p>\n                <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#FBF5ED</code>\n              </div>\n\n              {/* Tertiary Cards (80%) */}\n              <div className=\"text-center\">\n                <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#F9F2E7]\">\n                  <span className=\"text-lg font-bold text-[#3d3d3d]\">80%</span>\n                </div>\n                <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Tertiary Cards</h4>\n                <p className=\"text-sm text-[#3d3d3d]\">80% Beige gestapelt</p>\n                <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#F9F2E7</code>\n              </div>\n\n              {/* Full Beige (100%) */}\n              <div className=\"text-center\">\n                <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#F2E8CF]\">\n                  <span className=\"text-lg font-bold text-[#3d3d3d]\">100%</span>\n                </div>\n                <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Full Beige</h4>\n                <p className=\"text-sm text-[#3d3d3d]\">Grundton</p>\n                <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#F2E8CF</code>\n              </div>\n            </div>\n            \n            {/* Zus\xE4tzliche Farben */}\n            <div className=\"mt-8 space-y-6\">\n              <h3 className=\"font-semibold text-lg text-[#3d3d3d]\">Blaut\xF6ne</h3>\n              <div className=\"grid grid-cols-5 gap-4\">\n                \n                {/* Primary Blue */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#2F4F73]\">\n                    <span className=\"text-sm font-bold text-white\">Primary</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Primary Blue</h4>\n                  <p className=\"text-xs text-[#3d3d3d]\">Hauptfarbe f\xFCr Branding</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#2F4F73</code>\n                </div>\n                \n                {/* Blue Shade 1 */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#365C83]\">\n                    <span className=\"text-sm font-bold text-white\">Shade 1</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Blue Shade 1</h4>\n                  <p className=\"text-xs text-[#3d3d3d]\">Sekund\xE4re Aktionen</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#365C83</code>\n                </div>\n                \n                {/* Blue Shade 2 */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#3D6992]\">\n                    <span className=\"text-sm font-bold text-white\">Shade 2</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Blue Shade 2</h4>\n                  <p className=\"text-xs text-[#3d3d3d]\">Terti\xE4re Elemente</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#3D6992</code>\n                </div>\n                \n                {/* Blue Shade 3 */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#4375A2]\">\n                    <span className=\"text-sm font-bold text-white\">Shade 3</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Blue Shade 3</h4>\n                  <p className=\"text-xs text-[#3d3d3d]\">Akzente</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#4375A2</code>\n                </div>\n                \n                {/* Blue Shade 4 */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#4A82B1]\">\n                    <span className=\"text-sm font-bold text-white\">Shade 4</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Blue Shade 4</h4>\n                  <p className=\"text-xs text-[#3d3d3d]\">Hellste Variante</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#4A82B1</code>\n                </div>\n              </div>\n              \n              <h3 className=\"font-semibold text-lg text-[#3d3d3d]\">Grau & Wei\xDF</h3>\n              <div className=\"grid grid-cols-2 gap-4 max-w-md\">\n                \n                {/* Textgrau */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#3d3d3d]\">\n                    <span className=\"text-lg font-bold text-white\">800</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Textgrau</h4>\n                  <p className=\"text-sm text-[#3d3d3d]\">Konsistenter Text</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#3d3d3d</code>\n                </div>\n                \n                {/* Wei\xDF */}\n                <div className=\"text-center\">\n                  <div className=\"w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-white\">\n                    <span className=\"text-lg font-bold text-[#3d3d3d]\">0</span>\n                  </div>\n                  <h4 className=\"font-semibold mb-2 text-[#3d3d3d]\">Wei\xDF</h4>\n                  <p className=\"text-sm text-[#3d3d3d]\">Button-Text, Icons</p>\n                  <code className=\"text-xs bg-gray-100 px-2 py-1 rounded mt-2 block\">#FFFFFF</code>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        {/* Typography System */}\n        <div className=\"shadow-sm rounded-lg border border-[#E6D7B8] bg-[#F9F4EA]\">\n          <div className=\"rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]\">\n            <h2 className=\"text-2xl flex items-center gap-3 text-[#3d3d3d]\">\n              <div className=\"w-6 h-6 bg-[#2F4F73] rounded flex items-center justify-center\">\n                <span className=\"text-white text-xs font-bold\">Aa</span>\n              </div>\n              Typography System\n            </h2>\n            <p className=\"text-base mt-2 text-[#3d3d3d]\">\n              Custom Fonts f\xFCr Markenidentit\xE4t und optimale Lesbarkeit\n            </p>\n          </div>\n          <div className=\"p-8 space-y-8\">\n            \n            {/* Font Families */}\n            <div className=\"space-y-6\">\n              <h3 className=\"font-semibold text-lg text-[#3d3d3d]\">Font-Familien</h3>\n              <div className=\"grid grid-cols-1 md:grid-cols-3 gap-6\">\n                \n                {/* Display Font */}\n                <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n                  <h4 className=\"font-semibold mb-4 text-[#3d3d3d]\">Fjalla One (Display)</h4>\n                  <div className=\"space-y-3\">\n                    <div className=\"font-display text-4xl text-[#3d3d3d]\">DATEN-SEE</div>\n                    <div className=\"font-display text-2xl text-[#3d3d3d]\">Headlines</div>\n                    <div className=\"font-display text-lg text-[#3d3d3d]\">Subheadings</div>\n                  </div>\n                  <p className=\"text-sm mt-4 text-[#3d3d3d]/70\">F\xFCr \xDCberschriften und Marken-Elemente</p>\n                </div>\n                \n                {/* Body Font */}\n                <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n                  <h4 className=\"font-semibold mb-4 text-[#3d3d3d]\">Poppins (Body)</h4>\n                  <div className=\"space-y-3\">\n                    <div className=\"font-body text-xl font-semibold text-[#3d3d3d]\">Semibold Text</div>\n                    <div className=\"font-body text-base text-[#3d3d3d]\">Regular paragraph text with good readability and clean appearance.</div>\n                    <div className=\"font-body text-sm text-[#3d3d3d]\">Small text details</div>\n                  </div>\n                  <p className=\"text-sm mt-4 text-[#3d3d3d]/70\">F\xFCr Flie\xDFtext und UI-Elemente</p>\n                </div>\n                \n                {/* Accent Font */}\n                <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n                  <h4 className=\"font-semibold mb-4 text-[#3d3d3d]\">Barlow (Accent)</h4>\n                  <div className=\"space-y-3\">\n                    <div className=\"font-accent text-lg font-semibold text-[#3d3d3d]\">Navigation Items</div>\n                    <div className=\"font-accent text-base text-[#3d3d3d]\">Button labels and UI text</div>\n                    <div className=\"font-accent text-sm text-[#3d3d3d]\">Form labels</div>\n                  </div>\n                  <p className=\"text-sm mt-4 text-[#3d3d3d]/70\">F\xFCr UI-Komponenten und Navigation</p>\n                </div>\n              </div>\n            </div>\n            \n            {/* Font Sizes */}\n            <div className=\"space-y-6\">\n              <h3 className=\"font-semibold text-lg text-[#3d3d3d]\">Text-Gr\xF6\xDFen & Hierarchie</h3>\n              <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0] space-y-4\">\n                <div className=\"font-display text-6xl text-[#3d3d3d]\">6XL Display</div>\n                <div className=\"font-display text-5xl text-[#3d3d3d]\">5XL Headline</div>\n                <div className=\"font-display text-4xl text-[#3d3d3d]\">4XL Heading</div>\n                <div className=\"font-body text-3xl text-[#3d3d3d]\">3XL Subheading</div>\n                <div className=\"font-body text-2xl text-[#3d3d3d]\">2XL Section Title</div>\n                <div className=\"font-body text-xl text-[#3d3d3d]\">XL Large Text</div>\n                <div className=\"font-body text-lg text-[#3d3d3d]\">LG Body Large</div>\n                <div className=\"font-body text-base text-[#3d3d3d]\">Base Regular Text (16px)</div>\n                <div className=\"font-body text-sm text-[#3d3d3d]\">SM Small Text (14px)</div>\n                <div className=\"font-body text-xs text-[#3d3d3d]\">XS Caption Text (12px)</div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        {/* Button System */}\n        <div className=\"shadow-sm rounded-lg border border-[#E6D7B8] bg-[#F9F4EA]\">\n          <div className=\"rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]\">\n            <h2 className=\"text-2xl flex items-center gap-3 text-[#3d3d3d]\">\n              <div className=\"w-6 h-6 bg-[#2F4F73] rounded flex items-center justify-center\">\n                <div className=\"w-3 h-3 bg-white rounded\"></div>\n              </div>\n              Button-System\n            </h2>\n            <p className=\"text-base mt-2 text-[#3d3d3d]\">\n              Buttons mit pressed-shadow Effekt auf harmonischen Beige-Ebenen\n            </p>\n          </div>\n          <div className=\"p-8 space-y-10\">\n            \n            {/* Primary Buttons */}\n            <div className=\"p-8 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n              <h3 className=\"font-semibold text-xl mb-2 flex items-center gap-2 text-[#3d3d3d]\">\n                <div className=\"w-2 h-2 bg-[#2F4F73] rounded-full\"></div>\n                Haupt-Buttons (Primary)\n              </h3>\n              <p className=\"mb-6 text-[#3d3d3d]\">\n                Beige Hintergrund mit dunkelblauem Text und Border\n              </p>\n              \n              <div className=\"space-y-8\">\n                <div className=\"space-y-4\">\n                  <h4 className=\"font-medium text-[#3d3d3d]\">Navbar Buttons (2px/3px Shadow)</h4>\n                  <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]\">\n                    <div className=\"flex flex-wrap gap-3\">\n                      <NavbarButton leftIcon={<Home className=\"w-4 h-4\" />}>Home</NavbarButton>\n                      <NavbarButton leftIcon={<BarChart3 className=\"w-4 h-4\" />}>Dashboards</NavbarButton>\n                      <NavbarButton leftIcon={<User className=\"w-4 h-4\" />}>Community</NavbarButton>\n                    </div>\n                  </div>\n                </div>\n\n                <div className=\"space-y-4\">\n                  <h4 className=\"font-medium text-[#3d3d3d]\">Onpage Buttons (3px/5px Shadow)</h4>\n                  <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]\">\n                    <div className=\"flex flex-wrap gap-3\">\n                      <Button variant=\"primary\" context=\"page\" leftIcon={<Plus className=\"w-4 h-4\" />}>Erstellen</Button>\n                      <Button variant=\"primary\" context=\"page\" leftIcon={<Edit className=\"w-4 h-4\" />}>Bearbeiten</Button>\n                      <Button variant=\"primary\" context=\"page\" leftIcon={<Settings className=\"w-4 h-4\" />}>Einstellungen</Button>\n                    </div>\n                  </div>\n                </div>\n\n                <div className=\"space-y-4\">\n                  <h4 className=\"font-medium text-[#3d3d3d]\">Interactive States</h4>\n                  <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]\">\n                    <div className=\"flex gap-3\">\n                      <Button variant=\"primary\">Normal State</Button>\n                      <Button variant=\"primary\" loading>Loading State</Button>\n                      <Button variant=\"primary\" disabled>Disabled State</Button>\n                    </div>\n                  </div>\n                </div>\n              </div>\n            </div>\n\n            {/* Secondary Buttons */}\n            <div className=\"p-8 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]\">\n              <h3 className=\"font-semibold text-xl mb-2 flex items-center gap-2 text-[#3d3d3d]\">\n                <div className=\"w-2 h-2 bg-[#6B9AC4] rounded-full\"></div>\n                Sekund\xE4re Buttons (Secondary)\n              </h3>\n              <p className=\"mb-6 text-[#3d3d3d]\">\n                Hellblaue Buttons mit wei\xDFer Schrift f\xFCr spezielle Aktionen (3px/5px shadow)\n              </p>\n              \n              <div className=\"p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]\">\n                <div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6\">\n                  <Button variant=\"secondary\" context=\"page\" leftIcon={<Plus className=\"w-4 h-4\" />}>Widget hinzuf\xFCgen</Button>\n                  <Button variant=\"secondary\" context=\"page\" leftIcon={<Edit className=\"w-4 h-4\" />}>Bearbeiten</Button>\n                  <Button variant=\"secondary\" context=\"page\" leftIcon={<Eye className=\"w-4 h-4\" />}>Ansicht</Button>\n                  <Button variant=\"secondary\" context=\"page\" leftIcon={<Share className=\"w-4 h-4\" />}>Exportieren</Button>\n                </div>\n                \n                <div className=\"flex flex-wrap gap-3 pt-4 border-t border-[#E6D7B8]\">\n                  <Button variant=\"secondary\" context=\"page\" size=\"sm\">Edit</Button>\n                  <Button variant=\"secondary\" context=\"page\" size=\"sm\">Delete</Button>\n                  <IconButton \n                    context=\"page\"\n                    variant=\"secondary\"\n                    size=\"sm\"\n                    icon={<X className=\"w-3 h-3\" />}\n                    aria-label=\"Close\"\n                  />\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        {/* Footer */}\n        <div className=\"text-center py-8 rounded-2xl border border-[#E6D7B8] shadow-sm bg-[#F9F4EA]\">\n          <div className=\"flex items-center justify-center gap-2 mb-2\">\n            <LogoCompact size=\"sm\" />\n            <span className=\"font-semibold text-[#3d3d3d]\">\n              DATEN-SEE Design System v2.3\n            </span>\n          </div>\n          <p className=\"text-sm text-[#3d3d3d]\">\n            Stimmig, monochrom, harmonisch\n          </p>\n          <div className=\"flex justify-center gap-4 mt-4\">\n            <span className=\"text-xs px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F6F0E0]\">\n              Stacked Layers\n            </span>\n            <span className=\"text-xs px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F6F0E0]\">\n              Monochrome Text\n            </span>\n            <span className=\"text-xs px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F6F0E0]\">\n              Blue Accents Only\n            </span>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"],
+      names: ["DesignSystemPage", "div", "className", "Palette", "h1", "h2", "p", "code", "LogoCompact", "size", "h4", "map", "Logo", "span", "toUpperCase", "variant", "h3", "NavbarButton", "leftIcon", "Home", "BarChart3", "User", "Button", "context", "Plus", "Edit", "Settings", "loading", "disabled", "Eye", "Share", "IconButton", "icon", "X", "aria-label"],
+      mappings: "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"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "2bdd6ada8ea5219ffadbd07137fe044f0712c861"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_21mdtw907s = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_21mdtw907s();
+cov_21mdtw907s().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_21mdtw907s().s[1]++;
+Object.defineProperty(exports,
+/**
+* DATEN-SEE Design System v2.3 - Tailwind Arbitrary Values
+* Beige layering system with consistent gray text using direct color values
+*/
+"default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_21mdtw907s().f[0]++;
+    cov_21mdtw907s().s[2]++;
+    return DesignSystemPage;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_21mdtw907s().s[3]++, require("react/jsx-runtime"));
+const _lucidereact =
+/* istanbul ignore next */
+(cov_21mdtw907s().s[4]++, require("lucide-react"));
+const _Logo =
+/* istanbul ignore next */
+(cov_21mdtw907s().s[5]++, require("../../components/brand/Logo"));
+const _Button =
+/* istanbul ignore next */
+(cov_21mdtw907s().s[6]++, require("../../components/ui/Button"));
+function DesignSystemPage() {
+  /* istanbul ignore next */
+  cov_21mdtw907s().f[1]++;
+  cov_21mdtw907s().s[7]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+    className: "min-h-screen p-6 bg-[#FEFCF9]",
+    children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+      className: "max-w-7xl mx-auto space-y-8",
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "relative",
+        children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+          className: "text-center py-16 rounded-3xl shadow-sm border border-[#E6D7B8] relative overflow-hidden bg-[#FDF9F3]",
+          children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "relative z-10",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "inline-flex items-center gap-3 mb-6",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-12 h-12 rounded-2xl flex items-center justify-center border border-[#E6D7B8] bg-[#FBF5ED]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Palette, {
+                  className: "w-6 h-6 text-[#3d3d3d]"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h1", {
+                className: "font-display font-black text-5xl text-[#3d3d3d]",
+                children: "DATEN-SEE"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+              className: "font-display text-2xl mb-4 text-[#3d3d3d]",
+              children: "Design System v2.3"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg max-w-3xl mx-auto leading-relaxed mb-8 text-[#3d3d3d]",
+              children: "Stimmiges Design-System mit gestaffelten Beige-Ebenen und konsistentem Grau-Text. Monochrom, harmonisch, professionell."
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "flex justify-center gap-4",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "px-6 py-3 rounded-xl shadow-sm border border-[#E6D7B8] bg-[#FBF5ED]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-sm font-mono text-[#3d3d3d]",
+                  children: "Stacked Layers"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "px-6 py-3 rounded-xl shadow-sm border border-[#E6D7B8] bg-[#FBF5ED]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-sm font-mono text-[#3d3d3d]",
+                  children: "Monochrome Text"
+                })
+              })]
+            })]
+          })
+        })
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "shadow-sm rounded-lg border border-[#E6D7B8] bg-[#F9F4EA]",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h2", {
+            className: "text-2xl flex items-center gap-3 text-[#3d3d3d]",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "w-6 h-6 rounded flex items-center justify-center border border-[#E6D7B8] bg-[#F3EBD6]",
+              children: /*#__PURE__*/(0, _jsxruntime.jsx)(_Logo.LogoCompact, {
+                size: "sm"
+              })
+            }), "Logo System"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-base mt-2 text-[#3d3d3d]",
+            children: "Professionelle Logo-Komponenten auf harmonischen Beige-Hintergr\xfcnden"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+          className: "p-8",
+          children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "grid grid-cols-1 lg:grid-cols-3 gap-8",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "space-y-6",
+              children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "p-6 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold text-lg mb-6 text-center text-[#3d3d3d]",
+                  children: "Vollst\xe4ndiges Logo"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "space-y-6",
+                  children: ['sm', 'md', 'lg'].map(size => {
+                    /* istanbul ignore next */
+                    cov_21mdtw907s().f[2]++;
+                    cov_21mdtw907s().s[8]++;
+                    return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                      className: "p-6 rounded-xl border border-[#E6D7B8] flex flex-col items-center gap-3 hover:shadow-sm transition-shadow bg-[#F3EBD6]",
+                      children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Logo.Logo, {
+                        size: size
+                      }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                        className: "text-xs font-medium px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F0E7CC]",
+                        children: size.toUpperCase()
+                      })]
+                    }, size);
+                  })
+                })]
+              })
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "space-y-6",
+              children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "p-6 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold text-lg mb-6 text-center text-[#3d3d3d]",
+                  children: "Nur Icon"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "space-y-6",
+                  children: ['sm', 'md', 'lg'].map(size => {
+                    /* istanbul ignore next */
+                    cov_21mdtw907s().f[3]++;
+                    cov_21mdtw907s().s[9]++;
+                    return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                      className: "p-6 rounded-xl border border-[#E6D7B8] flex flex-col items-center gap-3 hover:shadow-sm transition-shadow bg-[#F3EBD6]",
+                      children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Logo.LogoCompact, {
+                        size: size
+                      }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                        className: "text-xs font-medium px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F0E7CC]",
+                        children: size.toUpperCase()
+                      })]
+                    }, size);
+                  })
+                })]
+              })
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "space-y-6",
+              children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "p-6 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold text-lg mb-6 text-center text-[#3d3d3d]",
+                  children: "Nur Text"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "space-y-6",
+                  children: ['sm', 'md', 'lg'].map(size => {
+                    /* istanbul ignore next */
+                    cov_21mdtw907s().f[4]++;
+                    cov_21mdtw907s().s[10]++;
+                    return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                      className: "p-6 rounded-xl border border-[#E6D7B8] flex flex-col items-center gap-3 hover:shadow-sm transition-shadow bg-[#F3EBD6]",
+                      children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Logo.Logo, {
+                        variant: "text",
+                        size: size
+                      }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                        className: "text-xs font-medium px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F0E7CC]",
+                        children: size.toUpperCase()
+                      })]
+                    }, size);
+                  })
+                })]
+              })
+            })]
+          })
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "shadow-sm bg-[#F9F4EA] rounded-lg border border-[#E6D7B8]",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h2", {
+            className: "text-2xl flex items-center gap-3 text-[#3d3d3d]",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Palette, {
+              className: "w-6 h-6"
+            }), "Farbsystem"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-base mt-2 text-[#3d3d3d]",
+            children: "Harmonisches Farbkonzept mit Beige-Layering und gezielten Blau-Akzenten"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "p-8",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "grid grid-cols-1 md:grid-cols-5 gap-6",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#FEFCF9]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "text-lg font-bold text-[#3d3d3d]",
+                  children: "20%"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold mb-2 text-[#3d3d3d]",
+                children: "Page Background"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-sm text-[#3d3d3d]",
+                children: "20% Beige gestapelt"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                children: "#FEFCF9"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#FDF9F3]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "text-lg font-bold text-[#3d3d3d]",
+                  children: "40%"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold mb-2 text-[#3d3d3d]",
+                children: "Primary Cards"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-sm text-[#3d3d3d]",
+                children: "40% Beige gestapelt"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                children: "#FDF9F3"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#FBF5ED]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "text-lg font-bold text-[#3d3d3d]",
+                  children: "60%"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold mb-2 text-[#3d3d3d]",
+                children: "Secondary Cards"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-sm text-[#3d3d3d]",
+                children: "60% Beige gestapelt"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                children: "#FBF5ED"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#F9F2E7]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "text-lg font-bold text-[#3d3d3d]",
+                  children: "80%"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold mb-2 text-[#3d3d3d]",
+                children: "Tertiary Cards"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-sm text-[#3d3d3d]",
+                children: "80% Beige gestapelt"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                children: "#F9F2E7"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#F2E8CF]",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "text-lg font-bold text-[#3d3d3d]",
+                  children: "100%"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold mb-2 text-[#3d3d3d]",
+                children: "Full Beige"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-sm text-[#3d3d3d]",
+                children: "Grundton"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                children: "#F2E8CF"
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "mt-8 space-y-6",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "font-semibold text-lg text-[#3d3d3d]",
+              children: "Blaut\xf6ne"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "grid grid-cols-5 gap-4",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#2F4F73]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-sm font-bold text-white",
+                    children: "Primary"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Primary Blue"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-xs text-[#3d3d3d]",
+                  children: "Hauptfarbe f\xfcr Branding"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#2F4F73"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#365C83]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-sm font-bold text-white",
+                    children: "Shade 1"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Blue Shade 1"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-xs text-[#3d3d3d]",
+                  children: "Sekund\xe4re Aktionen"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#365C83"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#3D6992]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-sm font-bold text-white",
+                    children: "Shade 2"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Blue Shade 2"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-xs text-[#3d3d3d]",
+                  children: "Terti\xe4re Elemente"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#3D6992"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#4375A2]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-sm font-bold text-white",
+                    children: "Shade 3"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Blue Shade 3"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-xs text-[#3d3d3d]",
+                  children: "Akzente"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#4375A2"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#4A82B1]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-sm font-bold text-white",
+                    children: "Shade 4"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Blue Shade 4"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-xs text-[#3d3d3d]",
+                  children: "Hellste Variante"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#4A82B1"
+                })]
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "font-semibold text-lg text-[#3d3d3d]",
+              children: "Grau & Wei\xdf"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "grid grid-cols-2 gap-4 max-w-md",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-[#3d3d3d]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-lg font-bold text-white",
+                    children: "800"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Textgrau"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-sm text-[#3d3d3d]",
+                  children: "Konsistenter Text"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#3d3d3d"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-20 h-20 border-2 border-[#E6D7B8] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm bg-white",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-lg font-bold text-[#3d3d3d]",
+                    children: "0"
+                  })
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-2 text-[#3d3d3d]",
+                  children: "Wei\xdf"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-sm text-[#3d3d3d]",
+                  children: "Button-Text, Icons"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("code", {
+                  className: "text-xs bg-gray-100 px-2 py-1 rounded mt-2 block",
+                  children: "#FFFFFF"
+                })]
+              })]
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "shadow-sm rounded-lg border border-[#E6D7B8] bg-[#F9F4EA]",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h2", {
+            className: "text-2xl flex items-center gap-3 text-[#3d3d3d]",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "w-6 h-6 bg-[#2F4F73] rounded flex items-center justify-center",
+              children: /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                className: "text-white text-xs font-bold",
+                children: "Aa"
+              })
+            }), "Typography System"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-base mt-2 text-[#3d3d3d]",
+            children: "Custom Fonts f\xfcr Markenidentit\xe4t und optimale Lesbarkeit"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "p-8 space-y-8",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "space-y-6",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "font-semibold text-lg text-[#3d3d3d]",
+              children: "Font-Familien"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-4 text-[#3d3d3d]",
+                  children: "Fjalla One (Display)"
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "space-y-3",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-display text-4xl text-[#3d3d3d]",
+                    children: "DATEN-SEE"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-display text-2xl text-[#3d3d3d]",
+                    children: "Headlines"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-display text-lg text-[#3d3d3d]",
+                    children: "Subheadings"
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-sm mt-4 text-[#3d3d3d]/70",
+                  children: "F\xfcr \xdcberschriften und Marken-Elemente"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-4 text-[#3d3d3d]",
+                  children: "Poppins (Body)"
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "space-y-3",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-body text-xl font-semibold text-[#3d3d3d]",
+                    children: "Semibold Text"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-body text-base text-[#3d3d3d]",
+                    children: "Regular paragraph text with good readability and clean appearance."
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-body text-sm text-[#3d3d3d]",
+                    children: "Small text details"
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-sm mt-4 text-[#3d3d3d]/70",
+                  children: "F\xfcr Flie\xdftext und UI-Elemente"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-semibold mb-4 text-[#3d3d3d]",
+                  children: "Barlow (Accent)"
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "space-y-3",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-accent text-lg font-semibold text-[#3d3d3d]",
+                    children: "Navigation Items"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-accent text-base text-[#3d3d3d]",
+                    children: "Button labels and UI text"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "font-accent text-sm text-[#3d3d3d]",
+                    children: "Form labels"
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-sm mt-4 text-[#3d3d3d]/70",
+                  children: "F\xfcr UI-Komponenten und Navigation"
+                })]
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "space-y-6",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "font-semibold text-lg text-[#3d3d3d]",
+              children: "Text-Gr\xf6\xdfen & Hierarchie"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F6F0E0] space-y-4",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-display text-6xl text-[#3d3d3d]",
+                children: "6XL Display"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-display text-5xl text-[#3d3d3d]",
+                children: "5XL Headline"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-display text-4xl text-[#3d3d3d]",
+                children: "4XL Heading"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-3xl text-[#3d3d3d]",
+                children: "3XL Subheading"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-2xl text-[#3d3d3d]",
+                children: "2XL Section Title"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-xl text-[#3d3d3d]",
+                children: "XL Large Text"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-lg text-[#3d3d3d]",
+                children: "LG Body Large"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-base text-[#3d3d3d]",
+                children: "Base Regular Text (16px)"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-sm text-[#3d3d3d]",
+                children: "SM Small Text (14px)"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "font-body text-xs text-[#3d3d3d]",
+                children: "XS Caption Text (12px)"
+              })]
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "shadow-sm rounded-lg border border-[#E6D7B8] bg-[#F9F4EA]",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "rounded-t-lg border-b border-[#E6D7B8] p-6 bg-[#F6F0E0]",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h2", {
+            className: "text-2xl flex items-center gap-3 text-[#3d3d3d]",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "w-6 h-6 bg-[#2F4F73] rounded flex items-center justify-center",
+              children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-3 h-3 bg-white rounded"
+              })
+            }), "Button-System"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-base mt-2 text-[#3d3d3d]",
+            children: "Buttons mit pressed-shadow Effekt auf harmonischen Beige-Ebenen"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "p-8 space-y-10",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "p-8 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h3", {
+              className: "font-semibold text-xl mb-2 flex items-center gap-2 text-[#3d3d3d]",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-2 h-2 bg-[#2F4F73] rounded-full"
+              }), "Haupt-Buttons (Primary)"]
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "mb-6 text-[#3d3d3d]",
+              children: "Beige Hintergrund mit dunkelblauem Text und Border"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "space-y-8",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "space-y-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-medium text-[#3d3d3d]",
+                  children: "Navbar Buttons (2px/3px Shadow)"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                    className: "flex flex-wrap gap-3",
+                    children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Button.NavbarButton, {
+                      leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Home, {
+                        className: "w-4 h-4"
+                      }),
+                      children: "Home"
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.NavbarButton, {
+                      leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.BarChart3, {
+                        className: "w-4 h-4"
+                      }),
+                      children: "Dashboards"
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.NavbarButton, {
+                      leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.User, {
+                        className: "w-4 h-4"
+                      }),
+                      children: "Community"
+                    })]
+                  })
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "space-y-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-medium text-[#3d3d3d]",
+                  children: "Onpage Buttons (3px/5px Shadow)"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                    className: "flex flex-wrap gap-3",
+                    children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                      variant: "primary",
+                      context: "page",
+                      leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Plus, {
+                        className: "w-4 h-4"
+                      }),
+                      children: "Erstellen"
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                      variant: "primary",
+                      context: "page",
+                      leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Edit, {
+                        className: "w-4 h-4"
+                      }),
+                      children: "Bearbeiten"
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                      variant: "primary",
+                      context: "page",
+                      leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Settings, {
+                        className: "w-4 h-4"
+                      }),
+                      children: "Einstellungen"
+                    })]
+                  })
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "space-y-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                  className: "font-medium text-[#3d3d3d]",
+                  children: "Interactive States"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]",
+                  children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                    className: "flex gap-3",
+                    children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                      variant: "primary",
+                      children: "Normal State"
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                      variant: "primary",
+                      loading: true,
+                      children: "Loading State"
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                      variant: "primary",
+                      disabled: true,
+                      children: "Disabled State"
+                    })]
+                  })
+                })]
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "p-8 rounded-2xl border border-[#E6D7B8] bg-[#F6F0E0]",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h3", {
+              className: "font-semibold text-xl mb-2 flex items-center gap-2 text-[#3d3d3d]",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-2 h-2 bg-[#6B9AC4] rounded-full"
+              }), "Sekund\xe4re Buttons (Secondary)"]
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "mb-6 text-[#3d3d3d]",
+              children: "Hellblaue Buttons mit wei\xdfer Schrift f\xfcr spezielle Aktionen (3px/5px shadow)"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "p-6 rounded-xl border border-[#E6D7B8] bg-[#F3EBD6]",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                  variant: "secondary",
+                  context: "page",
+                  leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Plus, {
+                    className: "w-4 h-4"
+                  }),
+                  children: "Widget hinzuf\xfcgen"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                  variant: "secondary",
+                  context: "page",
+                  leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Edit, {
+                    className: "w-4 h-4"
+                  }),
+                  children: "Bearbeiten"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                  variant: "secondary",
+                  context: "page",
+                  leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Eye, {
+                    className: "w-4 h-4"
+                  }),
+                  children: "Ansicht"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                  variant: "secondary",
+                  context: "page",
+                  leftIcon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Share, {
+                    className: "w-4 h-4"
+                  }),
+                  children: "Exportieren"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "flex flex-wrap gap-3 pt-4 border-t border-[#E6D7B8]",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                  variant: "secondary",
+                  context: "page",
+                  size: "sm",
+                  children: "Edit"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.Button, {
+                  variant: "secondary",
+                  context: "page",
+                  size: "sm",
+                  children: "Delete"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)(_Button.IconButton, {
+                  context: "page",
+                  variant: "secondary",
+                  size: "sm",
+                  icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.X, {
+                    className: "w-3 h-3"
+                  }),
+                  "aria-label": "Close"
+                })]
+              })]
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "text-center py-8 rounded-2xl border border-[#E6D7B8] shadow-sm bg-[#F9F4EA]",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "flex items-center justify-center gap-2 mb-2",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_Logo.LogoCompact, {
+            size: "sm"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            className: "font-semibold text-[#3d3d3d]",
+            children: "DATEN-SEE Design System v2.3"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+          className: "text-sm text-[#3d3d3d]",
+          children: "Stimmig, monochrom, harmonisch"
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "flex justify-center gap-4 mt-4",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            className: "text-xs px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F6F0E0]",
+            children: "Stacked Layers"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            className: "text-xs px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F6F0E0]",
+            children: "Monochrome Text"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            className: "text-xs px-3 py-1 rounded-full border border-[#E6D7B8] text-[#3d3d3d] bg-[#F6F0E0]",
+            children: "Blue Accents Only"
+          })]
+        })]
+      })]
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJEZXNpZ25TeXN0ZW1QYWdlIiwiY292XzIxbWR0dzkwN3MiLCJmIiwicyIsIl9qc3hydW50aW1lIiwianN4IiwiY2xhc3NOYW1lIiwianN4cyIsIl9sdWNpZGVyZWFjdCIsIlBhbGV0dGUiLCJfTG9nbyIsIkxvZ29Db21wYWN0Iiwic2l6ZSIsIm1hcCIsIkxvZ28iLCJ0b1VwcGVyQ2FzZSIsInZhcmlhbnQiLCJfQnV0dG9uIiwiTmF2YmFyQnV0dG9uIiwibGVmdEljb24iLCJIb21lIiwiQmFyQ2hhcnQzIiwiVXNlciIsIkJ1dHRvbiIsImNvbnRleHQiLCJQbHVzIiwiRWRpdCIsIlNldHRpbmdzIiwibG9hZGluZyIsImRpc2FibGVkIiwiRXllIiwiU2hhcmUiLCJJY29uQnV0dG9uIiwiaWNvbiIsIlgiXSwic291cmNlcyI6WyIvVXNlcnMvendlaWdlbi9TaXRlcy9kYXRlbi1zZWUtdjIvc3JjL2FwcC9kZXNpZ24tc3lzdGVtL3BhZ2UudHN4Il0sInNvdXJjZXNDb250ZW50IjpbIid1c2UgY2xpZW50JztcblxuaW1wb3J0IHsgUGx1cywgU2V0dGluZ3MsIFNoYXJlLCBFZGl0LCBFeWUsIFgsIEJhckNoYXJ0MywgSG9tZSwgVXNlciwgUGFsZXR0ZSB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5cbmltcG9ydCB7IExvZ28sIExvZ29Db21wYWN0IH0gZnJvbSAnQC9jb21wb25lbnRzL2JyYW5kL0xvZ28nO1xuaW1wb3J0IHsgQnV0dG9uLCBJY29uQnV0dG9uLCBOYXZiYXJCdXR0b24gfSBmcm9tICdAL2NvbXBvbmVudHMvdWkvQnV0dG9uJztcblxuLyoqXG4gKiBEQVRFTi1TRUUgRGVzaWduIFN5c3RlbSB2Mi4zIC0gVGFpbHdpbmQgQXJiaXRyYXJ5IFZhbHVlc1xuICogQmVpZ2UgbGF5ZXJpbmcgc3lzdGVtIHdpdGggY29uc2lzdGVudCBncmF5IHRleHQgdXNpbmcgZGlyZWN0IGNvbG9yIHZhbHVlc1xuICovXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBEZXNpZ25TeXN0ZW1QYWdlKCk6IFJlYWN0LlJlYWN0RWxlbWVudCB7XG4gIHJldHVybiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJtaW4taC1zY3JlZW4gcC02IGJnLVsjRkVGQ0Y5XVwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0byBzcGFjZS15LThcIj5cbiAgICAgICAgXG4gICAgICAgIHsvKiBIZWFkZXIgKi99XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmVcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIHB5LTE2IHJvdW5kZWQtM3hsIHNoYWRvdy1zbSBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSByZWxhdGl2ZSBvdmVyZmxvdy1oaWRkZW4gYmctWyNGREY5RjNdXCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIHotMTBcIj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgbWItNlwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xMiBoLTEyIHJvdW5kZWQtMnhsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIGJnLVsjRkJGNUVEXVwiPlxuICAgICAgICAgICAgICAgICAgPFBhbGV0dGUgY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LVsjM2QzZDNkXVwiIC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImZvbnQtZGlzcGxheSBmb250LWJsYWNrIHRleHQtNXhsIHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgICAgICBEQVRFTi1TRUVcbiAgICAgICAgICAgICAgICA8L2gxPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJmb250LWRpc3BsYXkgdGV4dC0yeGwgbWItNCB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICAgIERlc2lnbiBTeXN0ZW0gdjIuM1xuICAgICAgICAgICAgICA8L2gyPlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1sZyBtYXgtdy0zeGwgbXgtYXV0byBsZWFkaW5nLXJlbGF4ZWQgbWItOCB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICAgIFN0aW1taWdlcyBEZXNpZ24tU3lzdGVtIG1pdCBnZXN0YWZmZWx0ZW4gQmVpZ2UtRWJlbmVuIHVuZCBrb25zaXN0ZW50ZW0gR3JhdS1UZXh0LiBcbiAgICAgICAgICAgICAgICBNb25vY2hyb20sIGhhcm1vbmlzY2gsIHByb2Zlc3Npb25lbGwuXG4gICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBqdXN0aWZ5LWNlbnRlciBnYXAtNFwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicHgtNiBweS0zIHJvdW5kZWQteGwgc2hhZG93LXNtIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIGJnLVsjRkJGNUVEXVwiPlxuICAgICAgICAgICAgICAgICAgPGNvZGUgY2xhc3NOYW1lPVwidGV4dC1zbSBmb250LW1vbm8gdGV4dC1bIzNkM2QzZF1cIj5TdGFja2VkIExheWVyczwvY29kZT5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInB4LTYgcHktMyByb3VuZGVkLXhsIHNoYWRvdy1zbSBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0ZCRjVFRF1cIj5cbiAgICAgICAgICAgICAgICAgIDxjb2RlIGNsYXNzTmFtZT1cInRleHQtc20gZm9udC1tb25vIHRleHQtWyMzZDNkM2RdXCI+TW9ub2Nocm9tZSBUZXh0PC9jb2RlPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cblxuICAgICAgICB7LyogTG9nbyBTeXN0ZW0gKi99XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic2hhZG93LXNtIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gYmctWyNGOUY0RUFdXCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyb3VuZGVkLXQtbGcgYm9yZGVyLWIgYm9yZGVyLVsjRTZEN0I4XSBwLTYgYmctWyNGNkYwRTBdXCI+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0yeGwgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTYgaC02IHJvdW5kZWQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gYmctWyNGM0VCRDZdXCI+XG4gICAgICAgICAgICAgICAgPExvZ29Db21wYWN0IHNpemU9XCJzbVwiIC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICBMb2dvIFN5c3RlbVxuICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtYmFzZSBtdC0yIHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgIFByb2Zlc3Npb25lbGxlIExvZ28tS29tcG9uZW50ZW4gYXVmIGhhcm1vbmlzY2hlbiBCZWlnZS1IaW50ZXJncsO8bmRlblxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC04XCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTEgbGc6Z3JpZC1jb2xzLTMgZ2FwLThcIj5cbiAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgIHsvKiBGdWxsIExvZ28gKi99XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC0yeGwgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gYmctWyNGNkYwRTBdXCI+XG4gICAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWxnIG1iLTYgdGV4dC1jZW50ZXIgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgICAgICAgICAgVm9sbHN0w6RuZGlnZXMgTG9nb1xuICAgICAgICAgICAgICAgICAgPC9oND5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICAgICAgICAgICAgICAgIHtbJ3NtJywgJ21kJywgJ2xnJ10ubWFwKChzaXplKSA9PiAoXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBcbiAgICAgICAgICAgICAgICAgICAgICAgIGtleT17c2l6ZX0gXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBmbGV4IGZsZXgtY29sIGl0ZW1zLWNlbnRlciBnYXAtMyBob3ZlcjpzaGFkb3ctc20gdHJhbnNpdGlvbi1zaGFkb3cgYmctWyNGM0VCRDZdXCJcbiAgICAgICAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICAgICAgICA8TG9nbyBzaXplPXtzaXplIGFzICdzbScgfCAnbWQnIHwgJ2xnJ30gLz5cbiAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteHMgZm9udC1tZWRpdW0gcHgtMyBweS0xIHJvdW5kZWQtZnVsbCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSB0ZXh0LVsjM2QzZDNkXSBiZy1bI0YwRTdDQ11cIj5cbiAgICAgICAgICAgICAgICAgICAgICAgICAge3NpemUudG9VcHBlckNhc2UoKX1cbiAgICAgICAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgKSl9XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgey8qIEljb24gT25seSAqL31cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTZcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNiByb3VuZGVkLTJ4bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIHRleHQtbGcgbWItNiB0ZXh0LWNlbnRlciB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICAgICAgICBOdXIgSWNvblxuICAgICAgICAgICAgICAgICAgPC9oND5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICAgICAgICAgICAgICAgIHtbJ3NtJywgJ21kJywgJ2xnJ10ubWFwKChzaXplKSA9PiAoXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBcbiAgICAgICAgICAgICAgICAgICAgICAgIGtleT17c2l6ZX0gXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBmbGV4IGZsZXgtY29sIGl0ZW1zLWNlbnRlciBnYXAtMyBob3ZlcjpzaGFkb3ctc20gdHJhbnNpdGlvbi1zaGFkb3cgYmctWyNGM0VCRDZdXCJcbiAgICAgICAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICAgICAgICA8TG9nb0NvbXBhY3Qgc2l6ZT17c2l6ZSBhcyAnc20nIHwgJ21kJyB8ICdsZyd9IC8+XG4gICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXhzIGZvbnQtbWVkaXVtIHB4LTMgcHktMSByb3VuZGVkLWZ1bGwgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gdGV4dC1bIzNkM2QzZF0gYmctWyNGMEU3Q0NdXCI+XG4gICAgICAgICAgICAgICAgICAgICAgICAgIHtzaXplLnRvVXBwZXJDYXNlKCl9XG4gICAgICAgICAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgIHsvKiBUZXh0IE9ubHkgKi99XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC0yeGwgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gYmctWyNGNkYwRTBdXCI+XG4gICAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWxnIG1iLTYgdGV4dC1jZW50ZXIgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgICAgICAgICAgTnVyIFRleHRcbiAgICAgICAgICAgICAgICAgIDwvaDQ+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNlwiPlxuICAgICAgICAgICAgICAgICAgICB7WydzbScsICdtZCcsICdsZyddLm1hcCgoc2l6ZSkgPT4gKFxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgXG4gICAgICAgICAgICAgICAgICAgICAgICBrZXk9e3NpemV9IFxuICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwicC02IHJvdW5kZWQteGwgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gZmxleCBmbGV4LWNvbCBpdGVtcy1jZW50ZXIgZ2FwLTMgaG92ZXI6c2hhZG93LXNtIHRyYW5zaXRpb24tc2hhZG93IGJnLVsjRjNFQkQ2XVwiXG4gICAgICAgICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgICAgICAgPExvZ28gdmFyaWFudD1cInRleHRcIiBzaXplPXtzaXplIGFzICdzbScgfCAnbWQnIHwgJ2xnJ30gLz5cbiAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteHMgZm9udC1tZWRpdW0gcHgtMyBweS0xIHJvdW5kZWQtZnVsbCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSB0ZXh0LVsjM2QzZDNkXSBiZy1bI0YwRTdDQ11cIj5cbiAgICAgICAgICAgICAgICAgICAgICAgICAge3NpemUudG9VcHBlckNhc2UoKX1cbiAgICAgICAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgKSl9XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgey8qIEZhcmJzeXN0ZW0gKi99XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic2hhZG93LXNtIGJnLVsjRjlGNEVBXSByb3VuZGVkLWxnIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdXCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyb3VuZGVkLXQtbGcgYm9yZGVyLWIgYm9yZGVyLVsjRTZEN0I4XSBwLTYgYmctWyNGNkYwRTBdXCI+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0yeGwgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgICAgPFBhbGV0dGUgY2xhc3NOYW1lPVwidy02IGgtNlwiIC8+XG4gICAgICAgICAgICAgIEZhcmJzeXN0ZW1cbiAgICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWJhc2UgbXQtMiB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICBIYXJtb25pc2NoZXMgRmFyYmtvbnplcHQgbWl0IEJlaWdlLUxheWVyaW5nIHVuZCBnZXppZWx0ZW4gQmxhdS1Ba3plbnRlblxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC04XCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTEgbWQ6Z3JpZC1jb2xzLTUgZ2FwLTZcIj5cbiAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgIHsvKiBQYWdlIEJhY2tncm91bmQgKDIwJSkgKi99XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMjAgaC0yMCBib3JkZXItMiBib3JkZXItWyNFNkQ3QjhdIHJvdW5kZWQtMnhsIG14LWF1dG8gbWItNCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBzaGFkb3ctc20gYmctWyNGRUZDRjldXCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWxnIGZvbnQtYm9sZCB0ZXh0LVsjM2QzZDNkXVwiPjIwJTwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCBtYi0yIHRleHQtWyMzZDNkM2RdXCI+UGFnZSBCYWNrZ3JvdW5kPC9oND5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtWyMzZDNkM2RdXCI+MjAlIEJlaWdlIGdlc3RhcGVsdDwvcD5cbiAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jRkVGQ0Y5PC9jb2RlPlxuICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICB7LyogUHJpbWFyeSBDYXJkcyAoNDAlKSAqL31cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0yMCBoLTIwIGJvcmRlci0yIGJvcmRlci1bI0U2RDdCOF0gcm91bmRlZC0yeGwgbXgtYXV0byBtYi00IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHNoYWRvdy1zbSBiZy1bI0ZERjlGM11cIj5cbiAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQtbGcgZm9udC1ib2xkIHRleHQtWyMzZDNkM2RdXCI+NDAlPC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIG1iLTIgdGV4dC1bIzNkM2QzZF1cIj5QcmltYXJ5IENhcmRzPC9oND5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtWyMzZDNkM2RdXCI+NDAlIEJlaWdlIGdlc3RhcGVsdDwvcD5cbiAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jRkRGOUYzPC9jb2RlPlxuICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICB7LyogU2Vjb25kYXJ5IENhcmRzICg2MCUpICovfVxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIwIGgtMjAgYm9yZGVyLTIgYm9yZGVyLVsjRTZEN0I4XSByb3VuZGVkLTJ4bCBteC1hdXRvIG1iLTQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgc2hhZG93LXNtIGJnLVsjRkJGNUVEXVwiPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1sZyBmb250LWJvbGQgdGV4dC1bIzNkM2QzZF1cIj42MCU8L3NwYW4+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgbWItMiB0ZXh0LVsjM2QzZDNkXVwiPlNlY29uZGFyeSBDYXJkczwvaDQ+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LVsjM2QzZDNkXVwiPjYwJSBCZWlnZSBnZXN0YXBlbHQ8L3A+XG4gICAgICAgICAgICAgICAgPGNvZGUgY2xhc3NOYW1lPVwidGV4dC14cyBiZy1ncmF5LTEwMCBweC0yIHB5LTEgcm91bmRlZCBtdC0yIGJsb2NrXCI+I0ZCRjVFRDwvY29kZT5cbiAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgey8qIFRlcnRpYXJ5IENhcmRzICg4MCUpICovfVxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIwIGgtMjAgYm9yZGVyLTIgYm9yZGVyLVsjRTZEN0I4XSByb3VuZGVkLTJ4bCBteC1hdXRvIG1iLTQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgc2hhZG93LXNtIGJnLVsjRjlGMkU3XVwiPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1sZyBmb250LWJvbGQgdGV4dC1bIzNkM2QzZF1cIj44MCU8L3NwYW4+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgbWItMiB0ZXh0LVsjM2QzZDNkXVwiPlRlcnRpYXJ5IENhcmRzPC9oND5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtWyMzZDNkM2RdXCI+ODAlIEJlaWdlIGdlc3RhcGVsdDwvcD5cbiAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jRjlGMkU3PC9jb2RlPlxuICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICB7LyogRnVsbCBCZWlnZSAoMTAwJSkgKi99XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMjAgaC0yMCBib3JkZXItMiBib3JkZXItWyNFNkQ3QjhdIHJvdW5kZWQtMnhsIG14LWF1dG8gbWItNCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBzaGFkb3ctc20gYmctWyNGMkU4Q0ZdXCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWxnIGZvbnQtYm9sZCB0ZXh0LVsjM2QzZDNkXVwiPjEwMCU8L3NwYW4+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgbWItMiB0ZXh0LVsjM2QzZDNkXVwiPkZ1bGwgQmVpZ2U8L2g0PlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1bIzNkM2QzZF1cIj5HcnVuZHRvbjwvcD5cbiAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jRjJFOENGPC9jb2RlPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgXG4gICAgICAgICAgICB7LyogWnVzw6R0emxpY2hlIEZhcmJlbiAqL31cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtOCBzcGFjZS15LTZcIj5cbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1sZyB0ZXh0LVsjM2QzZDNkXVwiPkJsYXV0w7ZuZTwvaDM+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtNSBnYXAtNFwiPlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBQcmltYXJ5IEJsdWUgKi99XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIwIGgtMjAgYm9yZGVyLTIgYm9yZGVyLVsjRTZEN0I4XSByb3VuZGVkLTJ4bCBteC1hdXRvIG1iLTQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgc2hhZG93LXNtIGJnLVsjMkY0RjczXVwiPlxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXNtIGZvbnQtYm9sZCB0ZXh0LXdoaXRlXCI+UHJpbWFyeTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgbWItMiB0ZXh0LVsjM2QzZDNkXVwiPlByaW1hcnkgQmx1ZTwvaDQ+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtWyMzZDNkM2RdXCI+SGF1cHRmYXJiZSBmw7xyIEJyYW5kaW5nPC9wPlxuICAgICAgICAgICAgICAgICAgPGNvZGUgY2xhc3NOYW1lPVwidGV4dC14cyBiZy1ncmF5LTEwMCBweC0yIHB5LTEgcm91bmRlZCBtdC0yIGJsb2NrXCI+IzJGNEY3MzwvY29kZT5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICB7LyogQmx1ZSBTaGFkZSAxICovfVxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0yMCBoLTIwIGJvcmRlci0yIGJvcmRlci1bI0U2RDdCOF0gcm91bmRlZC0yeGwgbXgtYXV0byBtYi00IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHNoYWRvdy1zbSBiZy1bIzM2NUM4M11cIj5cbiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1zbSBmb250LWJvbGQgdGV4dC13aGl0ZVwiPlNoYWRlIDE8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIG1iLTIgdGV4dC1bIzNkM2QzZF1cIj5CbHVlIFNoYWRlIDE8L2g0PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LVsjM2QzZDNkXVwiPlNla3VuZMOkcmUgQWt0aW9uZW48L3A+XG4gICAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jMzY1QzgzPC9jb2RlPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBCbHVlIFNoYWRlIDIgKi99XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIwIGgtMjAgYm9yZGVyLTIgYm9yZGVyLVsjRTZEN0I4XSByb3VuZGVkLTJ4bCBteC1hdXRvIG1iLTQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgc2hhZG93LXNtIGJnLVsjM0Q2OTkyXVwiPlxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXNtIGZvbnQtYm9sZCB0ZXh0LXdoaXRlXCI+U2hhZGUgMjwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgbWItMiB0ZXh0LVsjM2QzZDNkXVwiPkJsdWUgU2hhZGUgMjwvaDQ+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtWyMzZDNkM2RdXCI+VGVydGnDpHJlIEVsZW1lbnRlPC9wPlxuICAgICAgICAgICAgICAgICAgPGNvZGUgY2xhc3NOYW1lPVwidGV4dC14cyBiZy1ncmF5LTEwMCBweC0yIHB5LTEgcm91bmRlZCBtdC0yIGJsb2NrXCI+IzNENjk5MjwvY29kZT5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICB7LyogQmx1ZSBTaGFkZSAzICovfVxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0yMCBoLTIwIGJvcmRlci0yIGJvcmRlci1bI0U2RDdCOF0gcm91bmRlZC0yeGwgbXgtYXV0byBtYi00IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHNoYWRvdy1zbSBiZy1bIzQzNzVBMl1cIj5cbiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1zbSBmb250LWJvbGQgdGV4dC13aGl0ZVwiPlNoYWRlIDM8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIG1iLTIgdGV4dC1bIzNkM2QzZF1cIj5CbHVlIFNoYWRlIDM8L2g0PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LVsjM2QzZDNkXVwiPkFremVudGU8L3A+XG4gICAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jNDM3NUEyPC9jb2RlPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBCbHVlIFNoYWRlIDQgKi99XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIwIGgtMjAgYm9yZGVyLTIgYm9yZGVyLVsjRTZEN0I4XSByb3VuZGVkLTJ4bCBteC1hdXRvIG1iLTQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgc2hhZG93LXNtIGJnLVsjNEE4MkIxXVwiPlxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXNtIGZvbnQtYm9sZCB0ZXh0LXdoaXRlXCI+U2hhZGUgNDwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgbWItMiB0ZXh0LVsjM2QzZDNkXVwiPkJsdWUgU2hhZGUgNDwvaDQ+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtWyMzZDNkM2RdXCI+SGVsbHN0ZSBWYXJpYW50ZTwvcD5cbiAgICAgICAgICAgICAgICAgIDxjb2RlIGNsYXNzTmFtZT1cInRleHQteHMgYmctZ3JheS0xMDAgcHgtMiBweS0xIHJvdW5kZWQgbXQtMiBibG9ja1wiPiM0QTgyQjE8L2NvZGU+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1sZyB0ZXh0LVsjM2QzZDNkXVwiPkdyYXUgJiBXZWnDnzwvaDM+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMiBnYXAtNCBtYXgtdy1tZFwiPlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBUZXh0Z3JhdSAqL31cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMjAgaC0yMCBib3JkZXItMiBib3JkZXItWyNFNkQ3QjhdIHJvdW5kZWQtMnhsIG14LWF1dG8gbWItNCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBzaGFkb3ctc20gYmctWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQtbGcgZm9udC1ib2xkIHRleHQtd2hpdGVcIj44MDA8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIG1iLTIgdGV4dC1bIzNkM2QzZF1cIj5UZXh0Z3JhdTwvaDQ+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtWyMzZDNkM2RdXCI+S29uc2lzdGVudGVyIFRleHQ8L3A+XG4gICAgICAgICAgICAgICAgICA8Y29kZSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGJnLWdyYXktMTAwIHB4LTIgcHktMSByb3VuZGVkIG10LTIgYmxvY2tcIj4jM2QzZDNkPC9jb2RlPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBXZWnDnyAqL31cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMjAgaC0yMCBib3JkZXItMiBib3JkZXItWyNFNkQ3QjhdIHJvdW5kZWQtMnhsIG14LWF1dG8gbWItNCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBzaGFkb3ctc20gYmctd2hpdGVcIj5cbiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1sZyBmb250LWJvbGQgdGV4dC1bIzNkM2QzZF1cIj4wPC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCBtYi0yIHRleHQtWyMzZDNkM2RdXCI+V2Vpw588L2g0PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LVsjM2QzZDNkXVwiPkJ1dHRvbi1UZXh0LCBJY29uczwvcD5cbiAgICAgICAgICAgICAgICAgIDxjb2RlIGNsYXNzTmFtZT1cInRleHQteHMgYmctZ3JheS0xMDAgcHgtMiBweS0xIHJvdW5kZWQgbXQtMiBibG9ja1wiPiNGRkZGRkY8L2NvZGU+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuXG4gICAgICAgIHsvKiBUeXBvZ3JhcGh5IFN5c3RlbSAqL31cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzaGFkb3ctc20gcm91bmRlZC1sZyBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0Y5RjRFQV1cIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJvdW5kZWQtdC1sZyBib3JkZXItYiBib3JkZXItWyNFNkQ3QjhdIHAtNiBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJ0ZXh0LTJ4bCBmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMyB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctNiBoLTYgYmctWyMyRjRGNzNdIHJvdW5kZWQgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXdoaXRlIHRleHQteHMgZm9udC1ib2xkXCI+QWE8L3NwYW4+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICBUeXBvZ3JhcGh5IFN5c3RlbVxuICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtYmFzZSBtdC0yIHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgIEN1c3RvbSBGb250cyBmw7xyIE1hcmtlbmlkZW50aXTDpHQgdW5kIG9wdGltYWxlIExlc2JhcmtlaXRcbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtOCBzcGFjZS15LThcIj5cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgey8qIEZvbnQgRmFtaWxpZXMgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNlwiPlxuICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWxnIHRleHQtWyMzZDNkM2RdXCI+Rm9udC1GYW1pbGllbjwvaDM+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBtZDpncmlkLWNvbHMtMyBnYXAtNlwiPlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBEaXNwbGF5IEZvbnQgKi99XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIG1iLTQgdGV4dC1bIzNkM2QzZF1cIj5GamFsbGEgT25lIChEaXNwbGF5KTwvaDQ+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktM1wiPlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtZGlzcGxheSB0ZXh0LTR4bCB0ZXh0LVsjM2QzZDNkXVwiPkRBVEVOLVNFRTwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtZGlzcGxheSB0ZXh0LTJ4bCB0ZXh0LVsjM2QzZDNkXVwiPkhlYWRsaW5lczwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtZGlzcGxheSB0ZXh0LWxnIHRleHQtWyMzZDNkM2RdXCI+U3ViaGVhZGluZ3M8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSBtdC00IHRleHQtWyMzZDNkM2RdLzcwXCI+RsO8ciDDnGJlcnNjaHJpZnRlbiB1bmQgTWFya2VuLUVsZW1lbnRlPC9wPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIHsvKiBCb2R5IEZvbnQgKi99XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIG1iLTQgdGV4dC1bIzNkM2QzZF1cIj5Qb3BwaW5zIChCb2R5KTwvaDQ+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktM1wiPlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXhsIGZvbnQtc2VtaWJvbGQgdGV4dC1bIzNkM2QzZF1cIj5TZW1pYm9sZCBUZXh0PC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtYmFzZSB0ZXh0LVsjM2QzZDNkXVwiPlJlZ3VsYXIgcGFyYWdyYXBoIHRleHQgd2l0aCBnb29kIHJlYWRhYmlsaXR5IGFuZCBjbGVhbiBhcHBlYXJhbmNlLjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXNtIHRleHQtWyMzZDNkM2RdXCI+U21hbGwgdGV4dCBkZXRhaWxzPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gbXQtNCB0ZXh0LVsjM2QzZDNkXS83MFwiPkbDvHIgRmxpZcOfdGV4dCB1bmQgVUktRWxlbWVudGU8L3A+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgey8qIEFjY2VudCBGb250ICovfVxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicC02IHJvdW5kZWQteGwgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gYmctWyNGNkYwRTBdXCI+XG4gICAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCBtYi00IHRleHQtWyMzZDNkM2RdXCI+QmFybG93IChBY2NlbnQpPC9oND5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0zXCI+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZm9udC1hY2NlbnQgdGV4dC1sZyBmb250LXNlbWlib2xkIHRleHQtWyMzZDNkM2RdXCI+TmF2aWdhdGlvbiBJdGVtczwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtYWNjZW50IHRleHQtYmFzZSB0ZXh0LVsjM2QzZDNkXVwiPkJ1dHRvbiBsYWJlbHMgYW5kIFVJIHRleHQ8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LWFjY2VudCB0ZXh0LXNtIHRleHQtWyMzZDNkM2RdXCI+Rm9ybSBsYWJlbHM8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSBtdC00IHRleHQtWyMzZDNkM2RdLzcwXCI+RsO8ciBVSS1Lb21wb25lbnRlbiB1bmQgTmF2aWdhdGlvbjwvcD5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgey8qIEZvbnQgU2l6ZXMgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNlwiPlxuICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWxnIHRleHQtWyMzZDNkM2RdXCI+VGV4dC1HcsO2w59lbiAmIEhpZXJhcmNoaWU8L2gzPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNiByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIGJnLVsjRjZGMEUwXSBzcGFjZS15LTRcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtZGlzcGxheSB0ZXh0LTZ4bCB0ZXh0LVsjM2QzZDNkXVwiPjZYTCBEaXNwbGF5PC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LWRpc3BsYXkgdGV4dC01eGwgdGV4dC1bIzNkM2QzZF1cIj41WEwgSGVhZGxpbmU8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtZGlzcGxheSB0ZXh0LTR4bCB0ZXh0LVsjM2QzZDNkXVwiPjRYTCBIZWFkaW5nPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC0zeGwgdGV4dC1bIzNkM2QzZF1cIj4zWEwgU3ViaGVhZGluZzwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtMnhsIHRleHQtWyMzZDNkM2RdXCI+MlhMIFNlY3Rpb24gVGl0bGU8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZvbnQtYm9keSB0ZXh0LXhsIHRleHQtWyMzZDNkM2RdXCI+WEwgTGFyZ2UgVGV4dDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZm9udC1ib2R5IHRleHQtbGcgdGV4dC1bIzNkM2QzZF1cIj5MRyBCb2R5IExhcmdlPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1iYXNlIHRleHQtWyMzZDNkM2RdXCI+QmFzZSBSZWd1bGFyIFRleHQgKDE2cHgpPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC1zbSB0ZXh0LVsjM2QzZDNkXVwiPlNNIFNtYWxsIFRleHQgKDE0cHgpPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LWJvZHkgdGV4dC14cyB0ZXh0LVsjM2QzZDNkXVwiPlhTIENhcHRpb24gVGV4dCAoMTJweCk8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgey8qIEJ1dHRvbiBTeXN0ZW0gKi99XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic2hhZG93LXNtIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI0U2RDdCOF0gYmctWyNGOUY0RUFdXCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyb3VuZGVkLXQtbGcgYm9yZGVyLWIgYm9yZGVyLVsjRTZEN0I4XSBwLTYgYmctWyNGNkYwRTBdXCI+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0yeGwgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTYgaC02IGJnLVsjMkY0RjczXSByb3VuZGVkIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTMgaC0zIGJnLXdoaXRlIHJvdW5kZWRcIj48L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIEJ1dHRvbi1TeXN0ZW1cbiAgICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWJhc2UgbXQtMiB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICBCdXR0b25zIG1pdCBwcmVzc2VkLXNoYWRvdyBFZmZla3QgYXVmIGhhcm1vbmlzY2hlbiBCZWlnZS1FYmVuZW5cbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtOCBzcGFjZS15LTEwXCI+XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIHsvKiBQcmltYXJ5IEJ1dHRvbnMgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtOCByb3VuZGVkLTJ4bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC14bCBtYi0yIGZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIgaC0yIGJnLVsjMkY0RjczXSByb3VuZGVkLWZ1bGxcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICBIYXVwdC1CdXR0b25zIChQcmltYXJ5KVxuICAgICAgICAgICAgICA8L2gzPlxuICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtYi02IHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgICAgQmVpZ2UgSGludGVyZ3J1bmQgbWl0IGR1bmtlbGJsYXVlbSBUZXh0IHVuZCBCb3JkZXJcbiAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LThcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktNFwiPlxuICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtbWVkaXVtIHRleHQtWyMzZDNkM2RdXCI+TmF2YmFyIEJ1dHRvbnMgKDJweC8zcHggU2hhZG93KTwvaDQ+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNiByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIGJnLVsjRjNFQkQ2XVwiPlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZmxleC13cmFwIGdhcC0zXCI+XG4gICAgICAgICAgICAgICAgICAgICAgPE5hdmJhckJ1dHRvbiBsZWZ0SWNvbj17PEhvbWUgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+fT5Ib21lPC9OYXZiYXJCdXR0b24+XG4gICAgICAgICAgICAgICAgICAgICAgPE5hdmJhckJ1dHRvbiBsZWZ0SWNvbj17PEJhckNoYXJ0MyBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz59PkRhc2hib2FyZHM8L05hdmJhckJ1dHRvbj5cbiAgICAgICAgICAgICAgICAgICAgICA8TmF2YmFyQnV0dG9uIGxlZnRJY29uPXs8VXNlciBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz59PkNvbW11bml0eTwvTmF2YmFyQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTRcIj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LW1lZGl1bSB0ZXh0LVsjM2QzZDNkXVwiPk9ucGFnZSBCdXR0b25zICgzcHgvNXB4IFNoYWRvdyk8L2g0PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwLTYgcm91bmRlZC14bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0YzRUJENl1cIj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtd3JhcCBnYXAtM1wiPlxuICAgICAgICAgICAgICAgICAgICAgIDxCdXR0b24gdmFyaWFudD1cInByaW1hcnlcIiBjb250ZXh0PVwicGFnZVwiIGxlZnRJY29uPXs8UGx1cyBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz59PkVyc3RlbGxlbjwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICAgIDxCdXR0b24gdmFyaWFudD1cInByaW1hcnlcIiBjb250ZXh0PVwicGFnZVwiIGxlZnRJY29uPXs8RWRpdCBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz59PkJlYXJiZWl0ZW48L0J1dHRvbj5cbiAgICAgICAgICAgICAgICAgICAgICA8QnV0dG9uIHZhcmlhbnQ9XCJwcmltYXJ5XCIgY29udGV4dD1cInBhZ2VcIiBsZWZ0SWNvbj17PFNldHRpbmdzIGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPn0+RWluc3RlbGx1bmdlbjwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTRcIj5cbiAgICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LW1lZGl1bSB0ZXh0LVsjM2QzZDNkXVwiPkludGVyYWN0aXZlIFN0YXRlczwvaDQ+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNiByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIGJnLVsjRjNFQkQ2XVwiPlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZ2FwLTNcIj5cbiAgICAgICAgICAgICAgICAgICAgICA8QnV0dG9uIHZhcmlhbnQ9XCJwcmltYXJ5XCI+Tm9ybWFsIFN0YXRlPC9CdXR0b24+XG4gICAgICAgICAgICAgICAgICAgICAgPEJ1dHRvbiB2YXJpYW50PVwicHJpbWFyeVwiIGxvYWRpbmc+TG9hZGluZyBTdGF0ZTwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICAgIDxCdXR0b24gdmFyaWFudD1cInByaW1hcnlcIiBkaXNhYmxlZD5EaXNhYmxlZCBTdGF0ZTwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogU2Vjb25kYXJ5IEJ1dHRvbnMgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtOCByb3VuZGVkLTJ4bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC14bCBtYi0yIGZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHRleHQtWyMzZDNkM2RdXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTIgaC0yIGJnLVsjNkI5QUM0XSByb3VuZGVkLWZ1bGxcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICBTZWt1bmTDpHJlIEJ1dHRvbnMgKFNlY29uZGFyeSlcbiAgICAgICAgICAgICAgPC9oMz5cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibWItNiB0ZXh0LVsjM2QzZDNkXVwiPlxuICAgICAgICAgICAgICAgIEhlbGxibGF1ZSBCdXR0b25zIG1pdCB3ZWnDn2VyIFNjaHJpZnQgZsO8ciBzcGV6aWVsbGUgQWt0aW9uZW4gKDNweC81cHggc2hhZG93KVxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgIFxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNiByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIGJnLVsjRjNFQkQ2XVwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMSBzbTpncmlkLWNvbHMtMiBsZzpncmlkLWNvbHMtNCBnYXAtNCBtYi02XCI+XG4gICAgICAgICAgICAgICAgICA8QnV0dG9uIHZhcmlhbnQ9XCJzZWNvbmRhcnlcIiBjb250ZXh0PVwicGFnZVwiIGxlZnRJY29uPXs8UGx1cyBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz59PldpZGdldCBoaW56dWbDvGdlbjwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgPEJ1dHRvbiB2YXJpYW50PVwic2Vjb25kYXJ5XCIgY29udGV4dD1cInBhZ2VcIiBsZWZ0SWNvbj17PEVkaXQgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+fT5CZWFyYmVpdGVuPC9CdXR0b24+XG4gICAgICAgICAgICAgICAgICA8QnV0dG9uIHZhcmlhbnQ9XCJzZWNvbmRhcnlcIiBjb250ZXh0PVwicGFnZVwiIGxlZnRJY29uPXs8RXllIGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPn0+QW5zaWNodDwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgPEJ1dHRvbiB2YXJpYW50PVwic2Vjb25kYXJ5XCIgY29udGV4dD1cInBhZ2VcIiBsZWZ0SWNvbj17PFNoYXJlIGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPn0+RXhwb3J0aWVyZW48L0J1dHRvbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZmxleC13cmFwIGdhcC0zIHB0LTQgYm9yZGVyLXQgYm9yZGVyLVsjRTZEN0I4XVwiPlxuICAgICAgICAgICAgICAgICAgPEJ1dHRvbiB2YXJpYW50PVwic2Vjb25kYXJ5XCIgY29udGV4dD1cInBhZ2VcIiBzaXplPVwic21cIj5FZGl0PC9CdXR0b24+XG4gICAgICAgICAgICAgICAgICA8QnV0dG9uIHZhcmlhbnQ9XCJzZWNvbmRhcnlcIiBjb250ZXh0PVwicGFnZVwiIHNpemU9XCJzbVwiPkRlbGV0ZTwvQnV0dG9uPlxuICAgICAgICAgICAgICAgICAgPEljb25CdXR0b24gXG4gICAgICAgICAgICAgICAgICAgIGNvbnRleHQ9XCJwYWdlXCJcbiAgICAgICAgICAgICAgICAgICAgdmFyaWFudD1cInNlY29uZGFyeVwiXG4gICAgICAgICAgICAgICAgICAgIHNpemU9XCJzbVwiXG4gICAgICAgICAgICAgICAgICAgIGljb249ezxYIGNsYXNzTmFtZT1cInctMyBoLTNcIiAvPn1cbiAgICAgICAgICAgICAgICAgICAgYXJpYS1sYWJlbD1cIkNsb3NlXCJcbiAgICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuXG4gICAgICAgIHsvKiBGb290ZXIgKi99XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgcHktOCByb3VuZGVkLTJ4bCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSBzaGFkb3ctc20gYmctWyNGOUY0RUFdXCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtMiBtYi0yXCI+XG4gICAgICAgICAgICA8TG9nb0NvbXBhY3Qgc2l6ZT1cInNtXCIgLz5cbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgICAgREFURU4tU0VFIERlc2lnbiBTeXN0ZW0gdjIuM1xuICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1bIzNkM2QzZF1cIj5cbiAgICAgICAgICAgIFN0aW1taWcsIG1vbm9jaHJvbSwgaGFybW9uaXNjaFxuICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1jZW50ZXIgZ2FwLTQgbXQtNFwiPlxuICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC14cyBweC0zIHB5LTEgcm91bmRlZC1mdWxsIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIHRleHQtWyMzZDNkM2RdIGJnLVsjRjZGMEUwXVwiPlxuICAgICAgICAgICAgICBTdGFja2VkIExheWVyc1xuICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC14cyBweC0zIHB5LTEgcm91bmRlZC1mdWxsIGJvcmRlciBib3JkZXItWyNFNkQ3QjhdIHRleHQtWyMzZDNkM2RdIGJnLVsjRjZGMEUwXVwiPlxuICAgICAgICAgICAgICBNb25vY2hyb21lIFRleHRcbiAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteHMgcHgtMyBweS0xIHJvdW5kZWQtZnVsbCBib3JkZXIgYm9yZGVyLVsjRTZEN0I4XSB0ZXh0LVsjM2QzZDNkXSBiZy1bI0Y2RjBFMF1cIj5cbiAgICAgICAgICAgICAgQmx1ZSBBY2NlbnRzIE9ubHlcbiAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L2Rpdj5cbiAgICA8L2Rpdj5cbiAgKTtcbn0iXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBT0E7Ozs7QUFJQTs7Ozs7O1dBQXdCQSxnQkFBQTs7Ozs7Ozs7a0NBVDREOzs7a0NBRWxEOzs7a0NBQ2U7QUFNbEMsU0FBU0EsaUJBQUE7RUFBQTtFQUFBQyxjQUFBLEdBQUFDLENBQUE7RUFBQUQsY0FBQSxHQUFBRSxDQUFBO0VBQ3RCLG9CQUNFLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO0lBQUlDLFNBQUEsRUFBVTtjQUNiLGlCQUFBRixXQUFBLENBQUFHLElBQUEsRUFBQztNQUFJRCxTQUFBLEVBQVU7OEJBR2IsSUFBQUYsV0FBQSxDQUFBQyxHQUFBLEVBQUM7UUFBSUMsU0FBQSxFQUFVO2tCQUNiLGlCQUFBRixXQUFBLENBQUFDLEdBQUEsRUFBQztVQUFJQyxTQUFBLEVBQVU7b0JBQ2IsaUJBQUFGLFdBQUEsQ0FBQUcsSUFBQSxFQUFDO1lBQUlELFNBQUEsRUFBVTtvQ0FDYixJ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

@@ -71,9 +71,9 @@ export function ResponsiveDashboard({
             <WidgetRenderer
               widget={widget}
               isEditMode={isEditMode}
-              onEdit={() => onEditWidget?.(widget.id)}
-              onDelete={() => onDeleteWidget?.(widget.id)}
-              onDuplicate={() => onDuplicateWidget?.(widget.id)}
+              onEdit={onEditWidget ? () => onEditWidget(widget.id) : undefined}
+              onDelete={onDeleteWidget ? () => onDeleteWidget(widget.id) : undefined}
+              onDuplicate={onDuplicateWidget ? () => onDuplicateWidget(widget.id) : undefined}
             />
           </div>
         ))}

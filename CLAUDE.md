@@ -671,6 +671,133 @@ CLAUDE_DEPLOYMENT.md  ← Production-Guidelines
 
 ---
 
+## 🏗️ **FILE ORGANIZATION RULES**
+
+### **Feature-Based Architecture:**
+```
+src/
+├── app/                    # Next.js App Router Pages
+│   ├── dashboard/         # Dashboard routes
+│   │   ├── [id]/         # Dynamic dashboard pages
+│   │   └── page.tsx      # Dashboard list/overview
+│   └── (auth)/           # Auth route group
+├── features/              # Feature-based modules (for complex features)
+│   └── dashboard/        # Dashboard feature
+│       ├── components/   # Feature-specific components
+│       ├── hooks/        # Feature-specific hooks
+│       ├── store/        # Feature state management
+│       └── types/        # Feature type definitions
+├── components/            # Shared components
+│   ├── ui/               # Generic UI (Button, Input, Modal)
+│   ├── layout/           # Layout components (Header, Navigation)
+│   └── charts/           # Chart components
+├── lib/                   # Utilities & Services
+│   ├── api/              # API clients & endpoints
+│   ├── auth/             # Authentication utilities
+│   ├── utils/            # Helper functions
+│   └── mock-data/        # Mock data for development
+├── hooks/                 # Global/shared hooks
+├── store/                 # Global state (Zustand)
+├── types/                 # Global TypeScript definitions
+└── styles/               # Global styles & CSS
+```
+
+### **Component Organization Rules:**
+- **Max 150 lines per component** - Split larger components into hooks/utilities
+- **One component per file** - No multiple component exports
+- **Co-locate related files** - Tests, styles, types near component
+- **Barrel exports** - Use index.ts files for clean imports from directories
+
+### **Naming Conventions:**
+```typescript
+// Components: PascalCase with descriptive names
+DashboardHeader.tsx
+WidgetRenderer.tsx
+ResponsiveDashboard.tsx
+
+// Hooks: camelCase with 'use' prefix
+useDashboard.ts
+useWidgetManagement.ts
+useDashboardUIState.ts
+
+// Types: PascalCase with Interface/Type prefix
+interface DashboardWidget { }
+type WidgetType = 'line-chart' | 'bar-chart';
+interface WidgetConfig { }
+
+// Constants: UPPER_SNAKE_CASE
+const MAX_WIDGETS_PER_DASHBOARD = 20;
+const DEFAULT_CHART_HEIGHT = 300;
+
+// Files: kebab-case for utilities, PascalCase for components
+dashboard-utils.ts
+chart-helpers.ts
+DashboardContainer.tsx
+```
+
+### **Import Order (enforced by ESLint):**
+```typescript
+// 1. External library imports
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Responsive, WidthProvider } from 'react-grid-layout';
+
+// 2. Internal absolute imports (@/ paths)
+import { Button } from '@/components/ui/Button';
+import { api } from '@/lib/api/client';
+import { DashboardWidget } from '@/types/dashboard.types';
+
+// 3. Relative imports
+import { WidgetRenderer } from './WidgetRenderer';
+import { useDashboardState } from '../hooks/useDashboardState';
+
+// 4. Type-only imports (last)
+import type { Dashboard, Widget } from '@/types';
+import type { ComponentProps } from 'react';
+```
+
+### **State Management File Structure:**
+```typescript
+// Zustand Store: feature-name.store.ts
+dashboard.store.ts
+auth.store.ts
+
+// TanStack Query Hooks: feature-queries.ts
+dashboard-queries.ts
+widget-queries.ts
+
+// Custom Hooks: use-feature-action.ts
+useDashboardState.ts
+useWidgetManagement.ts
+useUndoRedo.ts
+```
+
+### **Testing File Structure:**
+```
+src/components/dashboard/
+├── DashboardContainer.tsx
+├── DashboardContainer.test.tsx    # Unit tests
+├── __tests__/
+│   ├── DashboardContainer.integration.test.tsx
+│   └── dashboard-test-utils.tsx   # Test utilities
+└── __mocks__/
+    └── dashboard-data.ts          # Mock data for tests
+```
+
+### **API Layer Organization:**
+```
+src/lib/api/
+├── client.ts              # Base API client configuration
+├── dashboard.api.ts       # Dashboard CRUD operations
+├── widget.api.ts          # Widget-specific API calls
+├── auth.api.ts            # Authentication endpoints
+└── types/
+    ├── api-responses.ts   # API response types
+    └── api-requests.ts    # API request types
+```
+
+---
+
 ## 🎭 **SLASH-COMMANDS**
 
 ```bash
