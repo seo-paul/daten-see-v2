@@ -51,11 +51,16 @@ export default function RootLayout({
           </AuthProvider>
         </QueryProvider>
         
+        {/* Auto-Testing System for Development */}
+        {process.env.NODE_ENV === 'development' && (
+          <script src="/auto-testing-loader.js" async />
+        )}
+        
         {/* Development error overlay */}
         {process.env.NODE_ENV === 'development' && (
           <div id="development-overlay" className="fixed bottom-4 right-4 z-50">
             <div className="bg-blue-600 text-white px-3 py-1 rounded text-xs">
-              🚧 Development Mode - Error Monitoring Active
+              🚧 Development Mode - Auto-Testing Active
             </div>
           </div>
         )}

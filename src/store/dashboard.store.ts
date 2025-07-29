@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 import type { DashboardWidget } from '@/types/dashboard.types';
+import { demoWidgets, demoLayouts } from '@/lib/mock-data';
 
 /**
  * Dashboard UI State Store (Zustand)
@@ -25,6 +26,10 @@ interface DashboardUIStore {
   widgets: DashboardWidget[];
   layouts: Layouts;
   
+  // Initialization State - CRITICAL for preventing race conditions
+  isInitialized: boolean;
+  hasBeenModified: boolean; // Track if user has made any changes
+  
   // Undo/Redo State
   undoStack: {widgets: DashboardWidget[]; layouts: Layouts}[];
   redoStack: {widgets: DashboardWidget[]; layouts: Layouts}[];
@@ -34,6 +39,10 @@ interface DashboardUIStore {
   setHasChanges: (hasChanges: boolean) => void;
   setWidgets: (widgets: DashboardWidget[]) => void;
   setLayouts: (layouts: Layouts) => void;
+  
+  // Initialization Actions
+  initializeDemoData: () => void;
+  markAsModified: () => void;
   
   // Undo/Redo Actions
   pushUndoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}) => void;
@@ -61,6 +70,11 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
     hasChanges: false,
     widgets: [],
     layouts: EMPTY_LAYOUTS,
+    
+    // Initialization state - CRITICAL for race condition prevention
+    isInitialized: false,
+    hasBeenModified: false,
+    
     undoStack: [],
     redoStack: [],
 
@@ -74,11 +88,32 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
     },
 
     setWidgets: (widgets: DashboardWidget[]): void => {
-      set({ widgets, hasChanges: true });
+      set({ widgets, hasChanges: true, hasBeenModified: true });
     },
 
     setLayouts: (layouts: Layouts): void => {
-      set({ layouts, hasChanges: true });
+      set({ layouts, hasChanges: true, hasBeenModified: true });
+    },
+
+    // Initialization Actions - CRITICAL for preventing race conditions
+    initializeDemoData: (): void => {
+      const { isInitialized, hasBeenModified } = get();
+      
+      // NEVER re-initialize if already initialized OR if user has made changes
+      if (isInitialized || hasBeenModified) {
+        return;
+      }
+      
+      set({ 
+        widgets: demoWidgets,
+        layouts: demoLayouts,
+        isInitialized: true,
+        hasChanges: false // Demo data is not a "change"
+      });
+    },
+
+    markAsModified: (): void => {
+      set({ hasBeenModified: true });
     },
 
     // Undo/Redo Actions
@@ -138,6 +173,8 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
         hasChanges: false,
         widgets: [],
         layouts: EMPTY_LAYOUTS,
+        isInitialized: false,
+        hasBeenModified: false,
         undoStack: [],
         redoStack: []
       });

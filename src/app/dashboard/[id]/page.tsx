@@ -52,7 +52,7 @@ export default function DashboardDetailPage(): React.ReactElement {
       handleCloseWidgetModal,
       handleWidgetModalSubmit,
     },
-  } = useDashboardUIState();
+  } = useDashboardUIState(dashboardId);
 
   return (
     <MainLayout>

@@ -23,7 +23,6 @@ import {
   removeWidgetFromLayouts,
 } from '@/components/dashboard/ResponsiveDashboard';
 import type { WidgetConfigMode } from '@/components/dashboard/WidgetConfigModal';
-import { demoWidgets, demoLayouts } from '@/lib/mock-data';
 import { useDashboardUIStore } from '@/store/dashboard.store';
 import type { DashboardWidget } from '@/types/dashboard.types';
 
@@ -71,7 +70,7 @@ export interface DashboardUIState {
  * Custom hook for dashboard UI state management
  * Encapsulates all dashboard interaction logic
  */
-export function useDashboardUIState(): DashboardUIState {
+export function useDashboardUIState(_dashboardId = 'demo-dashboard', _userId?: string): DashboardUIState {
   // Zustand store access
   const {
     isEditMode,
@@ -84,27 +83,26 @@ export function useDashboardUIState(): DashboardUIState {
     setHasChanges,
     setWidgets,
     setLayouts,
+    initializeDemoData,
+    markAsModified,
     pushUndoState,
     clearRedoStack,
     undo,
     redo
   } = useDashboardUIStore();
 
+
   // Local modal state
   const [widgetModalOpen, setWidgetModalOpen] = useState(false);
   const [widgetModalMode, setWidgetModalMode] = useState<WidgetConfigMode>('create');
   const [widgetModalData, setWidgetModalData] = useState<DashboardWidget | undefined>();
 
-  // Initialize demo widgets ONLY on first load (temporary - will be replaced with real data)
-  const [isInitialized, setIsInitialized] = useState(false);
-  
+  // Initialize demo data ONCE - NO MORE RACE CONDITIONS!
   useEffect(() => {
-    if (widgets.length === 0 && !isInitialized) {
-      setWidgets(demoWidgets);
-      setLayouts(demoLayouts);
-      setIsInitialized(true);
-    }
-  }, [widgets.length, isInitialized, setWidgets, setLayouts]);
+    // Initialize demo data only if not already initialized
+    // This prevents widgets from reappearing after deletion
+    initializeDemoData();
+  }, []); // No dependencies - run only once on mount
 
   // Edit Mode Toggle
   const handleToggleEditMode = useCallback(() => {
@@ -117,9 +115,10 @@ export function useDashboardUIState(): DashboardUIState {
 
   // Layout Change Handler
   const handleLayoutChange = useCallback((_currentLayout: Layout[], allLayouts: Layouts) => {
+    markAsModified(); // Mark as modified to prevent demo data re-initialization
     setLayouts(allLayouts);
     setHasChanges(true);
-  }, [setLayouts, setHasChanges]);
+  }, [markAsModified, setLayouts, setHasChanges]);
 
   // Add New Widget
   const handleAddWidget = useCallback(() => {
@@ -128,23 +127,66 @@ export function useDashboardUIState(): DashboardUIState {
     setWidgetModalOpen(true);
   }, []);
 
-  // Delete Widget
+  // Delete Widget - STALE CLOSURE FIX WITH FUNCTIONAL UPDATES
   const handleDeleteWidget = useCallback((widgetId: string) => {
-    // Save current state to undo stack
-    pushUndoState({ widgets, layouts });
-    clearRedoStack();
-
-    const filteredWidgets = widgets.filter(w => w.id !== widgetId);
+    console.log(`🗑️ DELETE ATTEMPT: Widget ${widgetId}`);
     
-    setWidgets(filteredWidgets);
-    setLayouts(removeWidgetFromLayouts(layouts, widgetId));
-    setHasChanges(true);
-  }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]);
+    // Use current state from callback to avoid stale closures
+    const currentWidgets = useDashboardUIStore.getState().widgets;
+    const currentLayouts = useDashboardUIStore.getState().layouts;
+    
+    const widget = currentWidgets.find(w => w.id === widgetId);
+    
+    if (!widget) {
+      console.warn(`❌ Widget not found: ${widgetId}`, {
+        requestedId: widgetId,
+        availableIds: currentWidgets.map(w => w.id)
+      });
+      return;
+    }
+
+    try {
+      console.log(`🔄 DELETE PROCESSING: Widget ${widgetId}`, {
+        widgetType: widget.type,
+        currentCount: currentWidgets.length
+      });
+
+      // Mark as modified to prevent demo data re-initialization
+      markAsModified();
+
+      // Save current state to undo stack before any modifications
+      pushUndoState({ widgets: currentWidgets, layouts: currentLayouts });
+      clearRedoStack();
+
+      // Use functional updates to prevent stale closure issues
+      setWidgets(prevWidgets => {
+        const filtered = prevWidgets.filter(w => w.id !== widgetId);
+        console.log(`✅ WIDGETS UPDATED: ${prevWidgets.length} → ${filtered.length}`);
+        return filtered;
+      });
+      
+      setLayouts(prevLayouts => {
+        const filtered = removeWidgetFromLayouts(prevLayouts, widgetId);
+        console.log(`✅ LAYOUTS UPDATED: Widget ${widgetId} removed`);
+        return filtered;
+      });
+      
+      setHasChanges(true);
+      console.log(`✅ DELETE COMPLETED: Widget ${widgetId}`);
+      
+    } catch (error) {
+      console.error(`❌ DELETE FAILED: Widget ${widgetId}`, error);
+      throw error; // Re-throw for error boundaries
+    }
+  }, [markAsModified, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]); // Removed widgets/layouts deps
 
   // Duplicate Widget
   const handleDuplicateWidget = useCallback((widgetId: string) => {
     const widget = widgets.find(w => w.id === widgetId);
     if (!widget) return;
+
+    // Mark as modified to prevent demo data re-initialization
+    markAsModified();
 
     // Save current state to undo stack
     pushUndoState({ widgets, layouts });
@@ -160,7 +202,7 @@ export function useDashboardUIState(): DashboardUIState {
     setWidgets([...widgets, newWidget]);
     setLayouts(mergeLayouts(layouts, generateDefaultLayouts(newWidgetId, widget.type)));
     setHasChanges(true);
-  }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]);
+  }, [widgets, layouts, markAsModified, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]);
 
   // Edit Widget
   const handleEditWidget = useCallback((widgetId: string) => {
@@ -197,6 +239,9 @@ export function useDashboardUIState(): DashboardUIState {
   }, []);
 
   const handleWidgetModalSubmit = useCallback((widgetData: Partial<DashboardWidget>) => {
+    // Mark as modified to prevent demo data re-initialization
+    markAsModified();
+
     // Save current state to undo stack
     pushUndoState({ widgets, layouts });
     clearRedoStack();
@@ -232,6 +277,7 @@ export function useDashboardUIState(): DashboardUIState {
     setWidgetModalOpen(false);
     setWidgetModalData(undefined);
   }, [
+    markAsModified,
     widgetModalMode, 
     widgetModalData, 
     widgets, 

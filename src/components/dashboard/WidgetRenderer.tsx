@@ -59,15 +59,37 @@ function WidgetRendererBase({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                if (onDelete) {
-                  onDelete();
+                
+                // Use data attribute for more reliable debouncing
+                const button = e.currentTarget;
+                if (button.hasAttribute('data-deleting')) {
+                  console.log('🚫 DELETE BLOCKED: Already deleting');
+                  return;
+                }
+                
+                console.log('🎯 DELETE BUTTON CLICKED:', widget.id);
+                button.setAttribute('data-deleting', 'true');
+                
+                // Execute deletion immediately
+                try {
+                  onDelete?.();
+                } finally {
+                  // Clean up after deletion completes or fails
+                  setTimeout(() => {
+                    button.removeAttribute('data-deleting');
+                  }, 500);
                 }
               }}
               title="Widget löschen"
               aria-label="Widget löschen"
               className="delete-widget-btn"
+              style={{ 
+                pointerEvents: 'auto',
+                zIndex: 1000, // Higher than grid elements
+                position: 'relative'
+              }}
             >
-              <X className="w-3 h-3" />
+              <X className="w-3 h-3" style={{ pointerEvents: 'none' }} />
             </button>
           </div>
         )}

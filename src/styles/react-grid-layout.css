@@ -161,7 +161,7 @@
   transform: scale(0.95);
 }
 
-/* Delete button specific styling */
+/* Delete button specific styling - CRITICAL FIX FOR WIDGET DELETION */
 .delete-widget-btn {
   width: 24px !important;
   height: 24px !important;
@@ -174,9 +174,11 @@
   justify-content: center !important;
   cursor: pointer !important;
   transition: all 150ms ease !important;
-  z-index: 100 !important;
+  z-index: 1000 !important; /* Higher than grid elements (was 100) */
   position: relative !important;
   pointer-events: auto !important;
+  /* Prevent grid drag from interfering */
+  touch-action: none !important;
 }
 
 .delete-widget-btn:hover {
@@ -188,6 +190,28 @@
 .delete-widget-btn:active {
   transform: scale(0.95) !important;
   background: #b91c1c !important;
+}
+
+/* Ensure button is always clickable in edit mode - CRITICAL FOR WIDGET DELETION */
+.widget-edit-mode .delete-widget-btn {
+  pointer-events: auto !important;
+  z-index: 1001 !important; /* Even higher in edit mode */
+  position: relative !important;
+}
+
+/* Prevent grid layout drag events from interfering with delete button */
+.widget-edit-mode .widget-toolbar {
+  z-index: 1000 !important;
+  position: relative !important;
+}
+
+/* Fix for React Grid Layout drag interference */
+.react-grid-item.react-draggable-dragging .delete-widget-btn {
+  pointer-events: none !important; /* Disable during drag */
+}
+
+.react-grid-item:not(.react-draggable-dragging) .delete-widget-btn {
+  pointer-events: auto !important; /* Enable when not dragging */
 }
 
 /* Edit mode styles */
