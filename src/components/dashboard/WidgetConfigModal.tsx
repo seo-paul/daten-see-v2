@@ -10,21 +10,21 @@ import { X, LineChart, BarChart3, PieChart, Target, Type } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 import { sanitizeName } from '@/lib/utils/sanitization';
-import type { GridWidget } from '@/types/dashboard.types';
+import type { DashboardWidget } from '@/types/dashboard.types';
 
 export type WidgetConfigMode = 'create' | 'edit';
 
 interface WidgetConfigModalProps {
   isOpen: boolean;
   mode: WidgetConfigMode;
-  widget?: GridWidget; // For edit mode
+  widget?: DashboardWidget; // For edit mode
   onClose: () => void;
-  onSubmit: (widgetData: Partial<GridWidget>) => void;
+  onSubmit: (widgetData: Partial<DashboardWidget>) => void;
   isLoading?: boolean;
 }
 
 interface WidgetFormData {
-  type: GridWidget['type'];
+  type: DashboardWidget['type'];
   title: string;
   config: Record<string, any>;
 }
@@ -124,7 +124,7 @@ export function WidgetConfigModal({
       // Sanitize title
       const sanitizedTitle = sanitizeName(formData.title, 50);
       
-      const widgetData: Partial<GridWidget> = {
+      const widgetData: Partial<DashboardWidget> = {
         type: formData.type,
         title: sanitizedTitle,
         config: formData.config,
@@ -151,7 +151,7 @@ export function WidgetConfigModal({
     onClose();
   };
 
-  const getDefaultConfig = (type: GridWidget['type']): Record<string, any> => {
+  const getDefaultConfig = (type: DashboardWidget['type']): Record<string, any> => {
     switch (type) {
       case 'kpi':
         return {
@@ -170,7 +170,7 @@ export function WidgetConfigModal({
     }
   };
 
-  const handleTypeChange = (newType: GridWidget['type']): void => {
+  const handleTypeChange = (newType: DashboardWidget['type']): void => {
     setFormData(prev => ({
       ...prev,
       type: newType,

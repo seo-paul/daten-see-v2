@@ -1,15 +1,8 @@
-export interface Dashboard {
-  id: string;
-  name: string;
-  description: string;
-  isPublic: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  widgets: DashboardWidget[];
-  settings: DashboardSettings;
-}
-
-export interface DashboardWidget {
+/**
+ * API-compatible Dashboard Widget Interface
+ * Used for server communication with position/size data
+ */
+export interface ApiDashboardWidget {
   id: string;
   type: WidgetType;
   title: string;
@@ -17,6 +10,35 @@ export interface DashboardWidget {
   size: WidgetSize;
   config: Record<string, unknown>;
 }
+
+export interface Dashboard {
+  id: string;
+  name: string;
+  description: string;
+  isPublic: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  widgets: ApiDashboardWidget[];
+  settings: DashboardSettings;
+}
+
+/**
+ * Grid Widget Interface (for UI components)
+ * Used by dashboard grid system - no position needed (handled by react-grid-layout)
+ */
+export interface DashboardWidget {
+  id: string;
+  type: WidgetType;
+  title: string;
+  config: WidgetConfig;
+  dataSource?: string;
+}
+
+/**
+ * Re-export WidgetConfig from API types for consistency
+ */
+export type { WidgetConfig } from './api';
+
 
 export interface WidgetPosition {
   x: number;
@@ -35,25 +57,18 @@ export interface DashboardSettings {
   refreshInterval: number; // in seconds
 }
 
-export type WidgetType = 
-  | 'chart'
-  | 'table' 
-  | 'metric'
-  | 'text'
-  | 'image';
+/**
+ * Re-export unified types from API types
+ * This ensures compatibility between API and Grid systems
+ */
+export type { WidgetType } from './api';
 
 /**
- * Grid Layout Widget Interface
- * Used by dashboard grid system (react-grid-layout)
- * Different from API DashboardWidget which uses position/size objects
+ * Grid Layout Widget Interface (DEPRECATED)
+ * Use DashboardWidget instead - this alias maintained for backward compatibility
+ * @deprecated Use DashboardWidget interface instead
  */
-export interface GridWidget {
-  id: string;
-  type: 'line' | 'bar' | 'pie' | 'kpi' | 'text';
-  title: string;
-  config: Record<string, any>;
-  dataSource?: string;
-}
+export type GridWidget = DashboardWidget;
 
 export interface CreateDashboardRequest {
   name: string;

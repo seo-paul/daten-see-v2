@@ -3,25 +3,15 @@
  * Re-export all types for easy importing
  */
 
-// API Types
+// API Types (primary source)
 export * from './api';
 
-// Re-export common types for backward compatibility
+// Dashboard-specific exports (only types not in API)
 export type {
-  Dashboard,
-  DashboardWidget,
-  CreateDashboardRequest,
-  UpdateDashboardRequest,
-  DataSource,
-  DataSourceType,
-  User,
-  Organization,
-  Workspace,
-  AnalyticsData,
-  AnalyticsQuery,
-  ApiResponse,
-  PaginatedResponse,
-} from './api';
+  DashboardSettings,
+  DashboardListItem,
+  ApiDashboardWidget,
+} from './dashboard.types';
 
 // Query Keys
 export { apiQueryKeys } from './api';

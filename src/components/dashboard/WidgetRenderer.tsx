@@ -9,17 +9,18 @@ import {
   DashboardKPICard,
   type SimpleChartData,
 } from '@/components/charts';
-import type { GridWidget } from '@/types/dashboard.types';
+import type { DashboardWidget } from '@/types/dashboard.types';
 
 /**
  * Widget Renderer Props
+ * Fixed for exactOptionalPropertyTypes compatibility
  */
 interface WidgetRendererProps {
-  widget: GridWidget;
+  widget: DashboardWidget;
   isEditMode: boolean;
-  onEdit?: () => void;
-  onDelete?: () => void;
-  onDuplicate?: () => void;
+  onEdit?: (() => void) | undefined;
+  onDelete?: (() => void) | undefined;
+  onDuplicate?: (() => void) | undefined;
 }
 
 /**
@@ -36,7 +37,7 @@ export function WidgetRenderer({
     <div className={`widget-container relative h-full ${isEditMode ? 'widget-edit-mode' : ''}`}>
       {/* Edit Mode Overlay */}
       {isEditMode && (
-        <div className="absolute inset-0 bg-blue-100/30 border-2 border-blue-300/50 rounded-lg pointer-events-none z-5" />
+        <div className="absolute inset-0 bg-blue-100/30 border-2 border-blue-300/50 rounded-lg pointer-events-none z-10" />
       )}
       
       {/* Resize Handle - Only visible in edit mode */}
@@ -53,16 +54,21 @@ export function WidgetRenderer({
         {isEditMode && (
           <div className="widget-toolbar">
             <button
+              type="button"
               onClick={(e) => {
+                console.log('Delete button clicked for widget:', widget.id);
                 e.preventDefault();
                 e.stopPropagation();
                 if (onDelete) {
+                  console.log('Calling onDelete for widget:', widget.id);
                   onDelete();
+                } else {
+                  console.warn('onDelete handler not provided for widget:', widget.id);
                 }
               }}
               title="Widget löschen"
               aria-label="Widget löschen"
-              className="w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors shadow-[1px_2px_0px_0px_#DC2626] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[2px] relative z-30 pointer-events-auto"
+              className="delete-widget-btn"
             >
               <X className="w-3 h-3" />
             </button>
@@ -80,7 +86,7 @@ export function WidgetRenderer({
  * Widget Content Component
  * Renders the appropriate chart component based on widget type
  */
-function WidgetContent({ widget }: { widget: GridWidget }) {
+function WidgetContent({ widget }: { widget: DashboardWidget }) {
   // Mock data for demonstration - will be replaced with real data
   const mockLineData: SimpleChartData = {
     labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun'],
@@ -170,9 +176,10 @@ function WidgetContent({ widget }: { widget: GridWidget }) {
 /**
  * Generate a new widget with default configuration
  */
-export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 'id'> {
+export function createDefaultWidget(type: DashboardWidget['type']): Omit<DashboardWidget, 'id'> {
   const defaultConfigs = {
     line: {
+      type: 'line' as const,
       title: 'Liniendiagramm',
       config: {
         height: 250,
@@ -181,6 +188,7 @@ export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 
       },
     },
     bar: {
+      type: 'bar' as const,
       title: 'Balkendiagramm',
       config: {
         height: 250,
@@ -189,6 +197,7 @@ export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 
       },
     },
     pie: {
+      type: 'pie' as const,
       title: 'Kreisdiagramm',
       config: {
         height: 250,
@@ -196,6 +205,7 @@ export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 
       },
     },
     kpi: {
+      type: 'kpi' as const,
       title: 'KPI Metrik',
       config: {
         metric: 'Gesamtumsatz',
@@ -204,6 +214,7 @@ export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 
       },
     },
     text: {
+      type: 'text' as const,
       title: 'Text Widget',
       config: {
         content: 'Fügen Sie hier Ihren Text ein...',
@@ -211,8 +222,5 @@ export function createDefaultWidget(type: GridWidget['type']): Omit<GridWidget, 
     },
   };
 
-  return {
-    type,
-    ...defaultConfigs[type],
-  };
+  return defaultConfigs[type as keyof typeof defaultConfigs];
 }

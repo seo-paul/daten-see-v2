@@ -8,7 +8,7 @@ export interface Dashboard {
   id: string;
   name: string;
   description?: string;
-  widgets: DashboardWidget[];
+  widgets: ApiDashboardWidget[];
   createdAt: string;
   updatedAt: string;
   isPublic: boolean;
@@ -17,15 +17,29 @@ export interface Dashboard {
   workspaceId?: string;
 }
 
-export interface DashboardWidget {
+/**
+ * Unified Widget Type System
+ * Specific chart types used by both API and Grid systems
+ */
+export type WidgetType = 
+  | 'line'
+  | 'bar' 
+  | 'pie'
+  | 'kpi'
+  | 'text';
+
+export interface ApiDashboardWidget {
   id: string;
-  type: 'chart' | 'kpi' | 'text' | 'table' | 'filter';
+  type: WidgetType;
   title: string;
   config: WidgetConfig;
   position: WidgetPosition;
   dataSource?: string;
   refreshInterval?: number;
 }
+
+// Keep DashboardWidget as alias for backward compatibility in API layer
+export type DashboardWidget = ApiDashboardWidget;
 
 export interface WidgetPosition {
   x: number;
@@ -35,14 +49,27 @@ export interface WidgetPosition {
 }
 
 export interface WidgetConfig {
-  // Chart specific
+  // Chart specific (API level)
   chartType?: 'line' | 'bar' | 'doughnut' | 'scatter';
   metrics?: string[];
   dimensions?: string[];
   timeRange?: TimeRange;
   
+  // Chart specific (Grid level - for compatibility)
+  data?: any;
+  height?: number;
+  showGrid?: boolean;
+  showLegend?: boolean;
+  horizontal?: boolean;
+  stacked?: boolean;
+  doughnut?: boolean;
+  
   // KPI specific
   metric?: string;
+  value?: number;
+  previousValue?: number;
+  unit?: 'currency' | 'number' | 'percentage';
+  trend?: 'up' | 'down' | 'neutral';
   target?: number;
   comparison?: 'previous_period' | 'target' | 'benchmark';
   
@@ -50,15 +77,18 @@ export interface WidgetConfig {
   content?: string;
   markdown?: boolean;
   
-  // Table specific
+  // Table specific (for future use)
   columns?: TableColumn[];
   pageSize?: number;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   
-  // Filter specific
+  // Filter specific (for future use)
   filterType?: 'date' | 'select' | 'multiselect' | 'range';
   filterOptions?: FilterOption[];
+  
+  // Generic config for extensibility
+  [key: string]: any;
 }
 
 export interface TableColumn {

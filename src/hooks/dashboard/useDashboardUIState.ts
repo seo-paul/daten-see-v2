@@ -22,8 +22,7 @@ import {
   mergeLayouts,
   removeWidgetFromLayouts,
 } from '@/components/dashboard/ResponsiveDashboard';
-import { createDefaultWidget } from '@/components/dashboard/WidgetRenderer';
-import type { GridWidget } from '@/types/dashboard.types';
+import type { DashboardWidget } from '@/types/dashboard.types';
 import { sanitizeName } from '@/lib/utils/sanitization';
 import { useDashboardUIStore } from '@/store/dashboard.store';
 import type { WidgetConfigMode } from '@/components/dashboard/WidgetConfigModal';
@@ -47,14 +46,14 @@ export interface DashboardUIActions {
   
   // Widget Modal Management
   handleCloseWidgetModal: () => void;
-  handleWidgetModalSubmit: (widgetData: Partial<GridWidget>) => void;
+  handleWidgetModalSubmit: (widgetData: Partial<DashboardWidget>) => void;
 }
 
 export interface DashboardUIState {
   // State Values
   isEditMode: boolean;
   hasChanges: boolean;
-  widgets: GridWidget[];
+  widgets: DashboardWidget[];
   layouts: Layouts;
   canUndo: boolean;
   canRedo: boolean;
@@ -62,7 +61,7 @@ export interface DashboardUIState {
   // Widget Modal State
   widgetModalOpen: boolean;
   widgetModalMode: WidgetConfigMode;
-  widgetModalData?: GridWidget;
+  widgetModalData?: DashboardWidget | undefined;
   
   // Actions
   actions: DashboardUIActions;
@@ -94,12 +93,12 @@ export function useDashboardUIState(): DashboardUIState {
   // Local modal state
   const [widgetModalOpen, setWidgetModalOpen] = useState(false);
   const [widgetModalMode, setWidgetModalMode] = useState<WidgetConfigMode>('create');
-  const [widgetModalData, setWidgetModalData] = useState<GridWidget | undefined>();
+  const [widgetModalData, setWidgetModalData] = useState<DashboardWidget | undefined>();
 
   // Initialize demo widgets if empty (temporary - will be replaced with real data)
   useEffect(() => {
     if (widgets.length === 0) {
-      const demoWidgets: GridWidget[] = [
+      const demoWidgets: DashboardWidget[] = [
         {
           id: 'widget-1',
           type: 'line',
@@ -173,13 +172,21 @@ export function useDashboardUIState(): DashboardUIState {
 
   // Delete Widget
   const handleDeleteWidget = useCallback((widgetId: string) => {
+    console.log('handleDeleteWidget called with widgetId:', widgetId);
+    console.log('Current widgets:', widgets.map(w => w.id));
+    
     // Save current state to undo stack
     pushUndoState({ widgets, layouts });
     clearRedoStack();
 
-    setWidgets(widgets.filter(w => w.id !== widgetId));
+    const filteredWidgets = widgets.filter(w => w.id !== widgetId);
+    console.log('Filtered widgets:', filteredWidgets.map(w => w.id));
+    
+    setWidgets(filteredWidgets);
     setLayouts(removeWidgetFromLayouts(layouts, widgetId));
     setHasChanges(true);
+    
+    console.log('Widget deletion completed for:', widgetId);
   }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]);
 
   // Duplicate Widget
@@ -192,7 +199,7 @@ export function useDashboardUIState(): DashboardUIState {
     clearRedoStack();
 
     const newWidgetId = `widget-${Date.now()}`;
-    const newWidget: GridWidget = {
+    const newWidget: DashboardWidget = {
       ...widget,
       id: newWidgetId,
       title: `${widget.title} (Kopie)`,
@@ -237,7 +244,7 @@ export function useDashboardUIState(): DashboardUIState {
     setWidgetModalData(undefined);
   }, []);
 
-  const handleWidgetModalSubmit = useCallback((widgetData: Partial<GridWidget>) => {
+  const handleWidgetModalSubmit = useCallback((widgetData: Partial<DashboardWidget>) => {
     // Save current state to undo stack
     pushUndoState({ widgets, layouts });
     clearRedoStack();
@@ -245,12 +252,12 @@ export function useDashboardUIState(): DashboardUIState {
     if (widgetModalMode === 'create') {
       // Create new widget
       const newWidgetId = `widget-${Date.now()}`;
-      const newWidget: GridWidget = {
+      const newWidget: DashboardWidget = {
         id: newWidgetId,
         type: widgetData.type || 'line',
         title: widgetData.title || 'Neues Widget',
         config: widgetData.config || {},
-        dataSource: widgetData.dataSource,
+        ...(widgetData.dataSource && { dataSource: widgetData.dataSource }),
       };
 
       setWidgets([...widgets, newWidget]);
@@ -263,7 +270,7 @@ export function useDashboardUIState(): DashboardUIState {
               ...w, 
               title: widgetData.title || w.title,
               config: widgetData.config || w.config,
-              dataSource: widgetData.dataSource || w.dataSource,
+              ...(widgetData.dataSource !== undefined && { dataSource: widgetData.dataSource }),
             }
           : w
       ));

@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import type { Layout, Layouts } from 'react-grid-layout';
 
-import type { GridWidget } from '@/types/dashboard.types';
+import type { DashboardWidget } from '@/types/dashboard.types';
 import { WidgetRenderer } from './WidgetRenderer';
 
 // Import grid layout styles
@@ -15,16 +15,17 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 /**
  * Responsive Dashboard Props
+ * Fixed for exactOptionalPropertyTypes compatibility
  */
 interface ResponsiveDashboardProps {
-  widgets: GridWidget[];
+  widgets: DashboardWidget[];
   layouts: Layouts;
-  onLayoutChange?: (currentLayout: Layout[], allLayouts: Layouts) => void;
-  isEditMode?: boolean;
-  onEditWidget?: (widgetId: string) => void;
-  onDeleteWidget?: (widgetId: string) => void;
-  onDuplicateWidget?: (widgetId: string) => void;
-  className?: string;
+  onLayoutChange?: ((currentLayout: Layout[], allLayouts: Layouts) => void) | undefined;
+  isEditMode?: boolean | undefined;
+  onEditWidget?: ((widgetId: string) => void) | undefined;
+  onDeleteWidget?: ((widgetId: string) => void) | undefined;
+  onDuplicateWidget?: ((widgetId: string) => void) | undefined;
+  className?: string | undefined;
 }
 
 /**
@@ -70,10 +71,25 @@ export function ResponsiveDashboard({
           <div key={widget.id} className="widget-content">
             <WidgetRenderer
               widget={widget}
-              isEditMode={isEditMode}
-              onEdit={onEditWidget ? () => onEditWidget(widget.id) : undefined}
-              onDelete={onDeleteWidget ? () => onDeleteWidget(widget.id) : undefined}
-              onDuplicate={onDuplicateWidget ? () => onDuplicateWidget(widget.id) : undefined}
+              isEditMode={isEditMode || false}
+              {...(onEditWidget && { 
+                onEdit: () => {
+                  console.log('ResponsiveDashboard onEdit called for:', widget.id);
+                  onEditWidget(widget.id);
+                }
+              })}
+              {...(onDeleteWidget && { 
+                onDelete: () => {
+                  console.log('ResponsiveDashboard onDelete called for:', widget.id);
+                  onDeleteWidget(widget.id);
+                }
+              })}
+              {...(onDuplicateWidget && { 
+                onDuplicate: () => {
+                  console.log('ResponsiveDashboard onDuplicate called for:', widget.id);
+                  onDuplicateWidget(widget.id);
+                }
+              })}
             />
           </div>
         ))}
@@ -85,7 +101,7 @@ export function ResponsiveDashboard({
 /**
  * Generate default layouts for a widget
  */
-export function generateDefaultLayouts(widgetId: string, type: GridWidget['type']): Layouts {
+export function generateDefaultLayouts(widgetId: string, type: DashboardWidget['type']): Layouts {
   // Default sizes based on widget type
   const defaultSizes = {
     line: { w: 6, h: 4 },
@@ -95,7 +111,7 @@ export function generateDefaultLayouts(widgetId: string, type: GridWidget['type'
     text: { w: 4, h: 3 },
   };
 
-  const size = defaultSizes[type];
+  const size = defaultSizes[type as keyof typeof defaultSizes];
 
   return {
     lg: [{ i: widgetId, x: 0, y: 0, ...size }],

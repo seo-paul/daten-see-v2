@@ -37,7 +37,7 @@ export default function ApiTestPage(): React.JSX.Element {
     widgets: [
       {
         id: 'widget-1',
-        type: 'chart',
+        type: 'line',
         title: 'Sessions Chart',
         position: { x: 0, y: 0, w: 6, h: 4 },
         config: {

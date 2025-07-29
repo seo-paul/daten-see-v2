@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-import type { GridWidget } from '@/types/dashboard.types';
+import type { DashboardWidget } from '@/types/dashboard.types';
 import type { Layouts } from 'react-grid-layout';
 
 /**
@@ -22,25 +22,25 @@ interface DashboardUIStore {
   hasChanges: boolean;
   
   // Widget Management State  
-  widgets: GridWidget[];
+  widgets: DashboardWidget[];
   layouts: Layouts;
   
   // Undo/Redo State
-  undoStack: {widgets: GridWidget[]; layouts: Layouts}[];
-  redoStack: {widgets: GridWidget[]; layouts: Layouts}[];
+  undoStack: {widgets: DashboardWidget[]; layouts: Layouts}[];
+  redoStack: {widgets: DashboardWidget[]; layouts: Layouts}[];
   
   // UI Actions
   setEditMode: (isEditMode: boolean) => void;
   setHasChanges: (hasChanges: boolean) => void;
-  setWidgets: (widgets: GridWidget[]) => void;
+  setWidgets: (widgets: DashboardWidget[]) => void;
   setLayouts: (layouts: Layouts) => void;
   
   // Undo/Redo Actions
-  pushUndoState: (state: {widgets: GridWidget[]; layouts: Layouts}) => void;
-  pushRedoState: (state: {widgets: GridWidget[]; layouts: Layouts}) => void;
+  pushUndoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}) => void;
+  pushRedoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}) => void;
   clearRedoStack: () => void;
-  undo: () => {widgets: GridWidget[]; layouts: Layouts} | null;
-  redo: () => {widgets: GridWidget[]; layouts: Layouts} | null;
+  undo: () => {widgets: DashboardWidget[]; layouts: Layouts} | null;
+  redo: () => {widgets: DashboardWidget[]; layouts: Layouts} | null;
   
   // Reset
   resetUIState: () => void;
@@ -73,7 +73,7 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       set({ hasChanges });
     },
 
-    setWidgets: (widgets: GridWidget[]): void => {
+    setWidgets: (widgets: DashboardWidget[]): void => {
       set({ widgets, hasChanges: true });
     },
 
@@ -82,13 +82,13 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
     },
 
     // Undo/Redo Actions
-    pushUndoState: (state: {widgets: GridWidget[]; layouts: Layouts}): void => {
+    pushUndoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}): void => {
       set(current => ({
         undoStack: [...current.undoStack, state]
       }));
     },
 
-    pushRedoState: (state: {widgets: GridWidget[]; layouts: Layouts}): void => {
+    pushRedoState: (state: {widgets: DashboardWidget[]; layouts: Layouts}): void => {
       set(current => ({
         redoStack: [...current.redoStack, state]
       }));
@@ -98,7 +98,7 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       set({ redoStack: [] });
     },
 
-    undo: (): {widgets: GridWidget[]; layouts: Layouts} | null => {
+    undo: (): {widgets: DashboardWidget[]; layouts: Layouts} | null => {
       const { undoStack } = get();
       if (undoStack.length === 0) return null;
       
@@ -115,7 +115,7 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       return previousState;
     },
 
-    redo: (): {widgets: GridWidget[]; layouts: Layouts} | null => {
+    redo: (): {widgets: DashboardWidget[]; layouts: Layouts} | null => {
       const { redoStack } = get();
       if (redoStack.length === 0) return null;
       
