@@ -127,38 +127,36 @@ export function useDashboardUIState(_dashboardId = 'demo-dashboard', _userId?: s
     setWidgetModalOpen(true);
   }, []);
 
-  // Delete Widget - STALE CLOSURE FIX WITH FUNCTIONAL UPDATES
+  // Delete Widget - ATOMIC UPDATE APPROACH
   const handleDeleteWidget = useCallback((widgetId: string) => {
     console.log(`🗑️ DELETE ATTEMPT: Widget ${widgetId}`);
     
-    // Use current state from callback to avoid stale closures
-    const currentWidgets = useDashboardUIStore.getState().widgets;
-    const currentLayouts = useDashboardUIStore.getState().layouts;
-    
-    const widget = currentWidgets.find(w => w.id === widgetId);
-    
-    if (!widget) {
-      console.warn(`❌ Widget not found: ${widgetId}`, {
-        requestedId: widgetId,
-        availableIds: currentWidgets.map(w => w.id)
-      });
-      return;
-    }
-
     try {
+      // Perform atomic state update to prevent race conditions
+      const store = useDashboardUIStore.getState();
+      const widget = store.widgets.find(w => w.id === widgetId);
+      
+      if (!widget) {
+        console.warn(`❌ Widget not found: ${widgetId}`, {
+          requestedId: widgetId,
+          availableIds: store.widgets.map(w => w.id)
+        });
+        return;
+      }
+
       console.log(`🔄 DELETE PROCESSING: Widget ${widgetId}`, {
         widgetType: widget.type,
-        currentCount: currentWidgets.length
+        currentCount: store.widgets.length
       });
 
       // Mark as modified to prevent demo data re-initialization
       markAsModified();
 
       // Save current state to undo stack before any modifications
-      pushUndoState({ widgets: currentWidgets, layouts: currentLayouts });
+      pushUndoState({ widgets: store.widgets, layouts: store.layouts });
       clearRedoStack();
 
-      // Use functional updates to prevent stale closure issues
+      // Atomic updates using functional approach
       setWidgets(prevWidgets => {
         const filtered = prevWidgets.filter(w => w.id !== widgetId);
         console.log(`✅ WIDGETS UPDATED: ${prevWidgets.length} → ${filtered.length}`);
@@ -166,9 +164,9 @@ export function useDashboardUIState(_dashboardId = 'demo-dashboard', _userId?: s
       });
       
       setLayouts(prevLayouts => {
-        const filtered = removeWidgetFromLayouts(prevLayouts, widgetId);
+        const updated = removeWidgetFromLayouts(prevLayouts, widgetId);
         console.log(`✅ LAYOUTS UPDATED: Widget ${widgetId} removed`);
-        return filtered;
+        return updated;
       });
       
       setHasChanges(true);
@@ -178,7 +176,7 @@ export function useDashboardUIState(_dashboardId = 'demo-dashboard', _userId?: s
       console.error(`❌ DELETE FAILED: Widget ${widgetId}`, error);
       throw error; // Re-throw for error boundaries
     }
-  }, [markAsModified, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]); // Removed widgets/layouts deps
+  }, [markAsModified, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]);
 
   // Duplicate Widget
   const handleDuplicateWidget = useCallback((widgetId: string) => {

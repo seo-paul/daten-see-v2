@@ -174,11 +174,13 @@
   justify-content: center !important;
   cursor: pointer !important;
   transition: all 150ms ease !important;
-  z-index: 1000 !important; /* Higher than grid elements (was 100) */
+  z-index: 9999 !important; /* Maximum z-index to ensure clickability */
   position: relative !important;
   pointer-events: auto !important;
   /* Prevent grid drag from interfering */
-  touch-action: none !important;
+  touch-action: manipulation !important;
+  /* Ensure the button is always on top */
+  isolation: isolate !important;
 }
 
 .delete-widget-btn:hover {
@@ -195,22 +197,45 @@
 /* Ensure button is always clickable in edit mode - CRITICAL FOR WIDGET DELETION */
 .widget-edit-mode .delete-widget-btn {
   pointer-events: auto !important;
-  z-index: 1001 !important; /* Even higher in edit mode */
+  z-index: 10000 !important; /* Maximum priority in edit mode */
   position: relative !important;
+  isolation: isolate !important;
 }
 
 /* Prevent grid layout drag events from interfering with delete button */
 .widget-edit-mode .widget-toolbar {
-  z-index: 1000 !important;
+  z-index: 9999 !important;
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+/* DISABLE drag interference - always allow delete button clicks */
+.react-grid-item .delete-widget-btn {
+  pointer-events: auto !important; /* Always clickable */
+}
+
+/* Prevent any grid drag interference */
+.delete-widget-btn * {
+  pointer-events: none !important; /* Prevent child elements from interfering */
+}
+
+/* CRITICAL FIX: Prevent React Grid Layout from capturing mouse events on buttons */
+.react-grid-item .widget-toolbar {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
   position: relative !important;
 }
 
-/* Fix for React Grid Layout drag interference */
-.react-grid-item.react-draggable-dragging .delete-widget-btn {
+.react-grid-item .widget-toolbar * {
+  pointer-events: auto !important;
+}
+
+/* Ensure grid doesn't interfere with button interactions */
+.react-grid-item.react-draggable-dragging .widget-toolbar {
   pointer-events: none !important; /* Disable during drag */
 }
 
-.react-grid-item:not(.react-draggable-dragging) .delete-widget-btn {
+.react-grid-item:not(.react-draggable-dragging) .widget-toolbar {
   pointer-events: auto !important; /* Enable when not dragging */
 }
 

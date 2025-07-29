@@ -69,7 +69,20 @@ function ResponsiveDashboardBase({
     <div className="dashboard-grid-container">
       <ResponsiveGridLayout {...gridProps}>
         {widgets.map((widget) => (
-          <div key={widget.id} className="widget-content">
+          <div 
+            key={widget.id} 
+            className="widget-content"
+            // CRITICAL FIX: Prevent grid drag from interfering with button clicks
+            onMouseDown={(e) => {
+              // Allow clicks on buttons and toolbar elements to pass through
+              const target = e.target as HTMLElement;
+              if (target.closest('.widget-toolbar') || 
+                  target.closest('.delete-widget-btn') ||
+                  target.closest('button')) {
+                e.stopPropagation(); // Prevent grid drag from starting
+              }
+            }}
+          >
             <WidgetRenderer
               widget={widget}
               isEditMode={isEditMode || false}

@@ -56,28 +56,45 @@ function WidgetRendererBase({
           <div className="widget-toolbar">
             <button
               type="button"
+              onMouseDown={(e) => {
+                // CRITICAL: Prevent grid layout from capturing this event
+                e.stopPropagation();
+                e.preventDefault();
+                console.log('🎯 MOUSE DOWN on delete button - preventing grid drag');
+              }}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Use data attribute for more reliable debouncing
+                console.log('🎯 DELETE BUTTON CLICKED:', widget.id);
+                console.log('🎯 onDelete function available:', typeof onDelete);
+                
+                // Enhanced debouncing and error handling
                 const button = e.currentTarget;
                 if (button.hasAttribute('data-deleting')) {
                   console.log('🚫 DELETE BLOCKED: Already deleting');
                   return;
                 }
                 
-                console.log('🎯 DELETE BUTTON CLICKED:', widget.id);
                 button.setAttribute('data-deleting', 'true');
+                button.style.opacity = '0.5';
                 
-                // Execute deletion immediately
+                // Execute deletion with proper error handling
                 try {
-                  onDelete?.();
+                  if (onDelete) {
+                    console.log('🔄 CALLING onDelete function...');
+                    onDelete();
+                  } else {
+                    console.error('❌ onDelete function is undefined!');
+                  }
+                } catch (error) {
+                  console.error('❌ DELETE ERROR:', error);
                 } finally {
                   // Clean up after deletion completes or fails
                   setTimeout(() => {
                     button.removeAttribute('data-deleting');
-                  }, 500);
+                    button.style.opacity = '1';
+                  }, 1000);
                 }
               }}
               title="Widget löschen"

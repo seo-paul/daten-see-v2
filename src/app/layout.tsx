@@ -53,7 +53,10 @@ export default function RootLayout({
         
         {/* Auto-Testing System for Development */}
         {process.env.NODE_ENV === 'development' && (
-          <script src="/auto-testing-loader.js" async />
+          <>
+            <script src="/auto-testing-loader.js" async />
+            <script src="/debug-log-writer.js" async />
+          </>
         )}
         
         {/* Development error overlay */}

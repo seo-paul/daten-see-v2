@@ -37,8 +37,8 @@ interface DashboardUIStore {
   // UI Actions
   setEditMode: (isEditMode: boolean) => void;
   setHasChanges: (hasChanges: boolean) => void;
-  setWidgets: (widgets: DashboardWidget[]) => void;
-  setLayouts: (layouts: Layouts) => void;
+  setWidgets: (widgets: DashboardWidget[] | ((prev: DashboardWidget[]) => DashboardWidget[])) => void;
+  setLayouts: (layouts: Layouts | ((prev: Layouts) => Layouts)) => void;
   
   // Initialization Actions
   initializeDemoData: () => void;
@@ -87,12 +87,28 @@ export const useDashboardUIStore = create<DashboardUIStore>()(
       set({ hasChanges });
     },
 
-    setWidgets: (widgets: DashboardWidget[]): void => {
-      set({ widgets, hasChanges: true, hasBeenModified: true });
+    setWidgets: (widgets: DashboardWidget[] | ((prev: DashboardWidget[]) => DashboardWidget[])): void => {
+      if (typeof widgets === 'function') {
+        set((state) => ({ 
+          widgets: widgets(state.widgets), 
+          hasChanges: true, 
+          hasBeenModified: true 
+        }));
+      } else {
+        set({ widgets, hasChanges: true, hasBeenModified: true });
+      }
     },
 
-    setLayouts: (layouts: Layouts): void => {
-      set({ layouts, hasChanges: true, hasBeenModified: true });
+    setLayouts: (layouts: Layouts | ((prev: Layouts) => Layouts)): void => {
+      if (typeof layouts === 'function') {
+        set((state) => ({ 
+          layouts: layouts(state.layouts), 
+          hasChanges: true, 
+          hasBeenModified: true 
+        }));
+      } else {
+        set({ layouts, hasChanges: true, hasBeenModified: true });
+      }
     },
 
     // Initialization Actions - CRITICAL for preventing race conditions
