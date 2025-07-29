@@ -8,7 +8,7 @@ export interface ToastOptions {
   duration?: number;
 }
 
-export function useToast() {
+export function useToast(): { show: (message: string, type?: 'success' | 'error' | 'info') => void; toasts: JSX.Element } {
   const [toasts, setToasts] = useState<(ToastOptions & { id: string })[]>([]);
 
   const showToast = useCallback((options: ToastOptions) => {

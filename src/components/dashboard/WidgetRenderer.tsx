@@ -1,14 +1,15 @@
 'use client';
 
 import { X, Move3D } from 'lucide-react';
+import React from 'react';
 
 import { 
   DashboardLineChart, 
   DashboardBarChart, 
   DashboardPieChart,
   DashboardKPICard,
-  type SimpleChartData,
 } from '@/components/charts';
+import { mockLineData, mockBarData, mockPieData } from '@/lib/mock-data';
 import type { DashboardWidget } from '@/types/dashboard.types';
 
 /**
@@ -27,11 +28,11 @@ interface WidgetRendererProps {
  * Widget Renderer Component
  * Renders the actual chart/content based on widget type
  */
-export function WidgetRenderer({
+function WidgetRendererBase({
   widget,
   isEditMode,
   onDelete,
-}: WidgetRendererProps) {
+}: WidgetRendererProps): React.ReactElement {
 
   return (
     <div className={`widget-container relative h-full ${isEditMode ? 'widget-edit-mode' : ''}`}>
@@ -56,14 +57,10 @@ export function WidgetRenderer({
             <button
               type="button"
               onClick={(e) => {
-                console.log('Delete button clicked for widget:', widget.id);
                 e.preventDefault();
                 e.stopPropagation();
                 if (onDelete) {
-                  console.log('Calling onDelete for widget:', widget.id);
                   onDelete();
-                } else {
-                  console.warn('onDelete handler not provided for widget:', widget.id);
                 }
               }}
               title="Widget löschen"
@@ -86,31 +83,7 @@ export function WidgetRenderer({
  * Widget Content Component
  * Renders the appropriate chart component based on widget type
  */
-function WidgetContent({ widget }: { widget: DashboardWidget }) {
-  // Mock data for demonstration - will be replaced with real data
-  const mockLineData: SimpleChartData = {
-    labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun'],
-    datasets: [{
-      label: 'Umsatz 2024',
-      data: [45000, 52000, 48000, 61000, 55000, 67000],
-    }],
-  };
-
-  const mockBarData: SimpleChartData = {
-    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-    datasets: [{
-      label: '2024',
-      data: [145000, 183000, 203000, 196000],
-    }],
-  };
-
-  const mockPieData: SimpleChartData = {
-    labels: ['Marketing', 'Personal', 'Technologie', 'Büro'],
-    datasets: [{
-      label: 'Ausgaben',
-      data: [35000, 45000, 25000, 15000],
-    }],
-  };
+function WidgetContent({ widget }: { widget: DashboardWidget }): React.ReactElement {
 
   switch (widget.type) {
     case 'line':
@@ -177,9 +150,9 @@ function WidgetContent({ widget }: { widget: DashboardWidget }) {
  * Generate a new widget with default configuration
  */
 export function createDefaultWidget(type: DashboardWidget['type']): Omit<DashboardWidget, 'id'> {
-  const defaultConfigs = {
+  const defaultConfigs: Record<DashboardWidget['type'], Omit<DashboardWidget, 'id'>> = {
     line: {
-      type: 'line' as const,
+      type: 'line',
       title: 'Liniendiagramm',
       config: {
         height: 250,
@@ -188,7 +161,7 @@ export function createDefaultWidget(type: DashboardWidget['type']): Omit<Dashboa
       },
     },
     bar: {
-      type: 'bar' as const,
+      type: 'bar',
       title: 'Balkendiagramm',
       config: {
         height: 250,
@@ -197,7 +170,7 @@ export function createDefaultWidget(type: DashboardWidget['type']): Omit<Dashboa
       },
     },
     pie: {
-      type: 'pie' as const,
+      type: 'pie',
       title: 'Kreisdiagramm',
       config: {
         height: 250,
@@ -205,7 +178,7 @@ export function createDefaultWidget(type: DashboardWidget['type']): Omit<Dashboa
       },
     },
     kpi: {
-      type: 'kpi' as const,
+      type: 'kpi',
       title: 'KPI Metrik',
       config: {
         metric: 'Gesamtumsatz',
@@ -214,7 +187,7 @@ export function createDefaultWidget(type: DashboardWidget['type']): Omit<Dashboa
       },
     },
     text: {
-      type: 'text' as const,
+      type: 'text',
       title: 'Text Widget',
       config: {
         content: 'Fügen Sie hier Ihren Text ein...',
@@ -224,3 +197,9 @@ export function createDefaultWidget(type: DashboardWidget['type']): Omit<Dashboa
 
   return defaultConfigs[type as keyof typeof defaultConfigs];
 }
+
+/**
+ * Memoized Widget Renderer
+ * Prevents unnecessary re-renders when widget props haven't changed
+ */
+export const WidgetRenderer = React.memo(WidgetRendererBase);

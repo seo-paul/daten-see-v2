@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-import { getDefaultChartOptions, formatTooltip, CHART_COLORS } from '@/lib/charts/config';
+import { formatTooltip, CHART_COLORS } from '@/lib/charts/config';
 
 // Register Chart.js components
 ChartJS.register(

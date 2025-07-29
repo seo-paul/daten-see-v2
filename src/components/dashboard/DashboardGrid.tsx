@@ -3,8 +3,9 @@
  * Grid layout for dashboard cards
  */
 
-import { DashboardCard } from './DashboardCard';
 import type { DashboardListItem } from '@/types/dashboard.types';
+
+import { DashboardCard } from './DashboardCard';
 
 interface DashboardGridProps {
   dashboards: DashboardListItem[];

@@ -1,8 +1,8 @@
+import type { Layouts } from 'react-grid-layout';
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 import type { DashboardWidget } from '@/types/dashboard.types';
-import type { Layouts } from 'react-grid-layout';
 
 /**
  * Dashboard UI State Store (Zustand)

@@ -84,7 +84,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
   };
 
   const navigationItems = [
-    { href: '/dashboards', label: 'Dashboards', icon: <BarChart3 className="w-4 h-4" /> },
+    { href: '/dashboard', label: 'Dashboards', icon: <BarChart3 className="w-4 h-4" /> },
     { href: '/community', label: 'Community', icon: <User className="w-4 h-4" /> },
   ];
 
@@ -115,7 +115,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
               {navigationItems.map((item) => (
                 <button 
                   key={item.href} 
-                  onClick={() => router.push(item.href as '/dashboards' | '/community' | '/')}
+                  onClick={() => router.push(item.href as '/dashboard' | '/community' | '/')}
                   className="text-left"
                 >
                   <NavbarButton leftIcon={item.icon}>
@@ -188,7 +188,7 @@ const HeaderLayout = React.forwardRef<HTMLElement, HeaderLayoutProps>(({
                 <button
                   key={item.href} 
                   onClick={() => {
-                    router.push(item.href as '/dashboards' | '/community' | '/');
+                    router.push(item.href as '/dashboard' | '/community' | '/');
                     setMobileMenuOpen(false);
                   }}
                   className="block w-full text-left"

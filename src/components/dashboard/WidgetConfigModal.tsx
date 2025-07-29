@@ -26,7 +26,7 @@ interface WidgetConfigModalProps {
 interface WidgetFormData {
   type: DashboardWidget['type'];
   title: string;
-  config: Record<string, any>;
+  config: Record<string, unknown>;
 }
 
 const WIDGET_TYPES = [
@@ -151,7 +151,7 @@ export function WidgetConfigModal({
     onClose();
   };
 
-  const getDefaultConfig = (type: DashboardWidget['type']): Record<string, any> => {
+  const getDefaultConfig = (type: DashboardWidget['type']): Record<string, unknown> => {
     switch (type) {
       case 'kpi':
         return {

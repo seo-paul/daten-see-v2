@@ -2,10 +2,10 @@
 
 import { useParams } from 'next/navigation';
 
-import { DashboardHeader } from '@/components/layout/DashboardHeader';
-import { MainLayout } from '@/components/layout/MainLayout';
 import { ResponsiveDashboard } from '@/components/dashboard/ResponsiveDashboard';
 import { WidgetConfigModal } from '@/components/dashboard/WidgetConfigModal';
+import { DashboardHeader } from '@/components/layout/DashboardHeader';
+import { MainLayout } from '@/components/layout/MainLayout';
 import { useDashboard } from '@/hooks/dashboard/useDashboardQueries';
 import { useDashboardUIState } from '@/hooks/dashboard/useDashboardUIState';
 

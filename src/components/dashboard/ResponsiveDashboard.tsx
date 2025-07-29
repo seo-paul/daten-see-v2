@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import type { Layout, Layouts } from 'react-grid-layout';
 
 import type { DashboardWidget } from '@/types/dashboard.types';
+
 import { WidgetRenderer } from './WidgetRenderer';
 
 // Import grid layout styles
@@ -32,7 +33,7 @@ interface ResponsiveDashboardProps {
  * Responsive Dashboard Component
  * Automatically adjusts layout for different screen sizes
  */
-export function ResponsiveDashboard({
+function ResponsiveDashboardBase({
   widgets,
   layouts: initialLayouts,
   onLayoutChange,
@@ -41,11 +42,11 @@ export function ResponsiveDashboard({
   onDeleteWidget,
   onDuplicateWidget,
   className = '',
-}: ResponsiveDashboardProps) {
+}: ResponsiveDashboardProps): React.ReactElement {
   const [layouts, setLayouts] = useState<Layouts>(initialLayouts);
 
   // Handle layout changes across all breakpoints
-  const handleLayoutChange = useCallback((currentLayout: Layout[], allLayouts: Layouts) => {
+  const handleLayoutChange = useCallback((currentLayout: Layout[], allLayouts: Layouts): void => {
     setLayouts(allLayouts);
     onLayoutChange?.(currentLayout, allLayouts);
   }, [onLayoutChange]);
@@ -73,20 +74,17 @@ export function ResponsiveDashboard({
               widget={widget}
               isEditMode={isEditMode || false}
               {...(onEditWidget && { 
-                onEdit: () => {
-                  console.log('ResponsiveDashboard onEdit called for:', widget.id);
+                onEdit: (): void => {
                   onEditWidget(widget.id);
                 }
               })}
               {...(onDeleteWidget && { 
-                onDelete: () => {
-                  console.log('ResponsiveDashboard onDelete called for:', widget.id);
+                onDelete: (): void => {
                   onDeleteWidget(widget.id);
                 }
               })}
               {...(onDuplicateWidget && { 
-                onDuplicate: () => {
-                  console.log('ResponsiveDashboard onDuplicate called for:', widget.id);
+                onDuplicate: (): void => {
                   onDuplicateWidget(widget.id);
                 }
               })}
@@ -181,3 +179,9 @@ export const EMPTY_LAYOUTS: Layouts = {
   xs: [],
   xxs: [],
 };
+
+/**
+ * Memoized Responsive Dashboard
+ * Prevents unnecessary re-renders when props haven't changed
+ */
+export const ResponsiveDashboard = React.memo(ResponsiveDashboardBase);

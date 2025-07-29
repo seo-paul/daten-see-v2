@@ -3,6 +3,7 @@
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from 'lucide-react';
 
 import { CHART_COLORS, formatChartValue } from '@/lib/charts/config';
+
 import { TrendLineChart } from './LineChart';
 import { DonutProgress } from './PieChart';
 
@@ -213,7 +214,6 @@ export function CompactKPICard({
   change,
   changeType = 'percentage',
   trend = 'neutral',
-  color = CHART_COLORS.primary,
   className = '',
 }: {
   title: string;

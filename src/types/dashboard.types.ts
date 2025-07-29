@@ -1,4 +1,12 @@
 /**
+ * Import and re-export unified types from API types
+ */
+import type { WidgetType, WidgetConfig } from './api';
+
+// Re-export for other files
+export type { WidgetType, WidgetConfig };
+
+/**
  * API-compatible Dashboard Widget Interface
  * Used for server communication with position/size data
  */
@@ -34,10 +42,6 @@ export interface DashboardWidget {
   dataSource?: string;
 }
 
-/**
- * Re-export WidgetConfig from API types for consistency
- */
-export type { WidgetConfig } from './api';
 
 
 export interface WidgetPosition {
@@ -57,11 +61,6 @@ export interface DashboardSettings {
   refreshInterval: number; // in seconds
 }
 
-/**
- * Re-export unified types from API types
- * This ensures compatibility between API and Grid systems
- */
-export type { WidgetType } from './api';
 
 /**
  * Grid Layout Widget Interface (DEPRECATED)

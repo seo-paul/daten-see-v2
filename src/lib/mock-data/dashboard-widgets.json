@@ -1,0 +1,71 @@
+{
+  "lineChartData": {
+    "labels": ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun"],
+    "datasets": [
+      {
+        "label": "Umsatz 2024",
+        "data": [45000, 52000, 48000, 61000, 55000, 67000]
+      }
+    ]
+  },
+  "barChartData": {
+    "labels": ["Q1", "Q2", "Q3", "Q4"],
+    "datasets": [
+      {
+        "label": "2024",
+        "data": [145000, 183000, 203000, 196000]
+      }
+    ]
+  },
+  "pieChartData": {
+    "labels": ["Marketing", "Personal", "Technologie", "Büro"],
+    "datasets": [
+      {
+        "label": "Ausgaben",
+        "data": [35000, 45000, 25000, 15000]
+      }
+    ]
+  },
+  "demoWidgets": [
+    {
+      "id": "widget-1",
+      "type": "line",
+      "title": "Marketing Performance",
+      "config": {}
+    },
+    {
+      "id": "widget-2",
+      "type": "kpi",
+      "title": "Gesamtumsatz",
+      "config": {
+        "metric": "Gesamtumsatz",
+        "value": 89500,
+        "previousValue": 76200,
+        "unit": "currency",
+        "trend": "up"
+      }
+    }
+  ],
+  "demoLayouts": {
+    "lg": [
+      { "i": "widget-1", "x": 0, "y": 0, "w": 8, "h": 4 },
+      { "i": "widget-2", "x": 8, "y": 0, "w": 4, "h": 3 }
+    ],
+    "md": [
+      { "i": "widget-1", "x": 0, "y": 0, "w": 6, "h": 4 },
+      { "i": "widget-2", "x": 6, "y": 0, "w": 4, "h": 3 }
+    ],
+    "sm": [
+      { "i": "widget-1", "x": 0, "y": 0, "w": 6, "h": 4 },
+      { "i": "widget-2", "x": 0, "y": 4, "w": 6, "h": 3 }
+    ],
+    "xs": [
+      { "i": "widget-1", "x": 0, "y": 0, "w": 4, "h": 4 },
+      { "i": "widget-2", "x": 0, "y": 4, "w": 4, "h": 3 }
+    ],
+    "xxs": [
+      { "i": "widget-1", "x": 0, "y": 0, "w": 2, "h": 4 },
+      { "i": "widget-2", "x": 0, "y": 4, "w": 2, "h": 3 }
+    ]
+  }
+}

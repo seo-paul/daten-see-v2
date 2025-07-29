@@ -22,10 +22,10 @@ import {
   mergeLayouts,
   removeWidgetFromLayouts,
 } from '@/components/dashboard/ResponsiveDashboard';
-import type { DashboardWidget } from '@/types/dashboard.types';
-import { sanitizeName } from '@/lib/utils/sanitization';
-import { useDashboardUIStore } from '@/store/dashboard.store';
 import type { WidgetConfigMode } from '@/components/dashboard/WidgetConfigModal';
+import { demoWidgets, demoLayouts } from '@/lib/mock-data';
+import { useDashboardUIStore } from '@/store/dashboard.store';
+import type { DashboardWidget } from '@/types/dashboard.types';
 
 export interface DashboardUIActions {
   // Edit Mode
@@ -95,67 +95,25 @@ export function useDashboardUIState(): DashboardUIState {
   const [widgetModalMode, setWidgetModalMode] = useState<WidgetConfigMode>('create');
   const [widgetModalData, setWidgetModalData] = useState<DashboardWidget | undefined>();
 
-  // Initialize demo widgets if empty (temporary - will be replaced with real data)
+  // Initialize demo widgets ONLY on first load (temporary - will be replaced with real data)
+  const [isInitialized, setIsInitialized] = useState(false);
+  
   useEffect(() => {
-    if (widgets.length === 0) {
-      const demoWidgets: DashboardWidget[] = [
-        {
-          id: 'widget-1',
-          type: 'line',
-          title: 'Marketing Performance',
-          config: {},
-        },
-        {
-          id: 'widget-2',
-          type: 'kpi',
-          title: 'Gesamtumsatz',
-          config: {
-            metric: 'Gesamtumsatz',
-            value: 89500,
-            previousValue: 76200,
-            unit: 'currency',
-            trend: 'up',
-          },
-        },
-      ];
-
-      const demoLayouts: Layouts = {
-        lg: [
-          { i: 'widget-1', x: 0, y: 0, w: 8, h: 4 },
-          { i: 'widget-2', x: 8, y: 0, w: 4, h: 3 },
-        ],
-        md: [
-          { i: 'widget-1', x: 0, y: 0, w: 6, h: 4 },
-          { i: 'widget-2', x: 6, y: 0, w: 4, h: 3 },
-        ],
-        sm: [
-          { i: 'widget-1', x: 0, y: 0, w: 6, h: 4 },
-          { i: 'widget-2', x: 0, y: 4, w: 6, h: 3 },
-        ],
-        xs: [
-          { i: 'widget-1', x: 0, y: 0, w: 4, h: 4 },
-          { i: 'widget-2', x: 0, y: 4, w: 4, h: 3 },
-        ],
-        xxs: [
-          { i: 'widget-1', x: 0, y: 0, w: 2, h: 4 },
-          { i: 'widget-2', x: 0, y: 4, w: 2, h: 3 },
-        ],
-      };
-
+    if (widgets.length === 0 && !isInitialized) {
       setWidgets(demoWidgets);
       setLayouts(demoLayouts);
+      setIsInitialized(true);
     }
-  }, [widgets.length, setWidgets, setLayouts]);
+  }, [widgets.length, isInitialized, setWidgets, setLayouts]);
 
   // Edit Mode Toggle
   const handleToggleEditMode = useCallback(() => {
     setEditMode(!isEditMode);
     if (isEditMode && hasChanges) {
       // Save changes when exiting edit mode
-      console.log('Saving dashboard changes:', { widgets, layouts });
       setHasChanges(false);
     }
-  }, [isEditMode, hasChanges, widgets, layouts, setEditMode, setHasChanges]);
+  }, [isEditMode, hasChanges, setEditMode, setHasChanges]);
 
   // Layout Change Handler
   const handleLayoutChange = useCallback((_currentLayout: Layout[], allLayouts: Layouts) => {
@@ -172,21 +130,15 @@ export function useDashboardUIState(): DashboardUIState {
 
   // Delete Widget
   const handleDeleteWidget = useCallback((widgetId: string) => {
-    console.log('handleDeleteWidget called with widgetId:', widgetId);
-    console.log('Current widgets:', widgets.map(w => w.id));
-    
     // Save current state to undo stack
     pushUndoState({ widgets, layouts });
     clearRedoStack();
 
     const filteredWidgets = widgets.filter(w => w.id !== widgetId);
-    console.log('Filtered widgets:', filteredWidgets.map(w => w.id));
     
     setWidgets(filteredWidgets);
     setLayouts(removeWidgetFromLayouts(layouts, widgetId));
     setHasChanges(true);
-    
-    console.log('Widget deletion completed for:', widgetId);
   }, [widgets, layouts, pushUndoState, clearRedoStack, setWidgets, setLayouts, setHasChanges]);
 
   // Duplicate Widget

@@ -224,7 +224,6 @@ export function SimpleKPICard({
   value,
   previousValue,
   unit = 'number',
-  color: _color = CHART_COLORS.primary, // Underscore prefix to mark as intentionally unused
   className = '',
 }: {
   title: string;

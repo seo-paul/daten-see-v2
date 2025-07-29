@@ -3,6 +3,18 @@
  * Generated and maintained types for all API endpoints
  */
 
+// ===== CHART DATA TYPES =====
+export interface ChartData {
+  labels: string[];
+  datasets: Array<{
+    label: string;
+    data: number[];
+    backgroundColor?: string | string[];
+    borderColor?: string | string[];
+    [key: string]: unknown;
+  }>;
+}
+
 // ===== DASHBOARD TYPES =====
 export interface Dashboard {
   id: string;
@@ -56,7 +68,7 @@ export interface WidgetConfig {
   timeRange?: TimeRange;
   
   // Chart specific (Grid level - for compatibility)
-  data?: any;
+  data?: ChartData;
   height?: number;
   showGrid?: boolean;
   showLegend?: boolean;
@@ -88,7 +100,7 @@ export interface WidgetConfig {
   filterOptions?: FilterOption[];
   
   // Generic config for extensibility
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface TableColumn {

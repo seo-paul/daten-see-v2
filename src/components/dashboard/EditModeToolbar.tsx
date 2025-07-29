@@ -47,7 +47,7 @@ export function EditModeToolbar({
         <Button
           variant="primary"
           context="page"
-          onClick={onUndo || (() => {})}
+          onClick={onUndo || ((): void => {})}
           disabled={!canUndo || !onUndo}
           className="!px-3"
           aria-label="Undo"
@@ -58,7 +58,7 @@ export function EditModeToolbar({
         <Button
           variant="primary"
           context="page"
-          onClick={onRedo || (() => {})}
+          onClick={onRedo || ((): void => {})}
           disabled={!canRedo || !onRedo}
           className="!px-3"
           aria-label="Redo"
@@ -74,7 +74,7 @@ export function EditModeToolbar({
           variant="primary"
           context="page"
           leftIcon={<Plus className="w-4 h-4" />}
-          onClick={onAddWidget || (() => {})}
+          onClick={onAddWidget || ((): void => {})}
           disabled={!onAddWidget}
         >
           Widget hinzufügen
@@ -83,7 +83,7 @@ export function EditModeToolbar({
           variant="primary"
           context="page"
           leftIcon={<Eye className="w-4 h-4" />}
-          onClick={onExitEditMode || (() => {})}
+          onClick={onExitEditMode || ((): void => {})}
           disabled={!onExitEditMode}
         >
           Ansicht

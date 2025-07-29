@@ -13,8 +13,8 @@ import {
   Legend,
   Filler,
 } from 'chart.js';
-import { Line, Bar, Pie, Doughnut } from 'react-chartjs-2';
 import type { ChartData } from 'chart.js';
+import { Line, Bar, Pie, Doughnut } from 'react-chartjs-2';
 
 import { CHART_COLORS } from '@/lib/charts/config';
 

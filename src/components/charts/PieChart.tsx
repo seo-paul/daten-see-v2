@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import { Pie, Doughnut } from 'react-chartjs-2';
 
-import { getDefaultChartOptions, formatTooltip, CHART_COLORS } from '@/lib/charts/config';
+import { formatTooltip, CHART_COLORS } from '@/lib/charts/config';
 
 // Register Chart.js components
 ChartJS.register(
@@ -84,7 +84,7 @@ export function PieChart({
           usePointStyle: true,
           pointStyle: 'circle',
           generateLabels: (chart) => {
-            const datasets = chart.data.datasets;
+            const { datasets } = chart.data;
             if (datasets.length > 0) {
               const dataset = datasets[0];
               const labels = chart.data.labels || [];

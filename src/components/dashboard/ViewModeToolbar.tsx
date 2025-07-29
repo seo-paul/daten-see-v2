@@ -46,7 +46,7 @@ export function ViewModeToolbar({
           leftIcon={<Clock className="w-4 h-4" />}
           rightIcon={<ChevronDown className="w-4 h-4" />}
           className="min-w-[160px]"
-          onClick={onTimeFilterChange || (() => {})}
+          onClick={onTimeFilterChange || ((): void => {})}
           disabled={!onTimeFilterChange}
         >
           {timeFilter}
@@ -59,7 +59,7 @@ export function ViewModeToolbar({
           variant="primary"
           context="page"
           leftIcon={<Share className="w-4 h-4" />}
-          onClick={onShare || (() => {})}
+          onClick={onShare || ((): void => {})}
           disabled={!onShare}
         >
           Teilen
@@ -68,7 +68,7 @@ export function ViewModeToolbar({
           variant="primary"
           context="page"
           leftIcon={<Edit3 className="w-4 h-4" />}
-          onClick={onEnterEditMode || (() => {})}
+          onClick={onEnterEditMode || ((): void => {})}
           disabled={!onEnterEditMode}
         >
           Bearbeiten

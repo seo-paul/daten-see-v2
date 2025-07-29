@@ -15,7 +15,7 @@ export function Toast({
   type = 'success', 
   duration = 3000, 
   onClose 
-}: ToastProps) {
+}: ToastProps): React.ReactElement {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function Toast({
       setTimeout(onClose, 300); // Wait for animation to complete
     }, duration);
 
-    return () => clearTimeout(timer);
+    return (): void => clearTimeout(timer);
   }, [duration, onClose]);
 
   const typeStyles = {

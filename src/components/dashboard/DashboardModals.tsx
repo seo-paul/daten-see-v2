@@ -3,9 +3,10 @@
  * Contains Create and Edit modals for dashboards
  */
 
+import type { DashboardListItem, CreateDashboardRequest, UpdateDashboardRequest } from '@/types/dashboard.types';
+
 import { CreateDashboardModal } from './CreateDashboardModal';
 import { EditDashboardModal } from './EditDashboardModal';
-import type { DashboardListItem, CreateDashboardRequest, UpdateDashboardRequest } from '@/types/dashboard.types';
 
 interface DashboardModalsProps {
   showCreateModal: boolean;
