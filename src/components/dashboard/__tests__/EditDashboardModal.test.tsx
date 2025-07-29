@@ -38,6 +38,7 @@ describe('EditDashboardModal', () => {
     await user.click(screen.getByText('Änderungen speichern'));
 
     expect(defaultProps.onSubmit).toHaveBeenCalledWith({
+      id: '1',
       name: 'Updated Dashboard',
       description: 'Test description',
       isPublic: false,

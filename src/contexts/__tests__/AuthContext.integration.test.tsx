@@ -3,7 +3,7 @@
  * Testing core auth integration only (Reduced from 122 → 15 tests)
  */
 
-import { renderHook, act, waitFor } from '@testing-library/react';
+import { renderHook, act } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 
 import { TokenManagerMockScenarios } from '@/lib/testing/token-manager-mock';

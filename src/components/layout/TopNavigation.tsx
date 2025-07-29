@@ -64,6 +64,15 @@ export function TopNavigation({ className = '' }: TopNavigationProps): React.Rea
 
           {/* Action Buttons */}
           <div className="hidden sm:flex items-center space-x-2">
+            <Link href="/charts-demo">
+              <NavbarButton
+                size="sm"
+                aria-label="Charts Demo"
+                className="!px-2"
+              >
+                📊
+              </NavbarButton>
+            </Link>
             <NavbarButton
               size="sm"
               aria-label="Debug"

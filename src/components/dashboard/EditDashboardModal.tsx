@@ -73,6 +73,7 @@ export function EditDashboardModal({
 
     try {
       await onSubmit({
+        id: dashboard.id,
         name: formData.name,
         description: formData.description,
         isPublic: formData.isPublic
